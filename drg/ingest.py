@@ -125,6 +125,9 @@ def clean_page(text):
 
 
 def load_tokenizer():
+    from . import hf
+
+    hf.prefer_offline(config.EMBED_MODEL)  # must precede the transformers import
     from transformers import AutoTokenizer
 
     tok = AutoTokenizer.from_pretrained(config.EMBED_MODEL)

@@ -29,8 +29,13 @@ class Hit:
 def _model(config):
     if "model" not in _state:
         t0 = time.perf_counter()
-        from sentence_transformers import SentenceTransformer
+        from . import hf
 
+        hf.prefer_offline(config.EMBED_MODEL)  # must precede the transformers import
+        from sentence_transformers import SentenceTransformer
+        from transformers.utils import logging as hf_logging
+
+        hf_logging.disable_progress_bar()  # hides "Loading weights" in search/ask
         _state["model"] = SentenceTransformer(config.EMBED_MODEL)
         print(f"loaded embedding model in {time.perf_counter() - t0:.1f}s",
               file=sys.stderr, flush=True)
