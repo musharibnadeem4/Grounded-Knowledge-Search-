@@ -142,3 +142,6 @@ Source: `explore_report.md`, unless noted.
 **Status:** provisional
 
 Further entries are added as decisions are made.
+
+## 10. Embeddings Model 
+Stay on bge-small: the full embed costs 49 min on my CPU; bge-base would be ~2.5 h per experiment, which would cut the number of experiments I can run. Would change if retrieval failures point at embedding quality rather than chunking or filtering.
