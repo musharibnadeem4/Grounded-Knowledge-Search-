@@ -212,11 +212,59 @@ def save_hashes(index_dir, hashes):
     os.replace(tmp, p)
 
 
+# ------------------------------------------------------------- context header (E1)
+def context_prefix(meta):
+    """Text prepended to a chunk before embedding when ingesting with --context-header."""
+    return (f"{meta['company']} | {meta['doc_type']} | FY{meta['period']} | "
+            f"p.{meta['page']} | {meta['page_header']}\n")
+
+
+def embed_inputs(docs, metas, context_header):
+    """The texts that get embedded. The stored document stays the original chunk text."""
+    if not context_header:
+        return list(docs)
+    return [context_prefix(m) + d for d, m in zip(docs, metas)]
+
+
+def read_index_meta(index_dir):
+    """index_meta.json of an index, or None (indexes built before it existed)."""
+    p = Path(index_dir) / config.INDEX_META_FILE
+    if p.exists():
+        try:
+            return json.loads(p.read_text(encoding="utf-8"))
+        except ValueError:
+            return None
+    return None
+
+
+def write_index_meta(index_dir, context_header):
+    import datetime as dt
+
+    p = Path(index_dir) / config.INDEX_META_FILE
+    meta = {"context_header": bool(context_header), "embed_model": config.EMBED_MODEL,
+            "chunk_tokens": config.CHUNK_TOKENS, "chunk_overlap": config.CHUNK_OVERLAP,
+            "max_chunk_tokens": config.MAX_CHUNK_TOKENS,
+            "written": dt.datetime.now().astimezone().isoformat(timespec="seconds")}
+    tmp = p.with_suffix(".tmp")
+    tmp.write_text(json.dumps(meta, indent=1), encoding="utf-8")
+    os.replace(tmp, p)
+
+
 # ------------------------------------------------------------------------- main
-def ingest(corpus_dir, manifest_path=None, cache_dir=None, index_dir=None, workers=None):
+def ingest(corpus_dir, manifest_path=None, cache_dir=None, index_dir=None, workers=None,
+           context_header=False):
     manifest_path = Path(manifest_path or config.MANIFEST_PATH)
     cache_dir = Path(cache_dir or config.CACHE_DIR)
     index_dir = Path(index_dir or config.INDEX_DIR)
+    if context_header and index_dir.resolve() == Path(config.INDEX_DIR).resolve():
+        sys.exit(f"ingest: --context-header must not write to the default index "
+                 f"({config.INDEX_DIR}); pass --index-dir <another directory>")
+    # never mix chunk styles in one index
+    existing = read_index_meta(index_dir)
+    was_ch = existing["context_header"] if existing else False
+    if (index_dir / config.HASHES_FILE).exists() and was_ch != bool(context_header):
+        sys.exit(f"ingest: {index_dir} was built with context_header={was_ch}; refusing to add "
+                 f"context_header={bool(context_header)} chunks to it. Use a new --index-dir.")
     t = {"parse": 0.0, "chunk": 0.0, "embed": 0.0, "write": 0.0}
 
     manifest = read_manifest(manifest_path)
@@ -234,6 +282,10 @@ def ingest(corpus_dir, manifest_path=None, cache_dir=None, index_dir=None, worke
     if not todo:
         log("nothing to do")
         return 0
+    write_index_meta(index_dir, context_header)
+    if context_header:
+        log("context header ON: embedding '{company} | {doc_type} | FY{period} | p.{page} | "
+            "{page_header}' + chunk; stored text stays the original")
 
     # parse (cache first, then the rest in parallel)
     t0 = time.perf_counter()
@@ -279,7 +331,8 @@ def ingest(corpus_dir, manifest_path=None, cache_dir=None, index_dir=None, worke
         t["chunk"] += time.perf_counter() - t0
 
         t0 = time.perf_counter()
-        embs = (model.encode(docs, batch_size=config.EMBED_BATCH,
+        embs = (model.encode(embed_inputs(docs, metas, context_header),
+                             batch_size=config.EMBED_BATCH,
                              normalize_embeddings=True, show_progress_bar=True,
                              convert_to_numpy=True).tolist() if docs else [])
         t["embed"] += time.perf_counter() - t0
@@ -311,8 +364,12 @@ def main(argv=None):
     ap.add_argument("--cache-dir", default=str(config.CACHE_DIR))
     ap.add_argument("--index-dir", default=str(config.INDEX_DIR))
     ap.add_argument("--workers", type=int, default=None)
+    ap.add_argument("--context-header", action="store_true",
+                    help="embed '{company} | {doc_type} | FY{period} | p.{page} | {page_header}' + "
+                         "chunk text (stored text unchanged); requires --index-dir other than ./index")
     a = ap.parse_args(argv)
-    return ingest(a.corpus_dir, a.manifest, a.cache_dir, a.index_dir, a.workers)
+    return ingest(a.corpus_dir, a.manifest, a.cache_dir, a.index_dir, a.workers,
+                  context_header=a.context_header)
 
 
 if __name__ == "__main__":

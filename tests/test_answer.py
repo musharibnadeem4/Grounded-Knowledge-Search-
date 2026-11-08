@@ -364,3 +364,59 @@ def test_mixed_range_multi_company_question_still_retrieves(monkeypatch):
     monkeypatch.setattr(A, "retrieve", lambda *a, **k: called.append(1) or [])
     A.answer("Compare PepsiCo and Boeing in FY2024", "lead")
     assert called  # not out of range for every company, so retrieval proceeds
+
+
+# ------------------------------------------------- per-company sub-queries
+@pytest.mark.parametrize("question,company,expected", [
+    ("Compare R&D spending at AMD and Pfizer in 2022", "AMD", "R&D spending at AMD in 2022"),
+    ("Compare R&D spending at AMD and Pfizer in 2022", "Pfizer", "R&D spending at Pfizer in 2022"),
+    ("AMD vs Adobe revenue FY2022", "AMD", "AMD revenue FY2022"),
+    ("AMD vs Adobe revenue FY2022", "Adobe", "Adobe revenue FY2022"),
+    ("Which had higher revenue in FY2022, Boeing or Pfizer?", "Boeing",
+     "Which had higher revenue in FY2022, Boeing?"),
+    ("Which had higher revenue in FY2022, Boeing or Pfizer?", "Pfizer",
+     "Which had higher revenue in FY2022, Pfizer?"),
+    ("Compare AMD's and Adobe's R&D in FY2022", "AMD", "AMD's R&D in FY2022"),
+    ("Compare AMD, Adobe and Corning gross margin in 2021", "Adobe", "Adobe gross margin in 2021"),
+    ("Compare AMD, Adobe and Corning gross margin in 2021", "Corning", "Corning gross margin in 2021"),
+    ("How did JnJ compared to Pfizer perform in 2022?", "Pfizer", "How did Pfizer perform in 2022?"),
+    ("How did JnJ compared to Pfizer perform in 2022?", "Johnson & Johnson", "How did JnJ perform in 2022?"),
+    ("Pfizer versus Boeing: which spent more on R&D in 2020?", "Boeing",
+     "Boeing: which spent more on R&D in 2020?"),
+])
+def test_company_subquery(question, company, expected):
+    from drg.query import company_subquery, parse_query
+    sub = company_subquery(question, company)
+    assert sub == expected
+    assert parse_query(sub)[0] == {company}  # exactly one company left, and the year survives
+    assert parse_query(sub)[1] == parse_query(question)[1]
+
+
+def test_company_subquery_falls_back_to_original_question():
+    from drg.query import company_subquery
+    assert company_subquery("x", "AMD") == "x"   # company not in the text: unchanged
+
+
+def test_ask_retrieves_with_one_subquery_per_company_and_logs_them(monkeypatch, capsys):
+    seen = []
+
+    def fake(q, role, k, cfg, companies=None):
+        seen.append((q, k, tuple(companies)))
+        return [hit(len(seen), company=companies[0])]
+    monkeypatch.setattr(A, "retrieve", fake)
+    fake_llm(monkeypatch, {"status": "answered", "answer": "x [C1]"})
+    question = "Compare R&D spending at AMD and Adobe in 2022"
+    A.answer(question, "tech_telecom")
+    assert seen == [("R&D spending at AMD in 2022", 6, ("AMD",)),
+                    ("R&D spending at Adobe in 2022", 6, ("Adobe",))]
+    err = capsys.readouterr().err
+    assert "sub-query [AMD]: 'R&D spending at AMD in 2022'" in err
+    assert "sub-query [Adobe]: 'R&D spending at Adobe in 2022'" in err
+
+
+def test_llm_still_sees_the_original_question(monkeypatch):
+    monkeypatch.setattr(A, "retrieve", lambda q, role, k, cfg, companies=None: [hit(1, company=companies[0])])
+    calls = fake_llm(monkeypatch, {"status": "answered", "answer": "x [C1]"})
+    question = "Compare R&D spending at AMD and Adobe in 2022"
+    A.answer(question, "tech_telecom")
+    assert calls[0][1].endswith(f"Question: {question}")

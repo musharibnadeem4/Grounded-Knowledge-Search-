@@ -15,6 +15,7 @@ MANIFEST_PATH = Path("manifest.csv")
 CACHE_DIR = Path("cache") / "pages"
 INDEX_DIR = Path("index")
 HASHES_FILE = "hashes.json"  # lives inside INDEX_DIR
+INDEX_META_FILE = "index_meta.json"  # how an index was built (e.g. context_header); inside INDEX_DIR
 COLLECTION = "chunks"
 
 # Chroma write batch size (its hard limit is ~5k)
@@ -45,7 +46,7 @@ DROP_BOILERPLATE = False
 DROP_BOILERPLATE_OVERFETCH = 3
 # When a company has both a 10k and a 10k_annualreport doc for the same period, exclude the
 # annual-report doc in the where filter.
-PREFER_10K_OVER_ANNUALREPORT = False
+PREFER_10K_OVER_ANNUALREPORT = True
 
 # ask
 ASK_K = 8  # chunks given to the LLM for a question naming at most one company

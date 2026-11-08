@@ -10,7 +10,7 @@ import unicodedata
 from decimal import Decimal, InvalidOperation
 
 from . import acl, config, llm
-from .query import load_periods, parse_query
+from .query import company_subquery, load_periods, parse_query
 from .retrieve import retrieve
 
 OFF_DESK = "This question concerns a company outside your desk's coverage."
@@ -83,7 +83,13 @@ def gather(question, role, companies, cfg):
     """One retrieve() call, or one per company for multi-company questions."""
     if len(companies) >= 2:
         k = cfg.ASK_K_PER_COMPANY
-        per = [retrieve(question, role, k, cfg, companies=[c]) for c in sorted(companies)]
+        per = []
+        for c in sorted(companies):
+            # each company gets its own query: the other companies and the connecting
+            # words are removed so they cannot pull the search toward the wrong filings
+            sub_q = company_subquery(question, c)
+            log(f"sub-query [{c}]: {sub_q!r}")
+            per.append(retrieve(sub_q, role, k, cfg, companies=[c]))
         return interleave(per)
     return retrieve(question, role, cfg.ASK_K, cfg)
 

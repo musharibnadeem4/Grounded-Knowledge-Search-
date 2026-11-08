@@ -99,7 +99,8 @@ def _cfg(**flags):
 
 
 def test_flags_default_off():
-    assert config.DROP_BOILERPLATE is False and config.PREFER_10K_OVER_ANNUALREPORT is False
+    assert config.DROP_BOILERPLATE is False and config.PREFER_10K_OVER_ANNUALREPORT is True
+    assert config.YEAR_COMPANY_FILTER is True and config.RERANKER is None
 
 
 @needs_index

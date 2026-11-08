@@ -62,6 +62,41 @@ def clean_query(q):
     return " ".join(kept) or q
 
 
+_PH = "\x00"  # stands for a removed company mention
+_WORD_CONNECTOR = r"\b(?:and|or|vs\.?|versus|against|compared\s+(?:to|with)|relative\s+to)\b"
+_CONNECTOR = rf"(?:{_WORD_CONNECTOR})"
+_COMPANY_RE = dict(_COMPANY_RES)
+
+
+def company_subquery(q, company):
+    """Retrieval query for one company of a multi-company question: drop the other named
+    companies (and the connecting words next to them) plus a leading 'compare'.
+        "Compare R&D spending at AMD and Pfizer in 2022", "AMD" -> "R&D spending at AMD in 2022"
+    Falls back to the original question if the company would be lost."""
+    s = q
+    for name, rx in _COMPANY_RES:
+        if name != company:
+            s = rx.sub(_PH, s)
+    s = re.sub(_PH + r"['’]s", _PH, s)  # "Adobe's" -> placeholder
+    # several removed companies in a row ("X, Y and Z") -> one placeholder
+    s = re.sub(rf"{_PH}(?:\s*(?:,|{_CONNECTOR})\s*{_PH})+", _PH, s, flags=re.I)
+    # then remove the placeholder together with ONE adjacent connecting word:
+    s = re.sub(rf"\s*{_WORD_CONNECTOR}\s*{_PH}", " ", s, flags=re.I)   # "... and X"
+    s = re.sub(rf"{_PH}\s*{_WORD_CONNECTOR}\s*", "", s, flags=re.I)    # "X and ..."
+    s = re.sub(rf"\s*,\s*{_PH}", "", s)                                 # "..., X"
+    s = re.sub(rf"{_PH}\s*,\s*", "", s)                                 # "X, ..."
+    s = s.replace(_PH, "")
+    s = re.sub(r"^\s*(?:please\s+)?(?:compar(?:e|ing)|comparison\s+(?:of|between))\s+(?:the\s+)?",
+               "", s, flags=re.I)
+    s = re.sub(r"\s+([,.?!;:])", r"\1", re.sub(r"\s{2,}", " ", s)).strip()
+    s = re.sub(r"^(?:and|or|,)\s+", "", s, flags=re.I)
+    if s and s[0].islower():
+        s = s[0].upper() + s[1:]
+    if len(s) < 3 or not _COMPANY_RE[company].search(s):
+        return q
+    return s
+
+
 def load_periods(manifest_path):
     """{company: {period strings}} from the manifest."""
     out = {}

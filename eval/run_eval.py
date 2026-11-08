@@ -31,6 +31,7 @@ ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
 
 from drg import acl, config  # noqa: E402
+from drg.ingest import read_index_meta  # noqa: E402
 from drg.retrieve import last_timings, retrieve  # noqa: E402
 
 RESULTS = Path(__file__).resolve().parent / "results"
@@ -152,6 +153,8 @@ def main():
         setattr(cfg, key, val)
     if overrides:
         print(f"config overrides: {overrides}", file=sys.stderr)
+    index_meta = read_index_meta(cfg.INDEX_DIR)  # how the index was built (None = predates it)
+    print(f"index metadata: {index_meta}", file=sys.stderr)
 
     questions = load_questions(a.questions)
     doc_types = load_doc_types(cfg.MANIFEST_PATH)
@@ -222,6 +225,8 @@ def main():
     result = {"run_name": a.run_name, "timestamp": now, "git": git, "config": full_config,
               "metrics": {"overall": overall, "acl_leaks": leaks_total, "latency": latency,
                           "rerank_latency": rerank_latency},
+              "index_meta": index_meta if index_meta is not None
+              else {"note": "no index_meta.json (index predates it)", "context_header": False},
               "breakdowns": breakdowns, "rows": rows}
 
     RESULTS.mkdir(parents=True, exist_ok=True)
@@ -255,6 +260,7 @@ def render_md(res, ks):
     out = [f"# Eval run: {res['run_name']}\n",
            f"- Timestamp: {res['timestamp']}",
            f"- Config overrides (--set): {res['config']['overrides'] or 'none'}",
+           f"- Index metadata: {res.get('index_meta')}",
            f"- Git SHA: {sha}",
            f"- Question types: {res['config']['question_types']}",
            f"- **ACL leaks: {res['metrics']['acl_leaks']}** (must be 0)",
@@ -276,6 +282,7 @@ def append_summary(res, ks):
     row = {"run_name": res["run_name"], "timestamp": res["timestamp"],
            "git_sha": res["git"]["sha"] or "", "git_dirty": res["git"]["dirty"],
            "overrides": ";".join(f"{k}={v}" for k, v in res["config"]["overrides"].items()),
+           "index_context_header": res.get("index_meta", {}).get("context_header", ""),
            "n_answerable": ov["n"]}
     for k in ks:
         for b in ("doc_hit", "page_hit", "gold_page_recall"):

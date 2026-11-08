@@ -69,7 +69,8 @@ def label(hit, gold_docs, gold_companies):
 # Retrieval settings that were added to drg.config after some runs were made, with the
 # value they effectively had before they existed. Extend this when adding a new flag.
 LEGACY_DEFAULTS = {"YEAR_COMPANY_FILTER": False, "RERANKER": None,
-                   "MIN_CHUNK_CHARS": 0, "QUERY_CLEAN": False}
+                   "MIN_CHUNK_CHARS": 0, "QUERY_CLEAN": False,
+                   "DROP_BOILERPLATE": False, "PREFER_10K_OVER_ANNUALREPORT": False}
 _PATH_KEYS = {"INDEX_DIR", "MANIFEST_PATH", "CACHE_DIR"}  # taken from the run args / repo root
 
 
