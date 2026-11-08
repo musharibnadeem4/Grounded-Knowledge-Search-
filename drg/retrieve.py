@@ -7,11 +7,12 @@ its candidates must come from the same allowed-company set *before* scoring.
 Never retrieve unfiltered and filter afterwards, and never rank/score documents
 the role may not see, because scores, counts and ordering can leak them.
 """
+import json
 import sys
 import time
 from dataclasses import dataclass
 
-from . import acl
+from . import acl, query
 
 _state = {}  # per-process cache: model, collections, manifest check
 
@@ -60,6 +61,16 @@ def retrieve(question, role, k, config):
         acl.check_manifest(config.MANIFEST_PATH)
         _state["manifest_ok"] = True
 
+    where = {"company": {"$in": allowed}}  # ACL: inside the query
+    if getattr(config, "YEAR_COMPANY_FILTER", False):
+        # The result is always AND-ed with the role filter, so it can only narrow.
+        if "periods" not in _state:
+            _state["periods"] = query.load_periods(config.MANIFEST_PATH)
+        companies, year = query.parse_query(question)
+        where, chosen = query.build_where(allowed, companies, year, _state["periods"])
+        print(f"query parse: companies={sorted(companies)} year={year} "
+              f"searching={chosen} where={json.dumps(where)}", file=sys.stderr, flush=True)
+
     t0 = time.perf_counter()
     model = _model(config)
     t1 = time.perf_counter()
@@ -69,7 +80,7 @@ def retrieve(question, role, k, config):
     res = _collection(config).query(
         query_embeddings=q,
         n_results=k,
-        where={"company": {"$in": allowed}},  # ACL: inside the query
+        where=where,
         include=["documents", "metadatas", "distances"],
     )
     t3 = time.perf_counter()

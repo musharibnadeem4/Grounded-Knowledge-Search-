@@ -1,4 +1,5 @@
 """ACL tests against the real index (skipped if ./index is missing)."""
+import copy
 from pathlib import Path
 from types import SimpleNamespace
 
@@ -16,6 +17,14 @@ pytestmark = pytest.mark.skipif(not (INDEX / "chroma.sqlite3").exists(),
 CFG = SimpleNamespace(**{k: getattr(config, k) for k in dir(config) if k.isupper()})
 CFG.INDEX_DIR = INDEX
 CFG.MANIFEST_PATH = ROOT / "manifest.csv"
+
+@pytest.fixture(params=[False, True], ids=["filter_off", "filter_on"])
+def cfg(request):
+    """Every retrieval test runs with YEAR_COMPANY_FILTER off and on."""
+    c = copy.copy(CFG)
+    c.YEAR_COMPANY_FILTER = request.param
+    return c
+
 
 OFF_DESK_QUERIES = {
     "consumer": ["Pfizer revenue 2022", "AMD R&D expense", "Boeing commercial airplanes backlog",
@@ -48,17 +57,34 @@ def test_unknown_role():
 
 
 @pytest.mark.parametrize("role", sorted(OFF_DESK_QUERIES))
-def test_off_desk_queries_never_leak(role):
+def test_off_desk_queries_never_leak(role, cfg):
     allowed = set(acl.allowed_companies(role))
     for q in OFF_DESK_QUERIES[role]:
-        hits = retrieve(q, role, 20, CFG)
+        hits = retrieve(q, role, 20, cfg)
         assert hits, f"no results for {q!r}"
         assert {h.company for h in hits} <= allowed, (
             role, q, {h.company for h in hits} - allowed)
 
 
-def test_lead_sees_many_companies():
+def test_lead_sees_many_companies(cfg):
     seen = set()
     for q in LEAD_QUERIES:
-        seen |= {h.company for h in retrieve(q, "lead", 10, CFG)}
+        seen |= {h.company for h in retrieve(q, "lead", 10, cfg)}
     assert len(seen) >= 10, seen
+
+
+def test_consumer_naming_pfizer_and_year_stays_on_desk():
+    cfg = copy.copy(CFG)
+    cfg.YEAR_COMPANY_FILTER = True
+    allowed = set(acl.allowed_companies("consumer"))
+    for q in ("Pfizer revenue 2022", "What was Pfizer's FY2022 revenue?"):
+        hits = retrieve(q, "consumer", 20, cfg)
+        assert hits
+        assert {h.company for h in hits} <= allowed
+
+
+def test_flag_narrows_to_named_company():
+    cfg = copy.copy(CFG)
+    cfg.YEAR_COMPANY_FILTER = True
+    hits = retrieve("PepsiCo net revenue in FY2021", "consumer", 20, cfg)
+    assert hits and {h.company for h in hits} == {"PepsiCo"}

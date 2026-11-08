@@ -145,3 +145,17 @@ Further entries are added as decisions are made.
 
 ## 10. Embeddings Model 
 Stay on bge-small: the full embed costs 49 min on my CPU; bge-base would be ~2.5 h per experiment, which would cut the number of experiments I can run. Would change if retrieval failures point at embedding quality rather than chunking or filtering.
+
+## 11. Eval Set
+85% of wrong results (72 of 85) come from the right company’s other filings. Retrieval isn’t confused about what is being asked; it can’t tell which year’s filing. Also noticed during exploration: each 10-K repeats 2–3 years of the same line items.
+For 11 of 17 failures, the gold page isn’t even in the top 50. With ~8 near-identical filings per company crowding the results, the right one gets pushed out entirely. So a reranker can’t fix this: it can only reorder what was retrieved, and the gold isn’t there.
+Hypothesis for E2: “Restricting retrieval to the filing(s) matching the question’s company and fiscal year will raise page_hit@5 substantially, because 85% of wrong results are same-company, other-filing.”
+
+Fix: map a question’s year to filings
+
+These rules are general facts about filings, not tuned to the dev set:
+
+A filing for period P contains figures for P, P−1 and sometimes P−2. So prefer period = Y; if that company has no filing for Y (e.g. FY2013), widen to Y+1 and Y+2.
+Multi-year questions (“FY2022 and FY2021”, “FY2015–FY2017”): use the latest year, because the latest filing contains the earlier ones.
+No year in the question: don’t filter by year.
+The parsed company filter can only narrow the role’s allowed set, never widen it. That’s the access-control invariant.

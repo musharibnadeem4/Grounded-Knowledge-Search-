@@ -23,3 +23,5 @@ CHROMA_BATCH = 2000
 # Retrieval
 # bge recommends a query instruction for retrieval; empty = embed the question as-is.
 QUERY_PREFIX = ""
+# Parse company / year from the question and narrow the Chroma filter (never widens the role filter).
+YEAR_COMPANY_FILTER = False

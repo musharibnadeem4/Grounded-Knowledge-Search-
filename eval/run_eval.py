@@ -17,6 +17,7 @@ Notes on definitions:
 import argparse
 import csv
 import datetime as dt
+import ast
 import json
 import statistics
 import subprocess
@@ -105,6 +106,22 @@ def fmt(x):
     return "-" if x is None else f"{x:.3f}"
 
 
+def parse_overrides(items, cfg):
+    """['KEY=VALUE', ...] -> {KEY: value}. KEY must be an existing drg.config setting."""
+    out = {}
+    for item in items:
+        key, sep, raw = item.partition("=")
+        key = key.strip()
+        if not sep or not hasattr(cfg, key) or not key.isupper():
+            sys.exit(f"--set {item!r}: expected KEY=VALUE with KEY an existing drg.config "
+                     f"setting (e.g. YEAR_COMPANY_FILTER=True)")
+        try:
+            out[key] = ast.literal_eval(raw.strip())
+        except (ValueError, SyntaxError):
+            out[key] = raw.strip()
+    return out
+
+
 # ------------------------------------------------------------------------ answers
 def evaluate_answers(path, questions):
     """Stub: answer-quality metrics (correctness, faithfulness, ...) are not implemented."""
@@ -118,6 +135,9 @@ def main():
     ap.add_argument("--k", type=int, nargs="+", default=[5, 10, 20])
     ap.add_argument("--index-dir", default=str(ROOT / "index"))
     ap.add_argument("--questions", default=str(Path(__file__).resolve().parent / "questions.jsonl"))
+    ap.add_argument("--set", dest="overrides", action="append", default=[], metavar="KEY=VALUE",
+                    help="override a drg.config flag for this run, e.g. --set YEAR_COMPANY_FILTER=True "
+                         "(repeatable; value parsed as a Python literal, else a string)")
     ap.add_argument("--answers", default=None,
                     help="(stub) path to generated answers; answer-quality metrics not implemented")
     a = ap.parse_args()
@@ -127,6 +147,11 @@ def main():
     cfg = SimpleNamespace(**{k: getattr(config, k) for k in dir(config) if k.isupper()})
     cfg.INDEX_DIR = Path(a.index_dir)
     cfg.MANIFEST_PATH = ROOT / "manifest.csv"
+    overrides = parse_overrides(a.overrides, cfg)
+    for key, val in overrides.items():
+        setattr(cfg, key, val)
+    if overrides:
+        print(f"config overrides: {overrides}", file=sys.stderr)
 
     questions = load_questions(a.questions)
     doc_types = load_doc_types(cfg.MANIFEST_PATH)
@@ -181,6 +206,7 @@ def main():
         "args": {"run_name": a.run_name, "k": ks, "index_dir": str(cfg.INDEX_DIR),
                  "questions": a.questions},
         "drg.config": {k: str(getattr(cfg, k)) for k in dir(cfg) if k.isupper()},
+        "overrides": {k: repr(v) for k, v in overrides.items()},
         "retrieved_depth": kmax,
         "question_types": {t: len(rs) for t, rs in sorted(by_type.items())},
     }
@@ -217,6 +243,7 @@ def render_md(res, ks):
 
     out = [f"# Eval run: {res['run_name']}\n",
            f"- Timestamp: {res['timestamp']}",
+           f"- Config overrides (--set): {res['config']['overrides'] or 'none'}",
            f"- Git SHA: {sha}",
            f"- Question types: {res['config']['question_types']}",
            f"- **ACL leaks: {res['metrics']['acl_leaks']}** (must be 0)",
@@ -235,6 +262,7 @@ def append_summary(res, ks):
     ov, lat = res["metrics"]["overall"], res["metrics"]["latency"]
     row = {"run_name": res["run_name"], "timestamp": res["timestamp"],
            "git_sha": res["git"]["sha"] or "", "git_dirty": res["git"]["dirty"],
+           "overrides": ";".join(f"{k}={v}" for k, v in res["config"]["overrides"].items()),
            "n_answerable": ov["n"]}
     for k in ks:
         for b in ("doc_hit", "page_hit", "gold_page_recall"):
