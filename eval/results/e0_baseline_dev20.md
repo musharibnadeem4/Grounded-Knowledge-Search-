@@ -1,10 +1,10 @@
 # Eval run: e0_baseline_dev20
 
-- Timestamp: 2026-11-08T16:55:20+05:00
-- Git SHA: 248546b22bc1cf397e32efbc83453414303d1d9e (dirty)
+- Timestamp: 2026-11-08T16:57:50+05:00
+- Git SHA: 5596c4fcbe32439d5a414c6f44b1a8b6898b4910
 - Question types: {'answerable': 20}
 - **ACL leaks: 0** (must be 0)
-- Search latency: p50 93 ms, p95 101 ms (n=20, retrieval depth 20, model load excluded)
+- Search latency: p50 91 ms, p95 102 ms (n=20, retrieval depth 20, model load excluded)
 
 ## Overall (answerable questions)
 

@@ -1,9 +1,9 @@
 {
  "run_name": "e0_baseline_dev20",
- "timestamp": "2026-11-08T16:55:20+05:00",
+ "timestamp": "2026-11-08T16:57:50+05:00",
  "git": {
-  "sha": "248546b22bc1cf397e32efbc83453414303d1d9e",
-  "dirty": true
+  "sha": "5596c4fcbe32439d5a414c6f44b1a8b6898b4910",
+  "dirty": false
  },
  "config": {
   "args": {
@@ -51,9 +51,9 @@
   },
   "acl_leaks": 0,
   "latency": {
-   "p50_ms": 93.0621000006795,
-   "p95_ms": 101.28481503343211,
-   "mean_ms": 91.42303998814896,
+   "p50_ms": 90.50265012774616,
+   "p95_ms": 101.9975499715656,
+   "mean_ms": 90.09433001047,
    "n": 20
   }
  },
@@ -132,7 +132,7 @@
    "doc_types": [
     "10k"
    ],
-   "latency_ms": 92.5,
+   "latency_ms": 93.5,
    "acl_leaks": 0,
    "top10": [
     {
@@ -215,7 +215,7 @@
    "doc_types": [
     "10k"
    ],
-   "latency_ms": 94.4,
+   "latency_ms": 99.3,
    "acl_leaks": 0,
    "top10": [
     {
@@ -298,7 +298,7 @@
    "doc_types": [
     "Earnings"
    ],
-   "latency_ms": 99.8,
+   "latency_ms": 101.7,
    "acl_leaks": 0,
    "top10": [
     {
@@ -385,7 +385,7 @@
    "doc_types": [
     "10k"
    ],
-   "latency_ms": 96.7,
+   "latency_ms": 90.3,
    "acl_leaks": 0,
    "top10": [
     {
@@ -468,7 +468,7 @@
    "doc_types": [
     "10k"
    ],
-   "latency_ms": 100.6,
+   "latency_ms": 88.3,
    "acl_leaks": 0,
    "top10": [
     {
@@ -551,7 +551,7 @@
    "doc_types": [
     "10k"
    ],
-   "latency_ms": 93.6,
+   "latency_ms": 90.2,
    "acl_leaks": 0,
    "top10": [
     {
@@ -637,7 +637,7 @@
    "doc_types": [
     "10k"
    ],
-   "latency_ms": 79.3,
+   "latency_ms": 78.7,
    "acl_leaks": 0,
    "top10": [
     {
@@ -723,7 +723,7 @@
    "doc_types": [
     "10k"
    ],
-   "latency_ms": 87.6,
+   "latency_ms": 87.3,
    "acl_leaks": 0,
    "top10": [
     {
@@ -806,7 +806,7 @@
    "doc_types": [
     "10k"
    ],
-   "latency_ms": 76.4,
+   "latency_ms": 75.9,
    "acl_leaks": 0,
    "top10": [
     {
@@ -889,7 +889,7 @@
    "doc_types": [
     "10k"
    ],
-   "latency_ms": 91.6,
+   "latency_ms": 90.7,
    "acl_leaks": 0,
    "top10": [
     {
@@ -972,7 +972,7 @@
    "doc_types": [
     "10k"
    ],
-   "latency_ms": 98.0,
+   "latency_ms": 108.3,
    "acl_leaks": 0,
    "top10": [
     {
@@ -1055,7 +1055,7 @@
    "doc_types": [
     "10q"
    ],
-   "latency_ms": 98.5,
+   "latency_ms": 97.1,
    "acl_leaks": 0,
    "top10": [
     {
@@ -1138,7 +1138,7 @@
    "doc_types": [
     "10q"
    ],
-   "latency_ms": 113.9,
+   "latency_ms": 88.2,
    "acl_leaks": 0,
    "top10": [
     {
@@ -1221,7 +1221,7 @@
    "doc_types": [
     "10k"
    ],
-   "latency_ms": 97.3,
+   "latency_ms": 94.8,
    "acl_leaks": 0,
    "top10": [
     {
@@ -1304,7 +1304,7 @@
    "doc_types": [
     "Earnings"
    ],
-   "latency_ms": 99.3,
+   "latency_ms": 92.5,
    "acl_leaks": 0,
    "top10": [
     {
@@ -1387,7 +1387,7 @@
    "doc_types": [
     "10k"
    ],
-   "latency_ms": 72.2,
+   "latency_ms": 80.1,
    "acl_leaks": 0,
    "top10": [
     {
@@ -1473,7 +1473,7 @@
    "doc_types": [
     "10k"
    ],
-   "latency_ms": 80.6,
+   "latency_ms": 80.0,
    "acl_leaks": 0,
    "top10": [
     {
@@ -1556,7 +1556,7 @@
    "doc_types": [
     "10k"
    ],
-   "latency_ms": 74.4,
+   "latency_ms": 77.7,
    "acl_leaks": 0,
    "top10": [
     {
@@ -1639,7 +1639,7 @@
    "doc_types": [
     "10k"
    ],
-   "latency_ms": 89.9,
+   "latency_ms": 92.1,
    "acl_leaks": 0,
    "top10": [
     {
@@ -1722,7 +1722,7 @@
    "doc_types": [
     "10k"
    ],
-   "latency_ms": 91.8,
+   "latency_ms": 95.2,
    "acl_leaks": 0,
    "top10": [
     {
