@@ -1,0 +1,1827 @@
+{
+ "run_name": "e3a_rerank_minilm",
+ "timestamp": "2026-11-08T17:37:48+05:00",
+ "git": {
+  "sha": "c87785e3b8366f57a6d2a3a99d9c1c62ced571f4",
+  "dirty": true
+ },
+ "config": {
+  "args": {
+   "run_name": "e3a_rerank_minilm",
+   "k": [
+    5,
+    10,
+    20
+   ],
+   "index_dir": "D:\\Assignment DRG\\index",
+   "questions": "D:\\Assignment DRG\\eval\\questions.jsonl"
+  },
+  "drg.config": {
+   "CACHE_DIR": "cache\\pages",
+   "CHROMA_BATCH": "2000",
+   "CHUNK_OVERLAP": "50",
+   "CHUNK_TOKENS": "350",
+   "COLLECTION": "chunks",
+   "EMBED_BATCH": "64",
+   "EMBED_MODEL": "BAAI/bge-small-en-v1.5",
+   "HASHES_FILE": "hashes.json",
+   "INDEX_DIR": "D:\\Assignment DRG\\index",
+   "MANIFEST_PATH": "D:\\Assignment DRG\\manifest.csv",
+   "MAX_CHUNK_TOKENS": "500",
+   "QUERY_PREFIX": "",
+   "RERANKER": "cross-encoder/ms-marco-MiniLM-L-6-v2",
+   "RERANKERS_ALLOWED": "('cross-encoder/ms-marco-MiniLM-L-6-v2', 'BAAI/bge-reranker-base')",
+   "RERANK_DEPTH": "50",
+   "YEAR_COMPANY_FILTER": "True"
+  },
+  "overrides": {
+   "YEAR_COMPANY_FILTER": "True",
+   "RERANKER": "'cross-encoder/ms-marco-MiniLM-L-6-v2'"
+  },
+  "retrieved_depth": 20,
+  "question_types": {
+   "answerable": 20
+  }
+ },
+ "metrics": {
+  "overall": {
+   "n": 20,
+   "doc_hit@5": 0.95,
+   "page_hit@5": 0.5,
+   "gold_page_recall@5": 0.5,
+   "doc_hit@10": 1.0,
+   "page_hit@10": 0.5,
+   "gold_page_recall@10": 0.5,
+   "doc_hit@20": 1.0,
+   "page_hit@20": 0.65,
+   "gold_page_recall@20": 0.625,
+   "mrr@10": 0.2833333333333333
+  },
+  "acl_leaks": 0,
+  "latency": {
+   "p50_ms": 1399.3954000761732,
+   "p95_ms": 1951.813615043649,
+   "mean_ms": 1551.7254350008443,
+   "n": 20
+  },
+  "rerank_latency": {
+   "p50_ms": 1304.295149864629,
+   "p95_ms": 1679.761764861179,
+   "mean_ms": 1449.8772949678823,
+   "n": 20
+  }
+ },
+ "breakdowns": {
+  "by_tag": {
+   "multi_page": {
+    "n": 4,
+    "doc_hit@5": 1.0,
+    "page_hit@5": 0.0,
+    "gold_page_recall@5": 0.0,
+    "doc_hit@10": 1.0,
+    "page_hit@10": 0.0,
+    "gold_page_recall@10": 0.0,
+    "doc_hit@20": 1.0,
+    "page_hit@20": 0.5,
+    "gold_page_recall@20": 0.375,
+    "mrr@10": 0.0
+   }
+  },
+  "by_doc_type": {
+   "10k": {
+    "n": 16,
+    "doc_hit@5": 1.0,
+    "page_hit@5": 0.5,
+    "gold_page_recall@5": 0.5,
+    "doc_hit@10": 1.0,
+    "page_hit@10": 0.5,
+    "gold_page_recall@10": 0.5,
+    "doc_hit@20": 1.0,
+    "page_hit@20": 0.6875,
+    "gold_page_recall@20": 0.65625,
+    "mrr@10": 0.2708333333333333
+   },
+   "10q": {
+    "n": 2,
+    "doc_hit@5": 1.0,
+    "page_hit@5": 1.0,
+    "gold_page_recall@5": 1.0,
+    "doc_hit@10": 1.0,
+    "page_hit@10": 1.0,
+    "gold_page_recall@10": 1.0,
+    "doc_hit@20": 1.0,
+    "page_hit@20": 1.0,
+    "gold_page_recall@20": 1.0,
+    "mrr@10": 0.6666666666666666
+   },
+   "Earnings": {
+    "n": 2,
+    "doc_hit@5": 0.5,
+    "page_hit@5": 0.0,
+    "gold_page_recall@5": 0.0,
+    "doc_hit@10": 1.0,
+    "page_hit@10": 0.0,
+    "gold_page_recall@10": 0.0,
+    "doc_hit@20": 1.0,
+    "page_hit@20": 0.0,
+    "gold_page_recall@20": 0.0,
+    "mrr@10": 0.0
+   }
+  }
+ },
+ "rows": [
+  {
+   "id": "fb_00735",
+   "role": "consumer",
+   "type": "answerable",
+   "tags": [],
+   "gold": [
+    {
+     "doc_id": "PEPSICO_2022_10K",
+     "pages": [
+      26
+     ]
+    }
+   ],
+   "doc_types": [
+    "10k"
+   ],
+   "latency_ms": 1271.7,
+   "rerank_ms": 1180.5,
+   "acl_leaks": 0,
+   "top10": [
+    {
+     "doc_id": "PEPSICO_2022Q4_EARNINGS",
+     "page": 24,
+     "score": 0.81826
+    },
+    {
+     "doc_id": "PEPSICO_2022Q4_EARNINGS",
+     "page": 24,
+     "score": -1.63256
+    },
+    {
+     "doc_id": "PEPSICO_2022_10K",
+     "page": 112,
+     "score": -2.7201
+    },
+    {
+     "doc_id": "PEPSICO_2022_10K",
+     "page": 3,
+     "score": -3.42808
+    },
+    {
+     "doc_id": "PEPSICO_2022_10K",
+     "page": 7,
+     "score": -3.68382
+    },
+    {
+     "doc_id": "PEPSICO_2022_10K",
+     "page": 503,
+     "score": -3.78523
+    },
+    {
+     "doc_id": "PEPSICO_2022_10K",
+     "page": 4,
+     "score": -3.8044
+    },
+    {
+     "doc_id": "PEPSICO_2022_10K",
+     "page": 13,
+     "score": -4.28583
+    },
+    {
+     "doc_id": "PEPSICO_2022_10K",
+     "page": 129,
+     "score": -4.33568
+    },
+    {
+     "doc_id": "PEPSICO_2022_10K",
+     "page": 499,
+     "score": -4.412
+    }
+   ],
+   "metrics": {
+    "doc_hit@5": 1.0,
+    "page_hit@5": 0.0,
+    "gold_page_recall@5": 0.0,
+    "doc_hit@10": 1.0,
+    "page_hit@10": 0.0,
+    "gold_page_recall@10": 0.0,
+    "doc_hit@20": 1.0,
+    "page_hit@20": 0.0,
+    "gold_page_recall@20": 0.0,
+    "mrr@10": 0.0
+   }
+  },
+  {
+   "id": "fb_04171",
+   "role": "consumer",
+   "type": "answerable",
+   "tags": [],
+   "gold": [
+    {
+     "doc_id": "MGMRESORTS_2018_10K",
+     "pages": [
+      57
+     ]
+    }
+   ],
+   "doc_types": [
+    "10k"
+   ],
+   "latency_ms": 1320.2,
+   "rerank_ms": 1218.6,
+   "acl_leaks": 0,
+   "top10": [
+    {
+     "doc_id": "MGMRESORTS_2018_10K",
+     "page": 57,
+     "score": 1.03714
+    },
+    {
+     "doc_id": "MGMRESORTS_2018_10K",
+     "page": 60,
+     "score": 0.84803
+    },
+    {
+     "doc_id": "MGMRESORTS_2018_10K",
+     "page": 59,
+     "score": -0.32374
+    },
+    {
+     "doc_id": "MGMRESORTS_2018_10K",
+     "page": 61,
+     "score": -0.59872
+    },
+    {
+     "doc_id": "MGMRESORTS_2018_10K",
+     "page": 86,
+     "score": -0.86981
+    },
+    {
+     "doc_id": "MGMRESORTS_2018_10K",
+     "page": 48,
+     "score": -1.0476
+    },
+    {
+     "doc_id": "MGMRESORTS_2018_10K",
+     "page": 92,
+     "score": -1.13914
+    },
+    {
+     "doc_id": "MGMRESORTS_2018_10K",
+     "page": 87,
+     "score": -1.40146
+    },
+    {
+     "doc_id": "MGMRESORTS_2018_10K",
+     "page": 56,
+     "score": -1.56894
+    },
+    {
+     "doc_id": "MGMRESORTS_2018_10K",
+     "page": 86,
+     "score": -1.66902
+    }
+   ],
+   "metrics": {
+    "doc_hit@5": 1.0,
+    "page_hit@5": 1.0,
+    "gold_page_recall@5": 1.0,
+    "doc_hit@10": 1.0,
+    "page_hit@10": 1.0,
+    "gold_page_recall@10": 1.0,
+    "doc_hit@20": 1.0,
+    "page_hit@20": 1.0,
+    "gold_page_recall@20": 1.0,
+    "mrr@10": 1.0
+   }
+  },
+  {
+   "id": "fb_00603",
+   "role": "consumer",
+   "type": "answerable",
+   "tags": [],
+   "gold": [
+    {
+     "doc_id": "ULTABEAUTY_2023Q4_EARNINGS",
+     "pages": [
+      3
+     ]
+    }
+   ],
+   "doc_types": [
+    "Earnings"
+   ],
+   "latency_ms": 1273.8,
+   "rerank_ms": 1209.7,
+   "acl_leaks": 0,
+   "top10": [
+    {
+     "doc_id": "ULTABEAUTY_2023_10K",
+     "page": 54,
+     "score": 1.23842
+    },
+    {
+     "doc_id": "ULTABEAUTY_2023_10K",
+     "page": 42,
+     "score": 0.92328
+    },
+    {
+     "doc_id": "ULTABEAUTY_2023Q4_EARNINGS",
+     "page": 7,
+     "score": 0.89027
+    },
+    {
+     "doc_id": "ULTABEAUTY_2023_10K",
+     "page": 10,
+     "score": 0.78323
+    },
+    {
+     "doc_id": "ULTABEAUTY_2023Q4_EARNINGS",
+     "page": 8,
+     "score": 0.32598
+    },
+    {
+     "doc_id": "ULTABEAUTY_2023Q4_EARNINGS",
+     "page": 1,
+     "score": 0.26409
+    },
+    {
+     "doc_id": "ULTABEAUTY_2023_10K",
+     "page": 41,
+     "score": -0.05812
+    },
+    {
+     "doc_id": "ULTABEAUTY_2023Q4_EARNINGS",
+     "page": 1,
+     "score": -0.20361
+    },
+    {
+     "doc_id": "ULTABEAUTY_2023Q4_EARNINGS",
+     "page": 9,
+     "score": -0.8489
+    },
+    {
+     "doc_id": "ULTABEAUTY_2023_10K",
+     "page": 57,
+     "score": -0.96141
+    }
+   ],
+   "metrics": {
+    "doc_hit@5": 1.0,
+    "page_hit@5": 0.0,
+    "gold_page_recall@5": 0.0,
+    "doc_hit@10": 1.0,
+    "page_hit@10": 0.0,
+    "gold_page_recall@10": 0.0,
+    "doc_hit@20": 1.0,
+    "page_hit@20": 0.0,
+    "gold_page_recall@20": 0.0,
+    "mrr@10": 0.0
+   }
+  },
+  {
+   "id": "fb_00499",
+   "role": "health_industrials",
+   "type": "answerable",
+   "tags": [
+    "multi_page"
+   ],
+   "gold": [
+    {
+     "doc_id": "3M_2022_10K",
+     "pages": [
+      48,
+      50,
+      52
+     ]
+    }
+   ],
+   "doc_types": [
+    "10k"
+   ],
+   "latency_ms": 1260.2,
+   "rerank_ms": 1169.9,
+   "acl_leaks": 0,
+   "top10": [
+    {
+     "doc_id": "3M_2022_10K",
+     "page": 37,
+     "score": 1.12148
+    },
+    {
+     "doc_id": "3M_2022_10K",
+     "page": 121,
+     "score": -0.2002
+    },
+    {
+     "doc_id": "3M_2022_10K",
+     "page": 36,
+     "score": -0.40418
+    },
+    {
+     "doc_id": "3M_2022_10K",
+     "page": 4,
+     "score": -0.6647
+    },
+    {
+     "doc_id": "3M_2022_10K",
+     "page": 4,
+     "score": -1.1236
+    },
+    {
+     "doc_id": "3M_2022_10K",
+     "page": 53,
+     "score": -1.23012
+    },
+    {
+     "doc_id": "3M_2022_10K",
+     "page": 6,
+     "score": -1.24915
+    },
+    {
+     "doc_id": "3M_2022_10K",
+     "page": 16,
+     "score": -1.26864
+    },
+    {
+     "doc_id": "3M_2022_10K",
+     "page": 93,
+     "score": -1.36231
+    },
+    {
+     "doc_id": "3M_2022_10K",
+     "page": 37,
+     "score": -1.39118
+    }
+   ],
+   "metrics": {
+    "doc_hit@5": 1.0,
+    "page_hit@5": 0.0,
+    "gold_page_recall@5": 0.0,
+    "doc_hit@10": 1.0,
+    "page_hit@10": 0.0,
+    "gold_page_recall@10": 0.0,
+    "doc_hit@20": 1.0,
+    "page_hit@20": 0.0,
+    "gold_page_recall@20": 0.0,
+    "mrr@10": 0.0
+   }
+  },
+  {
+   "id": "fb_10285",
+   "role": "health_industrials",
+   "type": "answerable",
+   "tags": [],
+   "gold": [
+    {
+     "doc_id": "BOEING_2018_10K",
+     "pages": [
+      52
+     ]
+    }
+   ],
+   "doc_types": [
+    "10k"
+   ],
+   "latency_ms": 1514.4,
+   "rerank_ms": 1415.8,
+   "acl_leaks": 0,
+   "top10": [
+    {
+     "doc_id": "BOEING_2018_10K",
+     "page": 57,
+     "score": -3.88677
+    },
+    {
+     "doc_id": "BOEING_2018_10K",
+     "page": 52,
+     "score": -4.4485
+    },
+    {
+     "doc_id": "BOEING_2018_10K",
+     "page": 53,
+     "score": -5.24552
+    },
+    {
+     "doc_id": "BOEING_2018_10K",
+     "page": 74,
+     "score": -5.75255
+    },
+    {
+     "doc_id": "BOEING_2018_10K",
+     "page": 55,
+     "score": -5.89666
+    },
+    {
+     "doc_id": "BOEING_2018_10K",
+     "page": 38,
+     "score": -5.90285
+    },
+    {
+     "doc_id": "BOEING_2018_10K",
+     "page": 118,
+     "score": -5.90309
+    },
+    {
+     "doc_id": "BOEING_2018_10K",
+     "page": 88,
+     "score": -6.11722
+    },
+    {
+     "doc_id": "BOEING_2018_10K",
+     "page": 56,
+     "score": -6.17946
+    },
+    {
+     "doc_id": "BOEING_2018_10K",
+     "page": 50,
+     "score": -6.27903
+    }
+   ],
+   "metrics": {
+    "doc_hit@5": 1.0,
+    "page_hit@5": 1.0,
+    "gold_page_recall@5": 1.0,
+    "doc_hit@10": 1.0,
+    "page_hit@10": 1.0,
+    "gold_page_recall@10": 1.0,
+    "doc_hit@20": 1.0,
+    "page_hit@20": 1.0,
+    "gold_page_recall@20": 1.0,
+    "mrr@10": 0.5
+   }
+  },
+  {
+   "id": "fb_00494",
+   "role": "health_industrials",
+   "type": "answerable",
+   "tags": [],
+   "gold": [
+    {
+     "doc_id": "BOEING_2022_10K",
+     "pages": [
+      9
+     ]
+    }
+   ],
+   "doc_types": [
+    "10k"
+   ],
+   "latency_ms": 1351.3,
+   "rerank_ms": 1267.5,
+   "acl_leaks": 0,
+   "top10": [
+    {
+     "doc_id": "BOEING_2019_10K",
+     "page": 31,
+     "score": 0.76874
+    },
+    {
+     "doc_id": "BOEING_2022_10K",
+     "page": 9,
+     "score": -0.10939
+    },
+    {
+     "doc_id": "BOEING_2017_10K",
+     "page": 31,
+     "score": -0.72384
+    },
+    {
+     "doc_id": "BOEING_2019_10K",
+     "page": 88,
+     "score": -0.77738
+    },
+    {
+     "doc_id": "BOEING_2021_10K",
+     "page": 13,
+     "score": -0.88442
+    },
+    {
+     "doc_id": "BOEING_2021_10K",
+     "page": 39,
+     "score": -1.07986
+    },
+    {
+     "doc_id": "BOEING_2015_10K",
+     "page": 32,
+     "score": -1.28541
+    },
+    {
+     "doc_id": "BOEING_2016_10K",
+     "page": 30,
+     "score": -1.29627
+    },
+    {
+     "doc_id": "BOEING_2022_10K",
+     "page": 35,
+     "score": -1.40502
+    },
+    {
+     "doc_id": "BOEING_2015_10K",
+     "page": 31,
+     "score": -1.42775
+    }
+   ],
+   "metrics": {
+    "doc_hit@5": 1.0,
+    "page_hit@5": 1.0,
+    "gold_page_recall@5": 1.0,
+    "doc_hit@10": 1.0,
+    "page_hit@10": 1.0,
+    "gold_page_recall@10": 1.0,
+    "doc_hit@20": 1.0,
+    "page_hit@20": 1.0,
+    "gold_page_recall@20": 1.0,
+    "mrr@10": 0.5
+   }
+  },
+  {
+   "id": "fb_00215",
+   "role": "tech_telecom",
+   "type": "answerable",
+   "tags": [
+    "multi_page"
+   ],
+   "gold": [
+    {
+     "doc_id": "VERIZON_2022_10K",
+     "pages": [
+      23,
+      56
+     ]
+    }
+   ],
+   "doc_types": [
+    "10k"
+   ],
+   "latency_ms": 1350.9,
+   "rerank_ms": 1271.4,
+   "acl_leaks": 0,
+   "top10": [
+    {
+     "doc_id": "VERIZON_2022_10K",
+     "page": 21,
+     "score": 3.35069
+    },
+    {
+     "doc_id": "VERIZON_2022_10K",
+     "page": 4,
+     "score": 2.51285
+    },
+    {
+     "doc_id": "VERIZON_2022_10K",
+     "page": 37,
+     "score": 1.7864
+    },
+    {
+     "doc_id": "VERIZON_2022_10K",
+     "page": 5,
+     "score": 1.35966
+    },
+    {
+     "doc_id": "VERIZON_2022_10K",
+     "page": 36,
+     "score": 1.26275
+    },
+    {
+     "doc_id": "VERIZON_2022_10K",
+     "page": 51,
+     "score": 1.12227
+    },
+    {
+     "doc_id": "VERIZON_2022_10K",
+     "page": 39,
+     "score": 0.73393
+    },
+    {
+     "doc_id": "VERIZON_2022_10K",
+     "page": 37,
+     "score": 0.70832
+    },
+    {
+     "doc_id": "VERIZON_2022_10K",
+     "page": 52,
+     "score": 0.59263
+    },
+    {
+     "doc_id": "VERIZON_2022_10K",
+     "page": 103,
+     "score": 0.5711
+    }
+   ],
+   "metrics": {
+    "doc_hit@5": 1.0,
+    "page_hit@5": 0.0,
+    "gold_page_recall@5": 0.0,
+    "doc_hit@10": 1.0,
+    "page_hit@10": 0.0,
+    "gold_page_recall@10": 0.0,
+    "doc_hit@20": 1.0,
+    "page_hit@20": 1.0,
+    "gold_page_recall@20": 0.5,
+    "mrr@10": 0.0
+   }
+  },
+  {
+   "id": "fb_10130",
+   "role": "tech_telecom",
+   "type": "answerable",
+   "tags": [
+    "multi_page"
+   ],
+   "gold": [
+    {
+     "doc_id": "CORNING_2020_10K",
+     "pages": [
+      70,
+      72
+     ]
+    }
+   ],
+   "doc_types": [
+    "10k"
+   ],
+   "latency_ms": 1672.8,
+   "rerank_ms": 1571.0,
+   "acl_leaks": 0,
+   "top10": [
+    {
+     "doc_id": "CORNING_2020_10K",
+     "page": 43,
+     "score": -2.17217
+    },
+    {
+     "doc_id": "CORNING_2020_10K",
+     "page": 111,
+     "score": -2.31244
+    },
+    {
+     "doc_id": "CORNING_2020_10K",
+     "page": 90,
+     "score": -2.60265
+    },
+    {
+     "doc_id": "CORNING_2020_10K",
+     "page": 80,
+     "score": -3.3203
+    },
+    {
+     "doc_id": "CORNING_2020_10K",
+     "page": 45,
+     "score": -3.36935
+    },
+    {
+     "doc_id": "CORNING_2020_10K",
+     "page": 67,
+     "score": -3.8011
+    },
+    {
+     "doc_id": "CORNING_2020_10K",
+     "page": 31,
+     "score": -3.90283
+    },
+    {
+     "doc_id": "CORNING_2020_10K",
+     "page": 66,
+     "score": -4.18072
+    },
+    {
+     "doc_id": "CORNING_2020_10K",
+     "page": 93,
+     "score": -4.18638
+    },
+    {
+     "doc_id": "CORNING_2020_10K",
+     "page": 77,
+     "score": -4.21103
+    }
+   ],
+   "metrics": {
+    "doc_hit@5": 1.0,
+    "page_hit@5": 0.0,
+    "gold_page_recall@5": 0.0,
+    "doc_hit@10": 1.0,
+    "page_hit@10": 0.0,
+    "gold_page_recall@10": 0.0,
+    "doc_hit@20": 1.0,
+    "page_hit@20": 1.0,
+    "gold_page_recall@20": 1.0,
+    "mrr@10": 0.0
+   }
+  },
+  {
+   "id": "fb_00757",
+   "role": "tech_telecom",
+   "type": "answerable",
+   "tags": [],
+   "gold": [
+    {
+     "doc_id": "AMD_2022_10K",
+     "pages": [
+      12
+     ]
+    }
+   ],
+   "doc_types": [
+    "10k"
+   ],
+   "latency_ms": 3682.7,
+   "rerank_ms": 3592.1,
+   "acl_leaks": 0,
+   "top10": [
+    {
+     "doc_id": "AMD_2022_annualreport",
+     "page": 51,
+     "score": -4.95146
+    },
+    {
+     "doc_id": "AMD_2022_annualreport",
+     "page": 113,
+     "score": -5.72162
+    },
+    {
+     "doc_id": "AMD_2022_10K",
+     "page": 4,
+     "score": -5.84616
+    },
+    {
+     "doc_id": "AMD_2022_annualreport",
+     "page": 6,
+     "score": -6.82309
+    },
+    {
+     "doc_id": "AMD_2022_annualreport",
+     "page": 118,
+     "score": -6.86373
+    },
+    {
+     "doc_id": "AMD_2022_annualreport",
+     "page": 40,
+     "score": -6.90021
+    },
+    {
+     "doc_id": "AMD_2022_annualreport",
+     "page": 115,
+     "score": -6.93737
+    },
+    {
+     "doc_id": "AMD_2022_annualreport",
+     "page": 116,
+     "score": -6.96503
+    },
+    {
+     "doc_id": "AMD_2022_10K",
+     "page": 106,
+     "score": -7.04758
+    },
+    {
+     "doc_id": "AMD_2022_annualreport",
+     "page": 118,
+     "score": -7.09144
+    }
+   ],
+   "metrics": {
+    "doc_hit@5": 1.0,
+    "page_hit@5": 0.0,
+    "gold_page_recall@5": 0.0,
+    "doc_hit@10": 1.0,
+    "page_hit@10": 0.0,
+    "gold_page_recall@10": 0.0,
+    "doc_hit@20": 1.0,
+    "page_hit@20": 0.0,
+    "gold_page_recall@20": 0.0,
+    "mrr@10": 0.0
+   }
+  },
+  {
+   "id": "fb_01275",
+   "role": "consumer",
+   "type": "answerable",
+   "tags": [],
+   "gold": [
+    {
+     "doc_id": "BESTBUY_2023_10K",
+     "pages": [
+      42
+     ]
+    }
+   ],
+   "doc_types": [
+    "10k"
+   ],
+   "latency_ms": 1860.7,
+   "rerank_ms": 1568.7,
+   "acl_leaks": 0,
+   "top10": [
+    {
+     "doc_id": "BESTBUY_2023Q4_EARNINGS",
+     "page": 8,
+     "score": 1.03426
+    },
+    {
+     "doc_id": "BESTBUY_2023_10K",
+     "page": 29,
+     "score": 0.94809
+    },
+    {
+     "doc_id": "BESTBUY_2023_10K",
+     "page": 8,
+     "score": -2.24281
+    },
+    {
+     "doc_id": "BESTBUY_2023_10K",
+     "page": 42,
+     "score": -2.38436
+    },
+    {
+     "doc_id": "BESTBUY_2023_10K",
+     "page": 29,
+     "score": -2.61379
+    },
+    {
+     "doc_id": "BESTBUY_2023Q4_EARNINGS",
+     "page": 2,
+     "score": -3.90281
+    },
+    {
+     "doc_id": "BESTBUY_2023_10K",
+     "page": 4,
+     "score": -4.05526
+    },
+    {
+     "doc_id": "BESTBUY_2023_10K",
+     "page": 23,
+     "score": -4.44898
+    },
+    {
+     "doc_id": "BESTBUY_2023_8K_dated-2023-04-12",
+     "page": 4,
+     "score": -4.51354
+    },
+    {
+     "doc_id": "BESTBUY_2023_10K",
+     "page": 44,
+     "score": -4.61735
+    }
+   ],
+   "metrics": {
+    "doc_hit@5": 1.0,
+    "page_hit@5": 1.0,
+    "gold_page_recall@5": 1.0,
+    "doc_hit@10": 1.0,
+    "page_hit@10": 1.0,
+    "gold_page_recall@10": 1.0,
+    "doc_hit@20": 1.0,
+    "page_hit@20": 1.0,
+    "gold_page_recall@20": 1.0,
+    "mrr@10": 0.25
+   }
+  },
+  {
+   "id": "fb_04980",
+   "role": "consumer",
+   "type": "answerable",
+   "tags": [],
+   "gold": [
+    {
+     "doc_id": "PEPSICO_2021_10K",
+     "pages": [
+      63
+     ]
+    }
+   ],
+   "doc_types": [
+    "10k"
+   ],
+   "latency_ms": 1399.0,
+   "rerank_ms": 1306.6,
+   "acl_leaks": 0,
+   "top10": [
+    {
+     "doc_id": "PEPSICO_2021_10K",
+     "page": 66,
+     "score": -1.05127
+    },
+    {
+     "doc_id": "PEPSICO_2021_10K",
+     "page": 63,
+     "score": -1.51769
+    },
+    {
+     "doc_id": "PEPSICO_2021_10K",
+     "page": 65,
+     "score": -2.16762
+    },
+    {
+     "doc_id": "PEPSICO_2021_10K",
+     "page": 54,
+     "score": -2.33599
+    },
+    {
+     "doc_id": "PEPSICO_2021_10K",
+     "page": 64,
+     "score": -2.50606
+    },
+    {
+     "doc_id": "PEPSICO_2021_10K",
+     "page": 30,
+     "score": -2.84353
+    },
+    {
+     "doc_id": "PEPSICO_2021_10K",
+     "page": 66,
+     "score": -2.93679
+    },
+    {
+     "doc_id": "PEPSICO_2021_10K",
+     "page": 2,
+     "score": -2.97138
+    },
+    {
+     "doc_id": "PEPSICO_2021_10K",
+     "page": 102,
+     "score": -3.61972
+    },
+    {
+     "doc_id": "PEPSICO_2021_10K",
+     "page": 83,
+     "score": -3.89708
+    }
+   ],
+   "metrics": {
+    "doc_hit@5": 1.0,
+    "page_hit@5": 1.0,
+    "gold_page_recall@5": 1.0,
+    "doc_hit@10": 1.0,
+    "page_hit@10": 1.0,
+    "gold_page_recall@10": 1.0,
+    "doc_hit@20": 1.0,
+    "page_hit@20": 1.0,
+    "gold_page_recall@20": 1.0,
+    "mrr@10": 0.5
+   }
+  },
+  {
+   "id": "fb_00407",
+   "role": "consumer",
+   "type": "answerable",
+   "tags": [],
+   "gold": [
+    {
+     "doc_id": "MGMRESORTS_2023Q2_10Q",
+     "pages": [
+      11
+     ]
+    }
+   ],
+   "doc_types": [
+    "10q"
+   ],
+   "latency_ms": 1316.1,
+   "rerank_ms": 1238.9,
+   "acl_leaks": 0,
+   "top10": [
+    {
+     "doc_id": "MGMRESORTS_2023Q2_10Q",
+     "page": 11,
+     "score": 0.31408
+    },
+    {
+     "doc_id": "MGMRESORTS_2023Q2_10Q",
+     "page": 3,
+     "score": -1.51822
+    },
+    {
+     "doc_id": "MGMRESORTS_2023Q2_10Q",
+     "page": 10,
+     "score": -1.83087
+    },
+    {
+     "doc_id": "MGMRESORTS_2023Q2_10Q",
+     "page": 15,
+     "score": -2.25032
+    },
+    {
+     "doc_id": "MGMRESORTS_2023Q2_10Q",
+     "page": 37,
+     "score": -2.26941
+    },
+    {
+     "doc_id": "MGMRESORTS_2023Q2_10Q",
+     "page": 3,
+     "score": -2.57792
+    },
+    {
+     "doc_id": "MGMRESORTS_2023Q2_10Q",
+     "page": 37,
+     "score": -2.91366
+    },
+    {
+     "doc_id": "MGMRESORTS_2023Q2_10Q",
+     "page": 18,
+     "score": -3.10317
+    },
+    {
+     "doc_id": "MGMRESORTS_2023Q2_10Q",
+     "page": 6,
+     "score": -3.80646
+    },
+    {
+     "doc_id": "MGMRESORTS_2023Q2_10Q",
+     "page": 33,
+     "score": -4.14231
+    }
+   ],
+   "metrics": {
+    "doc_hit@5": 1.0,
+    "page_hit@5": 1.0,
+    "gold_page_recall@5": 1.0,
+    "doc_hit@10": 1.0,
+    "page_hit@10": 1.0,
+    "gold_page_recall@10": 1.0,
+    "doc_hit@20": 1.0,
+    "page_hit@20": 1.0,
+    "gold_page_recall@20": 1.0,
+    "mrr@10": 1.0
+   }
+  },
+  {
+   "id": "fb_00941",
+   "role": "health_industrials",
+   "type": "answerable",
+   "tags": [],
+   "gold": [
+    {
+     "doc_id": "3M_2023Q2_10Q",
+     "pages": [
+      1
+     ]
+    }
+   ],
+   "doc_types": [
+    "10q"
+   ],
+   "latency_ms": 1431.4,
+   "rerank_ms": 1329.5,
+   "acl_leaks": 0,
+   "top10": [
+    {
+     "doc_id": "3M_2023Q2_10Q",
+     "page": 71,
+     "score": 2.01816
+    },
+    {
+     "doc_id": "3M_2023Q2_10Q",
+     "page": 85,
+     "score": 1.87915
+    },
+    {
+     "doc_id": "3M_2023Q2_10Q",
+     "page": 1,
+     "score": 1.62388
+    },
+    {
+     "doc_id": "3M_2023Q2_10Q",
+     "page": 70,
+     "score": 1.03536
+    },
+    {
+     "doc_id": "3M_2023Q2_10Q",
+     "page": 91,
+     "score": 1.01229
+    },
+    {
+     "doc_id": "3M_2023Q2_10Q",
+     "page": 90,
+     "score": 0.8246
+    },
+    {
+     "doc_id": "3M_2023Q2_10Q",
+     "page": 71,
+     "score": 0.50342
+    },
+    {
+     "doc_id": "3M_2023Q2_10Q",
+     "page": 19,
+     "score": 0.45971
+    },
+    {
+     "doc_id": "3M_2023Q2_10Q",
+     "page": 73,
+     "score": 0.33409
+    },
+    {
+     "doc_id": "3M_2023Q2_10Q",
+     "page": 73,
+     "score": 0.20207
+    }
+   ],
+   "metrics": {
+    "doc_hit@5": 1.0,
+    "page_hit@5": 1.0,
+    "gold_page_recall@5": 1.0,
+    "doc_hit@10": 1.0,
+    "page_hit@10": 1.0,
+    "gold_page_recall@10": 1.0,
+    "doc_hit@20": 1.0,
+    "page_hit@20": 1.0,
+    "gold_page_recall@20": 1.0,
+    "mrr@10": 0.3333333333333333
+   }
+  },
+  {
+   "id": "fb_03029",
+   "role": "health_industrials",
+   "type": "answerable",
+   "tags": [],
+   "gold": [
+    {
+     "doc_id": "3M_2018_10K",
+     "pages": [
+      60
+     ]
+    }
+   ],
+   "doc_types": [
+    "10k"
+   ],
+   "latency_ms": 1480.7,
+   "rerank_ms": 1379.9,
+   "acl_leaks": 0,
+   "top10": [
+    {
+     "doc_id": "3M_2018_10K",
+     "page": 47,
+     "score": -0.83518
+    },
+    {
+     "doc_id": "3M_2018_10K",
+     "page": 14,
+     "score": -1.3466
+    },
+    {
+     "doc_id": "3M_2018_10K",
+     "page": 43,
+     "score": -1.72468
+    },
+    {
+     "doc_id": "3M_2018_10K",
+     "page": 44,
+     "score": -2.00798
+    },
+    {
+     "doc_id": "3M_2018_10K",
+     "page": 43,
+     "score": -2.01022
+    },
+    {
+     "doc_id": "3M_2018_10K",
+     "page": 109,
+     "score": -2.08062
+    },
+    {
+     "doc_id": "3M_2018_10K",
+     "page": 48,
+     "score": -2.51774
+    },
+    {
+     "doc_id": "3M_2018_10K",
+     "page": 58,
+     "score": -2.60662
+    },
+    {
+     "doc_id": "3M_2018_10K",
+     "page": 90,
+     "score": -2.7152
+    },
+    {
+     "doc_id": "3M_2018_10K",
+     "page": 86,
+     "score": -2.72751
+    }
+   ],
+   "metrics": {
+    "doc_hit@5": 1.0,
+    "page_hit@5": 0.0,
+    "gold_page_recall@5": 0.0,
+    "doc_hit@10": 1.0,
+    "page_hit@10": 0.0,
+    "gold_page_recall@10": 0.0,
+    "doc_hit@20": 1.0,
+    "page_hit@20": 1.0,
+    "gold_page_recall@20": 1.0,
+    "mrr@10": 0.0
+   }
+  },
+  {
+   "id": "fb_01484",
+   "role": "health_industrials",
+   "type": "answerable",
+   "tags": [],
+   "gold": [
+    {
+     "doc_id": "JOHNSON_JOHNSON_2022Q4_EARNINGS",
+     "pages": [
+      2
+     ]
+    }
+   ],
+   "doc_types": [
+    "Earnings"
+   ],
+   "latency_ms": 1399.8,
+   "rerank_ms": 1302.0,
+   "acl_leaks": 0,
+   "top10": [
+    {
+     "doc_id": "JOHNSON_JOHNSON_2022_10K",
+     "page": 28,
+     "score": 2.85944
+    },
+    {
+     "doc_id": "JOHNSON_JOHNSON_2022_10K",
+     "page": 33,
+     "score": 1.01778
+    },
+    {
+     "doc_id": "JOHNSON_JOHNSON_2022_10K",
+     "page": 28,
+     "score": 1.01524
+    },
+    {
+     "doc_id": "JOHNSON_JOHNSON_2022_10K",
+     "page": 30,
+     "score": 0.09508
+    },
+    {
+     "doc_id": "JOHNSON_JOHNSON_2022_10K",
+     "page": 29,
+     "score": 0.01419
+    },
+    {
+     "doc_id": "JOHNSON_JOHNSON_2022Q4_EARNINGS",
+     "page": 14,
+     "score": -0.54687
+    },
+    {
+     "doc_id": "JOHNSON_JOHNSON_2022Q4_EARNINGS",
+     "page": 13,
+     "score": -0.72862
+    },
+    {
+     "doc_id": "JOHNSON_JOHNSON_2022Q4_EARNINGS",
+     "page": 1,
+     "score": -0.90364
+    },
+    {
+     "doc_id": "JOHNSON_JOHNSON_2022_10K",
+     "page": 29,
+     "score": -3.60761
+    },
+    {
+     "doc_id": "JOHNSON_JOHNSON_2022_10K",
+     "page": 33,
+     "score": -3.9313
+    }
+   ],
+   "metrics": {
+    "doc_hit@5": 0.0,
+    "page_hit@5": 0.0,
+    "gold_page_recall@5": 0.0,
+    "doc_hit@10": 1.0,
+    "page_hit@10": 0.0,
+    "gold_page_recall@10": 0.0,
+    "doc_hit@20": 1.0,
+    "page_hit@20": 0.0,
+    "gold_page_recall@20": 0.0,
+    "mrr@10": 0.0
+   }
+  },
+  {
+   "id": "fb_00005",
+   "role": "tech_telecom",
+   "type": "answerable",
+   "tags": [],
+   "gold": [
+    {
+     "doc_id": "CORNING_2022_10K",
+     "pages": [
+      60
+     ]
+    }
+   ],
+   "doc_types": [
+    "10k"
+   ],
+   "latency_ms": 1463.0,
+   "rerank_ms": 1377.8,
+   "acl_leaks": 0,
+   "top10": [
+    {
+     "doc_id": "CORNING_2022_10K",
+     "page": 73,
+     "score": -3.88404
+    },
+    {
+     "doc_id": "CORNING_2022_10K",
+     "page": 8,
+     "score": -4.20182
+    },
+    {
+     "doc_id": "CORNING_2022_10K",
+     "page": 91,
+     "score": -4.77283
+    },
+    {
+     "doc_id": "CORNING_2022_10K",
+     "page": 63,
+     "score": -4.77738
+    },
+    {
+     "doc_id": "CORNING_2022_10K",
+     "page": 17,
+     "score": -5.29618
+    },
+    {
+     "doc_id": "CORNING_2022_10K",
+     "page": 91,
+     "score": -5.5636
+    },
+    {
+     "doc_id": "CORNING_2022_10K",
+     "page": 90,
+     "score": -5.65797
+    },
+    {
+     "doc_id": "CORNING_2022_10K",
+     "page": 84,
+     "score": -5.68647
+    },
+    {
+     "doc_id": "CORNING_2022_10K",
+     "page": 71,
+     "score": -5.70902
+    },
+    {
+     "doc_id": "CORNING_2022_10K",
+     "page": 56,
+     "score": -5.71157
+    }
+   ],
+   "metrics": {
+    "doc_hit@5": 1.0,
+    "page_hit@5": 0.0,
+    "gold_page_recall@5": 0.0,
+    "doc_hit@10": 1.0,
+    "page_hit@10": 0.0,
+    "gold_page_recall@10": 0.0,
+    "doc_hit@20": 1.0,
+    "page_hit@20": 0.0,
+    "gold_page_recall@20": 0.0,
+    "mrr@10": 0.0
+   }
+  },
+  {
+   "id": "fb_03069",
+   "role": "tech_telecom",
+   "type": "answerable",
+   "tags": [
+    "multi_page"
+   ],
+   "gold": [
+    {
+     "doc_id": "AMD_2015_10K",
+     "pages": [
+      56,
+      60
+     ]
+    }
+   ],
+   "doc_types": [
+    "10k"
+   ],
+   "latency_ms": 1680.2,
+   "rerank_ms": 1579.1,
+   "acl_leaks": 0,
+   "top10": [
+    {
+     "doc_id": "AMD_2015_10K",
+     "page": 18,
+     "score": -8.13458
+    },
+    {
+     "doc_id": "AMD_2015_10K",
+     "page": 3,
+     "score": -9.02281
+    },
+    {
+     "doc_id": "AMD_2015_10K",
+     "page": 3,
+     "score": -9.46753
+    },
+    {
+     "doc_id": "AMD_2015_10K",
+     "page": 4,
+     "score": -9.71738
+    },
+    {
+     "doc_id": "AMD_2015_10K",
+     "page": 63,
+     "score": -10.33474
+    },
+    {
+     "doc_id": "AMD_2015_10K",
+     "page": 32,
+     "score": -10.40479
+    },
+    {
+     "doc_id": "AMD_2015_10K",
+     "page": 39,
+     "score": -10.55036
+    },
+    {
+     "doc_id": "AMD_2015_10K",
+     "page": 3,
+     "score": -10.62064
+    },
+    {
+     "doc_id": "AMD_2015_10K",
+     "page": 3,
+     "score": -10.651
+    },
+    {
+     "doc_id": "AMD_2015_10K",
+     "page": 73,
+     "score": -10.67628
+    }
+   ],
+   "metrics": {
+    "doc_hit@5": 1.0,
+    "page_hit@5": 0.0,
+    "gold_page_recall@5": 0.0,
+    "doc_hit@10": 1.0,
+    "page_hit@10": 0.0,
+    "gold_page_recall@10": 0.0,
+    "doc_hit@20": 1.0,
+    "page_hit@20": 0.0,
+    "gold_page_recall@20": 0.0,
+    "mrr@10": 0.0
+   }
+  },
+  {
+   "id": "fb_00591",
+   "role": "tech_telecom",
+   "type": "answerable",
+   "tags": [],
+   "gold": [
+    {
+     "doc_id": "ADOBE_2022_10K",
+     "pages": [
+      57
+     ]
+    }
+   ],
+   "doc_types": [
+    "10k"
+   ],
+   "latency_ms": 1365.9,
+   "rerank_ms": 1278.8,
+   "acl_leaks": 0,
+   "top10": [
+    {
+     "doc_id": "ADOBE_2022_10K",
+     "page": 57,
+     "score": -2.4486
+    },
+    {
+     "doc_id": "ADOBE_2022_10K",
+     "page": 6,
+     "score": -2.84193
+    },
+    {
+     "doc_id": "ADOBE_2022_10K",
+     "page": 73,
+     "score": -5.759
+    },
+    {
+     "doc_id": "ADOBE_2022_10K",
+     "page": 70,
+     "score": -6.07426
+    },
+    {
+     "doc_id": "ADOBE_2022_10K",
+     "page": 55,
+     "score": -6.09991
+    },
+    {
+     "doc_id": "ADOBE_2022_10K",
+     "page": 90,
+     "score": -6.5313
+    },
+    {
+     "doc_id": "ADOBE_2022_10K",
+     "page": 72,
+     "score": -6.56016
+    },
+    {
+     "doc_id": "ADOBE_2022_10K",
+     "page": 74,
+     "score": -6.73087
+    },
+    {
+     "doc_id": "ADOBE_2022_10K",
+     "page": 53,
+     "score": -7.09502
+    },
+    {
+     "doc_id": "ADOBE_2022_10K",
+     "page": 84,
+     "score": -7.14425
+    }
+   ],
+   "metrics": {
+    "doc_hit@5": 1.0,
+    "page_hit@5": 1.0,
+    "gold_page_recall@5": 1.0,
+    "doc_hit@10": 1.0,
+    "page_hit@10": 1.0,
+    "gold_page_recall@10": 1.0,
+    "doc_hit@20": 1.0,
+    "page_hit@20": 1.0,
+    "gold_page_recall@20": 1.0,
+    "mrr@10": 1.0
+   }
+  },
+  {
+   "id": "fb_01254",
+   "role": "consumer",
+   "type": "answerable",
+   "tags": [],
+   "gold": [
+    {
+     "doc_id": "MGMRESORTS_2022_10K",
+     "pages": [
+      32
+     ]
+    }
+   ],
+   "doc_types": [
+    "10k"
+   ],
+   "latency_ms": 1374.0,
+   "rerank_ms": 1278.1,
+   "acl_leaks": 0,
+   "top10": [
+    {
+     "doc_id": "MGMRESORTS_2022_10K",
+     "page": 64,
+     "score": 4.19839
+    },
+    {
+     "doc_id": "MGMRESORTS_2022_10K",
+     "page": 64,
+     "score": 3.09968
+    },
+    {
+     "doc_id": "MGMRESORTS_2022_10K",
+     "page": 48,
+     "score": 2.09945
+    },
+    {
+     "doc_id": "MGMRESORTS_2022_10K",
+     "page": 32,
+     "score": 1.69847
+    },
+    {
+     "doc_id": "MGMRESORTS_2022_10K",
+     "page": 97,
+     "score": 1.64533
+    },
+    {
+     "doc_id": "MGMRESORTS_2022_10K",
+     "page": 96,
+     "score": -0.0697
+    },
+    {
+     "doc_id": "MGMRESORTS_2022Q4_EARNINGS",
+     "page": 1,
+     "score": -0.38142
+    },
+    {
+     "doc_id": "MGMRESORTS_2022_10K",
+     "page": 48,
+     "score": -0.38578
+    },
+    {
+     "doc_id": "MGMRESORTS_2022_10K",
+     "page": 47,
+     "score": -0.55409
+    },
+    {
+     "doc_id": "MGMRESORTS_2022_10K",
+     "page": 74,
+     "score": -0.58756
+    }
+   ],
+   "metrics": {
+    "doc_hit@5": 1.0,
+    "page_hit@5": 1.0,
+    "gold_page_recall@5": 1.0,
+    "doc_hit@10": 1.0,
+    "page_hit@10": 1.0,
+    "gold_page_recall@10": 1.0,
+    "doc_hit@20": 1.0,
+    "page_hit@20": 1.0,
+    "gold_page_recall@20": 1.0,
+    "mrr@10": 0.25
+   }
+  },
+  {
+   "id": "fb_02608",
+   "role": "consumer",
+   "type": "answerable",
+   "tags": [],
+   "gold": [
+    {
+     "doc_id": "BESTBUY_2017_10K",
+     "pages": [
+      56
+     ]
+    }
+   ],
+   "doc_types": [
+    "10k"
+   ],
+   "latency_ms": 1565.3,
+   "rerank_ms": 1461.5,
+   "acl_leaks": 0,
+   "top10": [
+    {
+     "doc_id": "BESTBUY_2017_10K",
+     "page": 57,
+     "score": -4.39707
+    },
+    {
+     "doc_id": "BESTBUY_2017_10K",
+     "page": 91,
+     "score": -4.73732
+    },
+    {
+     "doc_id": "BESTBUY_2017_10K",
+     "page": 56,
+     "score": -5.49198
+    },
+    {
+     "doc_id": "BESTBUY_2017_10K",
+     "page": 31,
+     "score": -5.6896
+    },
+    {
+     "doc_id": "BESTBUY_2017_10K",
+     "page": 91,
+     "score": -6.54058
+    },
+    {
+     "doc_id": "BESTBUY_2017_10K",
+     "page": 37,
+     "score": -6.57807
+    },
+    {
+     "doc_id": "BESTBUY_2017_10K",
+     "page": 81,
+     "score": -6.72623
+    },
+    {
+     "doc_id": "BESTBUY_2017_10K",
+     "page": 33,
+     "score": -6.80337
+    },
+    {
+     "doc_id": "BESTBUY_2017_10K",
+     "page": 26,
+     "score": -6.95039
+    },
+    {
+     "doc_id": "BESTBUY_2017_10K",
+     "page": 26,
+     "score": -7.08984
+    }
+   ],
+   "metrics": {
+    "doc_hit@5": 1.0,
+    "page_hit@5": 1.0,
+    "gold_page_recall@5": 1.0,
+    "doc_hit@10": 1.0,
+    "page_hit@10": 1.0,
+    "gold_page_recall@10": 1.0,
+    "doc_hit@20": 1.0,
+    "page_hit@20": 1.0,
+    "gold_page_recall@20": 1.0,
+    "mrr@10": 0.3333333333333333
+   }
+  }
+ ]
+}

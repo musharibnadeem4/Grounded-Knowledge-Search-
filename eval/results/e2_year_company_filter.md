@@ -1,11 +1,11 @@
 # Eval run: e2_year_company_filter
 
-- Timestamp: 2026-11-08T17:17:25+05:00
+- Timestamp: 2026-11-08T17:24:41+05:00
 - Config overrides (--set): {'YEAR_COMPANY_FILTER': 'True'}
-- Git SHA: 6e3d5f2c6c4d65a6df5075f83140c0e8dd6a9593 (dirty)
+- Git SHA: c87785e3b8366f57a6d2a3a99d9c1c62ced571f4
 - Question types: {'answerable': 20}
 - **ACL leaks: 0** (must be 0)
-- Search latency: p50 84 ms, p95 98 ms (n=20, retrieval depth 20, model load excluded)
+- Search latency: p50 86 ms, p95 93 ms (n=20, retrieval depth 20, model load excluded)
 
 ## Overall (answerable questions)
 

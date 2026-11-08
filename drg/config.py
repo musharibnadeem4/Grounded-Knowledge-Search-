@@ -24,4 +24,31 @@ CHROMA_BATCH = 2000
 # bge recommends a query instruction for retrieval; empty = embed the question as-is.
 QUERY_PREFIX = ""
 # Parse company / year from the question and narrow the Chroma filter (never widens the role filter).
-YEAR_COMPANY_FILTER = False
+YEAR_COMPANY_FILTER = True  # kept experiment (e2); set False to disable
+
+# Optional cross-encoder reranker. None = off. The reranker only reorders candidates that
+# the same Chroma query / where filter already returned (access control is unchanged).
+RERANKERS_ALLOWED = ("cross-encoder/ms-marco-MiniLM-L-6-v2", "BAAI/bge-reranker-base")
+RERANKER = None
+RERANK_DEPTH = 50  # candidates fetched and reranked; at least k are always fetched
+
+# Drop retrieved chunks whose stripped text is shorter than this many characters (0 = off).
+# MIN_CHUNK_OVERFETCH x the usual candidate count is fetched so k results can still be returned.
+MIN_CHUNK_CHARS = 0
+MIN_CHUNK_OVERFETCH = 3
+# Embed only the sentences that end with "?" or mention a parsed company / year
+# (falls back to the whole question). Retrieval only; the original question is untouched.
+QUERY_CLEAN = False
+# Drop chunks under 80 characters and chunks from exhibit-index / signature pages
+# (drg/boilerplate.py). DROP_BOILERPLATE_OVERFETCH x the usual candidate count is fetched.
+DROP_BOILERPLATE = False
+DROP_BOILERPLATE_OVERFETCH = 3
+# When a company has both a 10k and a 10k_annualreport doc for the same period, exclude the
+# annual-report doc in the where filter.
+PREFER_10K_OVER_ANNUALREPORT = False
+
+# ask
+ASK_K = 8  # chunks given to the LLM for a question naming at most one company
+ASK_K_PER_COMPANY = 6  # chunks retrieved for EACH company when a question names 2+ companies
+LLM_TIMEOUT = 30  # seconds
+# Provider / model come from the environment (.env): LLM_PROVIDER, LLM_MODEL. See .env.example.

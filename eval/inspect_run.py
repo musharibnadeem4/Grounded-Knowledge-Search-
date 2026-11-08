@@ -66,6 +66,40 @@ def label(hit, gold_docs, gold_companies):
     return "OTHER_COMPANY"
 
 
+# Retrieval settings that were added to drg.config after some runs were made, with the
+# value they effectively had before they existed. Extend this when adding a new flag.
+LEGACY_DEFAULTS = {"YEAR_COMPANY_FILTER": False, "RERANKER": None,
+                   "MIN_CHUNK_CHARS": 0, "QUERY_CLEAN": False}
+_PATH_KEYS = {"INDEX_DIR", "MANIFEST_PATH", "CACHE_DIR"}  # taken from the run args / repo root
+
+
+def apply_recorded_config(cfg, run):
+    """Make cfg equal the drg.config snapshot stored in the run (values were saved with
+    str()). Keys missing from an old snapshot get their pre-existence value: LEGACY_DEFAULTS,
+    else False for any flag that is a bool now, else the current value."""
+    snap = run["config"].get("drg.config", {})
+    for key in [k for k in vars(cfg) if k.isupper() and k not in _PATH_KEYS]:
+        cur = getattr(cfg, key)
+        if key in snap:
+            raw = snap[key]
+            if isinstance(cur, str):
+                val = raw
+            else:
+                try:
+                    val = ast.literal_eval(raw)
+                except (ValueError, SyntaxError):
+                    val = raw
+        elif key in LEGACY_DEFAULTS:
+            val = LEGACY_DEFAULTS[key]
+        elif isinstance(cur, bool):
+            val = False
+        else:
+            continue
+        if val != cur:
+            print(f"replaying {key}={val!r} (current default {cur!r})", file=sys.stderr)
+            setattr(cfg, key, val)
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("run_name")
@@ -75,6 +109,7 @@ def main():
     cfg = SimpleNamespace(**{k: getattr(config, k) for k in dir(config) if k.isupper()})
     cfg.INDEX_DIR = Path(run["config"]["args"]["index_dir"])
     cfg.MANIFEST_PATH = ROOT / "manifest.csv"
+    apply_recorded_config(cfg, run)  # full recorded snapshot, so old runs replay as they ran
     # apply the config overrides recorded in the run (run_eval --set); stored as repr strings
     for key, raw in run["config"].get("overrides", {}).items():
         if not hasattr(cfg, key):

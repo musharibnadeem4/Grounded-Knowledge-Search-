@@ -31,7 +31,7 @@ ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
 
 from drg import acl, config  # noqa: E402
-from drg.retrieve import retrieve  # noqa: E402
+from drg.retrieve import last_timings, retrieve  # noqa: E402
 
 RESULTS = Path(__file__).resolve().parent / "results"
 
@@ -163,20 +163,25 @@ def main():
 
     retrieve("warm-up query", "lead", 1, cfg)  # load model, untimed
 
-    rows, latencies, leaks_total = [], [], 0
+    rows, latencies, rerank_lat, leaks_total = [], [], [], 0
     for q in questions:
         allowed = set(acl.allowed_companies(q["role"]))
         t0 = time.perf_counter()
         hits = retrieve(q["question"], q["role"], kmax, cfg)
         ms = (time.perf_counter() - t0) * 1000
         latencies.append(ms)
+        rerank_s = last_timings().get("rerank_s")  # None when RERANKER is off
+        if rerank_s is not None:
+            rerank_lat.append(rerank_s * 1000)
         leaks = sum(h.company not in allowed for h in hits)
         leaks_total += leaks
         row = {
             "id": q["id"], "role": q["role"], "type": q["type"], "tags": q["tags"],
             "gold": q["gold"],
             "doc_types": sorted({doc_types.get(g["doc_id"], "unknown") for g in q["gold"]}),
-            "latency_ms": round(ms, 1), "acl_leaks": leaks,
+            "latency_ms": round(ms, 1),
+            "rerank_ms": None if rerank_s is None else round(rerank_s * 1000, 1),
+            "acl_leaks": leaks,
             "top10": [{"doc_id": h.doc_id, "page": h.page, "score": round(h.score, 5)}
                       for h in hits[:10]],
         }
@@ -199,6 +204,10 @@ def main():
     }
     latency = {"p50_ms": pct(latencies, 50), "p95_ms": pct(latencies, 95),
                "mean_ms": mean(latencies), "n": len(latencies)}
+    # reranker time alone (already included in the totals above); None when RERANKER is off
+    rerank_latency = ({"p50_ms": pct(rerank_lat, 50), "p95_ms": pct(rerank_lat, 95),
+                       "mean_ms": mean(rerank_lat), "n": len(rerank_lat)}
+                      if rerank_lat else None)
 
     git = git_info()
     now = dt.datetime.now(dt.timezone.utc).astimezone().isoformat(timespec="seconds")
@@ -211,7 +220,8 @@ def main():
         "question_types": {t: len(rs) for t, rs in sorted(by_type.items())},
     }
     result = {"run_name": a.run_name, "timestamp": now, "git": git, "config": full_config,
-              "metrics": {"overall": overall, "acl_leaks": leaks_total, "latency": latency},
+              "metrics": {"overall": overall, "acl_leaks": leaks_total, "latency": latency,
+                          "rerank_latency": rerank_latency},
               "breakdowns": breakdowns, "rows": rows}
 
     RESULTS.mkdir(parents=True, exist_ok=True)
@@ -232,6 +242,7 @@ def render_md(res, ks):
     g, ov = res["git"], res["metrics"]["overall"]
     sha = "none (no commits)" if not g["sha"] else g["sha"] + (" (dirty)" if g["dirty"] else "")
     lat = res["metrics"]["latency"]
+    rl = res["metrics"].get("rerank_latency")
     cols = [f"{b}@{k}" for k in ks for b in ("doc_hit", "page_hit", "gold_page_recall")] + ["mrr@10"]
 
     def table(groups):
@@ -248,7 +259,9 @@ def render_md(res, ks):
            f"- Question types: {res['config']['question_types']}",
            f"- **ACL leaks: {res['metrics']['acl_leaks']}** (must be 0)",
            f"- Search latency: p50 {lat['p50_ms']:.0f} ms, p95 {lat['p95_ms']:.0f} ms "
-           f"(n={lat['n']}, retrieval depth {res['config']['retrieved_depth']}, model load excluded)\n",
+           f"(n={lat['n']}, retrieval depth {res['config']['retrieved_depth']}, model load excluded)",
+           (f"- Rerank latency (included in the above): p50 {rl['p50_ms']:.0f} ms, "
+            f"p95 {rl['p95_ms']:.0f} ms" if rl else "- Rerank latency: n/a (RERANKER off)") + "\n",
            "## Overall (answerable questions)\n", table([("all", ov)]), "",
            "## By tag\n", table(list(res["breakdowns"]["by_tag"].items())) if
            res["breakdowns"]["by_tag"] else "_no tagged questions_", "",
@@ -271,6 +284,9 @@ def append_summary(res, ks):
     row.update({"acl_leaks": res["metrics"]["acl_leaks"],
                 "latency_p50_ms": round(lat["p50_ms"], 1),
                 "latency_p95_ms": round(lat["p95_ms"], 1)})
+    rl = res["metrics"].get("rerank_latency")
+    row["rerank_p50_ms"] = round(rl["p50_ms"], 1) if rl else ""
+    row["rerank_p95_ms"] = round(rl["p95_ms"], 1) if rl else ""
 
     path = RESULTS / "summary.csv"
     existing = []

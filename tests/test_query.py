@@ -5,7 +5,7 @@ from pathlib import Path
 import pytest
 
 from drg import acl
-from drg.query import build_where, company_periods, load_periods, parse_query
+from drg.query import build_where, clean_query, company_periods, load_periods, parse_query
 
 ROOT = Path(__file__).resolve().parent.parent
 
@@ -114,3 +114,25 @@ def test_build_where_year_rules():
     assert clauses[0] == {"$and": [{"company": "A"}, {"period": {"$in": ["2022"]}}]}
     assert clauses[1] == {"$and": [{"company": "B"}, {"period": {"$in": ["2023", "2024"]}}]}
     assert clauses[2] == {"company": "C"}  # no 2022 / 2023 / 2024 filing -> no year filter
+
+
+def test_clean_query_all_dev_questions():
+    """Prints original -> cleaned (run pytest -s to see) and checks nothing comes out empty."""
+    for q in _dev_questions():
+        cleaned = clean_query(q["question"])
+        print(f"{q['id']}: {q['question']!r} -> {cleaned!r}")
+        assert cleaned.strip(), q["id"]
+
+
+@pytest.mark.parametrize("text,expected", [
+    # keeps '?' sentences and company/year sentences, drops filler
+    ("You are an analyst. Be precise. What was Boeing's backlog?", "What was Boeing's backlog?"),
+    ("Pfizer reported results in 2022. Please answer briefly.", "Pfizer reported results in 2022."),
+    # nothing qualifies -> original
+    ("Tell me about revenue. Be brief.", "Tell me about revenue. Be brief."),
+    ("", ""),
+    # single question sentence unchanged
+    ("Did AMD report customer concentration in FY22?", "Did AMD report customer concentration in FY22?"),
+])
+def test_clean_query_cases(text, expected):
+    assert clean_query(text) == expected

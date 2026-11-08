@@ -45,6 +45,23 @@ def parse_query(q):
     return companies, (max(years) if years else None)
 
 
+_SENTENCE_SPLIT = re.compile(r"(?<=[.?!])\s+")
+
+
+def clean_query(q):
+    """Keep only sentences that end with '?' or mention a parsed company or year;
+    if none qualify, return the original question."""
+    kept = []
+    for sent in _SENTENCE_SPLIT.split(q.strip()):
+        sent = sent.strip()
+        if not sent:
+            continue
+        companies, year = parse_query(sent)
+        if sent.endswith("?") or companies or year is not None:
+            kept.append(sent)
+    return " ".join(kept) or q
+
+
 def load_periods(manifest_path):
     """{company: {period strings}} from the manifest."""
     out = {}
@@ -52,6 +69,15 @@ def load_periods(manifest_path):
         for r in csv.DictReader(f):
             out.setdefault(r["company"].strip(), set()).add(r["period"].strip())
     return out
+
+
+def annualreport_exclusions(manifest_path):
+    """doc_ids of 10k_annualreport docs that have a 10k doc for the same company and period."""
+    with open(Path(manifest_path), newline="", encoding="utf-8-sig") as f:
+        rows = [{k: (v or "").strip() for k, v in r.items()} for r in csv.DictReader(f)]
+    tenk = {(r["company"], r["period"]) for r in rows if r["doc_type"] == "10k"}
+    return sorted(r["doc_id"] for r in rows
+                  if r["doc_type"] == "10k_annualreport" and (r["company"], r["period"]) in tenk)
 
 
 def company_periods(periods, year):
