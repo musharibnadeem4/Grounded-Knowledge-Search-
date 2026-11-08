@@ -19,3 +19,7 @@ COLLECTION = "chunks"
 
 # Chroma write batch size (its hard limit is ~5k)
 CHROMA_BATCH = 2000
+
+# Retrieval
+# bge recommends a query instruction for retrieval; empty = embed the question as-is.
+QUERY_PREFIX = ""
