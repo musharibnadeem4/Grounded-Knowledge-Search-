@@ -1,0 +1,8 @@
+pdfs/
+index/
+cache/
+.env
+.venv/
+__pycache__/
+*.egg-info/
+*.pyc
