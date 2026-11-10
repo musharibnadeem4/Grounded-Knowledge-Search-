@@ -97,6 +97,44 @@ def company_subquery(q, company):
     return s
 
 
+# ---------------------------------------------------------------- financial query expansion
+# analyst shorthand / paraphrase -> the formal label filings use (appended to the retrieval query only)
+_EXPANSIONS = [
+    (r"\bcapex\b|\bcapital\s+(?:expenditures?|spending|investment)\b|\bcapital[- ]intensi\w+",
+     "capital expenditures; purchases of property, plant and equipment; additions to property and equipment"),
+    (r"\br\s*&\s*d\b", "research and development"),
+    (r"\bbottom[- ]line\b|\bnet\s+profit\b|\bprofit\s+attributable\b|\bearnings\b(?!\s+per)",
+     "net income; net earnings; net income attributable"),
+    (r"\btop[- ]line\b|\bsales\b|\brevenues?\b", "total revenues; net sales; net revenue"),
+    (r"\bhead\s?count\b|\bworkforce\b|\bemployed\b|\bnumber of (?:people|staff)\b",
+     "employees; number of employees; we employed"),
+    (r"\bsg\s*&\s*a\b", "selling, general and administrative expenses"),
+    (r"\bcogs\b|\bcost of goods\b", "cost of sales; cost of goods sold; cost of revenue"),
+    (r"\bd\s*&\s*a\b|\bdepreciation\b", "depreciation and amortization"),
+    (r"\bbalance[- ]sheet\b",
+     "consolidated balance sheets; statement of financial position; total assets; total liabilities"),
+    (r"\bp\s*&\s*l\b|\bincome statement\b|\bprofit and loss\b|\boperating profit\b",
+     "consolidated statements of operations; statements of income; statements of earnings; operating income"),
+    (r"\bcash[- ]flows?\b|\bfcf\b|\bfree cash\b",
+     "consolidated statements of cash flows; net cash provided by operating activities"),
+    (r"\beps\b", "earnings per share; diluted"),
+    (r"\bgross margin\b|\bgross profit\b", "gross profit; gross margin"),
+    (r"\bworking capital\b", "total current assets; total current liabilities"),
+    (r"\bdividends?\b", "dividends declared per share; cash dividends paid"),
+]
+_EXPANSION_RES = [(re.compile(p, re.I), t) for p, t in _EXPANSIONS]
+
+
+def expand_query(q):
+    """Append formal financial-statement terms for analyst shorthand found in `q`.
+    -> (expanded_query, [added phrases]). The original text is kept first; nothing is removed."""
+    added = []
+    for rx, terms in _EXPANSION_RES:
+        if rx.search(q) and terms not in added:
+            added.append(terms)
+    return (q + " " + "; ".join(added) if added else q), added
+
+
 def load_periods(manifest_path):
     """{company: {period strings}} from the manifest."""
     out = {}
@@ -115,16 +153,29 @@ def annualreport_exclusions(manifest_path):
                   if r["doc_type"] == "10k_annualreport" and (r["company"], r["period"]) in tenk)
 
 
-def company_periods(periods, year):
+_FORWARD = re.compile(r"\b(?:expect\w*|forecast\w*|guidance|outlook|project(?:s|ed|ing|ion|ions)|anticipat\w+|"
+                      r"predict\w*|going forward|next year|plans? to|planned)\b", re.I)
+
+
+def is_forward_looking(q):
+    """True if the question asks what a company expects / forecasts / guides for a (future) year."""
+    return bool(_FORWARD.search(q))
+
+
+def company_periods(periods, year, forward=False):
     """Periods to filter one company on, or None for no year filter.
-    period == year if the company has it; else period in {year+1, year+2}; else None."""
+    period == year if the company has it; else period in {year+1, year+2}; else None.
+    forward=True (a forward-looking question about `year`): a filing for `year` itself is still preferred,
+    but otherwise the filing of year-1 (which contains the outlook) is used instead of later filings."""
     if str(year) in periods:
         return [str(year)]
+    if forward and str(year - 1) in periods:
+        return [str(year - 1)]
     later = [str(y) for y in (year + 1, year + 2) if str(y) in periods]
     return later or None
 
 
-def build_where(allowed, companies, year, periods_by_company):
+def build_where(allowed, companies, year, periods_by_company, forward=False):
     """Single Chroma `where`. Never wider than `allowed`: the role filter is
     AND-ed on top, and the company set is parsed ∩ allowed (or allowed if empty).
     Returns (where, chosen_companies)."""
@@ -136,7 +187,7 @@ def build_where(allowed, companies, year, periods_by_company):
         return {"$and": [role, {"company": {"$in": chosen}}]}, chosen
     clauses = []
     for c in chosen:
-        ps = company_periods(periods_by_company.get(c, set()), year)
+        ps = company_periods(periods_by_company.get(c, set()), year, forward)
         clauses.append({"$and": [{"company": c}, {"period": {"$in": ps}}]} if ps
                        else {"company": c})
     inner = clauses[0] if len(clauses) == 1 else {"$or": clauses}

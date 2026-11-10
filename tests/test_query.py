@@ -136,3 +136,45 @@ def test_clean_query_all_dev_questions():
 ])
 def test_clean_query_cases(text, expected):
     assert clean_query(text) == expected
+
+
+# ------------------------------------------------------------ expand_query (QUERY_EXPAND)
+import pytest as _pytest  # noqa: E402
+from drg.query import expand_query  # noqa: E402
+
+
+@_pytest.mark.parametrize("q,expect", [
+    ("Compare R&D spending at AMD and Pfizer in 2022.", "research and development"),
+    ("What share of 3M's sales did it reinvest in capex?", "purchases of property, plant and equipment"),
+    ("How did the bottom line change?", "net income"),
+    ("What was Adobe's headcount in fiscal 2016?", "number of employees"),
+    ("What was SG&A?", "selling, general and administrative"),
+    ("Show the balance sheet totals", "statement of financial position"),
+    ("Look at the P&L", "statements of operations"),
+])
+def test_expand_query_adds_formal_terms(q, expect):
+    out, added = expand_query(q)
+    assert out.startswith(q) and expect in out and added
+
+
+def test_expand_query_noop_without_shorthand():
+    q = "Who joined the board in March 2023?"
+    assert expand_query(q) == (q, [])
+
+
+# ------------------------------------------------------- forward-looking years (FORECAST_PRIOR_YEAR)
+from drg.query import company_periods, is_forward_looking  # noqa: E402
+
+
+def test_is_forward_looking():
+    assert is_forward_looking("What production rate changes is Boeing forecasting for FY2023?")
+    assert is_forward_looking("What is PepsiCo's guidance for 2023?")
+    assert not is_forward_looking("What was Boeing's revenue in 2022?")
+    assert not is_forward_looking("Did the project finish on time?")
+
+
+def test_company_periods_forward():
+    assert company_periods({"2021", "2022"}, 2023) is None                       # unchanged default
+    assert company_periods({"2021", "2022"}, 2023, forward=True) == ["2022"]     # prior-year filing
+    assert company_periods({"2022", "2023"}, 2023, forward=True) == ["2023"]     # exact period still wins
+    assert company_periods({"2024"}, 2023, forward=True) == ["2024"]             # falls back to later filings
