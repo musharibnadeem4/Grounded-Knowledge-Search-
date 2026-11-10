@@ -39,14 +39,30 @@ def test_read_index_meta_missing(tmp_path):
 
 
 # ------------------------------------------------------------------------ guards
-def test_refuses_to_write_context_header_into_default_index(tmp_path):
-    index = ROOT / "index"
-    before = sorted((p.name, p.stat().st_mtime_ns) for p in index.iterdir()) if index.exists() else None
+def test_context_header_is_default():
+    import argparse
+    import inspect
+    assert inspect.signature(ing.ingest).parameters["context_header"].default is True
+    captured = {}
+    orig = ing.ingest
+    ing.ingest = lambda *a, **k: captured.update(k) or 0
+    try:
+        ing.main(["x"])
+        assert captured["context_header"] is True
+        ing.main(["x", "--no-context-header"])
+        assert captured["context_header"] is False
+    finally:
+        ing.ingest = orig
+
+
+def test_refuses_plain_chunks_into_header_index(tmp_path):
+    idx = tmp_path / "idx"
+    idx.mkdir()
+    (idx / config.HASHES_FILE).write_text("{}")
+    (idx / config.INDEX_META_FILE).write_text('{"context_header": true}')
     with pytest.raises(SystemExit) as e:
-        ing.ingest(tmp_path, SRC_MANIFEST, tmp_path / "cache", config.INDEX_DIR, context_header=True)
-    assert "default index" in str(e.value)
-    after = sorted((p.name, p.stat().st_mtime_ns) for p in index.iterdir()) if index.exists() else None
-    assert before == after  # nothing in ./index was touched
+        ing.ingest(tmp_path, SRC_MANIFEST, tmp_path / "cache", idx, context_header=False)
+    assert "context_header=True" in str(e.value)
 
 
 def test_refuses_to_mix_chunk_styles(tmp_path):
@@ -79,7 +95,7 @@ def test_context_header_changes_embeddings_not_stored_text(tmp_path):
     cache = tmp_path / "cache"  # shared: the second ingest reuses the parse cache
 
     plain, ch = tmp_path / "plain", tmp_path / "ch"
-    assert ing.ingest(corpus, manifest, cache, plain, workers=1) == 0
+    assert ing.ingest(corpus, manifest, cache, plain, workers=1, context_header=False) == 0
     assert (cache / f"{SMALL}.jsonl").exists()
     assert ing.ingest(corpus, manifest, cache, ch, workers=1, context_header=True) == 0
 

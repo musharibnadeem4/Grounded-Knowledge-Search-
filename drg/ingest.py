@@ -252,13 +252,10 @@ def write_index_meta(index_dir, context_header):
 
 # ------------------------------------------------------------------------- main
 def ingest(corpus_dir, manifest_path=None, cache_dir=None, index_dir=None, workers=None,
-           context_header=False):
+           context_header=True):
     manifest_path = Path(manifest_path or config.MANIFEST_PATH)
     cache_dir = Path(cache_dir or config.CACHE_DIR)
     index_dir = Path(index_dir or config.INDEX_DIR)
-    if context_header and index_dir.resolve() == Path(config.INDEX_DIR).resolve():
-        sys.exit(f"ingest: --context-header must not write to the default index "
-                 f"({config.INDEX_DIR}); pass --index-dir <another directory>")
     # never mix chunk styles in one index
     existing = read_index_meta(index_dir)
     was_ch = existing["context_header"] if existing else False
@@ -364,12 +361,20 @@ def main(argv=None):
     ap.add_argument("--cache-dir", default=str(config.CACHE_DIR))
     ap.add_argument("--index-dir", default=str(config.INDEX_DIR))
     ap.add_argument("--workers", type=int, default=None)
-    ap.add_argument("--context-header", action="store_true",
-                    help="embed '{company} | {doc_type} | FY{period} | p.{page} | {page_header}' + "
-                         "chunk text (stored text unchanged); requires --index-dir other than ./index")
+    ap.add_argument("--context-header", dest="context_header", action="store_true", default=True,
+                    help="(default) embed '{company} | {doc_type} | FY{period} | p.{page} | "
+                         "{page_header}' + chunk text (stored text unchanged)")
+    ap.add_argument("--no-context-header", dest="context_header", action="store_false",
+                    help="embed the plain chunk text only")
     a = ap.parse_args(argv)
-    return ingest(a.corpus_dir, a.manifest, a.cache_dir, a.index_dir, a.workers,
-                  context_header=a.context_header)
+    rc = ingest(a.corpus_dir, a.manifest, a.cache_dir, a.index_dir, a.workers,
+                context_header=a.context_header)
+    if rc == 0 and config.ONNX_ENCODER:
+        # queries use the ONNX encoder (config.ONNX_ENCODER); build it now if this machine does not have it yet.
+        # Failure only warns: retrieval falls back to sentence-transformers.
+        from . import onnx_export
+        onnx_export.ensure_onnx()
+    return rc
 
 
 if __name__ == "__main__":
