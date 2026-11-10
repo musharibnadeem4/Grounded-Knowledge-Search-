@@ -1,4 +1,4 @@
-"""Detect exhibit-index / signature boilerplate (for config.DROP_BOILERPLATE)."""
+"""Detect exhibit-index / signature boilerplate (for config.DROP_BOILERPLATE). OFF by default (no effect, e4); see EXPERIMENTS.md."""
 import re
 
 MIN_CHARS = 80  # chunks with fewer stripped characters are dropped
