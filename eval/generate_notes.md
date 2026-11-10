@@ -26,7 +26,7 @@
 five-year summary, the next year's prior-year column); they count as correct *citations* in answer scoring but
 not as retrieval hits. `numeric` = machine-checkable expected value(s) (`kind` usd_m / pct / count; `mode` any|all).
 Year-ambiguous questions list every valid doc/page in `gold` and every acceptable value in `numeric`.
-Every generated question has `"verified": false` - please verify the evidence (listed in docs/notes/SUMMARY_FOR_ME.md, section 9).
+Every generated question has `"verified": false` - please verify the evidence (the list with their evidence is in the file `eval/questions_v2.jsonl`, field `evidence`).
 
 ## Split
 Generated questions: round(40%) of each kind is tagged `holdout` (single 6/14, lead_compare 2/5, year_ambiguous 1/3,

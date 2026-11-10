@@ -3,7 +3,7 @@
 
 Usage:
     python scripts/explore.py <corpus_dir> [--manifest manifest.csv]
-        [--questions dev_questions.jsonl] [--out docs/notes/explore_report.md]
+        [--questions dev_questions.jsonl] [--out explore_report.md]
         [--min-chars 50]
 
 Sections:
@@ -92,7 +92,7 @@ def main():
     ap.add_argument("corpus_dir")
     ap.add_argument("--manifest", default="manifest.csv")
     ap.add_argument("--questions", default="dev_questions.jsonl")
-    ap.add_argument("--out", default="docs/notes/explore_report.md")
+    ap.add_argument("--out", default="explore_report.md")
     ap.add_argument("--min-chars", type=int, default=50,
                     help="pages with fewer stripped chars are 'near-zero'")
     args = ap.parse_args()

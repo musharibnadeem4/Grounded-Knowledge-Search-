@@ -2,7 +2,7 @@
 
 ## Corpus observations
 
-Source: `docs/notes/explore_report.md`, unless noted.
+Source: `explore_report.md`, unless noted.
 
 - 119 PDFs, 18,371 pages. Manifest matches files 119/119 case-sensitively and case-insensitively; no extra or duplicate files.
 - Page length: per-file median ranges widely; the median of the per-file medians is ~3,355 chars (~840 tokens at 4 chars/token). Pooled over all 18,371 pages the median is 3,138 chars (~784 tokens) (`logs/corpus_page_stats.txt`); I had guessed ~3,500 chars / ~850 tokens.

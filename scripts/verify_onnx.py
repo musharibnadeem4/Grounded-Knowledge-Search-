@@ -4,7 +4,7 @@
   python scripts/verify_onnx.py [--n 200]
 
 Texts: random chunk texts from ./index (read-only), plus the tune/holdout-free dev questions. Adoption criterion:
-minimum cosine > 0.999. Output goes to stdout (and is copied into docs/notes/WORKLOG.md by hand).
+minimum cosine > 0.999. Output goes to stdout.
 """
 import argparse
 import json
