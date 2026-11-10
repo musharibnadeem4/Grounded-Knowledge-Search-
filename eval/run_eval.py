@@ -31,8 +31,15 @@ ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
 
 from drg import acl, config  # noqa: E402
+from drg import answer as ask_pipeline  # noqa: E402
+from drg import llm  # noqa: E402
 from drg.ingest import read_index_meta  # noqa: E402
+from drg.query import parse_query  # noqa: E402
 from drg.retrieve import last_timings, retrieve  # noqa: E402
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import answer_metrics  # noqa: E402
+import cost_estimate  # noqa: E402
 
 RESULTS = Path(__file__).resolve().parent / "results"
 
@@ -73,6 +80,21 @@ def mean(xs):
 
 
 # ----------------------------------------------------------------------- scoring
+# What `ask` actually reads: the per-company/interleaved retrieval (ASK_K or ASK_K_PER_COMPANY) and then the
+# token-budgeted context. askk_page_hit = a gold page is among those chunks before the budget;
+# ctx_page_hit / ctx_gold_recall = after the budget (what the LLM sees).
+CTX_METRICS = ["askk_page_hit", "ctx_page_hit", "ctx_gold_recall"]
+
+
+def score_ctx(q, ask_hits, ctx_hits):
+    gold_pages = {(g["doc_id"], p) for g in q["gold"] for p in g["pages"]}
+    ask_set = {(h.doc_id, h.page) for h in ask_hits}
+    ctx_set = {(h.doc_id, h.page) for h in ctx_hits}
+    return {"askk_page_hit": float(bool(ask_set & gold_pages)),
+            "ctx_page_hit": float(bool(ctx_set & gold_pages)),
+            "ctx_gold_recall": len(ctx_set & gold_pages) / len(gold_pages) if gold_pages else 0.0}
+
+
 def score_question(q, hits, ks):
     """Per-question retrieval metrics (answerable only)."""
     gold_pages = {(g["doc_id"], p) for g in q["gold"] for p in g["pages"]}
@@ -98,8 +120,9 @@ def aggregate(rows, ks):
     names = [f"{b}@{k}" for k in ks for b in ("doc_hit", "page_hit", "gold_page_recall")]
     names.append("mrr@10")
     out = {"n": len(rows)}
-    for n in names:
-        out[n] = mean([r["metrics"][n] for r in rows])
+    for n in names + CTX_METRICS:
+        vals = [r["metrics"][n] for r in rows if n in r["metrics"]]
+        out[n] = mean(vals) if vals else None
     return out
 
 
@@ -135,14 +158,32 @@ def main():
     ap.add_argument("--run-name", required=True)
     ap.add_argument("--k", type=int, nargs="+", default=[5, 10, 20])
     ap.add_argument("--index-dir", default=str(ROOT / "index"))
-    ap.add_argument("--questions", default=str(Path(__file__).resolve().parent / "questions.jsonl"))
+    ap.add_argument("--questions", default=str(Path(__file__).resolve().parent / "questions_v2.jsonl"),
+                    help="question file (default: eval/questions_v2.jsonl = 20 dev + 34 generated; "
+                         "eval/questions.jsonl is the original 20 dev questions)")
     ap.add_argument("--set", dest="overrides", action="append", default=[], metavar="KEY=VALUE",
                     help="override a drg.config flag for this run, e.g. --set YEAR_COMPANY_FILTER=True "
                          "(repeatable; value parsed as a Python literal, else a string)")
-    ap.add_argument("--answers", default=None,
-                    help="(stub) path to generated answers; answer-quality metrics not implemented")
+    ap.add_argument("--answers", action="store_true",
+                    help="also run the ask pipeline in-process (live LLM calls) and score the answers")
+    ap.add_argument("--sleep", type=float, default=8.0,
+                    help="with --answers: seconds to wait after each question that called the LLM "
+                         "(rate limits; 429s are additionally retried by drg.llm)")
+    ap.add_argument("--max-llm-calls", type=int, default=None, metavar="N",
+                    help="with --answers: stop cleanly after N live provider calls (cache hits are free) and write "
+                         "the results so far marked PARTIAL. Also stops at once if the provider's daily cap is hit")
+    ap.add_argument("--no-llm-cache", action="store_true",
+                    help="with --answers: do not read/write the prompt-keyed LLM response cache (cache/llm). "
+                         "The cache avoids paying twice for identical prompts (Groq free tier: 200k tokens/day)")
+    ap.add_argument("--split", choices=["tune", "holdout", "all"], default="all",
+                    help="which questions to run (default all); questions without a `split` field count as tune. "
+                         "The report always lists tune and holdout separately. When tuning, use --split tune: "
+                         "holdout is for the final evaluation only")
     a = ap.parse_args()
 
+    if (RESULTS / f"{a.run_name}.json").exists():
+        sys.exit(f"eval/results/{a.run_name}.json already exists; results are never overwritten - "
+                 f"pick a new --run-name")
     ks = sorted(set(a.k))
     kmax = max(max(ks), 10)
     cfg = SimpleNamespace(**{k: getattr(config, k) for k in dir(config) if k.isupper()})
@@ -157,17 +198,34 @@ def main():
     print(f"index metadata: {index_meta}", file=sys.stderr)
 
     questions = load_questions(a.questions)
+    if a.split != "all":
+        questions = [q for q in questions if q.get("split", "tune") == a.split]
+    elif any(q.get("split") == "holdout" for q in questions):
+        print("NOTE --split all includes the HOLDOUT questions (reported separately; do not tune on them)",
+              file=sys.stderr)
+    if a.split == "holdout":
+        print("NOTE running HOLDOUT questions (final evaluation only)", file=sys.stderr)
+    if not questions:
+        sys.exit(f"no questions for --split {a.split}")
     doc_types = load_doc_types(cfg.MANIFEST_PATH)
     print(f"{len(questions)} questions, k={ks}, index={cfg.INDEX_DIR}", file=sys.stderr)
 
-    if a.answers:
-        print("WARN --answers given, but answer-quality metrics are not implemented; ignoring",
-              file=sys.stderr)
-
+    if a.answers and not a.no_llm_cache:
+        llm.enable_cache(ROOT / "cache" / "llm")
     retrieve("warm-up query", "lead", 1, cfg)  # load model, untimed
+    if a.answers:  # live LLM: say what it will cost before spending anything
+        cost_estimate.report(cost_estimate.estimate(questions, cfg), len(questions), a.max_llm_calls)
 
     rows, latencies, rerank_lat, leaks_total = [], [], [], 0
-    for q in questions:
+    partial = None
+    calls0 = llm.api_calls
+    for qi, q in enumerate(questions):
+        if a.answers and a.max_llm_calls is not None and llm.api_calls - calls0 >= a.max_llm_calls:
+            partial = {"reason": f"--max-llm-calls {a.max_llm_calls} reached", "questions_run": len(rows),
+                       "questions_total": len(questions), "next_question": q["id"]}
+            print(f"PARTIAL: {partial['reason']} after {len(rows)} of {len(questions)} questions", file=sys.stderr)
+            break
+        q.setdefault("gold", [])
         allowed = set(acl.allowed_companies(q["role"]))
         t0 = time.perf_counter()
         hits = retrieve(q["question"], q["role"], kmax, cfg)
@@ -180,6 +238,7 @@ def main():
         leaks_total += leaks
         row = {
             "id": q["id"], "role": q["role"], "type": q["type"], "tags": q["tags"],
+            "split": q.get("split", "tune"),
             "gold": q["gold"],
             "doc_types": sorted({doc_types.get(g["doc_id"], "unknown") for g in q["gold"]}),
             "latency_ms": round(ms, 1),
@@ -189,7 +248,39 @@ def main():
                       for h in hits[:10]],
         }
         row["metrics"] = score_question(q, hits, ks) if q["type"] == "answerable" else None
+        if row["metrics"] is not None:
+            # same retrieval + context budget as `ask` (untimed; not part of the latency numbers)
+            companies, _ = parse_query(q["question"])
+            ask_hits = ask_pipeline.gather(q["question"], q["role"], companies, cfg)
+            ctx_hits = ask_pipeline.fit_budget(ask_hits, cfg.CONTEXT_TOKEN_BUDGET, multi=len(companies) >= 2)
+            row["metrics"].update(score_ctx(q, ask_hits, ctx_hits))
+            row["ctx"] = [{"doc_id": h.doc_id, "page": h.page} for h in ctx_hits]
         rows.append(row)
+        if a.answers:
+            t1, w0, h0 = time.perf_counter(), llm.total_wait, llm.cache_stats()["hits"]
+            res = ask_pipeline.answer(q["question"], q["role"], cfg)
+            secs = time.perf_counter() - t1
+            waited = llm.total_wait - w0
+            cached = llm.cache_stats()["hits"] > h0
+            st = ask_pipeline.last_run
+            if st.get("quota_exhausted"):  # the provider's daily cap: this and every later call would fail
+                rows.pop()  # do not score a refusal that the model never made
+                partial = {"reason": "provider daily quota exhausted", "questions_run": len(rows),
+                           "questions_total": len(questions), "next_question": q["id"]}
+                print(f"PARTIAL: provider daily quota exhausted at {q['id']}; stopping with {len(rows)} of "
+                      f"{len(questions)} questions", file=sys.stderr)
+                break
+            row["answer"] = res
+            row["answer_metrics"] = answer_metrics.score_answer(
+                q, res, secs, st.get("llm_called", False), st.get("ungrounded_warnings", 0), waited)
+            row["answer_metrics"]["context_chunks"] = st.get("context_chunks", 0)
+            row["answer_metrics"]["llm_cached"] = cached
+            row["question"], row["gold_answer"] = q["question"], q.get("answer", "")
+            row["has_numeric"] = bool(q.get("numeric"))
+            print(f"[{qi + 1}/{len(questions)}] {q['id']} {q['type']}: {res['status']} "
+                  f"(expected {row['answer_metrics']['expected']}) {secs:.1f}s", file=sys.stderr)
+            if st.get("llm_called") and not cached and a.sleep > 0 and qi < len(questions) - 1:
+                time.sleep(a.sleep)  # pace real API calls (a cache hit makes none)
 
     answerable = [r for r in rows if r["metrics"]]
     overall = aggregate(answerable, ks)
@@ -201,10 +292,32 @@ def main():
             by_doc_type[t].append(r)
     for r in rows:
         by_type[r["type"]].append(r)
+    by_split = defaultdict(list)
+    for r in answerable:
+        by_split[r["split"]].append(r)
     breakdowns = {
+        "by_split": {t: aggregate(rs, ks) for t, rs in sorted(by_split.items())},
         "by_tag": {t: aggregate(rs, ks) for t, rs in sorted(by_tag.items())},
         "by_doc_type": {t: aggregate(rs, ks) for t, rs in sorted(by_doc_type.items())},
     }
+    answers = None
+    if a.answers:
+        print(f"LLM cache: {llm.cache_stats()}", file=sys.stderr)
+        by_kind_a, by_tag_a = defaultdict(list), defaultdict(list)
+        for r in rows:
+            by_kind_a[r["type"]].append(r)
+            for t in r["tags"]:
+                by_tag_a[t].append(r)
+        by_split_a = defaultdict(list)
+        for r in rows:
+            by_split_a[r["split"]].append(r)
+        answers = {"overall": answer_metrics.summarize(rows),
+                   "by_split": {t: answer_metrics.summarize(rs) for t, rs in sorted(by_split_a.items())},
+                   "by_type": {t: answer_metrics.summarize(rs) for t, rs in sorted(by_kind_a.items())},
+                   "by_tag": {t: answer_metrics.summarize(rs) for t, rs in sorted(by_tag_a.items())},
+                   "llm": dict(zip(("provider", "model"), llm._env())),
+                   "sleep_s": a.sleep, "max_llm_calls": a.max_llm_calls,
+                   "live_calls": llm.api_calls - calls0, "llm_cache": llm.cache_stats() if not a.no_llm_cache else None}
     latency = {"p50_ms": pct(latencies, 50), "p95_ms": pct(latencies, 95),
                "mean_ms": mean(latencies), "n": len(latencies)}
     # reranker time alone (already included in the totals above); None when RERANKER is off
@@ -216,7 +329,7 @@ def main():
     now = dt.datetime.now(dt.timezone.utc).astimezone().isoformat(timespec="seconds")
     full_config = {
         "args": {"run_name": a.run_name, "k": ks, "index_dir": str(cfg.INDEX_DIR),
-                 "questions": a.questions},
+                 "questions": a.questions, "split": a.split, "answers": a.answers},
         "drg.config": {k: str(getattr(cfg, k)) for k in dir(cfg) if k.isupper()},
         "overrides": {k: repr(v) for k, v in overrides.items()},
         "retrieved_depth": kmax,
@@ -227,7 +340,8 @@ def main():
                           "rerank_latency": rerank_latency},
               "index_meta": index_meta if index_meta is not None
               else {"note": "no index_meta.json (index predates it)", "context_header": False},
-              "breakdowns": breakdowns, "rows": rows}
+              "breakdowns": breakdowns, "answers": answers, "split": a.split,
+              "partial": partial, "status": "PARTIAL" if partial else "COMPLETE", "rows": rows}
 
     RESULTS.mkdir(parents=True, exist_ok=True)
     (RESULTS / f"{a.run_name}.json").write_text(
@@ -248,7 +362,8 @@ def render_md(res, ks):
     sha = "none (no commits)" if not g["sha"] else g["sha"] + (" (dirty)" if g["dirty"] else "")
     lat = res["metrics"]["latency"]
     rl = res["metrics"].get("rerank_latency")
-    cols = [f"{b}@{k}" for k in ks for b in ("doc_hit", "page_hit", "gold_page_recall")] + ["mrr@10"]
+    cols = ([f"{b}@{k}" for k in ks for b in ("doc_hit", "page_hit", "gold_page_recall")]
+            + ["mrr@10"] + CTX_METRICS)
 
     def table(groups):
         lines = ["| group | n | " + " | ".join(cols) + " |",
@@ -257,7 +372,12 @@ def render_md(res, ks):
             lines.append(f"| {name} | {m['n']} | " + " | ".join(fmt(m[c]) for c in cols) + " |")
         return "\n".join(lines)
 
-    out = [f"# Eval run: {res['run_name']}\n",
+    out = [f"# Eval run: {res['run_name']}\n"]
+    if res.get("partial"):
+        pt = res["partial"]
+        out.append(f"> **PARTIAL RUN** - {pt['reason']}: {pt['questions_run']} of {pt['questions_total']} questions "
+                   f"were run (stopped before `{pt['next_question']}`). Metrics cover only those questions.\n")
+    out += [
            f"- Timestamp: {res['timestamp']}",
            f"- Config overrides (--set): {res['config']['overrides'] or 'none'}",
            f"- Index metadata: {res.get('index_meta')}",
@@ -269,12 +389,55 @@ def render_md(res, ks):
            (f"- Rerank latency (included in the above): p50 {rl['p50_ms']:.0f} ms, "
             f"p95 {rl['p95_ms']:.0f} ms" if rl else "- Rerank latency: n/a (RERANKER off)") + "\n",
            "## Overall (answerable questions)\n", table([("all", ov)]), "",
+           "## By split (tune = used for decisions, holdout = first looked at in the final evaluation)\n",
+           table(list(res["breakdowns"].get("by_split", {}).items())), "",
            "## By tag\n", table(list(res["breakdowns"]["by_tag"].items())) if
            res["breakdowns"]["by_tag"] else "_no tagged questions_", "",
            "## By doc_type (of gold doc)\n",
            table(list(res["breakdowns"]["by_doc_type"].items())), "",
-           "## Full config\n", "```json", json.dumps(res["config"], indent=1), "```", ""]
+           ] + answers_md(res) + ["## Full config\n", "```json", json.dumps(res["config"], indent=1), "```", ""]
     return "\n".join(out)
+
+
+ANS_COLS = ["n", "n_answerable", "status_accuracy", "refusal_recall", "refusal_precision",
+            "answer_rate_on_answerable", "refusal_rate_on_answerable", "numeric_accuracy", "n_numeric",
+            "correct_rate", "partial_rate", "soft_refusal_rate", "refused_rate", "confident_error_rate", "citation_hit",
+            "citation_precision", "ungrounded_warnings", "latency_p50_s", "latency_p95_s",
+            "latency_net_p50_s", "latency_net_p95_s"]
+
+
+def answers_md(res):
+    an = res.get("answers")
+    if not an:
+        return []
+
+    def tbl(groups):
+        lines = ["| group | " + " | ".join(ANS_COLS) + " |", "|---|" + "---:|" * len(ANS_COLS)]
+        for name, m in groups:
+            lines.append(f"| {name} | " + " | ".join(
+                (fmt(m[c]) if isinstance(m[c], float) or m[c] is None else str(m[c])) for c in ANS_COLS) + " |")
+        return "\n".join(lines)
+
+    out = [f"## Answer quality (live LLM {an.get('llm')}; sleep {an['sleep_s']} s; split {res.get('split')})\n",
+           tbl([("all", an["overall"])] + list(an.get("by_split", {}).items())), "", "### By question type\n", tbl(list(an["by_type"].items())), "",
+           "### By tag\n", tbl(list(an["by_tag"].items())), "",
+           "### Per question\n", "| id | type | expected | got | numeric_ok | cite_hit | warnings | s |",
+           "|---|---|---|---|---|---|---|---:|"]
+    for r in res["rows"]:
+        m = r.get("answer_metrics")
+        if m:
+            out.append(f"| {r['id']} | {r['type']} | {m['expected']} | {m['got']} | {m['numeric_ok']} | "
+                       f"{m['cite_hit']} | {m['ungrounded_warnings']} | {m['seconds']} |")
+    out += ["", "### Manual review (answered, no numeric check)\n"]
+    manual = [r for r in res["rows"] if r.get("answer_metrics") and r["type"] == "answerable"
+              and not r.get("has_numeric") and r["answer"]["status"] == "answered"]
+    if not manual:
+        out.append("_none_")
+    for r in manual:
+        out += [f"**{r['id']}** ({r['role']})", f"- Q: {r['question']}",
+                f"- Gold: {r['gold_answer']}", f"- System: {r['answer']['answer']}",
+                f"- Cited: {[(c['doc_id'], c['page']) for c in r['answer']['citations']]}", ""]
+    return out + [""]
 
 
 def append_summary(res, ks):
@@ -288,6 +451,18 @@ def append_summary(res, ks):
         for b in ("doc_hit", "page_hit", "gold_page_recall"):
             row[f"{b}@{k}"] = round(ov[f"{b}@{k}"], 4) if ov[f"{b}@{k}"] is not None else ""
     row["mrr@10"] = round(ov["mrr@10"], 4) if ov["mrr@10"] is not None else ""
+    for c in CTX_METRICS:
+        row[c] = round(ov[c], 4) if ov.get(c) is not None else ""
+    row["split"] = res.get("split", "")
+    row["status"] = res.get("status", "COMPLETE")
+    an = (res.get("answers") or {}).get("overall")
+    if an:
+        for c in ("status_accuracy", "refusal_recall", "refusal_precision", "numeric_accuracy",
+                  "correct_rate", "partial_rate", "soft_refusal_rate", "refused_rate", "confident_error_rate",
+                  "answered_wrong_rate", "refusal_rate_on_answerable",
+                  "citation_hit", "citation_precision", "ungrounded_warnings", "latency_p50_s", "latency_p95_s",
+                  "latency_net_p50_s", "latency_net_p95_s"):
+            row[f"ans_{c}"] = round(an[c], 4) if isinstance(an[c], float) else (an[c] if an[c] is not None else "")
     row.update({"acl_leaks": res["metrics"]["acl_leaks"],
                 "latency_p50_ms": round(lat["p50_ms"], 1),
                 "latency_p95_ms": round(lat["p95_ms"], 1)})

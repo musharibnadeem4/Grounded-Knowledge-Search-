@@ -32,11 +32,52 @@ def first_gold_rank(row):
     return None
 
 
+def compare_flag(a):
+    """Per-question hit/miss comparison for askk / ctx / answer. Net = B better - B worse."""
+    ra, rb = load(a.run_a), load(a.run_b)
+
+    def val(row):
+        if a.metric == "answer":
+            m = row.get("answer_metrics")
+            return None if not m or m.get("answer_ok") is None else float(bool(m["answer_ok"]))
+        m = row.get("metrics")
+        key = {"askk": "askk_page_hit", "ctx": "ctx_page_hit"}[a.metric]
+        return None if not m or key not in m else m[key]
+
+    rows_a, rows_b = {r["id"]: r for r in ra["rows"]}, {r["id"]: r for r in rb["rows"]}
+    groups = {"B better": [], "B worse": [], "same": []}
+    lines = [f"# {a.run_a} (A) vs {a.run_b} (B), metric: {a.metric}\n",
+             "| id | role | A | B | verdict |", "|---|---|---:|---:|---|"]
+    skipped = []
+    for i in rows_a:
+        if i not in rows_b:
+            continue
+        x, y = val(rows_a[i]), val(rows_b[i])
+        if x is None or y is None:
+            skipped.append(i)
+            continue
+        verdict = "B better" if y > x else "B worse" if y < x else "same"
+        groups[verdict].append(i)
+        lines.append(f"| {i} | {rows_a[i]['role']} | {x:g} | {y:g} | {verdict} |")
+    n = sum(len(v) for v in groups.values())
+    lines += ["", "## Counts\n", f"- {n} questions compared ({len(skipped)} without this metric skipped)"]
+    for v in ("B better", "B worse", "same"):
+        lines.append(f"- **{v}: {len(groups[v])}**" + (f" - {', '.join(groups[v])}" if groups[v] else ""))
+    lines.append(f"- **net (B better - B worse): {len(groups['B better']) - len(groups['B worse'])}**")
+    sys.stdout.write("\n".join(lines) + "\n")
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("run_a")
     ap.add_argument("run_b")
+    ap.add_argument("--metric", choices=["rank", "askk", "ctx", "answer"], default="rank",
+                    help="rank (default): rank of the first gold-page chunk in the stored top 10; "
+                         "askk / ctx: gold page among the chunks ask retrieves / the budgeted LLM context; "
+                         "answer: answer_ok (numeric match, or correct refusal) from an --answers run")
     a = ap.parse_args()
+    if a.metric != "rank":
+        return compare_flag(a)
 
     ra, rb = load(a.run_a), load(a.run_b)
     rows_a = {r["id"]: r for r in ra["rows"] if r["type"] == "answerable"}
