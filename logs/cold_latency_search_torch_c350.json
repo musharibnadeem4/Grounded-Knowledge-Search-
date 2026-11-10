@@ -1,0 +1,56 @@
+{
+ "cmd": "search",
+ "n": 5,
+ "config_patch": {
+  "ONNX_ENCODER": false,
+  "INDEX_DIR": "index_c350"
+ },
+ "wall_s": {
+  "median": 18.86,
+  "min": 17.86,
+  "max": 100.88
+ },
+ "pre_llm_s": {
+  "median": 18.86,
+  "min": 17.86,
+  "max": 100.88
+ },
+ "runs": [
+  {
+   "wall_s": 100.88,
+   "llm_s": 0.0,
+   "pre_llm_s": 100.88,
+   "rate_limit_wait_s": 0,
+   "ok": true
+  },
+  {
+   "wall_s": 18.86,
+   "llm_s": 0.0,
+   "pre_llm_s": 18.86,
+   "rate_limit_wait_s": 0,
+   "ok": true
+  },
+  {
+   "wall_s": 17.89,
+   "llm_s": 0.0,
+   "pre_llm_s": 17.89,
+   "rate_limit_wait_s": 0,
+   "ok": true
+  },
+  {
+   "wall_s": 17.86,
+   "llm_s": 0.0,
+   "pre_llm_s": 17.86,
+   "rate_limit_wait_s": 0,
+   "ok": true
+  },
+  {
+   "wall_s": 19.38,
+   "llm_s": 0.0,
+   "pre_llm_s": 19.38,
+   "rate_limit_wait_s": 0,
+   "ok": true
+  }
+ ],
+ "hardware": "Intel64 Family 6 Model 186 Stepping 2, GenuineIntel; Windows-11-10.0.26300-SP0"
+}

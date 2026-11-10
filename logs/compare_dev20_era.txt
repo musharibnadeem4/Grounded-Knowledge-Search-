@@ -1,0 +1,272 @@
+##### compare_runs.py e0_baseline_dev20 e2_year_company_filter (rank of first gold-page chunk in the stored top 10)
+# e0_baseline_dev20 (A) vs e2_year_company_filter (B)
+
+Rank of the first gold-page chunk within the stored top 10 (`>10` = not in it).
+
+| id | role | A rank | B rank | verdict |
+|---|---|---:|---:|---|
+| fb_00735 | consumer | >10 | >10 | same |
+| fb_04171 | consumer | 6 | 1 | B better |
+| fb_00603 | consumer | >10 | >10 | same |
+| fb_00499 | health_industrials | >10 | >10 | same |
+| fb_10285 | health_industrials | 4 | 1 | B better |
+| fb_00494 | health_industrials | >10 | >10 | same |
+| fb_00215 | tech_telecom | >10 | 3 | B better |
+| fb_10130 | tech_telecom | >10 | 3 | B better |
+| fb_00757 | tech_telecom | >10 | >10 | same |
+| fb_01275 | consumer | >10 | >10 | same |
+| fb_04980 | consumer | >10 | >10 | same |
+| fb_00407 | consumer | 5 | 1 | B better |
+| fb_00941 | health_industrials | >10 | >10 | same |
+| fb_03029 | health_industrials | >10 | 7 | B better |
+| fb_01484 | health_industrials | >10 | >10 | same |
+| fb_00005 | tech_telecom | >10 | >10 | same |
+| fb_03069 | tech_telecom | >10 | >10 | same |
+| fb_00591 | tech_telecom | 3 | 1 | B better |
+| fb_01254 | consumer | >10 | 3 | B better |
+| fb_02608 | consumer | 9 | 1 | B better |
+
+## Counts
+
+- 20 answerable questions compared
+- **B better: 9** — fb_04171, fb_10285, fb_00215, fb_10130, fb_00407, fb_03029, fb_00591, fb_01254, fb_02608
+- **B worse: 0**
+- **same: 11** — fb_00735, fb_00603, fb_00499, fb_00494, fb_00757, fb_01275, fb_04980, fb_00941, fb_01484, fb_00005, fb_03069
+##### compare_runs.py e2_year_company_filter e3a_rerank_minilm (rank of first gold-page chunk in the stored top 10)
+# e2_year_company_filter (A) vs e3a_rerank_minilm (B)
+
+Rank of the first gold-page chunk within the stored top 10 (`>10` = not in it).
+
+| id | role | A rank | B rank | verdict |
+|---|---|---:|---:|---|
+| fb_00735 | consumer | >10 | >10 | same |
+| fb_04171 | consumer | 1 | 1 | same |
+| fb_00603 | consumer | >10 | >10 | same |
+| fb_00499 | health_industrials | >10 | >10 | same |
+| fb_10285 | health_industrials | 1 | 2 | B worse |
+| fb_00494 | health_industrials | >10 | 2 | B better |
+| fb_00215 | tech_telecom | 3 | >10 | B worse |
+| fb_10130 | tech_telecom | 3 | >10 | B worse |
+| fb_00757 | tech_telecom | >10 | >10 | same |
+| fb_01275 | consumer | >10 | 4 | B better |
+| fb_04980 | consumer | >10 | 2 | B better |
+| fb_00407 | consumer | 1 | 1 | same |
+| fb_00941 | health_industrials | >10 | 3 | B better |
+| fb_03029 | health_industrials | 7 | >10 | B worse |
+| fb_01484 | health_industrials | >10 | >10 | same |
+| fb_00005 | tech_telecom | >10 | >10 | same |
+| fb_03069 | tech_telecom | >10 | >10 | same |
+| fb_00591 | tech_telecom | 1 | 1 | same |
+| fb_01254 | consumer | 3 | 4 | B worse |
+| fb_02608 | consumer | 1 | 3 | B worse |
+
+## Counts
+
+- 20 answerable questions compared
+- **B better: 4** — fb_00494, fb_01275, fb_04980, fb_00941
+- **B worse: 6** — fb_10285, fb_00215, fb_10130, fb_03029, fb_01254, fb_02608
+- **same: 10** — fb_00735, fb_04171, fb_00603, fb_00499, fb_00757, fb_00407, fb_01484, fb_00005, fb_03069, fb_00591
+##### compare_runs.py e2_year_company_filter e3b_rerank_bge (rank of first gold-page chunk in the stored top 10)
+# e2_year_company_filter (A) vs e3b_rerank_bge (B)
+
+Rank of the first gold-page chunk within the stored top 10 (`>10` = not in it).
+
+| id | role | A rank | B rank | verdict |
+|---|---|---:|---:|---|
+| fb_00735 | consumer | >10 | >10 | same |
+| fb_04171 | consumer | 1 | 1 | same |
+| fb_00603 | consumer | >10 | >10 | same |
+| fb_00499 | health_industrials | >10 | >10 | same |
+| fb_10285 | health_industrials | 1 | 1 | same |
+| fb_00494 | health_industrials | >10 | >10 | same |
+| fb_00215 | tech_telecom | 3 | >10 | B worse |
+| fb_10130 | tech_telecom | 3 | >10 | B worse |
+| fb_00757 | tech_telecom | >10 | >10 | same |
+| fb_01275 | consumer | >10 | 7 | B better |
+| fb_04980 | consumer | >10 | 1 | B better |
+| fb_00407 | consumer | 1 | 1 | same |
+| fb_00941 | health_industrials | >10 | 9 | B better |
+| fb_03029 | health_industrials | 7 | >10 | B worse |
+| fb_01484 | health_industrials | >10 | >10 | same |
+| fb_00005 | tech_telecom | >10 | >10 | same |
+| fb_03069 | tech_telecom | >10 | 5 | B better |
+| fb_00591 | tech_telecom | 1 | >10 | B worse |
+| fb_01254 | consumer | 3 | 8 | B worse |
+| fb_02608 | consumer | 1 | 1 | same |
+
+## Counts
+
+- 20 answerable questions compared
+- **B better: 4** — fb_01275, fb_04980, fb_00941, fb_03069
+- **B worse: 5** — fb_00215, fb_10130, fb_03029, fb_00591, fb_01254
+- **same: 11** — fb_00735, fb_04171, fb_00603, fb_00499, fb_10285, fb_00494, fb_00757, fb_00407, fb_01484, fb_00005, fb_02608
+##### compare_runs.py e2_year_company_filter e3c_rerank_bge_depth10 (rank of first gold-page chunk in the stored top 10)
+# e2_year_company_filter (A) vs e3c_rerank_bge_depth10 (B)
+
+Rank of the first gold-page chunk within the stored top 10 (`>10` = not in it).
+
+| id | role | A rank | B rank | verdict |
+|---|---|---:|---:|---|
+| fb_00735 | consumer | >10 | >10 | same |
+| fb_04171 | consumer | 1 | 1 | same |
+| fb_00603 | consumer | >10 | >10 | same |
+| fb_00499 | health_industrials | >10 | >10 | same |
+| fb_10285 | health_industrials | 1 | 1 | same |
+| fb_00494 | health_industrials | >10 | 6 | B better |
+| fb_00215 | tech_telecom | 3 | 5 | B worse |
+| fb_10130 | tech_telecom | 3 | >10 | B worse |
+| fb_00757 | tech_telecom | >10 | >10 | same |
+| fb_01275 | consumer | >10 | >10 | same |
+| fb_04980 | consumer | >10 | 1 | B better |
+| fb_00407 | consumer | 1 | 1 | same |
+| fb_00941 | health_industrials | >10 | 7 | B better |
+| fb_03029 | health_industrials | 7 | 8 | B worse |
+| fb_01484 | health_industrials | >10 | >10 | same |
+| fb_00005 | tech_telecom | >10 | >10 | same |
+| fb_03069 | tech_telecom | >10 | >10 | same |
+| fb_00591 | tech_telecom | 1 | 6 | B worse |
+| fb_01254 | consumer | 3 | 5 | B worse |
+| fb_02608 | consumer | 1 | 1 | same |
+
+## Counts
+
+- 20 answerable questions compared
+- **B better: 3** — fb_00494, fb_04980, fb_00941
+- **B worse: 5** — fb_00215, fb_10130, fb_03029, fb_00591, fb_01254
+- **same: 12** — fb_00735, fb_04171, fb_00603, fb_00499, fb_10285, fb_00757, fb_01275, fb_00407, fb_01484, fb_00005, fb_03069, fb_02608
+##### compare_runs.py e2_year_company_filter e4_drop_boilerplate (rank of first gold-page chunk in the stored top 10)
+# e2_year_company_filter (A) vs e4_drop_boilerplate (B)
+
+Rank of the first gold-page chunk within the stored top 10 (`>10` = not in it).
+
+| id | role | A rank | B rank | verdict |
+|---|---|---:|---:|---|
+| fb_00735 | consumer | >10 | >10 | same |
+| fb_04171 | consumer | 1 | 1 | same |
+| fb_00603 | consumer | >10 | >10 | same |
+| fb_00499 | health_industrials | >10 | >10 | same |
+| fb_10285 | health_industrials | 1 | 1 | same |
+| fb_00494 | health_industrials | >10 | >10 | same |
+| fb_00215 | tech_telecom | 3 | 3 | same |
+| fb_10130 | tech_telecom | 3 | 3 | same |
+| fb_00757 | tech_telecom | >10 | >10 | same |
+| fb_01275 | consumer | >10 | >10 | same |
+| fb_04980 | consumer | >10 | >10 | same |
+| fb_00407 | consumer | 1 | 1 | same |
+| fb_00941 | health_industrials | >10 | >10 | same |
+| fb_03029 | health_industrials | 7 | 7 | same |
+| fb_01484 | health_industrials | >10 | >10 | same |
+| fb_00005 | tech_telecom | >10 | >10 | same |
+| fb_03069 | tech_telecom | >10 | >10 | same |
+| fb_00591 | tech_telecom | 1 | 1 | same |
+| fb_01254 | consumer | 3 | 3 | same |
+| fb_02608 | consumer | 1 | 1 | same |
+
+## Counts
+
+- 20 answerable questions compared
+- **B better: 0**
+- **B worse: 0**
+- **same: 20** — fb_00735, fb_04171, fb_00603, fb_00499, fb_10285, fb_00494, fb_00215, fb_10130, fb_00757, fb_01275, fb_04980, fb_00407, fb_00941, fb_03029, fb_01484, fb_00005, fb_03069, fb_00591, fb_01254, fb_02608
+##### compare_runs.py e2_year_company_filter e5_prefer_10k (rank of first gold-page chunk in the stored top 10)
+# e2_year_company_filter (A) vs e5_prefer_10k (B)
+
+Rank of the first gold-page chunk within the stored top 10 (`>10` = not in it).
+
+| id | role | A rank | B rank | verdict |
+|---|---|---:|---:|---|
+| fb_00735 | consumer | >10 | >10 | same |
+| fb_04171 | consumer | 1 | 1 | same |
+| fb_00603 | consumer | >10 | >10 | same |
+| fb_00499 | health_industrials | >10 | >10 | same |
+| fb_10285 | health_industrials | 1 | 1 | same |
+| fb_00494 | health_industrials | >10 | >10 | same |
+| fb_00215 | tech_telecom | 3 | 3 | same |
+| fb_10130 | tech_telecom | 3 | 3 | same |
+| fb_00757 | tech_telecom | >10 | >10 | same |
+| fb_01275 | consumer | >10 | >10 | same |
+| fb_04980 | consumer | >10 | >10 | same |
+| fb_00407 | consumer | 1 | 1 | same |
+| fb_00941 | health_industrials | >10 | >10 | same |
+| fb_03029 | health_industrials | 7 | 7 | same |
+| fb_01484 | health_industrials | >10 | >10 | same |
+| fb_00005 | tech_telecom | >10 | >10 | same |
+| fb_03069 | tech_telecom | >10 | >10 | same |
+| fb_00591 | tech_telecom | 1 | 1 | same |
+| fb_01254 | consumer | 3 | 3 | same |
+| fb_02608 | consumer | 1 | 1 | same |
+
+## Counts
+
+- 20 answerable questions compared
+- **B better: 0**
+- **B worse: 0**
+- **same: 20** — fb_00735, fb_04171, fb_00603, fb_00499, fb_10285, fb_00494, fb_00215, fb_10130, fb_00757, fb_01275, fb_04980, fb_00407, fb_00941, fb_03029, fb_01484, fb_00005, fb_03069, fb_00591, fb_01254, fb_02608
+##### compare_runs.py e2_year_company_filter e45_both (rank of first gold-page chunk in the stored top 10)
+# e2_year_company_filter (A) vs e45_both (B)
+
+Rank of the first gold-page chunk within the stored top 10 (`>10` = not in it).
+
+| id | role | A rank | B rank | verdict |
+|---|---|---:|---:|---|
+| fb_00735 | consumer | >10 | >10 | same |
+| fb_04171 | consumer | 1 | 1 | same |
+| fb_00603 | consumer | >10 | >10 | same |
+| fb_00499 | health_industrials | >10 | >10 | same |
+| fb_10285 | health_industrials | 1 | 1 | same |
+| fb_00494 | health_industrials | >10 | >10 | same |
+| fb_00215 | tech_telecom | 3 | 3 | same |
+| fb_10130 | tech_telecom | 3 | 3 | same |
+| fb_00757 | tech_telecom | >10 | >10 | same |
+| fb_01275 | consumer | >10 | >10 | same |
+| fb_04980 | consumer | >10 | >10 | same |
+| fb_00407 | consumer | 1 | 1 | same |
+| fb_00941 | health_industrials | >10 | >10 | same |
+| fb_03029 | health_industrials | 7 | 7 | same |
+| fb_01484 | health_industrials | >10 | >10 | same |
+| fb_00005 | tech_telecom | >10 | >10 | same |
+| fb_03069 | tech_telecom | >10 | >10 | same |
+| fb_00591 | tech_telecom | 1 | 1 | same |
+| fb_01254 | consumer | 3 | 3 | same |
+| fb_02608 | consumer | 1 | 1 | same |
+
+## Counts
+
+- 20 answerable questions compared
+- **B better: 0**
+- **B worse: 0**
+- **same: 20** — fb_00735, fb_04171, fb_00603, fb_00499, fb_10285, fb_00494, fb_00215, fb_10130, fb_00757, fb_01275, fb_04980, fb_00407, fb_00941, fb_03029, fb_01484, fb_00005, fb_03069, fb_00591, fb_01254, fb_02608
+##### compare_runs.py e2_year_company_filter e6_context_header (rank of first gold-page chunk in the stored top 10)
+# e2_year_company_filter (A) vs e6_context_header (B)
+
+Rank of the first gold-page chunk within the stored top 10 (`>10` = not in it).
+
+| id | role | A rank | B rank | verdict |
+|---|---|---:|---:|---|
+| fb_00735 | consumer | >10 | >10 | same |
+| fb_04171 | consumer | 1 | 2 | B worse |
+| fb_00603 | consumer | >10 | 8 | B better |
+| fb_00499 | health_industrials | >10 | >10 | same |
+| fb_10285 | health_industrials | 1 | 5 | B worse |
+| fb_00494 | health_industrials | >10 | >10 | same |
+| fb_00215 | tech_telecom | 3 | 4 | B worse |
+| fb_10130 | tech_telecom | 3 | 2 | B better |
+| fb_00757 | tech_telecom | >10 | >10 | same |
+| fb_01275 | consumer | >10 | 3 | B better |
+| fb_04980 | consumer | >10 | >10 | same |
+| fb_00407 | consumer | 1 | 1 | same |
+| fb_00941 | health_industrials | >10 | 5 | B better |
+| fb_03029 | health_industrials | 7 | 8 | B worse |
+| fb_01484 | health_industrials | >10 | 4 | B better |
+| fb_00005 | tech_telecom | >10 | 2 | B better |
+| fb_03069 | tech_telecom | >10 | >10 | same |
+| fb_00591 | tech_telecom | 1 | 1 | same |
+| fb_01254 | consumer | 3 | 1 | B better |
+| fb_02608 | consumer | 1 | 10 | B worse |
+
+## Counts
+
+- 20 answerable questions compared
+- **B better: 7** — fb_00603, fb_10130, fb_01275, fb_00941, fb_01484, fb_00005, fb_01254
+- **B worse: 5** — fb_04171, fb_10285, fb_00215, fb_03029, fb_02608
+- **same: 8** — fb_00735, fb_00499, fb_00494, fb_00757, fb_04980, fb_00407, fb_03069, fb_00591

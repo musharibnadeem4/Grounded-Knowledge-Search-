@@ -1,0 +1,34 @@
+ask parse: companies=['AMD', 'Pfizer'] year=2022
+sub-query [AMD]: 'R&D spending at AMD in 2022.'
+query parse: companies=['AMD'] year=2022 searching=['AMD'] where={"$and": [{"company": {"$in": ["AMD"]}}, {"$and": [{"company": "AMD"}, {"period": {"$in": ["2022"]}}]}]}
+query expand: +['research and development']
+onnx query encoder loaded in 0.51s
+query latency: model_load=0.509s embed=0.007s chroma=0.947s total=1.463s
+sub-query [Pfizer]: 'R&D spending at Pfizer in 2022.'
+query parse: companies=['Pfizer'] year=2022 searching=['Pfizer'] where={"$and": [{"company": {"$in": ["Pfizer"]}}, {"$and": [{"company": "Pfizer"}, {"period": {"$in": ["2022"]}}]}]}
+query expand: +['research and development']
+query latency: model_load=0.000s embed=0.005s chroma=0.079s total=0.084s
+retrieved 20 chunks:
+C1 AMD_2022_10K p.43
+C2 PFIZER_2022_10K p.73
+C3 AMD_2022_10K p.44
+C4 PFIZER_2022_10K p.34
+C5 AMD_2022_10K p.50
+C6 PFIZER_2022_10K p.42
+C7 AMD_2022_10K p.52
+C8 PFIZER_2022_10K p.11
+C9 AMD_2022_10K p.48
+C10 PFIZER_2022_10K p.105
+C11 AMD_2022_10K p.54
+C12 PFIZER_2022_10K p.36
+C13 AMD_2022_10K p.68
+C14 PFIZER_2022_10K p.106
+C15 AMD_2022_10K p.6
+C16 PFIZER_2022_10K p.22
+C17 AMD_2022_10K p.85
+C18 PFIZER_2022_10K p.12
+C19 AMD_2022_10K p.71
+C20 PFIZER_2022_10K p.13
+context budget 4500 tokens: kept 17 chunks (4261 tokens) (AMD: 2172/2250, Pfizer: 2089/2250), dropped 3: PFIZER_2022_10K p.12, AMD_2022_10K p.71, PFIZER_2022_10K p.13
+LLM raw response (first 2000 chars): {"status":"answered","answer":"In fiscal year 2022, AMD reported research and development expenses of $5.0\u202fbillion (equivalent to $5,005\u202fmillion)\u3010C5\u3011\u3010C11\u3011. The provided filings do not contain a disclosed total R&D spending figure for Pfizer for 2022, so a direct comparison cannot be completed for Pfizer."}
+ask latency: parse=0.000s retrieve=1.550s llm=1.648s total=3.199s

@@ -1,0 +1,4 @@
+query parse: companies=['Adobe'] year=2022 searching=['Adobe'] where={"$and": [{"company": {"$in": ["AMD", "Adobe", "Corning", "Verizon"]}}, {"$and": [{"company": "Adobe"}, {"period": {"$in": ["2022"]}}]}]}
+query expand: +['consolidated statements of operations; statements of income; statements of earnings; operating income']
+onnx query encoder loaded in 0.57s
+query latency: model_load=0.572s embed=0.014s chroma=1.067s total=1.653s

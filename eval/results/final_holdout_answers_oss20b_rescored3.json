@@ -1,0 +1,2734 @@
+{
+ "run_name": "final_holdout_answers_oss20b_rescored3",
+ "timestamp": "2026-11-09T14:37:26+05:00",
+ "git": {
+  "sha": "b236e7cc54fd59e35538e1e58cb2bde402f3f768",
+  "dirty": true
+ },
+ "config": {
+  "args": {
+   "run_name": "final_holdout_answers_oss20b",
+   "k": [
+    5,
+    10,
+    20
+   ],
+   "index_dir": "index_c200",
+   "questions": "eval/questions_v2.jsonl",
+   "split": "holdout",
+   "answers": true
+  },
+  "drg.config": {
+   "ASK_K": "14",
+   "ASK_K_PER_COMPANY": "10",
+   "ASK_MAX_CHUNKS_PER_PAGE": "1",
+   "CACHE_DIR": "cache\\pages",
+   "CHROMA_BATCH": "2000",
+   "CHUNK_OVERLAP": "40",
+   "CHUNK_TOKENS": "200",
+   "COLLECTION": "chunks",
+   "CONTEXT_TOKEN_BUDGET": "4500",
+   "DROP_BOILERPLATE": "False",
+   "DROP_BOILERPLATE_OVERFETCH": "3",
+   "EMBED_BATCH": "64",
+   "EMBED_MODEL": "BAAI/bge-small-en-v1.5",
+   "FORECAST_PRIOR_YEAR": "False",
+   "HASHES_FILE": "hashes.json",
+   "HYBRID_BM25": "False",
+   "HYBRID_DEPTH": "50",
+   "INDEX_DIR": "index_c200",
+   "INDEX_META_FILE": "index_meta.json",
+   "LLM_TIMEOUT": "30",
+   "MANIFEST_PATH": "D:\\Assignment DRG\\manifest.csv",
+   "MAX_CHUNK_TOKENS": "500",
+   "MIN_CHUNK_CHARS": "0",
+   "MIN_CHUNK_OVERFETCH": "3",
+   "ONNX_DIR": "models\\bge-small-en-v1.5-onnx",
+   "ONNX_ENCODER": "True",
+   "PREFER_10K_OVER_ANNUALREPORT": "True",
+   "PROMPT_VERSION": "1",
+   "QUERY_CLEAN": "False",
+   "QUERY_EXPAND": "True",
+   "QUERY_PREFIX": "",
+   "RERANKER": "None",
+   "RERANKERS_ALLOWED": "('cross-encoder/ms-marco-MiniLM-L-6-v2', 'BAAI/bge-reranker-base')",
+   "RERANK_DEPTH": "50",
+   "RRF_K": "60",
+   "YEAR_COMPANY_FILTER": "True"
+  },
+  "overrides": {},
+  "retrieved_depth": 20,
+  "question_types": {
+   "answerable": 9,
+   "off_desk": 2,
+   "unanswerable": 2
+  }
+ },
+ "metrics": {
+  "overall": {
+   "n": 9,
+   "doc_hit@5": 1.0,
+   "page_hit@5": 0.4444444444444444,
+   "gold_page_recall@5": 0.3055555555555556,
+   "doc_hit@10": 1.0,
+   "page_hit@10": 0.7777777777777778,
+   "gold_page_recall@10": 0.5277777777777778,
+   "doc_hit@20": 1.0,
+   "page_hit@20": 0.7777777777777778,
+   "gold_page_recall@20": 0.5833333333333334,
+   "mrr@10": 0.4046296296296296,
+   "askk_page_hit": 0.8888888888888888,
+   "ctx_page_hit": 0.8888888888888888,
+   "ctx_gold_recall": 0.6388888888888888
+  },
+  "acl_leaks": 0,
+  "latency": {
+   "p50_ms": 109.77859981358051,
+   "p95_ms": 356.03583999909466,
+   "mean_ms": 162.95555382608794,
+   "n": 13
+  },
+  "rerank_latency": null
+ },
+ "index_meta": {
+  "context_header": true,
+  "embed_model": "BAAI/bge-small-en-v1.5",
+  "chunk_tokens": 200,
+  "chunk_overlap": 40,
+  "max_chunk_tokens": 500,
+  "written": "2026-11-09T13:26:06+05:00"
+ },
+ "breakdowns": {
+  "by_tag": {
+   "10q": {
+    "n": 1,
+    "doc_hit@5": 1.0,
+    "page_hit@5": 0.0,
+    "gold_page_recall@5": 0.0,
+    "doc_hit@10": 1.0,
+    "page_hit@10": 0.0,
+    "gold_page_recall@10": 0.0,
+    "doc_hit@20": 1.0,
+    "page_hit@20": 0.0,
+    "gold_page_recall@20": 0.0,
+    "mrr@10": 0.0,
+    "askk_page_hit": 0.0,
+    "ctx_page_hit": 0.0,
+    "ctx_gold_recall": 0.0
+   },
+   "8k": {
+    "n": 1,
+    "doc_hit@5": 1.0,
+    "page_hit@5": 1.0,
+    "gold_page_recall@5": 1.0,
+    "doc_hit@10": 1.0,
+    "page_hit@10": 1.0,
+    "gold_page_recall@10": 1.0,
+    "doc_hit@20": 1.0,
+    "page_hit@20": 1.0,
+    "gold_page_recall@20": 1.0,
+    "mrr@10": 1.0,
+    "askk_page_hit": 1.0,
+    "ctx_page_hit": 1.0,
+    "ctx_gold_recall": 1.0
+   },
+   "calc": {
+    "n": 3,
+    "doc_hit@5": 1.0,
+    "page_hit@5": 0.0,
+    "gold_page_recall@5": 0.0,
+    "doc_hit@10": 1.0,
+    "page_hit@10": 0.6666666666666666,
+    "gold_page_recall@10": 0.5,
+    "doc_hit@20": 1.0,
+    "page_hit@20": 0.6666666666666666,
+    "gold_page_recall@20": 0.6666666666666666,
+    "mrr@10": 0.09722222222222221,
+    "askk_page_hit": 0.6666666666666666,
+    "ctx_page_hit": 0.6666666666666666,
+    "ctx_gold_recall": 0.6666666666666666
+   },
+   "compare": {
+    "n": 2,
+    "doc_hit@5": 1.0,
+    "page_hit@5": 0.0,
+    "gold_page_recall@5": 0.0,
+    "doc_hit@10": 1.0,
+    "page_hit@10": 0.5,
+    "gold_page_recall@10": 0.25,
+    "doc_hit@20": 1.0,
+    "page_hit@20": 0.5,
+    "gold_page_recall@20": 0.25,
+    "mrr@10": 0.05,
+    "askk_page_hit": 1.0,
+    "ctx_page_hit": 1.0,
+    "ctx_gold_recall": 0.5
+   },
+   "generated": {
+    "n": 9,
+    "doc_hit@5": 1.0,
+    "page_hit@5": 0.4444444444444444,
+    "gold_page_recall@5": 0.3055555555555556,
+    "doc_hit@10": 1.0,
+    "page_hit@10": 0.7777777777777778,
+    "gold_page_recall@10": 0.5277777777777778,
+    "doc_hit@20": 1.0,
+    "page_hit@20": 0.7777777777777778,
+    "gold_page_recall@20": 0.5833333333333334,
+    "mrr@10": 0.4046296296296296,
+    "askk_page_hit": 0.8888888888888888,
+    "ctx_page_hit": 0.8888888888888888,
+    "ctx_gold_recall": 0.6388888888888888
+   },
+   "holdout": {
+    "n": 9,
+    "doc_hit@5": 1.0,
+    "page_hit@5": 0.4444444444444444,
+    "gold_page_recall@5": 0.3055555555555556,
+    "doc_hit@10": 1.0,
+    "page_hit@10": 0.7777777777777778,
+    "gold_page_recall@10": 0.5277777777777778,
+    "doc_hit@20": 1.0,
+    "page_hit@20": 0.7777777777777778,
+    "gold_page_recall@20": 0.5833333333333334,
+    "mrr@10": 0.4046296296296296,
+    "askk_page_hit": 0.8888888888888888,
+    "ctx_page_hit": 0.8888888888888888,
+    "ctx_gold_recall": 0.6388888888888888
+   },
+   "narrative": {
+    "n": 1,
+    "doc_hit@5": 1.0,
+    "page_hit@5": 1.0,
+    "gold_page_recall@5": 0.5,
+    "doc_hit@10": 1.0,
+    "page_hit@10": 1.0,
+    "gold_page_recall@10": 0.5,
+    "doc_hit@20": 1.0,
+    "page_hit@20": 1.0,
+    "gold_page_recall@20": 0.5,
+    "mrr@10": 0.25,
+    "askk_page_hit": 1.0,
+    "ctx_page_hit": 1.0,
+    "ctx_gold_recall": 0.5
+   },
+   "statement_table": {
+    "n": 7,
+    "doc_hit@5": 1.0,
+    "page_hit@5": 0.2857142857142857,
+    "gold_page_recall@5": 0.17857142857142858,
+    "doc_hit@10": 1.0,
+    "page_hit@10": 0.7142857142857143,
+    "gold_page_recall@10": 0.4642857142857143,
+    "doc_hit@20": 1.0,
+    "page_hit@20": 0.7142857142857143,
+    "gold_page_recall@20": 0.5357142857142857,
+    "mrr@10": 0.3416666666666667,
+    "askk_page_hit": 0.8571428571428571,
+    "ctx_page_hit": 0.8571428571428571,
+    "ctx_gold_recall": 0.6071428571428571
+   },
+   "year_ambiguous": {
+    "n": 1,
+    "doc_hit@5": 1.0,
+    "page_hit@5": 1.0,
+    "gold_page_recall@5": 0.25,
+    "doc_hit@10": 1.0,
+    "page_hit@10": 1.0,
+    "gold_page_recall@10": 0.25,
+    "doc_hit@20": 1.0,
+    "page_hit@20": 1.0,
+    "gold_page_recall@20": 0.25,
+    "mrr@10": 1.0,
+    "askk_page_hit": 1.0,
+    "ctx_page_hit": 1.0,
+    "ctx_gold_recall": 0.25
+   }
+  },
+  "by_doc_type": {
+   "10k": {
+    "n": 7,
+    "doc_hit@5": 1.0,
+    "page_hit@5": 0.42857142857142855,
+    "gold_page_recall@5": 0.25,
+    "doc_hit@10": 1.0,
+    "page_hit@10": 0.8571428571428571,
+    "gold_page_recall@10": 0.5357142857142857,
+    "doc_hit@20": 1.0,
+    "page_hit@20": 0.8571428571428571,
+    "gold_page_recall@20": 0.6071428571428571,
+    "mrr@10": 0.3773809523809524,
+    "askk_page_hit": 1.0,
+    "ctx_page_hit": 1.0,
+    "ctx_gold_recall": 0.6785714285714286
+   },
+   "10q": {
+    "n": 1,
+    "doc_hit@5": 1.0,
+    "page_hit@5": 0.0,
+    "gold_page_recall@5": 0.0,
+    "doc_hit@10": 1.0,
+    "page_hit@10": 0.0,
+    "gold_page_recall@10": 0.0,
+    "doc_hit@20": 1.0,
+    "page_hit@20": 0.0,
+    "gold_page_recall@20": 0.0,
+    "mrr@10": 0.0,
+    "askk_page_hit": 0.0,
+    "ctx_page_hit": 0.0,
+    "ctx_gold_recall": 0.0
+   },
+   "8k": {
+    "n": 1,
+    "doc_hit@5": 1.0,
+    "page_hit@5": 1.0,
+    "gold_page_recall@5": 1.0,
+    "doc_hit@10": 1.0,
+    "page_hit@10": 1.0,
+    "gold_page_recall@10": 1.0,
+    "doc_hit@20": 1.0,
+    "page_hit@20": 1.0,
+    "gold_page_recall@20": 1.0,
+    "mrr@10": 1.0,
+    "askk_page_hit": 1.0,
+    "ctx_page_hit": 1.0,
+    "ctx_gold_recall": 1.0
+   }
+  }
+ },
+ "answers": {
+  "overall": {
+   "n": 13,
+   "n_answerable": 9,
+   "n_negative": 4,
+   "status_accuracy": 0.7692307692307693,
+   "refusal_recall": 1.0,
+   "refusal_precision": 0.5714285714285714,
+   "answer_rate_on_answerable": 0.6666666666666666,
+   "numeric_accuracy": 0.625,
+   "n_numeric": 8,
+   "confident_error_rate": 0.125,
+   "n_confident_errors": 1,
+   "refusal_rate_numeric": 0.25,
+   "refusal_rate_on_answerable": 0.33333333333333337,
+   "citation_hit": 0.8333333333333334,
+   "citation_precision": 0.8333333333333334,
+   "ungrounded_warnings": 3,
+   "latency_p50_s": 21.46,
+   "latency_p95_s": 33.606,
+   "latency_net_p50_s": 1.45,
+   "latency_net_p95_s": 2.2540000000000004
+  },
+  "by_type": {
+   "answerable": {
+    "n": 9,
+    "n_answerable": 9,
+    "n_negative": 0,
+    "status_accuracy": 0.6666666666666666,
+    "refusal_recall": null,
+    "refusal_precision": 0.0,
+    "answer_rate_on_answerable": 0.6666666666666666,
+    "numeric_accuracy": 0.625,
+    "n_numeric": 8,
+    "confident_error_rate": 0.125,
+    "n_confident_errors": 1,
+    "refusal_rate_numeric": 0.25,
+    "refusal_rate_on_answerable": 0.33333333333333337,
+    "citation_hit": 0.8333333333333334,
+    "citation_precision": 0.8333333333333334,
+    "ungrounded_warnings": 3,
+    "latency_p50_s": 21.46,
+    "latency_p95_s": 35.054,
+    "latency_net_p50_s": 1.46,
+    "latency_net_p95_s": 2.4059999999999997
+   },
+   "off_desk": {
+    "n": 2,
+    "n_answerable": 0,
+    "n_negative": 2,
+    "status_accuracy": 1.0,
+    "refusal_recall": 1.0,
+    "refusal_precision": 1.0,
+    "answer_rate_on_answerable": null,
+    "numeric_accuracy": null,
+    "n_numeric": 0,
+    "confident_error_rate": null,
+    "n_confident_errors": 0,
+    "refusal_rate_numeric": null,
+    "refusal_rate_on_answerable": null,
+    "citation_hit": null,
+    "citation_precision": null,
+    "ungrounded_warnings": 0,
+    "latency_p50_s": 0.0,
+    "latency_p95_s": 0.0,
+    "latency_net_p50_s": 0.0,
+    "latency_net_p95_s": 0.0
+   },
+   "unanswerable": {
+    "n": 2,
+    "n_answerable": 0,
+    "n_negative": 2,
+    "status_accuracy": 1.0,
+    "refusal_recall": 1.0,
+    "refusal_precision": 1.0,
+    "answer_rate_on_answerable": null,
+    "numeric_accuracy": null,
+    "n_numeric": 0,
+    "confident_error_rate": null,
+    "n_confident_errors": 0,
+    "refusal_rate_numeric": null,
+    "refusal_rate_on_answerable": null,
+    "citation_hit": null,
+    "citation_precision": null,
+    "ungrounded_warnings": 0,
+    "latency_p50_s": 24.605,
+    "latency_p95_s": 25.671499999999998,
+    "latency_net_p50_s": 1.605,
+    "latency_net_p95_s": 1.7715
+   }
+  },
+  "by_tag": {
+   "10q": {
+    "n": 1,
+    "n_answerable": 1,
+    "n_negative": 0,
+    "status_accuracy": 0.0,
+    "refusal_recall": null,
+    "refusal_precision": 0.0,
+    "answer_rate_on_answerable": 0.0,
+    "numeric_accuracy": 0.0,
+    "n_numeric": 1,
+    "confident_error_rate": 0.0,
+    "n_confident_errors": 0,
+    "refusal_rate_numeric": 1.0,
+    "refusal_rate_on_answerable": 1.0,
+    "citation_hit": null,
+    "citation_precision": null,
+    "ungrounded_warnings": 0,
+    "latency_p50_s": 25.46,
+    "latency_p95_s": 25.46,
+    "latency_net_p50_s": 1.46,
+    "latency_net_p95_s": 1.46
+   },
+   "8k": {
+    "n": 1,
+    "n_answerable": 1,
+    "n_negative": 0,
+    "status_accuracy": 0.0,
+    "refusal_recall": null,
+    "refusal_precision": 0.0,
+    "answer_rate_on_answerable": 0.0,
+    "numeric_accuracy": null,
+    "n_numeric": 0,
+    "confident_error_rate": null,
+    "n_confident_errors": 0,
+    "refusal_rate_numeric": null,
+    "refusal_rate_on_answerable": 1.0,
+    "citation_hit": null,
+    "citation_precision": null,
+    "ungrounded_warnings": 0,
+    "latency_p50_s": 19.71,
+    "latency_p95_s": 19.71,
+    "latency_net_p50_s": 1.71,
+    "latency_net_p95_s": 1.71
+   },
+   "calc": {
+    "n": 3,
+    "n_answerable": 3,
+    "n_negative": 0,
+    "status_accuracy": 0.6666666666666666,
+    "refusal_recall": null,
+    "refusal_precision": 0.0,
+    "answer_rate_on_answerable": 0.6666666666666666,
+    "numeric_accuracy": 0.6666666666666666,
+    "n_numeric": 3,
+    "confident_error_rate": 0.0,
+    "n_confident_errors": 0,
+    "refusal_rate_numeric": 0.3333333333333333,
+    "refusal_rate_on_answerable": 0.33333333333333337,
+    "citation_hit": 1.0,
+    "citation_precision": 1.0,
+    "ungrounded_warnings": 2,
+    "latency_p50_s": 1.42,
+    "latency_p95_s": 23.055999999999997,
+    "latency_net_p50_s": 1.42,
+    "latency_net_p95_s": 1.456
+   },
+   "compare": {
+    "n": 2,
+    "n_answerable": 2,
+    "n_negative": 0,
+    "status_accuracy": 0.5,
+    "refusal_recall": null,
+    "refusal_precision": 0.0,
+    "answer_rate_on_answerable": 0.5,
+    "numeric_accuracy": 0.0,
+    "n_numeric": 2,
+    "confident_error_rate": 0.5,
+    "n_confident_errors": 1,
+    "refusal_rate_numeric": 0.5,
+    "refusal_rate_on_answerable": 0.5,
+    "citation_hit": 1.0,
+    "citation_precision": 1.0,
+    "ungrounded_warnings": 1,
+    "latency_p50_s": 34.33,
+    "latency_p95_s": 37.588,
+    "latency_net_p50_s": 2.33,
+    "latency_net_p95_s": 2.6719999999999997
+   },
+   "generated": {
+    "n": 13,
+    "n_answerable": 9,
+    "n_negative": 4,
+    "status_accuracy": 0.7692307692307693,
+    "refusal_recall": 1.0,
+    "refusal_precision": 0.5714285714285714,
+    "answer_rate_on_answerable": 0.6666666666666666,
+    "numeric_accuracy": 0.625,
+    "n_numeric": 8,
+    "confident_error_rate": 0.125,
+    "n_confident_errors": 1,
+    "refusal_rate_numeric": 0.25,
+    "refusal_rate_on_answerable": 0.33333333333333337,
+    "citation_hit": 0.8333333333333334,
+    "citation_precision": 0.8333333333333334,
+    "ungrounded_warnings": 3,
+    "latency_p50_s": 21.46,
+    "latency_p95_s": 33.606,
+    "latency_net_p50_s": 1.45,
+    "latency_net_p95_s": 2.2540000000000004
+   },
+   "holdout": {
+    "n": 13,
+    "n_answerable": 9,
+    "n_negative": 4,
+    "status_accuracy": 0.7692307692307693,
+    "refusal_recall": 1.0,
+    "refusal_precision": 0.5714285714285714,
+    "answer_rate_on_answerable": 0.6666666666666666,
+    "numeric_accuracy": 0.625,
+    "n_numeric": 8,
+    "confident_error_rate": 0.125,
+    "n_confident_errors": 1,
+    "refusal_rate_numeric": 0.25,
+    "refusal_rate_on_answerable": 0.33333333333333337,
+    "citation_hit": 0.8333333333333334,
+    "citation_precision": 0.8333333333333334,
+    "ungrounded_warnings": 3,
+    "latency_p50_s": 21.46,
+    "latency_p95_s": 33.606,
+    "latency_net_p50_s": 1.45,
+    "latency_net_p95_s": 2.2540000000000004
+   },
+   "narrative": {
+    "n": 1,
+    "n_answerable": 1,
+    "n_negative": 0,
+    "status_accuracy": 1.0,
+    "refusal_recall": null,
+    "refusal_precision": null,
+    "answer_rate_on_answerable": 1.0,
+    "numeric_accuracy": 1.0,
+    "n_numeric": 1,
+    "confident_error_rate": 0.0,
+    "n_confident_errors": 0,
+    "refusal_rate_numeric": 0.0,
+    "refusal_rate_on_answerable": 0.0,
+    "citation_hit": 1.0,
+    "citation_precision": 1.0,
+    "ungrounded_warnings": 0,
+    "latency_p50_s": 21.46,
+    "latency_p95_s": 21.46,
+    "latency_net_p50_s": 1.46,
+    "latency_net_p95_s": 1.46
+   },
+   "no_filing_for_year": {
+    "n": 1,
+    "n_answerable": 0,
+    "n_negative": 1,
+    "status_accuracy": 1.0,
+    "refusal_recall": 1.0,
+    "refusal_precision": 1.0,
+    "answer_rate_on_answerable": null,
+    "numeric_accuracy": null,
+    "n_numeric": 0,
+    "confident_error_rate": null,
+    "n_confident_errors": 0,
+    "refusal_rate_numeric": null,
+    "refusal_rate_on_answerable": null,
+    "citation_hit": null,
+    "citation_precision": null,
+    "ungrounded_warnings": 0,
+    "latency_p50_s": 23.42,
+    "latency_p95_s": 23.42,
+    "latency_net_p50_s": 1.42,
+    "latency_net_p95_s": 1.42
+   },
+   "nonexistent_segment": {
+    "n": 1,
+    "n_answerable": 0,
+    "n_negative": 1,
+    "status_accuracy": 1.0,
+    "refusal_recall": 1.0,
+    "refusal_precision": 1.0,
+    "answer_rate_on_answerable": null,
+    "numeric_accuracy": null,
+    "n_numeric": 0,
+    "confident_error_rate": null,
+    "n_confident_errors": 0,
+    "refusal_rate_numeric": null,
+    "refusal_rate_on_answerable": null,
+    "citation_hit": null,
+    "citation_precision": null,
+    "ungrounded_warnings": 0,
+    "latency_p50_s": 25.79,
+    "latency_p95_s": 25.79,
+    "latency_net_p50_s": 1.79,
+    "latency_net_p95_s": 1.79
+   },
+   "off_desk": {
+    "n": 2,
+    "n_answerable": 0,
+    "n_negative": 2,
+    "status_accuracy": 1.0,
+    "refusal_recall": 1.0,
+    "refusal_precision": 1.0,
+    "answer_rate_on_answerable": null,
+    "numeric_accuracy": null,
+    "n_numeric": 0,
+    "confident_error_rate": null,
+    "n_confident_errors": 0,
+    "refusal_rate_numeric": null,
+    "refusal_rate_on_answerable": null,
+    "citation_hit": null,
+    "citation_precision": null,
+    "ungrounded_warnings": 0,
+    "latency_p50_s": 0.0,
+    "latency_p95_s": 0.0,
+    "latency_net_p50_s": 0.0,
+    "latency_net_p95_s": 0.0
+   },
+   "statement_table": {
+    "n": 7,
+    "n_answerable": 7,
+    "n_negative": 0,
+    "status_accuracy": 0.7142857142857143,
+    "refusal_recall": null,
+    "refusal_precision": 0.0,
+    "answer_rate_on_answerable": 0.7142857142857143,
+    "numeric_accuracy": 0.5714285714285714,
+    "n_numeric": 7,
+    "confident_error_rate": 0.14285714285714285,
+    "n_confident_errors": 1,
+    "refusal_rate_numeric": 0.2857142857142857,
+    "refusal_rate_on_answerable": 0.2857142857142857,
+    "citation_hit": 0.8,
+    "citation_precision": 0.8,
+    "ungrounded_warnings": 3,
+    "latency_p50_s": 24.35,
+    "latency_p95_s": 35.778000000000006,
+    "latency_net_p50_s": 1.45,
+    "latency_net_p95_s": 2.482
+   },
+   "unanswerable": {
+    "n": 2,
+    "n_answerable": 0,
+    "n_negative": 2,
+    "status_accuracy": 1.0,
+    "refusal_recall": 1.0,
+    "refusal_precision": 1.0,
+    "answer_rate_on_answerable": null,
+    "numeric_accuracy": null,
+    "n_numeric": 0,
+    "confident_error_rate": null,
+    "n_confident_errors": 0,
+    "refusal_rate_numeric": null,
+    "refusal_rate_on_answerable": null,
+    "citation_hit": null,
+    "citation_precision": null,
+    "ungrounded_warnings": 0,
+    "latency_p50_s": 24.605,
+    "latency_p95_s": 25.671499999999998,
+    "latency_net_p50_s": 1.605,
+    "latency_net_p95_s": 1.7715
+   },
+   "year_ambiguous": {
+    "n": 1,
+    "n_answerable": 1,
+    "n_negative": 0,
+    "status_accuracy": 1.0,
+    "refusal_recall": null,
+    "refusal_precision": null,
+    "answer_rate_on_answerable": 1.0,
+    "numeric_accuracy": 1.0,
+    "n_numeric": 1,
+    "confident_error_rate": 0.0,
+    "n_confident_errors": 0,
+    "refusal_rate_numeric": 0.0,
+    "refusal_rate_on_answerable": 0.0,
+    "citation_hit": 0.0,
+    "citation_precision": 0.0,
+    "ungrounded_warnings": 0,
+    "latency_p50_s": 24.35,
+    "latency_p95_s": 24.35,
+    "latency_net_p50_s": 1.35,
+    "latency_net_p95_s": 1.35
+   }
+  },
+  "llm": {
+   "provider": "groq",
+   "model": "openai/gpt-oss-20b"
+  },
+  "sleep_s": 8.0,
+  "llm_cache": {
+   "hits": 0,
+   "misses": 11
+  },
+  "by_split": {
+   "tune": {
+    "n": 13,
+    "n_answerable": 9,
+    "n_negative": 4,
+    "status_accuracy": 0.7692307692307693,
+    "refusal_recall": 1.0,
+    "refusal_precision": 0.5714285714285714,
+    "answer_rate_on_answerable": 0.6666666666666666,
+    "numeric_accuracy": 0.625,
+    "n_numeric": 8,
+    "confident_error_rate": 0.125,
+    "n_confident_errors": 1,
+    "refusal_rate_numeric": 0.25,
+    "refusal_rate_on_answerable": 0.33333333333333337,
+    "citation_hit": 0.8333333333333334,
+    "citation_precision": 0.8333333333333334,
+    "ungrounded_warnings": 3,
+    "latency_p50_s": 21.46,
+    "latency_p95_s": 33.606,
+    "latency_net_p50_s": 1.45,
+    "latency_net_p95_s": 2.2540000000000004
+   }
+  }
+ },
+ "split": "holdout",
+ "rows": [
+  {
+   "id": "g_s01",
+   "role": "health_industrials",
+   "type": "answerable",
+   "tags": [
+    "calc",
+    "generated",
+    "holdout",
+    "statement_table"
+   ],
+   "gold": [
+    {
+     "doc_id": "3M_2021_10K",
+     "pages": [
+      45,
+      49
+     ]
+    }
+   ],
+   "doc_types": [
+    "10k"
+   ],
+   "latency_ms": 109.6,
+   "rerank_ms": null,
+   "acl_leaks": 0,
+   "top10": [
+    {
+     "doc_id": "3M_2021_10K",
+     "page": 37,
+     "score": 0.77649
+    },
+    {
+     "doc_id": "3M_2021_10K",
+     "page": 124,
+     "score": 0.77433
+    },
+    {
+     "doc_id": "3M_2021_10K",
+     "page": 24,
+     "score": 0.77373
+    },
+    {
+     "doc_id": "3M_2021_10K",
+     "page": 37,
+     "score": 0.77349
+    },
+    {
+     "doc_id": "3M_2021_10K",
+     "page": 26,
+     "score": 0.77035
+    },
+    {
+     "doc_id": "3M_2021_10K",
+     "page": 49,
+     "score": 0.76735
+    },
+    {
+     "doc_id": "3M_2021_10K",
+     "page": 30,
+     "score": 0.76629
+    },
+    {
+     "doc_id": "3M_2021_10K",
+     "page": 45,
+     "score": 0.76619
+    },
+    {
+     "doc_id": "3M_2021_10K",
+     "page": 30,
+     "score": 0.76298
+    },
+    {
+     "doc_id": "3M_2021_10K",
+     "page": 28,
+     "score": 0.7607
+    }
+   ],
+   "metrics": {
+    "doc_hit@5": 1.0,
+    "page_hit@5": 0.0,
+    "gold_page_recall@5": 0.0,
+    "doc_hit@10": 1.0,
+    "page_hit@10": 1.0,
+    "gold_page_recall@10": 1.0,
+    "doc_hit@20": 1.0,
+    "page_hit@20": 1.0,
+    "gold_page_recall@20": 1.0,
+    "mrr@10": 0.16666666666666666,
+    "askk_page_hit": 1.0,
+    "ctx_page_hit": 1.0,
+    "ctx_gold_recall": 1.0
+   },
+   "ctx": [
+    {
+     "doc_id": "3M_2021_10K",
+     "page": 37
+    },
+    {
+     "doc_id": "3M_2021_10K",
+     "page": 124
+    },
+    {
+     "doc_id": "3M_2021_10K",
+     "page": 24
+    },
+    {
+     "doc_id": "3M_2021_10K",
+     "page": 26
+    },
+    {
+     "doc_id": "3M_2021_10K",
+     "page": 49
+    },
+    {
+     "doc_id": "3M_2021_10K",
+     "page": 30
+    },
+    {
+     "doc_id": "3M_2021_10K",
+     "page": 45
+    },
+    {
+     "doc_id": "3M_2021_10K",
+     "page": 28
+    },
+    {
+     "doc_id": "3M_2021_10K",
+     "page": 123
+    },
+    {
+     "doc_id": "3M_2021_10K",
+     "page": 118
+    },
+    {
+     "doc_id": "3M_2021_10K",
+     "page": 62
+    },
+    {
+     "doc_id": "3M_2021_10K",
+     "page": 23
+    },
+    {
+     "doc_id": "3M_2021_10K",
+     "page": 14
+    },
+    {
+     "doc_id": "3M_2021_10K",
+     "page": 39
+    }
+   ],
+   "answer": {
+    "status": "answered",
+    "answer": "The company reinvested 1,603 million dollars in capital expenditures in 2021. 2021 net sales were 35,355 million dollars. The share of sales reinvested in capex is calculated as:\n\nCapex ÷ Sales = 1,603 million ÷ 35,355 million = 0.04536 ≈ 4.54 %.\n\nThus, about 4.54 % of 3M’s 2021 sales were reinvested in capex. [C5][C7]",
+    "citations": [
+     {
+      "doc_id": "3M_2021_10K",
+      "page": 49,
+      "chunk_id": "d4747393a856efb2"
+     },
+     {
+      "doc_id": "3M_2021_10K",
+      "page": 45,
+      "chunk_id": "c51c85153ad209a9"
+     }
+    ]
+   },
+   "answer_metrics": {
+    "status_ok": true,
+    "expected": "answered",
+    "got": "answered",
+    "seconds": 1.42,
+    "waited_s": 0.0,
+    "seconds_net": 1.42,
+    "llm_called": true,
+    "ungrounded_warnings": 1,
+    "numeric_ok": true,
+    "cite_hit": true,
+    "cite_precision": 1.0,
+    "answer_ok": true,
+    "context_chunks": 14
+   },
+   "question": "What share of 3M's 2021 sales did the company reinvest in capex?",
+   "gold_answer": "About 4.5%: purchases of PP&E of $1,603M on net sales of $35,355M.",
+   "has_numeric": true
+  },
+  {
+   "id": "g_s03",
+   "role": "health_industrials",
+   "type": "answerable",
+   "tags": [
+    "calc",
+    "generated",
+    "holdout",
+    "statement_table"
+   ],
+   "gold": [
+    {
+     "doc_id": "PFIZER_2021_10K",
+     "pages": [
+      39,
+      57
+     ]
+    }
+   ],
+   "doc_types": [
+    "10k"
+   ],
+   "latency_ms": 116.9,
+   "rerank_ms": null,
+   "acl_leaks": 0,
+   "top10": [
+    {
+     "doc_id": "PFIZER_2021_10K",
+     "page": 108,
+     "score": 0.82441
+    },
+    {
+     "doc_id": "PFIZER_2021_10K",
+     "page": 41,
+     "score": 0.82369
+    },
+    {
+     "doc_id": "PFIZER_2021_10K",
+     "page": 42,
+     "score": 0.81459
+    },
+    {
+     "doc_id": "PFIZER_2021_10K",
+     "page": 109,
+     "score": 0.8112
+    },
+    {
+     "doc_id": "PFIZER_2021_10K",
+     "page": 33,
+     "score": 0.80662
+    },
+    {
+     "doc_id": "PFIZER_2021_10K",
+     "page": 33,
+     "score": 0.80198
+    },
+    {
+     "doc_id": "PFIZER_2021_10K",
+     "page": 76,
+     "score": 0.80023
+    },
+    {
+     "doc_id": "PFIZER_2021_10K",
+     "page": 39,
+     "score": 0.79781
+    },
+    {
+     "doc_id": "PFIZER_2021_10K",
+     "page": 78,
+     "score": 0.79755
+    },
+    {
+     "doc_id": "PFIZER_2021_10K",
+     "page": 41,
+     "score": 0.79546
+    }
+   ],
+   "metrics": {
+    "doc_hit@5": 1.0,
+    "page_hit@5": 0.0,
+    "gold_page_recall@5": 0.0,
+    "doc_hit@10": 1.0,
+    "page_hit@10": 1.0,
+    "gold_page_recall@10": 0.5,
+    "doc_hit@20": 1.0,
+    "page_hit@20": 1.0,
+    "gold_page_recall@20": 1.0,
+    "mrr@10": 0.125,
+    "askk_page_hit": 1.0,
+    "ctx_page_hit": 1.0,
+    "ctx_gold_recall": 1.0
+   },
+   "ctx": [
+    {
+     "doc_id": "PFIZER_2021_10K",
+     "page": 108
+    },
+    {
+     "doc_id": "PFIZER_2021_10K",
+     "page": 41
+    },
+    {
+     "doc_id": "PFIZER_2021_10K",
+     "page": 42
+    },
+    {
+     "doc_id": "PFIZER_2021_10K",
+     "page": 109
+    },
+    {
+     "doc_id": "PFIZER_2021_10K",
+     "page": 33
+    },
+    {
+     "doc_id": "PFIZER_2021_10K",
+     "page": 76
+    },
+    {
+     "doc_id": "PFIZER_2021_10K",
+     "page": 39
+    },
+    {
+     "doc_id": "PFIZER_2021_10K",
+     "page": 78
+    },
+    {
+     "doc_id": "PFIZER_2021_10K",
+     "page": 32
+    },
+    {
+     "doc_id": "PFIZER_2021_10K",
+     "page": 12
+    },
+    {
+     "doc_id": "PFIZER_2021_10K",
+     "page": 57
+    },
+    {
+     "doc_id": "PFIZER_2021_10K",
+     "page": 40
+    },
+    {
+     "doc_id": "PFIZER_2021_10K",
+     "page": 74
+    },
+    {
+     "doc_id": "PFIZER_2021_10K",
+     "page": 112
+    }
+   ],
+   "answer": {
+    "status": "answered",
+    "answer": "The research and development expense for 2021 was $13,829 million, and the total revenue (top line) was $81,288 million. The fraction of revenue that went to R&D is calculated as:\n\n[\n\frac{13,829\text{ million}}{81,288\text{ million}} = 0.1701\text{ (or }17.0%\text{)}\n]\n\nThus, about 17.0 % of Pfizer’s 2021 top line was spent on research and development. [C11]",
+    "citations": [
+     {
+      "doc_id": "PFIZER_2021_10K",
+      "page": 57,
+      "chunk_id": "98c2dd27402f1aea"
+     }
+    ]
+   },
+   "answer_metrics": {
+    "status_ok": true,
+    "expected": "answered",
+    "got": "answered",
+    "seconds": 1.23,
+    "waited_s": 0.0,
+    "seconds_net": 1.23,
+    "llm_called": true,
+    "ungrounded_warnings": 1,
+    "numeric_ok": true,
+    "cite_hit": true,
+    "cite_precision": 1.0,
+    "answer_ok": true,
+    "context_chunks": 14
+   },
+   "question": "What fraction of Pfizer's 2021 top line went to research and development?",
+   "gold_answer": "About 17.0%: R&D expenses of $13,829M on total revenues of $81,288M.",
+   "has_numeric": true
+  },
+  {
+   "id": "g_s06",
+   "role": "health_industrials",
+   "type": "answerable",
+   "tags": [
+    "generated",
+    "holdout",
+    "narrative"
+   ],
+   "gold": [
+    {
+     "doc_id": "JOHNSON_JOHNSON_2020_10K",
+     "pages": [
+      7,
+      8
+     ]
+    }
+   ],
+   "doc_types": [
+    "10k"
+   ],
+   "latency_ms": 103.6,
+   "rerank_ms": null,
+   "acl_leaks": 0,
+   "top10": [
+    {
+     "doc_id": "JOHNSON_JOHNSON_2020_10K",
+     "page": 11,
+     "score": 0.77074
+    },
+    {
+     "doc_id": "JOHNSON_JOHNSON_2020_10K",
+     "page": 11,
+     "score": 0.76798
+    },
+    {
+     "doc_id": "JOHNSON_JOHNSON_2020_10K",
+     "page": 87,
+     "score": 0.71502
+    },
+    {
+     "doc_id": "JOHNSON_JOHNSON_2020_10K",
+     "page": 7,
+     "score": 0.71436
+    },
+    {
+     "doc_id": "JOHNSON_JOHNSON_2020_10K",
+     "page": 11,
+     "score": 0.70861
+    },
+    {
+     "doc_id": "JOHNSON_JOHNSON_2020_10K",
+     "page": 87,
+     "score": 0.70692
+    },
+    {
+     "doc_id": "JOHNSON_JOHNSON_2020_10K",
+     "page": 46,
+     "score": 0.70521
+    },
+    {
+     "doc_id": "JOHNSON_JOHNSON_2020_10K",
+     "page": 20,
+     "score": 0.70367
+    },
+    {
+     "doc_id": "JOHNSON_JOHNSON_2020_10K",
+     "page": 38,
+     "score": 0.70354
+    },
+    {
+     "doc_id": "JOHNSON_JOHNSON_2020_10K",
+     "page": 26,
+     "score": 0.7025
+    }
+   ],
+   "metrics": {
+    "doc_hit@5": 1.0,
+    "page_hit@5": 1.0,
+    "gold_page_recall@5": 0.5,
+    "doc_hit@10": 1.0,
+    "page_hit@10": 1.0,
+    "gold_page_recall@10": 0.5,
+    "doc_hit@20": 1.0,
+    "page_hit@20": 1.0,
+    "gold_page_recall@20": 0.5,
+    "mrr@10": 0.25,
+    "askk_page_hit": 1.0,
+    "ctx_page_hit": 1.0,
+    "ctx_gold_recall": 0.5
+   },
+   "ctx": [
+    {
+     "doc_id": "JOHNSON_JOHNSON_2020_10K",
+     "page": 11
+    },
+    {
+     "doc_id": "JOHNSON_JOHNSON_2020_10K",
+     "page": 87
+    },
+    {
+     "doc_id": "JOHNSON_JOHNSON_2020_10K",
+     "page": 7
+    },
+    {
+     "doc_id": "JOHNSON_JOHNSON_2020_10K",
+     "page": 46
+    },
+    {
+     "doc_id": "JOHNSON_JOHNSON_2020_10K",
+     "page": 20
+    },
+    {
+     "doc_id": "JOHNSON_JOHNSON_2020_10K",
+     "page": 38
+    },
+    {
+     "doc_id": "JOHNSON_JOHNSON_2020_10K",
+     "page": 26
+    },
+    {
+     "doc_id": "JOHNSON_JOHNSON_2020_10K",
+     "page": 69
+    },
+    {
+     "doc_id": "JOHNSON_JOHNSON_2020_10K",
+     "page": 89
+    },
+    {
+     "doc_id": "JOHNSON_JOHNSON_2020_10K",
+     "page": 12
+    },
+    {
+     "doc_id": "JOHNSON_JOHNSON_2020_10K",
+     "page": 43
+    },
+    {
+     "doc_id": "JOHNSON_JOHNSON_2020_10K",
+     "page": 118
+    },
+    {
+     "doc_id": "JOHNSON_JOHNSON_2020_10K",
+     "page": 24
+    },
+    {
+     "doc_id": "JOHNSON_JOHNSON_2020_10K",
+     "page": 42
+    }
+   ],
+   "answer": {
+    "status": "answered",
+    "answer": "Johnson & Johnson reported that it had approximately 134,500 employees worldwide in its 2020 annual report. [C3]",
+    "citations": [
+     {
+      "doc_id": "JOHNSON_JOHNSON_2020_10K",
+      "page": 7,
+      "chunk_id": "ca0b875813be5d76"
+     }
+    ]
+   },
+   "answer_metrics": {
+    "status_ok": true,
+    "expected": "answered",
+    "got": "answered",
+    "seconds": 21.46,
+    "waited_s": 20.0,
+    "seconds_net": 1.46,
+    "llm_called": true,
+    "ungrounded_warnings": 0,
+    "numeric_ok": true,
+    "cite_hit": true,
+    "cite_precision": 1.0,
+    "answer_ok": true,
+    "context_chunks": 14
+   },
+   "question": "How many people did Johnson & Johnson say it employed worldwide in its 2020 annual report?",
+   "gold_answer": "Approximately 134,500 employees.",
+   "has_numeric": true
+  },
+  {
+   "id": "g_s07",
+   "role": "tech_telecom",
+   "type": "answerable",
+   "tags": [
+    "generated",
+    "holdout",
+    "statement_table"
+   ],
+   "gold": [
+    {
+     "doc_id": "CORNING_2021_10K",
+     "pages": [
+      30
+     ]
+    }
+   ],
+   "doc_types": [
+    "10k"
+   ],
+   "latency_ms": 102.5,
+   "rerank_ms": null,
+   "acl_leaks": 0,
+   "top10": [
+    {
+     "doc_id": "CORNING_2021_10K",
+     "page": 30,
+     "score": 0.86875
+    },
+    {
+     "doc_id": "CORNING_2021_10K",
+     "page": 30,
+     "score": 0.8576
+    },
+    {
+     "doc_id": "CORNING_2021_10K",
+     "page": 30,
+     "score": 0.85291
+    },
+    {
+     "doc_id": "CORNING_2021_10K",
+     "page": 26,
+     "score": 0.8327
+    },
+    {
+     "doc_id": "CORNING_2021_10K",
+     "page": 66,
+     "score": 0.8312
+    },
+    {
+     "doc_id": "CORNING_2021_10K",
+     "page": 65,
+     "score": 0.82919
+    },
+    {
+     "doc_id": "CORNING_2021_10K",
+     "page": 65,
+     "score": 0.82406
+    },
+    {
+     "doc_id": "CORNING_2021_10K",
+     "page": 30,
+     "score": 0.82155
+    },
+    {
+     "doc_id": "CORNING_2021_10K",
+     "page": 25,
+     "score": 0.80808
+    },
+    {
+     "doc_id": "CORNING_2021_10K",
+     "page": 32,
+     "score": 0.80303
+    }
+   ],
+   "metrics": {
+    "doc_hit@5": 1.0,
+    "page_hit@5": 1.0,
+    "gold_page_recall@5": 1.0,
+    "doc_hit@10": 1.0,
+    "page_hit@10": 1.0,
+    "gold_page_recall@10": 1.0,
+    "doc_hit@20": 1.0,
+    "page_hit@20": 1.0,
+    "gold_page_recall@20": 1.0,
+    "mrr@10": 1.0,
+    "askk_page_hit": 1.0,
+    "ctx_page_hit": 1.0,
+    "ctx_gold_recall": 1.0
+   },
+   "ctx": [
+    {
+     "doc_id": "CORNING_2021_10K",
+     "page": 30
+    },
+    {
+     "doc_id": "CORNING_2021_10K",
+     "page": 26
+    },
+    {
+     "doc_id": "CORNING_2021_10K",
+     "page": 66
+    },
+    {
+     "doc_id": "CORNING_2021_10K",
+     "page": 65
+    },
+    {
+     "doc_id": "CORNING_2021_10K",
+     "page": 25
+    },
+    {
+     "doc_id": "CORNING_2021_10K",
+     "page": 32
+    },
+    {
+     "doc_id": "CORNING_2021_10K",
+     "page": 62
+    },
+    {
+     "doc_id": "CORNING_2021_10K",
+     "page": 87
+    },
+    {
+     "doc_id": "CORNING_2021_10K",
+     "page": 69
+    },
+    {
+     "doc_id": "CORNING_2021_10K",
+     "page": 38
+    },
+    {
+     "doc_id": "CORNING_2021_10K",
+     "page": 42
+    },
+    {
+     "doc_id": "CORNING_2021_10K",
+     "page": 93
+    },
+    {
+     "doc_id": "CORNING_2021_10K",
+     "page": 34
+    },
+    {
+     "doc_id": "CORNING_2021_10K",
+     "page": 28
+    }
+   ],
+   "answer": {
+    "status": "answered",
+    "answer": "Corning’s profit attributable to its shareholders for the year ended December 31, 2021 was $1,906 million (in millions of dollars). [C1]",
+    "citations": [
+     {
+      "doc_id": "CORNING_2021_10K",
+      "page": 30,
+      "chunk_id": "f18fd6a612c3541a"
+     }
+    ]
+   },
+   "answer_metrics": {
+    "status_ok": true,
+    "expected": "answered",
+    "got": "answered",
+    "seconds": 20.45,
+    "waited_s": 19.0,
+    "seconds_net": 1.45,
+    "llm_called": true,
+    "ungrounded_warnings": 0,
+    "numeric_ok": true,
+    "cite_hit": true,
+    "cite_precision": 1.0,
+    "answer_ok": true,
+    "context_chunks": 14
+   },
+   "question": "What was Corning's 2021 profit attributable to its shareholders, in $ millions?",
+   "gold_answer": "$1,906 million.",
+   "has_numeric": true
+  },
+  {
+   "id": "g_s10",
+   "role": "consumer",
+   "type": "answerable",
+   "tags": [
+    "10q",
+    "calc",
+    "generated",
+    "holdout",
+    "statement_table"
+   ],
+   "gold": [
+    {
+     "doc_id": "BESTBUY_2024Q2_10Q",
+     "pages": [
+      4
+     ]
+    }
+   ],
+   "doc_types": [
+    "10q"
+   ],
+   "latency_ms": 87.9,
+   "rerank_ms": null,
+   "acl_leaks": 0,
+   "top10": [
+    {
+     "doc_id": "BESTBUY_2024Q2_10Q",
+     "page": 19,
+     "score": 0.81847
+    },
+    {
+     "doc_id": "BESTBUY_2024Q2_EARNINGS",
+     "page": 5,
+     "score": 0.81819
+    },
+    {
+     "doc_id": "BESTBUY_2024Q2_EARNINGS",
+     "page": 8,
+     "score": 0.81405
+    },
+    {
+     "doc_id": "BESTBUY_2024Q2_EARNINGS",
+     "page": 1,
+     "score": 0.81348
+    },
+    {
+     "doc_id": "BESTBUY_2024Q2_EARNINGS",
+     "page": 1,
+     "score": 0.80939
+    },
+    {
+     "doc_id": "BESTBUY_2024Q2_EARNINGS",
+     "page": 1,
+     "score": 0.80931
+    },
+    {
+     "doc_id": "BESTBUY_2024Q2_EARNINGS",
+     "page": 10,
+     "score": 0.8059
+    },
+    {
+     "doc_id": "BESTBUY_2024Q2_EARNINGS",
+     "page": 8,
+     "score": 0.80398
+    },
+    {
+     "doc_id": "BESTBUY_2024Q2_EARNINGS",
+     "page": 5,
+     "score": 0.80342
+    },
+    {
+     "doc_id": "BESTBUY_2024Q2_EARNINGS",
+     "page": 8,
+     "score": 0.80324
+    }
+   ],
+   "metrics": {
+    "doc_hit@5": 1.0,
+    "page_hit@5": 0.0,
+    "gold_page_recall@5": 0.0,
+    "doc_hit@10": 1.0,
+    "page_hit@10": 0.0,
+    "gold_page_recall@10": 0.0,
+    "doc_hit@20": 1.0,
+    "page_hit@20": 0.0,
+    "gold_page_recall@20": 0.0,
+    "mrr@10": 0.0,
+    "askk_page_hit": 0.0,
+    "ctx_page_hit": 0.0,
+    "ctx_gold_recall": 0.0
+   },
+   "ctx": [
+    {
+     "doc_id": "BESTBUY_2024Q2_10Q",
+     "page": 19
+    },
+    {
+     "doc_id": "BESTBUY_2024Q2_EARNINGS",
+     "page": 5
+    },
+    {
+     "doc_id": "BESTBUY_2024Q2_EARNINGS",
+     "page": 8
+    },
+    {
+     "doc_id": "BESTBUY_2024Q2_EARNINGS",
+     "page": 1
+    },
+    {
+     "doc_id": "BESTBUY_2024Q2_EARNINGS",
+     "page": 10
+    },
+    {
+     "doc_id": "BESTBUY_2024Q2_EARNINGS",
+     "page": 11
+    },
+    {
+     "doc_id": "BESTBUY_2024Q2_EARNINGS",
+     "page": 9
+    },
+    {
+     "doc_id": "BESTBUY_2024Q2_10Q",
+     "page": 16
+    },
+    {
+     "doc_id": "BESTBUY_2024Q2_EARNINGS",
+     "page": 6
+    },
+    {
+     "doc_id": "BESTBUY_2024Q2_EARNINGS",
+     "page": 2
+    },
+    {
+     "doc_id": "BESTBUY_2024Q2_EARNINGS",
+     "page": 7
+    },
+    {
+     "doc_id": "BESTBUY_2024Q2_10Q",
+     "page": 18
+    },
+    {
+     "doc_id": "BESTBUY_2024Q2_10Q",
+     "page": 12
+    },
+    {
+     "doc_id": "BESTBUY_2024Q2_10Q",
+     "page": 14
+    }
+   ],
+   "answer": {
+    "status": "refused",
+    "answer": "The provided documents do not contain the answer for the exact company and period asked.",
+    "citations": []
+   },
+   "answer_metrics": {
+    "status_ok": false,
+    "expected": "answered",
+    "got": "refused",
+    "seconds": 25.46,
+    "waited_s": 24.0,
+    "seconds_net": 1.46,
+    "llm_called": true,
+    "ungrounded_warnings": 0,
+    "numeric_ok": false,
+    "cite_hit": null,
+    "cite_precision": null,
+    "answer_ok": false,
+    "context_chunks": 14
+   },
+   "question": "What gross margin did Best Buy earn in the second quarter of fiscal 2024?",
+   "gold_answer": "About 23.2%: gross profit of $2,220M on revenue of $9,583M.",
+   "has_numeric": true
+  },
+  {
+   "id": "g_s13",
+   "role": "consumer",
+   "type": "answerable",
+   "tags": [
+    "8k",
+    "generated",
+    "holdout"
+   ],
+   "gold": [
+    {
+     "doc_id": "MGMRESORTS_2023_8K_dated-2023-03-01",
+     "pages": [
+      2
+     ]
+    }
+   ],
+   "doc_types": [
+    "8k"
+   ],
+   "latency_ms": 462.3,
+   "rerank_ms": null,
+   "acl_leaks": 0,
+   "top10": [
+    {
+     "doc_id": "MGMRESORTS_2023_8K_dated-2023-03-01",
+     "page": 2,
+     "score": 0.72157
+    },
+    {
+     "doc_id": "MGMRESORTS_2023_8K_dated-2023-03-01",
+     "page": 4,
+     "score": 0.66244
+    },
+    {
+     "doc_id": "MGMRESORTS_2023Q2_10Q",
+     "page": 4,
+     "score": 0.65931
+    },
+    {
+     "doc_id": "MGMRESORTS_2023Q2_10Q",
+     "page": 38,
+     "score": 0.65852
+    },
+    {
+     "doc_id": "MGMRESORTS_2023_8K_dated-2023-03-01",
+     "page": 4,
+     "score": 0.65703
+    },
+    {
+     "doc_id": "MGMRESORTS_2023Q2_10Q",
+     "page": 38,
+     "score": 0.65401
+    },
+    {
+     "doc_id": "MGMRESORTS_2023Q2_10Q",
+     "page": 17,
+     "score": 0.65114
+    },
+    {
+     "doc_id": "MGMRESORTS_2023_8K_dated-2023-03-01",
+     "page": 2,
+     "score": 0.65052
+    },
+    {
+     "doc_id": "MGMRESORTS_2023Q2_10Q",
+     "page": 43,
+     "score": 0.64949
+    },
+    {
+     "doc_id": "MGMRESORTS_2023_8K_dated-2023-03-01",
+     "page": 2,
+     "score": 0.64896
+    }
+   ],
+   "metrics": {
+    "doc_hit@5": 1.0,
+    "page_hit@5": 1.0,
+    "gold_page_recall@5": 1.0,
+    "doc_hit@10": 1.0,
+    "page_hit@10": 1.0,
+    "gold_page_recall@10": 1.0,
+    "doc_hit@20": 1.0,
+    "page_hit@20": 1.0,
+    "gold_page_recall@20": 1.0,
+    "mrr@10": 1.0,
+    "askk_page_hit": 1.0,
+    "ctx_page_hit": 1.0,
+    "ctx_gold_recall": 1.0
+   },
+   "ctx": [
+    {
+     "doc_id": "MGMRESORTS_2023_8K_dated-2023-03-01",
+     "page": 2
+    },
+    {
+     "doc_id": "MGMRESORTS_2023_8K_dated-2023-03-01",
+     "page": 4
+    },
+    {
+     "doc_id": "MGMRESORTS_2023Q2_10Q",
+     "page": 4
+    },
+    {
+     "doc_id": "MGMRESORTS_2023Q2_10Q",
+     "page": 38
+    },
+    {
+     "doc_id": "MGMRESORTS_2023Q2_10Q",
+     "page": 17
+    },
+    {
+     "doc_id": "MGMRESORTS_2023Q2_10Q",
+     "page": 43
+    },
+    {
+     "doc_id": "MGMRESORTS_2023Q2_10Q",
+     "page": 9
+    },
+    {
+     "doc_id": "MGMRESORTS_2023Q2_10Q",
+     "page": 25
+    },
+    {
+     "doc_id": "MGMRESORTS_2023Q2_10Q",
+     "page": 22
+    },
+    {
+     "doc_id": "MGMRESORTS_2023_8K_dated-2023-03-01",
+     "page": 3
+    },
+    {
+     "doc_id": "MGMRESORTS_2023_8K_dated-2023-09-12",
+     "page": 4
+    },
+    {
+     "doc_id": "MGMRESORTS_2023Q2_10Q",
+     "page": 45
+    },
+    {
+     "doc_id": "MGMRESORTS_2023Q2_10Q",
+     "page": 33
+    },
+    {
+     "doc_id": "MGMRESORTS_2023Q2_10Q",
+     "page": 26
+    }
+   ],
+   "answer": {
+    "status": "refused",
+    "answer": "No supported answer could be cited from the available documents.",
+    "citations": []
+   },
+   "answer_metrics": {
+    "status_ok": false,
+    "expected": "answered",
+    "got": "refused",
+    "seconds": 19.71,
+    "waited_s": 18.0,
+    "seconds_net": 1.71,
+    "llm_called": true,
+    "ungrounded_warnings": 0,
+    "numeric_ok": null,
+    "cite_hit": null,
+    "cite_precision": null,
+    "answer_ok": null,
+    "context_chunks": 14
+   },
+   "question": "Who joined MGM's board in March 2023, and how many directors does it have after that?",
+   "gold_answer": "Benjamin (Ben) S. Winston was appointed; the board grew from eleven to twelve directors.",
+   "has_numeric": false
+  },
+  {
+   "id": "g_l01",
+   "role": "lead",
+   "type": "answerable",
+   "tags": [
+    "compare",
+    "generated",
+    "holdout",
+    "statement_table"
+   ],
+   "gold": [
+    {
+     "doc_id": "AMD_2022_10K",
+     "pages": [
+      54
+     ]
+    },
+    {
+     "doc_id": "PFIZER_2022_10K",
+     "pages": [
+      54
+     ]
+    }
+   ],
+   "doc_types": [
+    "10k"
+   ],
+   "latency_ms": 285.2,
+   "rerank_ms": null,
+   "acl_leaks": 0,
+   "top10": [
+    {
+     "doc_id": "PFIZER_2022_10K",
+     "page": 34,
+     "score": 0.80566
+    },
+    {
+     "doc_id": "PFIZER_2022_10K",
+     "page": 73,
+     "score": 0.80337
+    },
+    {
+     "doc_id": "PFIZER_2022_10K",
+     "page": 34,
+     "score": 0.79784
+    },
+    {
+     "doc_id": "PFIZER_2022_10K",
+     "page": 34,
+     "score": 0.7899
+    },
+    {
+     "doc_id": "PFIZER_2022_10K",
+     "page": 42,
+     "score": 0.78514
+    },
+    {
+     "doc_id": "PFIZER_2022_10K",
+     "page": 34,
+     "score": 0.78497
+    },
+    {
+     "doc_id": "PFIZER_2022_10K",
+     "page": 34,
+     "score": 0.77743
+    },
+    {
+     "doc_id": "PFIZER_2022_10K",
+     "page": 42,
+     "score": 0.77486
+    },
+    {
+     "doc_id": "AMD_2022_10K",
+     "page": 44,
+     "score": 0.77041
+    },
+    {
+     "doc_id": "PFIZER_2022_10K",
+     "page": 105,
+     "score": 0.77037
+    }
+   ],
+   "metrics": {
+    "doc_hit@5": 1.0,
+    "page_hit@5": 0.0,
+    "gold_page_recall@5": 0.0,
+    "doc_hit@10": 1.0,
+    "page_hit@10": 0.0,
+    "gold_page_recall@10": 0.0,
+    "doc_hit@20": 1.0,
+    "page_hit@20": 0.0,
+    "gold_page_recall@20": 0.0,
+    "mrr@10": 0.0,
+    "askk_page_hit": 1.0,
+    "ctx_page_hit": 1.0,
+    "ctx_gold_recall": 0.5
+   },
+   "ctx": [
+    {
+     "doc_id": "AMD_2022_10K",
+     "page": 43
+    },
+    {
+     "doc_id": "PFIZER_2022_10K",
+     "page": 73
+    },
+    {
+     "doc_id": "AMD_2022_10K",
+     "page": 44
+    },
+    {
+     "doc_id": "PFIZER_2022_10K",
+     "page": 34
+    },
+    {
+     "doc_id": "AMD_2022_10K",
+     "page": 50
+    },
+    {
+     "doc_id": "PFIZER_2022_10K",
+     "page": 42
+    },
+    {
+     "doc_id": "AMD_2022_10K",
+     "page": 52
+    },
+    {
+     "doc_id": "PFIZER_2022_10K",
+     "page": 11
+    },
+    {
+     "doc_id": "AMD_2022_10K",
+     "page": 48
+    },
+    {
+     "doc_id": "PFIZER_2022_10K",
+     "page": 105
+    },
+    {
+     "doc_id": "AMD_2022_10K",
+     "page": 54
+    },
+    {
+     "doc_id": "PFIZER_2022_10K",
+     "page": 36
+    },
+    {
+     "doc_id": "AMD_2022_10K",
+     "page": 68
+    },
+    {
+     "doc_id": "PFIZER_2022_10K",
+     "page": 106
+    },
+    {
+     "doc_id": "AMD_2022_10K",
+     "page": 6
+    },
+    {
+     "doc_id": "PFIZER_2022_10K",
+     "page": 22
+    },
+    {
+     "doc_id": "AMD_2022_10K",
+     "page": 85
+    }
+   ],
+   "answer": {
+    "status": "answered",
+    "answer": "AMD reported research and development expenses of $5.0 billion in 2022 (reported as $5,005 million in the consolidated statements) [C5]. The filings provided do not contain a specific figure for Pfizer’s total R&D spending in 2022, so that portion of the comparison cannot be answered from the supplied context.",
+    "citations": [
+     {
+      "doc_id": "AMD_2022_10K",
+      "page": 50,
+      "chunk_id": "3350104a0d1d388e"
+     }
+    ]
+   },
+   "answer_metrics": {
+    "status_ok": true,
+    "expected": "answered",
+    "got": "answered",
+    "seconds": 30.71,
+    "waited_s": 28.0,
+    "seconds_net": 2.71,
+    "llm_called": true,
+    "ungrounded_warnings": 1,
+    "numeric_ok": false,
+    "cite_hit": true,
+    "cite_precision": 1.0,
+    "answer_ok": false,
+    "context_chunks": 17
+   },
+   "question": "Compare R&D spending at AMD and Pfizer in 2022.",
+   "gold_answer": "AMD spent $5,005M on R&D in 2022; Pfizer spent $11,428M (about 2.3x AMD).",
+   "has_numeric": true
+  },
+  {
+   "id": "g_l02",
+   "role": "lead",
+   "type": "answerable",
+   "tags": [
+    "compare",
+    "generated",
+    "holdout",
+    "statement_table"
+   ],
+   "gold": [
+    {
+     "doc_id": "BOEING_2021_10K",
+     "pages": [
+      60
+     ]
+    },
+    {
+     "doc_id": "3M_2021_10K",
+     "pages": [
+      45
+     ]
+    }
+   ],
+   "doc_types": [
+    "10k"
+   ],
+   "latency_ms": 216.7,
+   "rerank_ms": null,
+   "acl_leaks": 0,
+   "top10": [
+    {
+     "doc_id": "BOEING_2021_10K",
+     "page": 66,
+     "score": 0.75399
+    },
+    {
+     "doc_id": "3M_2021_10K",
+     "page": 24,
+     "score": 0.74313
+    },
+    {
+     "doc_id": "BOEING_2021_10K",
+     "page": 42,
+     "score": 0.73872
+    },
+    {
+     "doc_id": "3M_2021_10K",
+     "page": 26,
+     "score": 0.73493
+    },
+    {
+     "doc_id": "BOEING_2021_10K",
+     "page": 124,
+     "score": 0.73313
+    },
+    {
+     "doc_id": "BOEING_2021_10K",
+     "page": 35,
+     "score": 0.73214
+    },
+    {
+     "doc_id": "3M_2021_10K",
+     "page": 123,
+     "score": 0.73043
+    },
+    {
+     "doc_id": "BOEING_2021_10K",
+     "page": 28,
+     "score": 0.7291
+    },
+    {
+     "doc_id": "BOEING_2021_10K",
+     "page": 122,
+     "score": 0.72806
+    },
+    {
+     "doc_id": "BOEING_2021_10K",
+     "page": 60,
+     "score": 0.7264
+    }
+   ],
+   "metrics": {
+    "doc_hit@5": 1.0,
+    "page_hit@5": 0.0,
+    "gold_page_recall@5": 0.0,
+    "doc_hit@10": 1.0,
+    "page_hit@10": 1.0,
+    "gold_page_recall@10": 0.5,
+    "doc_hit@20": 1.0,
+    "page_hit@20": 1.0,
+    "gold_page_recall@20": 0.5,
+    "mrr@10": 0.1,
+    "askk_page_hit": 1.0,
+    "ctx_page_hit": 1.0,
+    "ctx_gold_recall": 0.5
+   },
+   "ctx": [
+    {
+     "doc_id": "3M_2021_10K",
+     "page": 24
+    },
+    {
+     "doc_id": "BOEING_2021_10K",
+     "page": 66
+    },
+    {
+     "doc_id": "3M_2021_10K",
+     "page": 26
+    },
+    {
+     "doc_id": "BOEING_2021_10K",
+     "page": 124
+    },
+    {
+     "doc_id": "3M_2021_10K",
+     "page": 28
+    },
+    {
+     "doc_id": "BOEING_2021_10K",
+     "page": 35
+    },
+    {
+     "doc_id": "3M_2021_10K",
+     "page": 123
+    },
+    {
+     "doc_id": "BOEING_2021_10K",
+     "page": 28
+    },
+    {
+     "doc_id": "3M_2021_10K",
+     "page": 16
+    },
+    {
+     "doc_id": "BOEING_2021_10K",
+     "page": 60
+    },
+    {
+     "doc_id": "3M_2021_10K",
+     "page": 22
+    },
+    {
+     "doc_id": "BOEING_2021_10K",
+     "page": 122
+    },
+    {
+     "doc_id": "3M_2021_10K",
+     "page": 30
+    },
+    {
+     "doc_id": "BOEING_2021_10K",
+     "page": 123
+    },
+    {
+     "doc_id": "3M_2021_10K",
+     "page": 2
+    },
+    {
+     "doc_id": "BOEING_2021_10K",
+     "page": 42
+    },
+    {
+     "doc_id": "3M_2021_10K",
+     "page": 53
+    },
+    {
+     "doc_id": "BOEING_2021_10K",
+     "page": 32
+    }
+   ],
+   "answer": {
+    "status": "refused",
+    "answer": "No supported answer could be cited from the available documents.",
+    "citations": []
+   },
+   "answer_metrics": {
+    "status_ok": false,
+    "expected": "answered",
+    "got": "refused",
+    "seconds": 37.95,
+    "waited_s": 36.0,
+    "seconds_net": 1.95,
+    "llm_called": true,
+    "ungrounded_warnings": 0,
+    "numeric_ok": false,
+    "cite_hit": null,
+    "cite_precision": null,
+    "answer_ok": false,
+    "context_chunks": 18
+   },
+   "question": "Between Boeing and 3M, who booked more top-line sales in 2021, and what were the two figures?",
+   "gold_answer": "Boeing: $62,286M of total revenues vs 3M: $35,355M of net sales; Boeing was higher by $26,931M.",
+   "has_numeric": true
+  },
+  {
+   "id": "g_y01",
+   "role": "consumer",
+   "type": "answerable",
+   "tags": [
+    "generated",
+    "holdout",
+    "statement_table",
+    "year_ambiguous"
+   ],
+   "gold": [
+    {
+     "doc_id": "BESTBUY_2022_10K",
+     "pages": [
+      26
+     ]
+    },
+    {
+     "doc_id": "BESTBUY_2023_10K",
+     "pages": [
+      25,
+      40,
+      62
+     ]
+    }
+   ],
+   "doc_types": [
+    "10k"
+   ],
+   "latency_ms": 107.6,
+   "rerank_ms": null,
+   "acl_leaks": 0,
+   "top10": [
+    {
+     "doc_id": "BESTBUY_2022_10K",
+     "page": 26,
+     "score": 0.82273
+    },
+    {
+     "doc_id": "BESTBUY_2022_10K",
+     "page": 41,
+     "score": 0.81854
+    },
+    {
+     "doc_id": "BESTBUY_2022_10K",
+     "page": 26,
+     "score": 0.81844
+    },
+    {
+     "doc_id": "BESTBUY_2022_10K",
+     "page": 26,
+     "score": 0.81585
+    },
+    {
+     "doc_id": "BESTBUY_2022_10K",
+     "page": 26,
+     "score": 0.8141
+    },
+    {
+     "doc_id": "BESTBUY_2022_10K",
+     "page": 27,
+     "score": 0.80953
+    },
+    {
+     "doc_id": "BESTBUY_2022_10K",
+     "page": 64,
+     "score": 0.79189
+    },
+    {
+     "doc_id": "BESTBUY_2022_10K",
+     "page": 27,
+     "score": 0.79034
+    },
+    {
+     "doc_id": "BESTBUY_2022_10K",
+     "page": 65,
+     "score": 0.78733
+    },
+    {
+     "doc_id": "BESTBUY_2022_10K",
+     "page": 61,
+     "score": 0.78283
+    }
+   ],
+   "metrics": {
+    "doc_hit@5": 1.0,
+    "page_hit@5": 1.0,
+    "gold_page_recall@5": 0.25,
+    "doc_hit@10": 1.0,
+    "page_hit@10": 1.0,
+    "gold_page_recall@10": 0.25,
+    "doc_hit@20": 1.0,
+    "page_hit@20": 1.0,
+    "gold_page_recall@20": 0.25,
+    "mrr@10": 1.0,
+    "askk_page_hit": 1.0,
+    "ctx_page_hit": 1.0,
+    "ctx_gold_recall": 0.25
+   },
+   "ctx": [
+    {
+     "doc_id": "BESTBUY_2022_10K",
+     "page": 26
+    },
+    {
+     "doc_id": "BESTBUY_2022_10K",
+     "page": 41
+    },
+    {
+     "doc_id": "BESTBUY_2022_10K",
+     "page": 27
+    },
+    {
+     "doc_id": "BESTBUY_2022_10K",
+     "page": 64
+    },
+    {
+     "doc_id": "BESTBUY_2022_10K",
+     "page": 65
+    },
+    {
+     "doc_id": "BESTBUY_2022_10K",
+     "page": 61
+    },
+    {
+     "doc_id": "BESTBUY_2022_10K",
+     "page": 43
+    },
+    {
+     "doc_id": "BESTBUY_2022_10K",
+     "page": 28
+    },
+    {
+     "doc_id": "BESTBUY_2022_10K",
+     "page": 32
+    },
+    {
+     "doc_id": "BESTBUY_2022_10K",
+     "page": 44
+    },
+    {
+     "doc_id": "BESTBUY_2022_10K",
+     "page": 38
+    },
+    {
+     "doc_id": "BESTBUY_2022_10K",
+     "page": 5
+    },
+    {
+     "doc_id": "BESTBUY_2022_10K",
+     "page": 30
+    },
+    {
+     "doc_id": "BESTBUY_2022_10K",
+     "page": 22
+    }
+   ],
+   "answer": {
+    "status": "answered",
+    "answer": "Best Buy’s total revenue for the fiscal year ended January 29, 2022 was $51,761 million (in millions). [C2][C4]",
+    "citations": [
+     {
+      "doc_id": "BESTBUY_2022_10K",
+      "page": 41,
+      "chunk_id": "1dc4a76ea332e709"
+     },
+     {
+      "doc_id": "BESTBUY_2022_10K",
+      "page": 64,
+      "chunk_id": "51645f1181333387"
+     }
+    ]
+   },
+   "answer_metrics": {
+    "status_ok": true,
+    "expected": "answered",
+    "got": "answered",
+    "seconds": 24.35,
+    "waited_s": 23.0,
+    "seconds_net": 1.35,
+    "llm_called": true,
+    "ungrounded_warnings": 0,
+    "numeric_ok": true,
+    "cite_hit": false,
+    "cite_precision": 0.0,
+    "answer_ok": true,
+    "context_chunks": 14
+   },
+   "question": "What was Best Buy's revenue in 2022?",
+   "gold_answer": "Ambiguous: fiscal 2022 (year ended Jan 29, 2022) revenue was $51,761M; fiscal 2023 (ended Jan 28, 2023, i.e. the calendar-2022 year) was $46,298M. Either is acceptable if the interpretation is stated.",
+   "has_numeric": true
+  },
+  {
+   "id": "g_o03",
+   "role": "health_industrials",
+   "type": "off_desk",
+   "tags": [
+    "generated",
+    "holdout",
+    "off_desk"
+   ],
+   "gold": [],
+   "doc_types": [],
+   "latency_ms": 159.1,
+   "rerank_ms": null,
+   "acl_leaks": 0,
+   "top10": [
+    {
+     "doc_id": "3M_2023Q2_10Q",
+     "page": 69,
+     "score": 0.75091
+    },
+    {
+     "doc_id": "Pfizer_2023Q2_10Q",
+     "page": 46,
+     "score": 0.73444
+    },
+    {
+     "doc_id": "3M_2023Q2_10Q",
+     "page": 69,
+     "score": 0.72927
+    },
+    {
+     "doc_id": "3M_2023Q2_10Q",
+     "page": 9,
+     "score": 0.72241
+    },
+    {
+     "doc_id": "3M_2023Q2_10Q",
+     "page": 66,
+     "score": 0.72208
+    },
+    {
+     "doc_id": "3M_2023Q2_10Q",
+     "page": 61,
+     "score": 0.7178
+    },
+    {
+     "doc_id": "3M_2023Q2_10Q",
+     "page": 68,
+     "score": 0.7171
+    },
+    {
+     "doc_id": "Pfizer_2023Q2_10Q",
+     "page": 45,
+     "score": 0.7169
+    },
+    {
+     "doc_id": "Pfizer_2023Q2_10Q",
+     "page": 47,
+     "score": 0.71569
+    },
+    {
+     "doc_id": "3M_2023Q2_10Q",
+     "page": 66,
+     "score": 0.71432
+    }
+   ],
+   "metrics": null,
+   "answer": {
+    "status": "refused",
+    "answer": "This question concerns a company outside your desk's coverage.",
+    "citations": []
+   },
+   "answer_metrics": {
+    "status_ok": true,
+    "expected": "refused",
+    "got": "refused",
+    "seconds": 0.0,
+    "waited_s": 0.0,
+    "seconds_net": 0.0,
+    "llm_called": false,
+    "ungrounded_warnings": 0,
+    "numeric_ok": null,
+    "cite_hit": null,
+    "cite_precision": null,
+    "answer_ok": true,
+    "context_chunks": 0
+   },
+   "question": "What organic revenue growth did PepsiCo report for the first quarter of 2023?",
+   "gold_answer": "REFUSE (PepsiCo is not on the health_industrials desk).",
+   "has_numeric": false
+  },
+  {
+   "id": "g_o04",
+   "role": "health_industrials",
+   "type": "off_desk",
+   "tags": [
+    "generated",
+    "holdout",
+    "off_desk"
+   ],
+   "gold": [],
+   "doc_types": [],
+   "latency_ms": 183.1,
+   "rerank_ms": null,
+   "acl_leaks": 0,
+   "top10": [
+    {
+     "doc_id": "3M_2021_10K",
+     "page": 123,
+     "score": 0.72714
+    },
+    {
+     "doc_id": "JOHNSON_JOHNSON_2021_10K",
+     "page": 36,
+     "score": 0.72378
+    },
+    {
+     "doc_id": "JOHNSON_JOHNSON_2021_10K",
+     "page": 36,
+     "score": 0.72002
+    },
+    {
+     "doc_id": "JOHNSON_JOHNSON_2021_10K",
+     "page": 36,
+     "score": 0.71823
+    },
+    {
+     "doc_id": "3M_2021_10K",
+     "page": 123,
+     "score": 0.71732
+    },
+    {
+     "doc_id": "3M_2021_10K",
+     "page": 123,
+     "score": 0.71628
+    },
+    {
+     "doc_id": "3M_2021_10K",
+     "page": 24,
+     "score": 0.71177
+    },
+    {
+     "doc_id": "JOHNSON_JOHNSON_2021_10K",
+     "page": 36,
+     "score": 0.70767
+    },
+    {
+     "doc_id": "JOHNSON_JOHNSON_2021_10K",
+     "page": 36,
+     "score": 0.70317
+    },
+    {
+     "doc_id": "3M_2021_10K",
+     "page": 21,
+     "score": 0.70288
+    }
+   ],
+   "metrics": null,
+   "answer": {
+    "status": "refused",
+    "answer": "This question concerns a company outside your desk's coverage.",
+    "citations": []
+   },
+   "answer_metrics": {
+    "status_ok": true,
+    "expected": "refused",
+    "got": "refused",
+    "seconds": 0.0,
+    "waited_s": 0.0,
+    "seconds_net": 0.0,
+    "llm_called": false,
+    "ungrounded_warnings": 0,
+    "numeric_ok": null,
+    "cite_hit": null,
+    "cite_precision": null,
+    "answer_ok": true,
+    "context_chunks": 0
+   },
+   "question": "What was Verizon's net income in 2021?",
+   "gold_answer": "REFUSE (Verizon is not on the health_industrials desk).",
+   "has_numeric": false
+  },
+  {
+   "id": "g_u01",
+   "role": "consumer",
+   "type": "unanswerable",
+   "tags": [
+    "generated",
+    "holdout",
+    "no_filing_for_year",
+    "unanswerable"
+   ],
+   "gold": [],
+   "doc_types": [],
+   "latency_ms": 74.1,
+   "rerank_ms": null,
+   "acl_leaks": 0,
+   "top10": [
+    {
+     "doc_id": "ULTABEAUTY_2023_10K",
+     "page": 55,
+     "score": 0.83006
+    },
+    {
+     "doc_id": "ULTABEAUTY_2023_10K",
+     "page": 38,
+     "score": 0.82811
+    },
+    {
+     "doc_id": "ULTABEAUTY_2023_10K",
+     "page": 66,
+     "score": 0.82789
+    },
+    {
+     "doc_id": "ULTABEAUTY_2023_10K",
+     "page": 66,
+     "score": 0.81813
+    },
+    {
+     "doc_id": "ULTABEAUTY_2024Q2_EARNINGS",
+     "page": 9,
+     "score": 0.81777
+    },
+    {
+     "doc_id": "ULTABEAUTY_2023Q4_EARNINGS",
+     "page": 6,
+     "score": 0.80993
+    },
+    {
+     "doc_id": "ULTABEAUTY_2023Q4_EARNINGS",
+     "page": 1,
+     "score": 0.80937
+    },
+    {
+     "doc_id": "ULTABEAUTY_2023Q4_EARNINGS",
+     "page": 6,
+     "score": 0.80659
+    },
+    {
+     "doc_id": "ULTABEAUTY_2024Q2_EARNINGS",
+     "page": 1,
+     "score": 0.80641
+    },
+    {
+     "doc_id": "ULTABEAUTY_2024Q1_EARNINGS",
+     "page": 5,
+     "score": 0.80376
+    }
+   ],
+   "metrics": null,
+   "answer": {
+    "status": "refused",
+    "answer": "The provided documents do not contain the answer for the exact company and period asked.",
+    "citations": []
+   },
+   "answer_metrics": {
+    "status_ok": true,
+    "expected": "refused",
+    "got": "refused",
+    "seconds": 23.42,
+    "waited_s": 22.0,
+    "seconds_net": 1.42,
+    "llm_called": true,
+    "ungrounded_warnings": 0,
+    "numeric_ok": null,
+    "cite_hit": null,
+    "cite_precision": null,
+    "answer_ok": true,
+    "context_chunks": 14
+   },
+   "question": "What were Ulta Beauty's net sales in fiscal 2018?",
+   "gold_answer": "REFUSE (the corpus has Ulta filings for fiscal 2022-2024 only; no filing covers fiscal 2018).",
+   "has_numeric": false
+  },
+  {
+   "id": "g_u04",
+   "role": "health_industrials",
+   "type": "unanswerable",
+   "tags": [
+    "generated",
+    "holdout",
+    "nonexistent_segment",
+    "unanswerable"
+   ],
+   "gold": [],
+   "doc_types": [],
+   "latency_ms": 109.8,
+   "rerank_ms": null,
+   "acl_leaks": 0,
+   "top10": [
+    {
+     "doc_id": "BOEING_2021_10K",
+     "page": 124,
+     "score": 0.78537
+    },
+    {
+     "doc_id": "BOEING_2021_10K",
+     "page": 66,
+     "score": 0.78481
+    },
+    {
+     "doc_id": "BOEING_2021_10K",
+     "page": 122,
+     "score": 0.77445
+    },
+    {
+     "doc_id": "BOEING_2021_10K",
+     "page": 44,
+     "score": 0.76934
+    },
+    {
+     "doc_id": "BOEING_2021_10K",
+     "page": 123,
+     "score": 0.76908
+    },
+    {
+     "doc_id": "BOEING_2021_10K",
+     "page": 124,
+     "score": 0.76612
+    },
+    {
+     "doc_id": "BOEING_2021_10K",
+     "page": 123,
+     "score": 0.76612
+    },
+    {
+     "doc_id": "BOEING_2021_10K",
+     "page": 46,
+     "score": 0.75919
+    },
+    {
+     "doc_id": "BOEING_2021_10K",
+     "page": 28,
+     "score": 0.75904
+    },
+    {
+     "doc_id": "BOEING_2021_10K",
+     "page": 35,
+     "score": 0.75483
+    }
+   ],
+   "metrics": null,
+   "answer": {
+    "status": "refused",
+    "answer": "The provided documents do not contain the answer for the exact company and period asked.",
+    "citations": []
+   },
+   "answer_metrics": {
+    "status_ok": true,
+    "expected": "refused",
+    "got": "refused",
+    "seconds": 25.79,
+    "waited_s": 24.0,
+    "seconds_net": 1.79,
+    "llm_called": true,
+    "ungrounded_warnings": 0,
+    "numeric_ok": null,
+    "cite_hit": null,
+    "cite_precision": null,
+    "answer_ok": true,
+    "context_chunks": 14
+   },
+   "question": "How much revenue did Boeing's space tourism segment generate in 2021?",
+   "gold_answer": "REFUSE (Boeing has no such segment).",
+   "has_numeric": false
+  }
+ ],
+ "rescored_from": "final_holdout_answers_oss20b"
+}

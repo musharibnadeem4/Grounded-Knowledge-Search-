@@ -1,0 +1,5 @@
+# corpus-wide page length statistics from cache/pages (pdfplumber text, before cleaning), computed 2026-11-10
+files 119 pages 18371
+median chars per page (all pages pooled): 3138  ~tokens at 4 chars/token: 784
+median of per-file medians: 3355  ~tokens: 838
+mean chars per page: 3221

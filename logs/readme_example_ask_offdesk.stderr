@@ -1,0 +1,3 @@
+ask parse: companies=['Pfizer'] year=2022
+refusing: off-desk companies ['Pfizer'] for role consumer
+ask latency: parse=0.000s retrieve=0.000s llm=0.000s total=0.000s

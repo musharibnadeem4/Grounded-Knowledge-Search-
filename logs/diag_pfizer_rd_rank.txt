@@ -1,0 +1,13 @@
+# diagnostic: rank of PFIZER_2022_10K p.54 (statement of income) / p.41 (MD&A) and the top-8 pages, for three phrasings of the Pfizer R&D question. Role lead, companies=[Pfizer], k=100, QUERY_EXPAND on. Produced 2026-11-10 by a throwaway script. Format: (rank of p.54, rank of p.41, top-8 pages).
+R&D spending at Pfizer in 2022.
+  200-token index (./index), expansion: rank of PFIZER_2022_10K p.54 / p.41, top-8 pages: (37, 47, [73, 34, 34, 34, 42, 42, 34, 11])
+  350-token index (index_c350), expansion: (40, 30, [34, 11, 34, 34, 105, 34, 72, 42])
+  350-token index, expansion + hybrid: (63, 9, [34, 34, 12, 12, 34, 11, 11, 34])
+Pfizer research and development expenses 2022
+  200-token index (./index), expansion: rank of PFIZER_2022_10K p.54 / p.41, top-8 pages: (5, 24, [73, 42, 34, 42, 54, 105, 34, 42])
+  350-token index (index_c350), expansion: (9, 12, [42, 34, 42, 105, 42, 74, 34, 34])
+  350-token index, expansion + hybrid: (7, 2, [42, 41, 42, 72, 73, 34, 54, 72])
+Pfizer R&D expense 2022 statement of income
+  200-token index (./index), expansion: rank of PFIZER_2022_10K p.54 / p.41, top-8 pages: (1, 58, [54, 34, 42, 34, 72, 105, 42, 73])
+  350-token index (index_c350), expansion: (3, 29, [42, 34, 54, 34, 105, 105, 73, 105])
+  350-token index, expansion + hybrid: (3, 13, [34, 34, 54, 73, 72, 42, 42, 72])

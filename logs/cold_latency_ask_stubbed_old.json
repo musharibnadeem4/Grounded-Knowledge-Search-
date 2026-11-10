@@ -1,0 +1,60 @@
+{
+ "cmd": "ask",
+ "n": 5,
+ "config_patch": {
+  "ONNX_ENCODER": false,
+  "QUERY_EXPAND": false,
+  "ASK_K": 8,
+  "ASK_K_PER_COMPANY": 6,
+  "ASK_MAX_CHUNKS_PER_PAGE": 0,
+  "INDEX_DIR": "index_c350"
+ },
+ "wall_s": {
+  "median": 17.84,
+  "min": 17.42,
+  "max": 19.35
+ },
+ "pre_llm_s": {
+  "median": 17.76,
+  "min": 17.34,
+  "max": 19.28
+ },
+ "runs": [
+  {
+   "wall_s": 19.35,
+   "llm_s": 0.06,
+   "pre_llm_s": 19.28,
+   "rate_limit_wait_s": 0,
+   "ok": true
+  },
+  {
+   "wall_s": 18.03,
+   "llm_s": 0.07,
+   "pre_llm_s": 17.95,
+   "rate_limit_wait_s": 0,
+   "ok": true
+  },
+  {
+   "wall_s": 17.69,
+   "llm_s": 0.07,
+   "pre_llm_s": 17.62,
+   "rate_limit_wait_s": 0,
+   "ok": true
+  },
+  {
+   "wall_s": 17.42,
+   "llm_s": 0.08,
+   "pre_llm_s": 17.34,
+   "rate_limit_wait_s": 0,
+   "ok": true
+  },
+  {
+   "wall_s": 17.84,
+   "llm_s": 0.08,
+   "pre_llm_s": 17.76,
+   "rate_limit_wait_s": 0,
+   "ok": true
+  }
+ ],
+ "hardware": "Intel64 Family 6 Model 186 Stepping 2, GenuineIntel; Windows-11-10.0.26300-SP0"
+}

@@ -1,0 +1,6720 @@
+{
+ "run_name": "p4_baseline_tune_answers_replay",
+ "timestamp": "2026-11-09T13:38:32+05:00",
+ "git": {
+  "sha": "b236e7cc54fd59e35538e1e58cb2bde402f3f768",
+  "dirty": true
+ },
+ "config": {
+  "args": {
+   "run_name": "p4_baseline_tune_answers_replay",
+   "k": [
+    5,
+    10,
+    20
+   ],
+   "index_dir": "D:\\Assignment DRG\\index",
+   "questions": "eval/questions_v2.jsonl",
+   "split": "tune",
+   "answers": true
+  },
+  "drg.config": {
+   "ASK_K": "8",
+   "ASK_K_PER_COMPANY": "6",
+   "ASK_MAX_CHUNKS_PER_PAGE": "0",
+   "CACHE_DIR": "cache\\pages",
+   "CHROMA_BATCH": "2000",
+   "CHUNK_OVERLAP": "50",
+   "CHUNK_TOKENS": "350",
+   "COLLECTION": "chunks",
+   "CONTEXT_TOKEN_BUDGET": "4500",
+   "DROP_BOILERPLATE": "False",
+   "DROP_BOILERPLATE_OVERFETCH": "3",
+   "EMBED_BATCH": "64",
+   "EMBED_MODEL": "BAAI/bge-small-en-v1.5",
+   "FORECAST_PRIOR_YEAR": "False",
+   "HASHES_FILE": "hashes.json",
+   "HYBRID_BM25": "False",
+   "HYBRID_DEPTH": "50",
+   "INDEX_DIR": "D:\\Assignment DRG\\index",
+   "INDEX_META_FILE": "index_meta.json",
+   "LLM_TIMEOUT": "30",
+   "MANIFEST_PATH": "D:\\Assignment DRG\\manifest.csv",
+   "MAX_CHUNK_TOKENS": "500",
+   "MIN_CHUNK_CHARS": "0",
+   "MIN_CHUNK_OVERFETCH": "3",
+   "ONNX_DIR": "models\\bge-small-en-v1.5-onnx",
+   "ONNX_ENCODER": "False",
+   "PREFER_10K_OVER_ANNUALREPORT": "True",
+   "PROMPT_VERSION": "1",
+   "QUERY_CLEAN": "False",
+   "QUERY_EXPAND": "False",
+   "QUERY_PREFIX": "",
+   "RERANKER": "None",
+   "RERANKERS_ALLOWED": "('cross-encoder/ms-marco-MiniLM-L-6-v2', 'BAAI/bge-reranker-base')",
+   "RERANK_DEPTH": "50",
+   "RRF_K": "60",
+   "YEAR_COMPANY_FILTER": "True"
+  },
+  "overrides": {},
+  "retrieved_depth": 20,
+  "question_types": {
+   "answerable": 33,
+   "off_desk": 4,
+   "unanswerable": 4
+  }
+ },
+ "metrics": {
+  "overall": {
+   "n": 33,
+   "doc_hit@5": 1.0,
+   "page_hit@5": 0.6060606060606061,
+   "gold_page_recall@5": 0.5252525252525252,
+   "doc_hit@10": 1.0,
+   "page_hit@10": 0.696969696969697,
+   "gold_page_recall@10": 0.6161616161616161,
+   "doc_hit@20": 1.0,
+   "page_hit@20": 0.8484848484848485,
+   "gold_page_recall@20": 0.7474747474747475,
+   "mrr@10": 0.33434343434343433,
+   "askk_page_hit": 0.696969696969697,
+   "ctx_page_hit": 0.696969696969697,
+   "ctx_gold_recall": 0.601010101010101
+  },
+  "acl_leaks": 0,
+  "latency": {
+   "p50_ms": 242.38310009241104,
+   "p95_ms": 352.74440003558993,
+   "mean_ms": 247.6663244149943,
+   "n": 41
+  },
+  "rerank_latency": null
+ },
+ "index_meta": {
+  "context_header": true,
+  "embed_model": "BAAI/bge-small-en-v1.5",
+  "chunk_tokens": 350,
+  "chunk_overlap": 50,
+  "max_chunk_tokens": 500,
+  "written": "2026-11-08T18:55:59+05:00"
+ },
+ "breakdowns": {
+  "by_tag": {
+   "10q": {
+    "n": 1,
+    "doc_hit@5": 1.0,
+    "page_hit@5": 1.0,
+    "gold_page_recall@5": 1.0,
+    "doc_hit@10": 1.0,
+    "page_hit@10": 1.0,
+    "gold_page_recall@10": 1.0,
+    "doc_hit@20": 1.0,
+    "page_hit@20": 1.0,
+    "gold_page_recall@20": 1.0,
+    "mrr@10": 0.25,
+    "askk_page_hit": 1.0,
+    "ctx_page_hit": 1.0,
+    "ctx_gold_recall": 1.0
+   },
+   "8k": {
+    "n": 1,
+    "doc_hit@5": 1.0,
+    "page_hit@5": 1.0,
+    "gold_page_recall@5": 1.0,
+    "doc_hit@10": 1.0,
+    "page_hit@10": 1.0,
+    "gold_page_recall@10": 1.0,
+    "doc_hit@20": 1.0,
+    "page_hit@20": 1.0,
+    "gold_page_recall@20": 1.0,
+    "mrr@10": 1.0,
+    "askk_page_hit": 1.0,
+    "ctx_page_hit": 1.0,
+    "ctx_gold_recall": 1.0
+   },
+   "calc": {
+    "n": 5,
+    "doc_hit@5": 1.0,
+    "page_hit@5": 0.8,
+    "gold_page_recall@5": 0.8,
+    "doc_hit@10": 1.0,
+    "page_hit@10": 0.8,
+    "gold_page_recall@10": 0.8,
+    "doc_hit@20": 1.0,
+    "page_hit@20": 1.0,
+    "gold_page_recall@20": 1.0,
+    "mrr@10": 0.4,
+    "askk_page_hit": 0.8,
+    "ctx_page_hit": 0.8,
+    "ctx_gold_recall": 0.8
+   },
+   "compare": {
+    "n": 3,
+    "doc_hit@5": 1.0,
+    "page_hit@5": 0.3333333333333333,
+    "gold_page_recall@5": 0.16666666666666666,
+    "doc_hit@10": 1.0,
+    "page_hit@10": 0.3333333333333333,
+    "gold_page_recall@10": 0.16666666666666666,
+    "doc_hit@20": 1.0,
+    "page_hit@20": 0.6666666666666666,
+    "gold_page_recall@20": 0.3333333333333333,
+    "mrr@10": 0.16666666666666666,
+    "askk_page_hit": 0.6666666666666666,
+    "ctx_page_hit": 0.6666666666666666,
+    "ctx_gold_recall": 0.3333333333333333
+   },
+   "dev": {
+    "n": 20,
+    "doc_hit@5": 1.0,
+    "page_hit@5": 0.55,
+    "gold_page_recall@5": 0.5,
+    "doc_hit@10": 1.0,
+    "page_hit@10": 0.7,
+    "gold_page_recall@10": 0.65,
+    "doc_hit@20": 1.0,
+    "page_hit@20": 0.85,
+    "gold_page_recall@20": 0.7916666666666667,
+    "mrr@10": 0.30416666666666664,
+    "askk_page_hit": 0.65,
+    "ctx_page_hit": 0.65,
+    "ctx_gold_recall": 0.6
+   },
+   "earnings": {
+    "n": 2,
+    "doc_hit@5": 1.0,
+    "page_hit@5": 1.0,
+    "gold_page_recall@5": 1.0,
+    "doc_hit@10": 1.0,
+    "page_hit@10": 1.0,
+    "gold_page_recall@10": 1.0,
+    "doc_hit@20": 1.0,
+    "page_hit@20": 1.0,
+    "gold_page_recall@20": 1.0,
+    "mrr@10": 0.75,
+    "askk_page_hit": 1.0,
+    "ctx_page_hit": 1.0,
+    "ctx_gold_recall": 1.0
+   },
+   "generated": {
+    "n": 13,
+    "doc_hit@5": 1.0,
+    "page_hit@5": 0.6923076923076923,
+    "gold_page_recall@5": 0.5641025641025641,
+    "doc_hit@10": 1.0,
+    "page_hit@10": 0.6923076923076923,
+    "gold_page_recall@10": 0.5641025641025641,
+    "doc_hit@20": 1.0,
+    "page_hit@20": 0.8461538461538461,
+    "gold_page_recall@20": 0.6794871794871795,
+    "mrr@10": 0.3807692307692308,
+    "askk_page_hit": 0.7692307692307693,
+    "ctx_page_hit": 0.7692307692307693,
+    "ctx_gold_recall": 0.6025641025641025
+   },
+   "multi_page": {
+    "n": 4,
+    "doc_hit@5": 1.0,
+    "page_hit@5": 0.5,
+    "gold_page_recall@5": 0.25,
+    "doc_hit@10": 1.0,
+    "page_hit@10": 0.5,
+    "gold_page_recall@10": 0.25,
+    "doc_hit@20": 1.0,
+    "page_hit@20": 0.75,
+    "gold_page_recall@20": 0.4583333333333333,
+    "mrr@10": 0.1875,
+    "askk_page_hit": 0.5,
+    "ctx_page_hit": 0.5,
+    "ctx_gold_recall": 0.25
+   },
+   "narrative": {
+    "n": 1,
+    "doc_hit@5": 1.0,
+    "page_hit@5": 0.0,
+    "gold_page_recall@5": 0.0,
+    "doc_hit@10": 1.0,
+    "page_hit@10": 0.0,
+    "gold_page_recall@10": 0.0,
+    "doc_hit@20": 1.0,
+    "page_hit@20": 0.0,
+    "gold_page_recall@20": 0.0,
+    "mrr@10": 0.0,
+    "askk_page_hit": 0.0,
+    "ctx_page_hit": 0.0,
+    "ctx_gold_recall": 0.0
+   },
+   "statement_table": {
+    "n": 9,
+    "doc_hit@5": 1.0,
+    "page_hit@5": 0.6666666666666666,
+    "gold_page_recall@5": 0.48148148148148145,
+    "doc_hit@10": 1.0,
+    "page_hit@10": 0.6666666666666666,
+    "gold_page_recall@10": 0.48148148148148145,
+    "doc_hit@20": 1.0,
+    "page_hit@20": 0.8888888888888888,
+    "gold_page_recall@20": 0.6481481481481481,
+    "mrr@10": 0.27222222222222225,
+    "askk_page_hit": 0.7777777777777778,
+    "ctx_page_hit": 0.7777777777777778,
+    "ctx_gold_recall": 0.537037037037037
+   },
+   "tune": {
+    "n": 13,
+    "doc_hit@5": 1.0,
+    "page_hit@5": 0.6923076923076923,
+    "gold_page_recall@5": 0.5641025641025641,
+    "doc_hit@10": 1.0,
+    "page_hit@10": 0.6923076923076923,
+    "gold_page_recall@10": 0.5641025641025641,
+    "doc_hit@20": 1.0,
+    "page_hit@20": 0.8461538461538461,
+    "gold_page_recall@20": 0.6794871794871795,
+    "mrr@10": 0.3807692307692308,
+    "askk_page_hit": 0.7692307692307693,
+    "ctx_page_hit": 0.7692307692307693,
+    "ctx_gold_recall": 0.6025641025641025
+   },
+   "year_ambiguous": {
+    "n": 2,
+    "doc_hit@5": 1.0,
+    "page_hit@5": 1.0,
+    "gold_page_recall@5": 0.41666666666666663,
+    "doc_hit@10": 1.0,
+    "page_hit@10": 1.0,
+    "gold_page_recall@10": 0.41666666666666663,
+    "doc_hit@20": 1.0,
+    "page_hit@20": 1.0,
+    "gold_page_recall@20": 0.41666666666666663,
+    "mrr@10": 0.625,
+    "askk_page_hit": 1.0,
+    "ctx_page_hit": 1.0,
+    "ctx_gold_recall": 0.41666666666666663
+   }
+  },
+  "by_doc_type": {
+   "10k": {
+    "n": 25,
+    "doc_hit@5": 1.0,
+    "page_hit@5": 0.52,
+    "gold_page_recall@5": 0.41333333333333333,
+    "doc_hit@10": 1.0,
+    "page_hit@10": 0.6,
+    "gold_page_recall@10": 0.49333333333333335,
+    "doc_hit@20": 1.0,
+    "page_hit@20": 0.8,
+    "gold_page_recall@20": 0.6666666666666667,
+    "mrr@10": 0.2683333333333333,
+    "askk_page_hit": 0.6,
+    "ctx_page_hit": 0.6,
+    "ctx_gold_recall": 0.4733333333333334
+   },
+   "10q": {
+    "n": 3,
+    "doc_hit@5": 1.0,
+    "page_hit@5": 1.0,
+    "gold_page_recall@5": 1.0,
+    "doc_hit@10": 1.0,
+    "page_hit@10": 1.0,
+    "gold_page_recall@10": 1.0,
+    "doc_hit@20": 1.0,
+    "page_hit@20": 1.0,
+    "gold_page_recall@20": 1.0,
+    "mrr@10": 0.48333333333333334,
+    "askk_page_hit": 1.0,
+    "ctx_page_hit": 1.0,
+    "ctx_gold_recall": 1.0
+   },
+   "8k": {
+    "n": 1,
+    "doc_hit@5": 1.0,
+    "page_hit@5": 1.0,
+    "gold_page_recall@5": 1.0,
+    "doc_hit@10": 1.0,
+    "page_hit@10": 1.0,
+    "gold_page_recall@10": 1.0,
+    "doc_hit@20": 1.0,
+    "page_hit@20": 1.0,
+    "gold_page_recall@20": 1.0,
+    "mrr@10": 1.0,
+    "askk_page_hit": 1.0,
+    "ctx_page_hit": 1.0,
+    "ctx_gold_recall": 1.0
+   },
+   "Earnings": {
+    "n": 5,
+    "doc_hit@5": 1.0,
+    "page_hit@5": 0.8,
+    "gold_page_recall@5": 0.6666666666666667,
+    "doc_hit@10": 1.0,
+    "page_hit@10": 1.0,
+    "gold_page_recall@10": 0.8666666666666666,
+    "doc_hit@20": 1.0,
+    "page_hit@20": 1.0,
+    "gold_page_recall@20": 0.8666666666666666,
+    "mrr@10": 0.425,
+    "askk_page_hit": 1.0,
+    "ctx_page_hit": 1.0,
+    "ctx_gold_recall": 0.8666666666666666
+   }
+  }
+ },
+ "answers": {
+  "overall": {
+   "n": 41,
+   "n_answerable": 33,
+   "n_negative": 8,
+   "status_accuracy": 0.926829268292683,
+   "refusal_recall": 1.0,
+   "refusal_precision": 0.7272727272727273,
+   "answer_rate_on_answerable": 0.9090909090909091,
+   "numeric_accuracy": 0.8,
+   "n_numeric": 20,
+   "citation_hit": 0.5666666666666667,
+   "citation_precision": 0.45555555555555555,
+   "ungrounded_warnings": 17,
+   "latency_p50_s": 0.23,
+   "latency_p95_s": 0.38,
+   "latency_net_p50_s": 0.23,
+   "latency_net_p95_s": 0.38
+  },
+  "by_type": {
+   "answerable": {
+    "n": 33,
+    "n_answerable": 33,
+    "n_negative": 0,
+    "status_accuracy": 0.9090909090909091,
+    "refusal_recall": null,
+    "refusal_precision": 0.0,
+    "answer_rate_on_answerable": 0.9090909090909091,
+    "numeric_accuracy": 0.8,
+    "n_numeric": 20,
+    "citation_hit": 0.5666666666666667,
+    "citation_precision": 0.45555555555555555,
+    "ungrounded_warnings": 17,
+    "latency_p50_s": 0.24,
+    "latency_p95_s": 0.39199999999999996,
+    "latency_net_p50_s": 0.24,
+    "latency_net_p95_s": 0.39199999999999996
+   },
+   "off_desk": {
+    "n": 4,
+    "n_answerable": 0,
+    "n_negative": 4,
+    "status_accuracy": 1.0,
+    "refusal_recall": 1.0,
+    "refusal_precision": 1.0,
+    "answer_rate_on_answerable": null,
+    "numeric_accuracy": null,
+    "n_numeric": 0,
+    "citation_hit": null,
+    "citation_precision": null,
+    "ungrounded_warnings": 0,
+    "latency_p50_s": 0.0,
+    "latency_p95_s": 0.0,
+    "latency_net_p50_s": 0.0,
+    "latency_net_p95_s": 0.0
+   },
+   "unanswerable": {
+    "n": 4,
+    "n_answerable": 0,
+    "n_negative": 4,
+    "status_accuracy": 1.0,
+    "refusal_recall": 1.0,
+    "refusal_precision": 1.0,
+    "answer_rate_on_answerable": null,
+    "numeric_accuracy": null,
+    "n_numeric": 0,
+    "citation_hit": null,
+    "citation_precision": null,
+    "ungrounded_warnings": 0,
+    "latency_p50_s": 0.235,
+    "latency_p95_s": 0.2485,
+    "latency_net_p50_s": 0.235,
+    "latency_net_p95_s": 0.2485
+   }
+  },
+  "by_tag": {
+   "10q": {
+    "n": 1,
+    "n_answerable": 1,
+    "n_negative": 0,
+    "status_accuracy": 1.0,
+    "refusal_recall": null,
+    "refusal_precision": null,
+    "answer_rate_on_answerable": 1.0,
+    "numeric_accuracy": 1.0,
+    "n_numeric": 1,
+    "citation_hit": 1.0,
+    "citation_precision": 0.5,
+    "ungrounded_warnings": 0,
+    "latency_p50_s": 0.2,
+    "latency_p95_s": 0.2,
+    "latency_net_p50_s": 0.2,
+    "latency_net_p95_s": 0.2
+   },
+   "8k": {
+    "n": 1,
+    "n_answerable": 1,
+    "n_negative": 0,
+    "status_accuracy": 1.0,
+    "refusal_recall": null,
+    "refusal_precision": null,
+    "answer_rate_on_answerable": 1.0,
+    "numeric_accuracy": 1.0,
+    "n_numeric": 1,
+    "citation_hit": 1.0,
+    "citation_precision": 1.0,
+    "ungrounded_warnings": 1,
+    "latency_p50_s": 0.18,
+    "latency_p95_s": 0.18,
+    "latency_net_p50_s": 0.18,
+    "latency_net_p95_s": 0.18
+   },
+   "calc": {
+    "n": 5,
+    "n_answerable": 5,
+    "n_negative": 0,
+    "status_accuracy": 0.8,
+    "refusal_recall": null,
+    "refusal_precision": 0.0,
+    "answer_rate_on_answerable": 0.8,
+    "numeric_accuracy": 0.8,
+    "n_numeric": 5,
+    "citation_hit": 0.75,
+    "citation_precision": 0.625,
+    "ungrounded_warnings": 5,
+    "latency_p50_s": 0.22,
+    "latency_p95_s": 0.284,
+    "latency_net_p50_s": 0.22,
+    "latency_net_p95_s": 0.284
+   },
+   "compare": {
+    "n": 3,
+    "n_answerable": 3,
+    "n_negative": 0,
+    "status_accuracy": 1.0,
+    "refusal_recall": null,
+    "refusal_precision": null,
+    "answer_rate_on_answerable": 1.0,
+    "numeric_accuracy": 1.0,
+    "n_numeric": 3,
+    "citation_hit": 0.6666666666666666,
+    "citation_precision": 0.3333333333333333,
+    "ungrounded_warnings": 2,
+    "latency_p50_s": 0.15,
+    "latency_p95_s": 0.24,
+    "latency_net_p50_s": 0.15,
+    "latency_net_p95_s": 0.24
+   },
+   "dev": {
+    "n": 20,
+    "n_answerable": 20,
+    "n_negative": 0,
+    "status_accuracy": 0.95,
+    "refusal_recall": null,
+    "refusal_precision": 0.0,
+    "answer_rate_on_answerable": 0.95,
+    "numeric_accuracy": 0.7142857142857143,
+    "n_numeric": 7,
+    "citation_hit": 0.42105263157894735,
+    "citation_precision": 0.3508771929824562,
+    "ungrounded_warnings": 9,
+    "latency_p50_s": 0.245,
+    "latency_p95_s": 0.32450000000000007,
+    "latency_net_p50_s": 0.245,
+    "latency_net_p95_s": 0.32450000000000007
+   },
+   "earnings": {
+    "n": 2,
+    "n_answerable": 2,
+    "n_negative": 0,
+    "status_accuracy": 0.5,
+    "refusal_recall": null,
+    "refusal_precision": 0.0,
+    "answer_rate_on_answerable": 0.5,
+    "numeric_accuracy": 0.5,
+    "n_numeric": 2,
+    "citation_hit": 1.0,
+    "citation_precision": 1.0,
+    "ungrounded_warnings": 0,
+    "latency_p50_s": 0.255,
+    "latency_p95_s": 0.2865,
+    "latency_net_p50_s": 0.255,
+    "latency_net_p95_s": 0.2865
+   },
+   "forecast": {
+    "n": 1,
+    "n_answerable": 0,
+    "n_negative": 1,
+    "status_accuracy": 1.0,
+    "refusal_recall": 1.0,
+    "refusal_precision": 1.0,
+    "answer_rate_on_answerable": null,
+    "numeric_accuracy": null,
+    "n_numeric": 0,
+    "citation_hit": null,
+    "citation_precision": null,
+    "ungrounded_warnings": 0,
+    "latency_p50_s": 0.25,
+    "latency_p95_s": 0.25,
+    "latency_net_p50_s": 0.25,
+    "latency_net_p95_s": 0.25
+   },
+   "generated": {
+    "n": 21,
+    "n_answerable": 13,
+    "n_negative": 8,
+    "status_accuracy": 0.9047619047619048,
+    "refusal_recall": 1.0,
+    "refusal_precision": 0.8,
+    "answer_rate_on_answerable": 0.8461538461538461,
+    "numeric_accuracy": 0.8461538461538461,
+    "n_numeric": 13,
+    "citation_hit": 0.8181818181818182,
+    "citation_precision": 0.6363636363636364,
+    "ungrounded_warnings": 8,
+    "latency_p50_s": 0.22,
+    "latency_p95_s": 0.38,
+    "latency_net_p50_s": 0.22,
+    "latency_net_p95_s": 0.38
+   },
+   "multi_page": {
+    "n": 4,
+    "n_answerable": 4,
+    "n_negative": 0,
+    "status_accuracy": 1.0,
+    "refusal_recall": null,
+    "refusal_precision": null,
+    "answer_rate_on_answerable": 1.0,
+    "numeric_accuracy": 0.0,
+    "n_numeric": 2,
+    "citation_hit": 0.25,
+    "citation_precision": 0.25,
+    "ungrounded_warnings": 3,
+    "latency_p50_s": 0.255,
+    "latency_p95_s": 0.27,
+    "latency_net_p50_s": 0.255,
+    "latency_net_p95_s": 0.27
+   },
+   "narrative": {
+    "n": 1,
+    "n_answerable": 1,
+    "n_negative": 0,
+    "status_accuracy": 0.0,
+    "refusal_recall": null,
+    "refusal_precision": 0.0,
+    "answer_rate_on_answerable": 0.0,
+    "numeric_accuracy": 0.0,
+    "n_numeric": 1,
+    "citation_hit": null,
+    "citation_precision": null,
+    "ungrounded_warnings": 0,
+    "latency_p50_s": 0.38,
+    "latency_p95_s": 0.38,
+    "latency_net_p50_s": 0.38,
+    "latency_net_p95_s": 0.38
+   },
+   "nonexistent_metric": {
+    "n": 1,
+    "n_answerable": 0,
+    "n_negative": 1,
+    "status_accuracy": 1.0,
+    "refusal_recall": 1.0,
+    "refusal_precision": 1.0,
+    "answer_rate_on_answerable": null,
+    "numeric_accuracy": null,
+    "n_numeric": 0,
+    "citation_hit": null,
+    "citation_precision": null,
+    "ungrounded_warnings": 0,
+    "latency_p50_s": 0.24,
+    "latency_p95_s": 0.24,
+    "latency_net_p50_s": 0.24,
+    "latency_net_p95_s": 0.24
+   },
+   "off_desk": {
+    "n": 4,
+    "n_answerable": 0,
+    "n_negative": 4,
+    "status_accuracy": 1.0,
+    "refusal_recall": 1.0,
+    "refusal_precision": 1.0,
+    "answer_rate_on_answerable": null,
+    "numeric_accuracy": null,
+    "n_numeric": 0,
+    "citation_hit": null,
+    "citation_precision": null,
+    "ungrounded_warnings": 0,
+    "latency_p50_s": 0.0,
+    "latency_p95_s": 0.0,
+    "latency_net_p50_s": 0.0,
+    "latency_net_p95_s": 0.0
+   },
+   "proxy_only": {
+    "n": 1,
+    "n_answerable": 0,
+    "n_negative": 1,
+    "status_accuracy": 1.0,
+    "refusal_recall": 1.0,
+    "refusal_precision": 1.0,
+    "answer_rate_on_answerable": null,
+    "numeric_accuracy": null,
+    "n_numeric": 0,
+    "citation_hit": null,
+    "citation_precision": null,
+    "ungrounded_warnings": 0,
+    "latency_p50_s": 0.23,
+    "latency_p95_s": 0.23,
+    "latency_net_p50_s": 0.23,
+    "latency_net_p95_s": 0.23
+   },
+   "statement_table": {
+    "n": 9,
+    "n_answerable": 9,
+    "n_negative": 0,
+    "status_accuracy": 1.0,
+    "refusal_recall": null,
+    "refusal_precision": null,
+    "answer_rate_on_answerable": 1.0,
+    "numeric_accuracy": 1.0,
+    "n_numeric": 9,
+    "citation_hit": 0.7777777777777778,
+    "citation_precision": 0.5555555555555556,
+    "ungrounded_warnings": 7,
+    "latency_p50_s": 0.22,
+    "latency_p95_s": 0.38999999999999996,
+    "latency_net_p50_s": 0.22,
+    "latency_net_p95_s": 0.38999999999999996
+   },
+   "tune": {
+    "n": 21,
+    "n_answerable": 13,
+    "n_negative": 8,
+    "status_accuracy": 0.9047619047619048,
+    "refusal_recall": 1.0,
+    "refusal_precision": 0.8,
+    "answer_rate_on_answerable": 0.8461538461538461,
+    "numeric_accuracy": 0.8461538461538461,
+    "n_numeric": 13,
+    "citation_hit": 0.8181818181818182,
+    "citation_precision": 0.6363636363636364,
+    "ungrounded_warnings": 8,
+    "latency_p50_s": 0.22,
+    "latency_p95_s": 0.38,
+    "latency_net_p50_s": 0.22,
+    "latency_net_p95_s": 0.38
+   },
+   "unanswerable": {
+    "n": 4,
+    "n_answerable": 0,
+    "n_negative": 4,
+    "status_accuracy": 1.0,
+    "refusal_recall": 1.0,
+    "refusal_precision": 1.0,
+    "answer_rate_on_answerable": null,
+    "numeric_accuracy": null,
+    "n_numeric": 0,
+    "citation_hit": null,
+    "citation_precision": null,
+    "ungrounded_warnings": 0,
+    "latency_p50_s": 0.235,
+    "latency_p95_s": 0.2485,
+    "latency_net_p50_s": 0.235,
+    "latency_net_p95_s": 0.2485
+   },
+   "year_ambiguous": {
+    "n": 2,
+    "n_answerable": 2,
+    "n_negative": 0,
+    "status_accuracy": 1.0,
+    "refusal_recall": null,
+    "refusal_precision": null,
+    "answer_rate_on_answerable": 1.0,
+    "numeric_accuracy": 1.0,
+    "n_numeric": 2,
+    "citation_hit": 1.0,
+    "citation_precision": 0.75,
+    "ungrounded_warnings": 1,
+    "latency_p50_s": 0.26,
+    "latency_p95_s": 0.323,
+    "latency_net_p50_s": 0.26,
+    "latency_net_p95_s": 0.323
+   },
+   "year_beyond_corpus": {
+    "n": 1,
+    "n_answerable": 0,
+    "n_negative": 1,
+    "status_accuracy": 1.0,
+    "refusal_recall": 1.0,
+    "refusal_precision": 1.0,
+    "answer_rate_on_answerable": null,
+    "numeric_accuracy": null,
+    "n_numeric": 0,
+    "citation_hit": null,
+    "citation_precision": null,
+    "ungrounded_warnings": 0,
+    "latency_p50_s": 0.0,
+    "latency_p95_s": 0.0,
+    "latency_net_p50_s": 0.0,
+    "latency_net_p95_s": 0.0
+   }
+  },
+  "sleep_s": 0.0,
+  "llm_cache": {
+   "hits": 36,
+   "misses": 0
+  }
+ },
+ "split": "tune",
+ "rows": [
+  {
+   "id": "fb_00735",
+   "role": "consumer",
+   "type": "answerable",
+   "tags": [
+    "dev"
+   ],
+   "gold": [
+    {
+     "doc_id": "PEPSICO_2022_10K",
+     "pages": [
+      26
+     ]
+    }
+   ],
+   "doc_types": [
+    "10k"
+   ],
+   "latency_ms": 242.4,
+   "rerank_ms": null,
+   "acl_leaks": 0,
+   "top10": [
+    {
+     "doc_id": "PEPSICO_2022Q4_EARNINGS",
+     "page": 24,
+     "score": 0.78117
+    },
+    {
+     "doc_id": "PEPSICO_2022Q4_EARNINGS",
+     "page": 24,
+     "score": 0.75048
+    },
+    {
+     "doc_id": "PEPSICO_2022_10K",
+     "page": 25,
+     "score": 0.74902
+    },
+    {
+     "doc_id": "PEPSICO_2022_10K",
+     "page": 64,
+     "score": 0.74584
+    },
+    {
+     "doc_id": "PEPSICO_2022_10K",
+     "page": 35,
+     "score": 0.73935
+    },
+    {
+     "doc_id": "PEPSICO_2022_10K",
+     "page": 12,
+     "score": 0.73921
+    },
+    {
+     "doc_id": "PEPSICO_2022_10K",
+     "page": 32,
+     "score": 0.73813
+    },
+    {
+     "doc_id": "PEPSICO_2022Q4_EARNINGS",
+     "page": 18,
+     "score": 0.73744
+    },
+    {
+     "doc_id": "PEPSICO_2022_10K",
+     "page": 24,
+     "score": 0.73724
+    },
+    {
+     "doc_id": "PEPSICO_2022_10K",
+     "page": 34,
+     "score": 0.73721
+    }
+   ],
+   "metrics": {
+    "doc_hit@5": 1.0,
+    "page_hit@5": 0.0,
+    "gold_page_recall@5": 0.0,
+    "doc_hit@10": 1.0,
+    "page_hit@10": 0.0,
+    "gold_page_recall@10": 0.0,
+    "doc_hit@20": 1.0,
+    "page_hit@20": 0.0,
+    "gold_page_recall@20": 0.0,
+    "mrr@10": 0.0,
+    "askk_page_hit": 0.0,
+    "ctx_page_hit": 0.0,
+    "ctx_gold_recall": 0.0
+   },
+   "ctx": [
+    {
+     "doc_id": "PEPSICO_2022Q4_EARNINGS",
+     "page": 24
+    },
+    {
+     "doc_id": "PEPSICO_2022Q4_EARNINGS",
+     "page": 24
+    },
+    {
+     "doc_id": "PEPSICO_2022_10K",
+     "page": 25
+    },
+    {
+     "doc_id": "PEPSICO_2022_10K",
+     "page": 64
+    },
+    {
+     "doc_id": "PEPSICO_2022_10K",
+     "page": 35
+    },
+    {
+     "doc_id": "PEPSICO_2022_10K",
+     "page": 12
+    },
+    {
+     "doc_id": "PEPSICO_2022_10K",
+     "page": 32
+    },
+    {
+     "doc_id": "PEPSICO_2022Q4_EARNINGS",
+     "page": 18
+    }
+   ],
+   "answer": {
+    "status": "answered",
+    "answer": "In its 2022 Form 10-K (covering fiscal year 2022), PepsiCo disclosed that it and its subsidiaries are parties to a variety of ongoing litigation, claims, legal or regulatory proceedings, inquiries and investigations that could adversely affect the business [C3]. The provided filings do not include a comparable disclosure for fiscal year 2021, so we cannot confirm from the given context whether material legal battles were reported for FY 2021.",
+    "citations": [
+     {
+      "doc_id": "PEPSICO_2022_10K",
+      "page": 25,
+      "chunk_id": "4bc488d83cbe89bc"
+     }
+    ]
+   },
+   "answer_metrics": {
+    "status_ok": true,
+    "expected": "answered",
+    "got": "answered",
+    "seconds": 0.27,
+    "waited_s": 0.0,
+    "seconds_net": 0.27,
+    "llm_called": true,
+    "ungrounded_warnings": 0,
+    "numeric_ok": null,
+    "cite_hit": false,
+    "cite_precision": 0.0,
+    "answer_ok": null,
+    "context_chunks": 8,
+    "llm_cached": true
+   },
+   "question": "Has Pepsico reported any materially important ongoing legal battles from FY2022 and FY2021?",
+   "gold_answer": "No, Pepsico is not involved in material legal battles.",
+   "has_numeric": false
+  },
+  {
+   "id": "fb_04171",
+   "role": "consumer",
+   "type": "answerable",
+   "tags": [
+    "dev"
+   ],
+   "gold": [
+    {
+     "doc_id": "MGMRESORTS_2018_10K",
+     "pages": [
+      57
+     ]
+    }
+   ],
+   "doc_types": [
+    "10k"
+   ],
+   "latency_ms": 232.8,
+   "rerank_ms": null,
+   "acl_leaks": 0,
+   "top10": [
+    {
+     "doc_id": "MGMRESORTS_2018_10K",
+     "page": 95,
+     "score": 0.83617
+    },
+    {
+     "doc_id": "MGMRESORTS_2018_10K",
+     "page": 57,
+     "score": 0.83127
+    },
+    {
+     "doc_id": "MGMRESORTS_2018_10K",
+     "page": 95,
+     "score": 0.82709
+    },
+    {
+     "doc_id": "MGMRESORTS_2018_10K",
+     "page": 95,
+     "score": 0.82087
+    },
+    {
+     "doc_id": "MGMRESORTS_2018_10K",
+     "page": 95,
+     "score": 0.81737
+    },
+    {
+     "doc_id": "MGMRESORTS_2018_10K",
+     "page": 45,
+     "score": 0.81661
+    },
+    {
+     "doc_id": "MGMRESORTS_2018_10K",
+     "page": 103,
+     "score": 0.81424
+    },
+    {
+     "doc_id": "MGMRESORTS_2018_10K",
+     "page": 99,
+     "score": 0.81275
+    },
+    {
+     "doc_id": "MGMRESORTS_2018_10K",
+     "page": 96,
+     "score": 0.81253
+    },
+    {
+     "doc_id": "MGMRESORTS_2018_10K",
+     "page": 57,
+     "score": 0.81196
+    }
+   ],
+   "metrics": {
+    "doc_hit@5": 1.0,
+    "page_hit@5": 1.0,
+    "gold_page_recall@5": 1.0,
+    "doc_hit@10": 1.0,
+    "page_hit@10": 1.0,
+    "gold_page_recall@10": 1.0,
+    "doc_hit@20": 1.0,
+    "page_hit@20": 1.0,
+    "gold_page_recall@20": 1.0,
+    "mrr@10": 0.5,
+    "askk_page_hit": 1.0,
+    "ctx_page_hit": 1.0,
+    "ctx_gold_recall": 1.0
+   },
+   "ctx": [
+    {
+     "doc_id": "MGMRESORTS_2018_10K",
+     "page": 95
+    },
+    {
+     "doc_id": "MGMRESORTS_2018_10K",
+     "page": 57
+    },
+    {
+     "doc_id": "MGMRESORTS_2018_10K",
+     "page": 95
+    },
+    {
+     "doc_id": "MGMRESORTS_2018_10K",
+     "page": 95
+    },
+    {
+     "doc_id": "MGMRESORTS_2018_10K",
+     "page": 95
+    },
+    {
+     "doc_id": "MGMRESORTS_2018_10K",
+     "page": 45
+    },
+    {
+     "doc_id": "MGMRESORTS_2018_10K",
+     "page": 103
+    },
+    {
+     "doc_id": "MGMRESORTS_2018_10K",
+     "page": 99
+    }
+   ],
+   "answer": {
+    "status": "answered",
+    "answer": "FY2018 year-end accounts payable = $302,578 thousand = $302.578 million (calculated as 302,578 � 1,000) [C2]",
+    "citations": [
+     {
+      "doc_id": "MGMRESORTS_2018_10K",
+      "page": 57,
+      "chunk_id": "98f00acde60f84bf"
+     }
+    ]
+   },
+   "answer_metrics": {
+    "status_ok": true,
+    "expected": "answered",
+    "got": "answered",
+    "seconds": 0.26,
+    "waited_s": 0.0,
+    "seconds_net": 0.26,
+    "llm_called": true,
+    "ungrounded_warnings": 0,
+    "numeric_ok": true,
+    "cite_hit": true,
+    "cite_precision": 1.0,
+    "answer_ok": true,
+    "context_chunks": 8,
+    "llm_cached": true
+   },
+   "question": "Basing your judgments off of the balance sheet, what is the year end FY2018 amount of accounts payable for MGM Resorts? Answer in USD millions.",
+   "gold_answer": "$303.00",
+   "has_numeric": true
+  },
+  {
+   "id": "fb_00603",
+   "role": "consumer",
+   "type": "answerable",
+   "tags": [
+    "dev"
+   ],
+   "gold": [
+    {
+     "doc_id": "ULTABEAUTY_2023Q4_EARNINGS",
+     "pages": [
+      3
+     ]
+    }
+   ],
+   "doc_types": [
+    "Earnings"
+   ],
+   "latency_ms": 170.8,
+   "rerank_ms": null,
+   "acl_leaks": 0,
+   "top10": [
+    {
+     "doc_id": "ULTABEAUTY_2023_10K",
+     "page": 41,
+     "score": 0.80766
+    },
+    {
+     "doc_id": "ULTABEAUTY_2023Q4_EARNINGS",
+     "page": 1,
+     "score": 0.79906
+    },
+    {
+     "doc_id": "ULTABEAUTY_2023_10K",
+     "page": 42,
+     "score": 0.79307
+    },
+    {
+     "doc_id": "ULTABEAUTY_2023_10K",
+     "page": 38,
+     "score": 0.79253
+    },
+    {
+     "doc_id": "ULTABEAUTY_2023Q4_EARNINGS",
+     "page": 2,
+     "score": 0.78916
+    },
+    {
+     "doc_id": "ULTABEAUTY_2023_10K",
+     "page": 42,
+     "score": 0.78732
+    },
+    {
+     "doc_id": "ULTABEAUTY_2023Q4_EARNINGS",
+     "page": 1,
+     "score": 0.78685
+    },
+    {
+     "doc_id": "ULTABEAUTY_2023Q4_EARNINGS",
+     "page": 3,
+     "score": 0.7831
+    },
+    {
+     "doc_id": "ULTABEAUTY_2023_10K",
+     "page": 59,
+     "score": 0.78262
+    },
+    {
+     "doc_id": "ULTABEAUTY_2023_10K",
+     "page": 7,
+     "score": 0.77805
+    }
+   ],
+   "metrics": {
+    "doc_hit@5": 1.0,
+    "page_hit@5": 0.0,
+    "gold_page_recall@5": 0.0,
+    "doc_hit@10": 1.0,
+    "page_hit@10": 1.0,
+    "gold_page_recall@10": 1.0,
+    "doc_hit@20": 1.0,
+    "page_hit@20": 1.0,
+    "gold_page_recall@20": 1.0,
+    "mrr@10": 0.125,
+    "askk_page_hit": 1.0,
+    "ctx_page_hit": 1.0,
+    "ctx_gold_recall": 1.0
+   },
+   "ctx": [
+    {
+     "doc_id": "ULTABEAUTY_2023_10K",
+     "page": 41
+    },
+    {
+     "doc_id": "ULTABEAUTY_2023Q4_EARNINGS",
+     "page": 1
+    },
+    {
+     "doc_id": "ULTABEAUTY_2023_10K",
+     "page": 42
+    },
+    {
+     "doc_id": "ULTABEAUTY_2023_10K",
+     "page": 38
+    },
+    {
+     "doc_id": "ULTABEAUTY_2023Q4_EARNINGS",
+     "page": 2
+    },
+    {
+     "doc_id": "ULTABEAUTY_2023_10K",
+     "page": 42
+    },
+    {
+     "doc_id": "ULTABEAUTY_2023Q4_EARNINGS",
+     "page": 1
+    },
+    {
+     "doc_id": "ULTABEAUTY_2023Q4_EARNINGS",
+     "page": 3
+    }
+   ],
+   "answer": {
+    "status": "answered",
+    "answer": "At the end of fiscal 2023 (January 28, 2023), Ulta Beauty�s merchandise inventories rose to $1.6 billion, up $104.2 million (7.0%) from $1.5 billion a year earlier. The increase was driven by three main factors: $54 million of the rise came from the addition of 47 new stores opened since the prior year; $25 million was due to new key-brand launches; and another $25 million resulted from higher inventory costs. [C1]",
+    "citations": [
+     {
+      "doc_id": "ULTABEAUTY_2023_10K",
+      "page": 41,
+      "chunk_id": "a572504dfb3b0422"
+     }
+    ]
+   },
+   "answer_metrics": {
+    "status_ok": true,
+    "expected": "answered",
+    "got": "answered",
+    "seconds": 0.2,
+    "waited_s": 0.0,
+    "seconds_net": 0.2,
+    "llm_called": true,
+    "ungrounded_warnings": 0,
+    "numeric_ok": null,
+    "cite_hit": false,
+    "cite_precision": 0.0,
+    "answer_ok": null,
+    "context_chunks": 8,
+    "llm_cached": true
+   },
+   "question": "What drove the increase in Ulta Beauty's merchandise inventories balance at end of FY2023?",
+   "gold_answer": "Increase in Merchandise inventories balance was driven by the opening of 47 new stores. The answer here assumes FY2023 refers to the 12 months ended on January 28, 2023 (although the company refers to this period as its fiscal 2022.",
+   "has_numeric": false
+  },
+  {
+   "id": "fb_00499",
+   "role": "health_industrials",
+   "type": "answerable",
+   "tags": [
+    "dev",
+    "multi_page"
+   ],
+   "gold": [
+    {
+     "doc_id": "3M_2022_10K",
+     "pages": [
+      48,
+      50,
+      52
+     ]
+    }
+   ],
+   "doc_types": [
+    "10k"
+   ],
+   "latency_ms": 236.1,
+   "rerank_ms": null,
+   "acl_leaks": 0,
+   "top10": [
+    {
+     "doc_id": "3M_2022_10K",
+     "page": 38,
+     "score": 0.81354
+    },
+    {
+     "doc_id": "3M_2022_10K",
+     "page": 38,
+     "score": 0.80727
+    },
+    {
+     "doc_id": "3M_2022_10K",
+     "page": 37,
+     "score": 0.80416
+    },
+    {
+     "doc_id": "3M_2022_10K",
+     "page": 39,
+     "score": 0.79756
+    },
+    {
+     "doc_id": "3M_2022_10K",
+     "page": 34,
+     "score": 0.78519
+    },
+    {
+     "doc_id": "3M_2022_10K",
+     "page": 41,
+     "score": 0.78335
+    },
+    {
+     "doc_id": "3M_2022_10K",
+     "page": 4,
+     "score": 0.77801
+    },
+    {
+     "doc_id": "3M_2022_10K",
+     "page": 37,
+     "score": 0.77797
+    },
+    {
+     "doc_id": "3M_2022_10K",
+     "page": 42,
+     "score": 0.77279
+    },
+    {
+     "doc_id": "3M_2022_10K",
+     "page": 38,
+     "score": 0.7723
+    }
+   ],
+   "metrics": {
+    "doc_hit@5": 1.0,
+    "page_hit@5": 0.0,
+    "gold_page_recall@5": 0.0,
+    "doc_hit@10": 1.0,
+    "page_hit@10": 0.0,
+    "gold_page_recall@10": 0.0,
+    "doc_hit@20": 1.0,
+    "page_hit@20": 1.0,
+    "gold_page_recall@20": 0.3333333333333333,
+    "mrr@10": 0.0,
+    "askk_page_hit": 0.0,
+    "ctx_page_hit": 0.0,
+    "ctx_gold_recall": 0.0
+   },
+   "ctx": [
+    {
+     "doc_id": "3M_2022_10K",
+     "page": 38
+    },
+    {
+     "doc_id": "3M_2022_10K",
+     "page": 38
+    },
+    {
+     "doc_id": "3M_2022_10K",
+     "page": 37
+    },
+    {
+     "doc_id": "3M_2022_10K",
+     "page": 39
+    },
+    {
+     "doc_id": "3M_2022_10K",
+     "page": 34
+    },
+    {
+     "doc_id": "3M_2022_10K",
+     "page": 41
+    },
+    {
+     "doc_id": "3M_2022_10K",
+     "page": 4
+    },
+    {
+     "doc_id": "3M_2022_10K",
+     "page": 37
+    }
+   ],
+   "answer": {
+    "status": "answered",
+    "answer": "Based on FY2022 data, 3M�s operations involve substantial capital investment, which is characteristic of a capital-intensive business. In FY2022 the company reported total capital spending of $1,749 million (i.e., $1.749 billion) and net property, plant and equipment of $92,000 million (i.e., $92 billion) [C5]. These large amounts of capital outlays and assets suggest that 3M�s business model requires significant capital resources.",
+    "citations": [
+     {
+      "doc_id": "3M_2022_10K",
+      "page": 34,
+      "chunk_id": "e132b902b7bccfdb"
+     }
+    ]
+   },
+   "answer_metrics": {
+    "status_ok": true,
+    "expected": "answered",
+    "got": "answered",
+    "seconds": 0.27,
+    "waited_s": 0.0,
+    "seconds_net": 0.27,
+    "llm_called": true,
+    "ungrounded_warnings": 2,
+    "numeric_ok": null,
+    "cite_hit": false,
+    "cite_precision": 0.0,
+    "answer_ok": null,
+    "context_chunks": 8,
+    "llm_cached": true
+   },
+   "question": "Is 3M a capital-intensive business based on FY2022 data?",
+   "gold_answer": "No, the company is managing its CAPEX and Fixed Assets pretty efficiently, which is evident from below key metrics:\nCAPEX/Revenue Ratio: 5.1%\nFixed assets/Total Assets: 20%\nReturn on Assets= 12.4%",
+   "has_numeric": false
+  },
+  {
+   "id": "fb_10285",
+   "role": "health_industrials",
+   "type": "answerable",
+   "tags": [
+    "dev"
+   ],
+   "gold": [
+    {
+     "doc_id": "BOEING_2018_10K",
+     "pages": [
+      52
+     ]
+    }
+   ],
+   "doc_types": [
+    "10k"
+   ],
+   "latency_ms": 230.1,
+   "rerank_ms": null,
+   "acl_leaks": 0,
+   "top10": [
+    {
+     "doc_id": "BOEING_2018_10K",
+     "page": 56,
+     "score": 0.78604
+    },
+    {
+     "doc_id": "BOEING_2018_10K",
+     "page": 71,
+     "score": 0.78545
+    },
+    {
+     "doc_id": "BOEING_2018_10K",
+     "page": 38,
+     "score": 0.78206
+    },
+    {
+     "doc_id": "BOEING_2018_10K",
+     "page": 57,
+     "score": 0.78102
+    },
+    {
+     "doc_id": "BOEING_2018_10K",
+     "page": 52,
+     "score": 0.77999
+    },
+    {
+     "doc_id": "BOEING_2018_10K",
+     "page": 2,
+     "score": 0.77917
+    },
+    {
+     "doc_id": "BOEING_2018_10K",
+     "page": 54,
+     "score": 0.77817
+    },
+    {
+     "doc_id": "BOEING_2018_10K",
+     "page": 110,
+     "score": 0.77609
+    },
+    {
+     "doc_id": "BOEING_2018_10K",
+     "page": 117,
+     "score": 0.77319
+    },
+    {
+     "doc_id": "BOEING_2018_10K",
+     "page": 38,
+     "score": 0.77153
+    }
+   ],
+   "metrics": {
+    "doc_hit@5": 1.0,
+    "page_hit@5": 1.0,
+    "gold_page_recall@5": 1.0,
+    "doc_hit@10": 1.0,
+    "page_hit@10": 1.0,
+    "gold_page_recall@10": 1.0,
+    "doc_hit@20": 1.0,
+    "page_hit@20": 1.0,
+    "gold_page_recall@20": 1.0,
+    "mrr@10": 0.2,
+    "askk_page_hit": 1.0,
+    "ctx_page_hit": 1.0,
+    "ctx_gold_recall": 1.0
+   },
+   "ctx": [
+    {
+     "doc_id": "BOEING_2018_10K",
+     "page": 56
+    },
+    {
+     "doc_id": "BOEING_2018_10K",
+     "page": 71
+    },
+    {
+     "doc_id": "BOEING_2018_10K",
+     "page": 38
+    },
+    {
+     "doc_id": "BOEING_2018_10K",
+     "page": 57
+    },
+    {
+     "doc_id": "BOEING_2018_10K",
+     "page": 52
+    },
+    {
+     "doc_id": "BOEING_2018_10K",
+     "page": 2
+    },
+    {
+     "doc_id": "BOEING_2018_10K",
+     "page": 54
+    },
+    {
+     "doc_id": "BOEING_2018_10K",
+     "page": 110
+    }
+   ],
+   "answer": {
+    "status": "answered",
+    "answer": "Boeing's net property, plant, and equipment at year end FY2018 was $12,645 million [C5].",
+    "citations": [
+     {
+      "doc_id": "BOEING_2018_10K",
+      "page": 52,
+      "chunk_id": "694b555acbbb1ef0"
+     }
+    ]
+   },
+   "answer_metrics": {
+    "status_ok": true,
+    "expected": "answered",
+    "got": "answered",
+    "seconds": 0.41,
+    "waited_s": 0.0,
+    "seconds_net": 0.41,
+    "llm_called": true,
+    "ungrounded_warnings": 0,
+    "numeric_ok": true,
+    "cite_hit": true,
+    "cite_precision": 1.0,
+    "answer_ok": true,
+    "context_chunks": 8,
+    "llm_cached": true
+   },
+   "question": "We need to calculate a financial metric by using information only provided within the balance sheet. Please answer the following question: what is Boeing's year end FY2018 net property, plant, and equipment (in USD millions)?",
+   "gold_answer": "$12645.00",
+   "has_numeric": true
+  },
+  {
+   "id": "fb_00494",
+   "role": "health_industrials",
+   "type": "answerable",
+   "tags": [
+    "dev"
+   ],
+   "gold": [
+    {
+     "doc_id": "BOEING_2022_10K",
+     "pages": [
+      9
+     ]
+    }
+   ],
+   "doc_types": [
+    "10k"
+   ],
+   "latency_ms": 182.6,
+   "rerank_ms": null,
+   "acl_leaks": 0,
+   "top10": [
+    {
+     "doc_id": "BOEING_2022_10K",
+     "page": 35,
+     "score": 0.81185
+    },
+    {
+     "doc_id": "BOEING_2022_10K",
+     "page": 81,
+     "score": 0.81164
+    },
+    {
+     "doc_id": "BOEING_2021_10K",
+     "page": 13,
+     "score": 0.81081
+    },
+    {
+     "doc_id": "BOEING_2021_10K",
+     "page": 39,
+     "score": 0.80642
+    },
+    {
+     "doc_id": "BOEING_2020_10K",
+     "page": 40,
+     "score": 0.80536
+    },
+    {
+     "doc_id": "BOEING_2021_10K",
+     "page": 39,
+     "score": 0.80197
+    },
+    {
+     "doc_id": "BOEING_2017_10K",
+     "page": 31,
+     "score": 0.80126
+    },
+    {
+     "doc_id": "BOEING_2022_10K",
+     "page": 81,
+     "score": 0.79896
+    },
+    {
+     "doc_id": "BOEING_2018_10K",
+     "page": 32,
+     "score": 0.79671
+    },
+    {
+     "doc_id": "BOEING_2022_10K",
+     "page": 35,
+     "score": 0.79599
+    }
+   ],
+   "metrics": {
+    "doc_hit@5": 1.0,
+    "page_hit@5": 0.0,
+    "gold_page_recall@5": 0.0,
+    "doc_hit@10": 1.0,
+    "page_hit@10": 0.0,
+    "gold_page_recall@10": 0.0,
+    "doc_hit@20": 1.0,
+    "page_hit@20": 1.0,
+    "gold_page_recall@20": 1.0,
+    "mrr@10": 0.0,
+    "askk_page_hit": 0.0,
+    "ctx_page_hit": 0.0,
+    "ctx_gold_recall": 0.0
+   },
+   "ctx": [
+    {
+     "doc_id": "BOEING_2022_10K",
+     "page": 35
+    },
+    {
+     "doc_id": "BOEING_2022_10K",
+     "page": 81
+    },
+    {
+     "doc_id": "BOEING_2021_10K",
+     "page": 13
+    },
+    {
+     "doc_id": "BOEING_2021_10K",
+     "page": 39
+    },
+    {
+     "doc_id": "BOEING_2020_10K",
+     "page": 40
+    },
+    {
+     "doc_id": "BOEING_2021_10K",
+     "page": 39
+    },
+    {
+     "doc_id": "BOEING_2017_10K",
+     "page": 31
+    },
+    {
+     "doc_id": "BOEING_2022_10K",
+     "page": 81
+    }
+   ],
+   "answer": {
+    "status": "answered",
+    "answer": "Boeing expects to gradually increase production to about 5 aircraft per month in fiscal year 2023, returning to that rate during the year. [C1]",
+    "citations": [
+     {
+      "doc_id": "BOEING_2022_10K",
+      "page": 35,
+      "chunk_id": "54eb2f376d48c1fc"
+     }
+    ]
+   },
+   "answer_metrics": {
+    "status_ok": true,
+    "expected": "answered",
+    "got": "answered",
+    "seconds": 0.23,
+    "waited_s": 0.0,
+    "seconds_net": 0.23,
+    "llm_called": true,
+    "ungrounded_warnings": 0,
+    "numeric_ok": null,
+    "cite_hit": false,
+    "cite_precision": 0.0,
+    "answer_ok": null,
+    "context_chunks": 8,
+    "llm_cached": true
+   },
+   "question": "What production rate changes is Boeing forecasting for FY2023?",
+   "gold_answer": "Boeing forecasts an increase in the production rates for the 737, 777X and 787 aircrafts in 2023.",
+   "has_numeric": false
+  },
+  {
+   "id": "fb_00215",
+   "role": "tech_telecom",
+   "type": "answerable",
+   "tags": [
+    "dev",
+    "multi_page"
+   ],
+   "gold": [
+    {
+     "doc_id": "VERIZON_2022_10K",
+     "pages": [
+      23,
+      56
+     ]
+    }
+   ],
+   "doc_types": [
+    "10k"
+   ],
+   "latency_ms": 223.3,
+   "rerank_ms": null,
+   "acl_leaks": 0,
+   "top10": [
+    {
+     "doc_id": "VERIZON_2022_10K",
+     "page": 38,
+     "score": 0.81072
+    },
+    {
+     "doc_id": "VERIZON_2022_10K",
+     "page": 21,
+     "score": 0.8038
+    },
+    {
+     "doc_id": "VERIZON_2022_10K",
+     "page": 37,
+     "score": 0.79775
+    },
+    {
+     "doc_id": "VERIZON_2022_10K",
+     "page": 56,
+     "score": 0.78443
+    },
+    {
+     "doc_id": "VERIZON_2022_10K",
+     "page": 38,
+     "score": 0.78375
+    },
+    {
+     "doc_id": "VERIZON_2022_10K",
+     "page": 38,
+     "score": 0.78334
+    },
+    {
+     "doc_id": "VERIZON_2022_10K",
+     "page": 21,
+     "score": 0.78145
+    },
+    {
+     "doc_id": "VERIZON_2022_10K",
+     "page": 37,
+     "score": 0.77826
+    },
+    {
+     "doc_id": "VERIZON_2022_10K",
+     "page": 39,
+     "score": 0.77773
+    },
+    {
+     "doc_id": "VERIZON_2022_10K",
+     "page": 38,
+     "score": 0.77648
+    }
+   ],
+   "metrics": {
+    "doc_hit@5": 1.0,
+    "page_hit@5": 1.0,
+    "gold_page_recall@5": 0.5,
+    "doc_hit@10": 1.0,
+    "page_hit@10": 1.0,
+    "gold_page_recall@10": 0.5,
+    "doc_hit@20": 1.0,
+    "page_hit@20": 1.0,
+    "gold_page_recall@20": 1.0,
+    "mrr@10": 0.25,
+    "askk_page_hit": 1.0,
+    "ctx_page_hit": 1.0,
+    "ctx_gold_recall": 0.5
+   },
+   "ctx": [
+    {
+     "doc_id": "VERIZON_2022_10K",
+     "page": 38
+    },
+    {
+     "doc_id": "VERIZON_2022_10K",
+     "page": 21
+    },
+    {
+     "doc_id": "VERIZON_2022_10K",
+     "page": 37
+    },
+    {
+     "doc_id": "VERIZON_2022_10K",
+     "page": 56
+    },
+    {
+     "doc_id": "VERIZON_2022_10K",
+     "page": 38
+    },
+    {
+     "doc_id": "VERIZON_2022_10K",
+     "page": 38
+    },
+    {
+     "doc_id": "VERIZON_2022_10K",
+     "page": 21
+    },
+    {
+     "doc_id": "VERIZON_2022_10K",
+     "page": 37
+    }
+   ],
+   "answer": {
+    "status": "answered",
+    "answer": "Verizon�s FY 2022 data show a capital-intensive business. The company recorded cash flows from capital expenditures of $23,087 million in 2022 [C2] and operating revenues of $136,835 million in the same year [C2]. The capital intensity can be expressed as:\n\nCapEx % = (CapEx / Operating Revenues) � 100\n= ($23,087 million / $136,835 million) � 100\n= 0.1687 � 100 ≈ 16.9 %.\n\nThus, capital spending was about 16.9 % of revenue, indicating a capital-intensive operation. Additionally, Verizon reported long-term debt commitments of $149.4 billion as of December 31 2022 [C1], underscoring the substantial capital financing needs of the business.",
+    "citations": [
+     {
+      "doc_id": "VERIZON_2022_10K",
+      "page": 21,
+      "chunk_id": "4db1741ac03c46ec"
+     },
+     {
+      "doc_id": "VERIZON_2022_10K",
+      "page": 38,
+      "chunk_id": "f835efa68e073263"
+     }
+    ]
+   },
+   "answer_metrics": {
+    "status_ok": true,
+    "expected": "answered",
+    "got": "answered",
+    "seconds": 0.24,
+    "waited_s": 0.0,
+    "seconds_net": 0.24,
+    "llm_called": true,
+    "ungrounded_warnings": 1,
+    "numeric_ok": null,
+    "cite_hit": false,
+    "cite_precision": 0.0,
+    "answer_ok": null,
+    "context_chunks": 8,
+    "llm_cached": true
+   },
+   "question": "Is Verizon a capital intensive business based on FY 2022 data?",
+   "gold_answer": "Yes. Verizon's capital intensity ratio was approximately 2.774729. This means that it took approximately $2.77 of assets to generate $1 of revenue and thus, Verizon can be considered capital intensive.",
+   "has_numeric": false
+  },
+  {
+   "id": "fb_10130",
+   "role": "tech_telecom",
+   "type": "answerable",
+   "tags": [
+    "dev",
+    "multi_page"
+   ],
+   "gold": [
+    {
+     "doc_id": "CORNING_2020_10K",
+     "pages": [
+      70,
+      72
+     ]
+    }
+   ],
+   "doc_types": [
+    "10k"
+   ],
+   "latency_ms": 245.4,
+   "rerank_ms": null,
+   "acl_leaks": 0,
+   "top10": [
+    {
+     "doc_id": "CORNING_2020_10K",
+     "page": 110,
+     "score": 0.78221
+    },
+    {
+     "doc_id": "CORNING_2020_10K",
+     "page": 72,
+     "score": 0.77107
+    },
+    {
+     "doc_id": "CORNING_2020_10K",
+     "page": 77,
+     "score": 0.77081
+    },
+    {
+     "doc_id": "CORNING_2020_10K",
+     "page": 95,
+     "score": 0.76823
+    },
+    {
+     "doc_id": "CORNING_2020_10K",
+     "page": 131,
+     "score": 0.76794
+    },
+    {
+     "doc_id": "CORNING_2020_10K",
+     "page": 43,
+     "score": 0.76331
+    },
+    {
+     "doc_id": "CORNING_2020_10K",
+     "page": 77,
+     "score": 0.76258
+    },
+    {
+     "doc_id": "CORNING_2020_10K",
+     "page": 80,
+     "score": 0.76256
+    },
+    {
+     "doc_id": "CORNING_2020_10K",
+     "page": 44,
+     "score": 0.76015
+    },
+    {
+     "doc_id": "CORNING_2020_10K",
+     "page": 95,
+     "score": 0.76008
+    }
+   ],
+   "metrics": {
+    "doc_hit@5": 1.0,
+    "page_hit@5": 1.0,
+    "gold_page_recall@5": 0.5,
+    "doc_hit@10": 1.0,
+    "page_hit@10": 1.0,
+    "gold_page_recall@10": 0.5,
+    "doc_hit@20": 1.0,
+    "page_hit@20": 1.0,
+    "gold_page_recall@20": 0.5,
+    "mrr@10": 0.5,
+    "askk_page_hit": 1.0,
+    "ctx_page_hit": 1.0,
+    "ctx_gold_recall": 0.5
+   },
+   "ctx": [
+    {
+     "doc_id": "CORNING_2020_10K",
+     "page": 110
+    },
+    {
+     "doc_id": "CORNING_2020_10K",
+     "page": 72
+    },
+    {
+     "doc_id": "CORNING_2020_10K",
+     "page": 77
+    },
+    {
+     "doc_id": "CORNING_2020_10K",
+     "page": 95
+    },
+    {
+     "doc_id": "CORNING_2020_10K",
+     "page": 131
+    },
+    {
+     "doc_id": "CORNING_2020_10K",
+     "page": 43
+    },
+    {
+     "doc_id": "CORNING_2020_10K",
+     "page": 77
+    },
+    {
+     "doc_id": "CORNING_2020_10K",
+     "page": 80
+    }
+   ],
+   "answer": {
+    "status": "answered",
+    "answer": "The balance sheet provides accounts payable of $1,174 million for FY2020 and $1,587 million for FY2019 [C2]. The average accounts payable is therefore (1,174 + 1,587) / 2 = 1,380.5 million. Inventories were $2,438 million in FY2020 and $2,320 million in FY2019, giving a change of 2,438 - 2,320 = 118 million [C2]. However, the FY2020 cost of goods sold (COGS) figure required for the denominator of the DPO formula is not present in the provided filings, so the DPO cannot be computed from the available data.",
+    "citations": [
+     {
+      "doc_id": "CORNING_2020_10K",
+      "page": 72,
+      "chunk_id": "8ca23e49639bf1e6"
+     }
+    ]
+   },
+   "answer_metrics": {
+    "status_ok": true,
+    "expected": "answered",
+    "got": "answered",
+    "seconds": 0.27,
+    "waited_s": 0.0,
+    "seconds_net": 0.27,
+    "llm_called": true,
+    "ungrounded_warnings": 0,
+    "numeric_ok": false,
+    "cite_hit": true,
+    "cite_precision": 1.0,
+    "answer_ok": false,
+    "context_chunks": 8,
+    "llm_cached": true
+   },
+   "question": "Based on the information provided primarily in the balance sheet and the statement of income, what is FY2020 days payable outstanding (DPO) for Corning? DPO is defined as: 365 * (average accounts payable between FY2019 and FY2020) / (FY2020 COGS + change in inventory between FY2019 and FY2020). Round your answer to two decimal places.",
+   "gold_answer": "63.86",
+   "has_numeric": true
+  },
+  {
+   "id": "fb_00757",
+   "role": "tech_telecom",
+   "type": "answerable",
+   "tags": [
+    "dev"
+   ],
+   "gold": [
+    {
+     "doc_id": "AMD_2022_10K",
+     "pages": [
+      12
+     ]
+    }
+   ],
+   "doc_types": [
+    "10k"
+   ],
+   "latency_ms": 225.0,
+   "rerank_ms": null,
+   "acl_leaks": 0,
+   "top10": [
+    {
+     "doc_id": "AMD_2022_10K",
+     "page": 67,
+     "score": 0.73942
+    },
+    {
+     "doc_id": "AMD_2022_10K",
+     "page": 112,
+     "score": 0.72038
+    },
+    {
+     "doc_id": "AMD_2022_10K",
+     "page": 43,
+     "score": 0.71409
+    },
+    {
+     "doc_id": "AMD_2022_10K",
+     "page": 22,
+     "score": 0.71322
+    },
+    {
+     "doc_id": "AMD_2022_10K",
+     "page": 43,
+     "score": 0.71202
+    },
+    {
+     "doc_id": "AMD_2022_10K",
+     "page": 42,
+     "score": 0.71154
+    },
+    {
+     "doc_id": "AMD_2022_10K",
+     "page": 4,
+     "score": 0.71082
+    },
+    {
+     "doc_id": "AMD_2022_10K",
+     "page": 9,
+     "score": 0.7101
+    },
+    {
+     "doc_id": "AMD_2022_10K",
+     "page": 104,
+     "score": 0.70989
+    },
+    {
+     "doc_id": "AMD_2022_10K",
+     "page": 104,
+     "score": 0.70963
+    }
+   ],
+   "metrics": {
+    "doc_hit@5": 1.0,
+    "page_hit@5": 0.0,
+    "gold_page_recall@5": 0.0,
+    "doc_hit@10": 1.0,
+    "page_hit@10": 0.0,
+    "gold_page_recall@10": 0.0,
+    "doc_hit@20": 1.0,
+    "page_hit@20": 1.0,
+    "gold_page_recall@20": 1.0,
+    "mrr@10": 0.0,
+    "askk_page_hit": 0.0,
+    "ctx_page_hit": 0.0,
+    "ctx_gold_recall": 0.0
+   },
+   "ctx": [
+    {
+     "doc_id": "AMD_2022_10K",
+     "page": 67
+    },
+    {
+     "doc_id": "AMD_2022_10K",
+     "page": 112
+    },
+    {
+     "doc_id": "AMD_2022_10K",
+     "page": 43
+    },
+    {
+     "doc_id": "AMD_2022_10K",
+     "page": 22
+    },
+    {
+     "doc_id": "AMD_2022_10K",
+     "page": 43
+    },
+    {
+     "doc_id": "AMD_2022_10K",
+     "page": 42
+    },
+    {
+     "doc_id": "AMD_2022_10K",
+     "page": 4
+    },
+    {
+     "doc_id": "AMD_2022_10K",
+     "page": 9
+    }
+   ],
+   "answer": {
+    "status": "answered",
+    "answer": "Yes. In its FY22 Form 10-K AMD disclosed that a small number of customers will continue to account for a substantial part of AMD�s revenue in the future, indicating customer concentration. [C7]",
+    "citations": [
+     {
+      "doc_id": "AMD_2022_10K",
+      "page": 4,
+      "chunk_id": "1d6bdd606d23b1d8"
+     }
+    ]
+   },
+   "answer_metrics": {
+    "status_ok": true,
+    "expected": "answered",
+    "got": "answered",
+    "seconds": 0.2,
+    "waited_s": 0.0,
+    "seconds_net": 0.2,
+    "llm_called": true,
+    "ungrounded_warnings": 1,
+    "numeric_ok": null,
+    "cite_hit": false,
+    "cite_precision": 0.0,
+    "answer_ok": null,
+    "context_chunks": 8,
+    "llm_cached": true
+   },
+   "question": "Did AMD report customer concentration in FY22?",
+   "gold_answer": "Yes, one customer accounted for 16% of consolidated net revenue",
+   "has_numeric": false
+  },
+  {
+   "id": "fb_01275",
+   "role": "consumer",
+   "type": "answerable",
+   "tags": [
+    "dev"
+   ],
+   "gold": [
+    {
+     "doc_id": "BESTBUY_2023_10K",
+     "pages": [
+      42
+     ]
+    }
+   ],
+   "doc_types": [
+    "10k"
+   ],
+   "latency_ms": 206.6,
+   "rerank_ms": null,
+   "acl_leaks": 0,
+   "top10": [
+    {
+     "doc_id": "BESTBUY_2023Q4_EARNINGS",
+     "page": 8,
+     "score": 0.77752
+    },
+    {
+     "doc_id": "BESTBUY_2023_10K",
+     "page": 29,
+     "score": 0.74467
+    },
+    {
+     "doc_id": "BESTBUY_2023_10K",
+     "page": 42,
+     "score": 0.74143
+    },
+    {
+     "doc_id": "BESTBUY_2023Q4_EARNINGS",
+     "page": 6,
+     "score": 0.72568
+    },
+    {
+     "doc_id": "BESTBUY_2023Q4_EARNINGS",
+     "page": 8,
+     "score": 0.72568
+    },
+    {
+     "doc_id": "BESTBUY_2023_10K",
+     "page": 26,
+     "score": 0.71808
+    },
+    {
+     "doc_id": "BESTBUY_2023_10K",
+     "page": 29,
+     "score": 0.71413
+    },
+    {
+     "doc_id": "BESTBUY_2023Q4_EARNINGS",
+     "page": 1,
+     "score": 0.71225
+    },
+    {
+     "doc_id": "BESTBUY_2023Q4_EARNINGS",
+     "page": 7,
+     "score": 0.71132
+    },
+    {
+     "doc_id": "BESTBUY_2023Q4_EARNINGS",
+     "page": 12,
+     "score": 0.7093
+    }
+   ],
+   "metrics": {
+    "doc_hit@5": 1.0,
+    "page_hit@5": 1.0,
+    "gold_page_recall@5": 1.0,
+    "doc_hit@10": 1.0,
+    "page_hit@10": 1.0,
+    "gold_page_recall@10": 1.0,
+    "doc_hit@20": 1.0,
+    "page_hit@20": 1.0,
+    "gold_page_recall@20": 1.0,
+    "mrr@10": 0.3333333333333333,
+    "askk_page_hit": 1.0,
+    "ctx_page_hit": 1.0,
+    "ctx_gold_recall": 1.0
+   },
+   "ctx": [
+    {
+     "doc_id": "BESTBUY_2023Q4_EARNINGS",
+     "page": 8
+    },
+    {
+     "doc_id": "BESTBUY_2023_10K",
+     "page": 29
+    },
+    {
+     "doc_id": "BESTBUY_2023_10K",
+     "page": 42
+    },
+    {
+     "doc_id": "BESTBUY_2023Q4_EARNINGS",
+     "page": 6
+    },
+    {
+     "doc_id": "BESTBUY_2023Q4_EARNINGS",
+     "page": 8
+    },
+    {
+     "doc_id": "BESTBUY_2023_10K",
+     "page": 26
+    },
+    {
+     "doc_id": "BESTBUY_2023_10K",
+     "page": 29
+    },
+    {
+     "doc_id": "BESTBUY_2023Q4_EARNINGS",
+     "page": 1
+    }
+   ],
+   "answer": {
+    "status": "refused",
+    "answer": "No supported answer could be cited from the available documents.",
+    "citations": []
+   },
+   "answer_metrics": {
+    "status_ok": false,
+    "expected": "answered",
+    "got": "refused",
+    "seconds": 0.22,
+    "waited_s": 0.0,
+    "seconds_net": 0.22,
+    "llm_called": true,
+    "ungrounded_warnings": 0,
+    "numeric_ok": null,
+    "cite_hit": null,
+    "cite_precision": null,
+    "answer_ok": null,
+    "context_chunks": 8,
+    "llm_cached": true
+   },
+   "question": "Among operations, investing, and financing activities, which brought in the most (or lost the least) cash flow for Best Buy in FY2023?",
+   "gold_answer": "Best Buy generated the most cash flow from operating activities in FY 2023 ($1.8 bn)",
+   "has_numeric": false
+  },
+  {
+   "id": "fb_04980",
+   "role": "consumer",
+   "type": "answerable",
+   "tags": [
+    "dev"
+   ],
+   "gold": [
+    {
+     "doc_id": "PEPSICO_2021_10K",
+     "pages": [
+      63
+     ]
+    }
+   ],
+   "doc_types": [
+    "10k"
+   ],
+   "latency_ms": 270.4,
+   "rerank_ms": null,
+   "acl_leaks": 0,
+   "top10": [
+    {
+     "doc_id": "PEPSICO_2021_10K",
+     "page": 52,
+     "score": 0.77264
+    },
+    {
+     "doc_id": "PEPSICO_2021_10K",
+     "page": 51,
+     "score": 0.75923
+    },
+    {
+     "doc_id": "PEPSICO_2021_10K",
+     "page": 52,
+     "score": 0.759
+    },
+    {
+     "doc_id": "PEPSICO_2021_10K",
+     "page": 52,
+     "score": 0.75881
+    },
+    {
+     "doc_id": "PEPSICO_2021_10K",
+     "page": 92,
+     "score": 0.75381
+    },
+    {
+     "doc_id": "PEPSICO_2021_10K",
+     "page": 32,
+     "score": 0.75374
+    },
+    {
+     "doc_id": "PEPSICO_2021_10K",
+     "page": 53,
+     "score": 0.75038
+    },
+    {
+     "doc_id": "PEPSICO_2021_10K",
+     "page": 53,
+     "score": 0.74886
+    },
+    {
+     "doc_id": "PEPSICO_2021_10K",
+     "page": 98,
+     "score": 0.74637
+    },
+    {
+     "doc_id": "PEPSICO_2021_10K",
+     "page": 51,
+     "score": 0.74596
+    }
+   ],
+   "metrics": {
+    "doc_hit@5": 1.0,
+    "page_hit@5": 0.0,
+    "gold_page_recall@5": 0.0,
+    "doc_hit@10": 1.0,
+    "page_hit@10": 0.0,
+    "gold_page_recall@10": 0.0,
+    "doc_hit@20": 1.0,
+    "page_hit@20": 0.0,
+    "gold_page_recall@20": 0.0,
+    "mrr@10": 0.0,
+    "askk_page_hit": 0.0,
+    "ctx_page_hit": 0.0,
+    "ctx_gold_recall": 0.0
+   },
+   "ctx": [
+    {
+     "doc_id": "PEPSICO_2021_10K",
+     "page": 52
+    },
+    {
+     "doc_id": "PEPSICO_2021_10K",
+     "page": 51
+    },
+    {
+     "doc_id": "PEPSICO_2021_10K",
+     "page": 52
+    },
+    {
+     "doc_id": "PEPSICO_2021_10K",
+     "page": 52
+    },
+    {
+     "doc_id": "PEPSICO_2021_10K",
+     "page": 92
+    },
+    {
+     "doc_id": "PEPSICO_2021_10K",
+     "page": 32
+    },
+    {
+     "doc_id": "PEPSICO_2021_10K",
+     "page": 53
+    },
+    {
+     "doc_id": "PEPSICO_2021_10K",
+     "page": 53
+    }
+   ],
+   "answer": {
+    "status": "answered",
+    "answer": "For fiscal year 2021 PepsiCo�s capital expenditure (net capital spending) was $4,625 million, which equals $4.625 billion. This figure comes from the cash-flow-statement-derived free-cash-flow table that lists �Capital spending (4,625)� for 2021 [C7]. The amounts in the cash-flow tables are presented in millions of dollars [C6], so we convert $4,625 million � 1,000 = $4.625 billion.",
+    "citations": [
+     {
+      "doc_id": "PEPSICO_2021_10K",
+      "page": 53,
+      "chunk_id": "a769bceb7e6c3ee6"
+     },
+     {
+      "doc_id": "PEPSICO_2021_10K",
+      "page": 32,
+      "chunk_id": "cef7ec58d2fc98e4"
+     }
+    ]
+   },
+   "answer_metrics": {
+    "status_ok": true,
+    "expected": "answered",
+    "got": "answered",
+    "seconds": 0.32,
+    "waited_s": 0.0,
+    "seconds_net": 0.32,
+    "llm_called": true,
+    "ungrounded_warnings": 0,
+    "numeric_ok": true,
+    "cite_hit": false,
+    "cite_precision": 0.0,
+    "answer_ok": true,
+    "context_chunks": 8,
+    "llm_cached": true
+   },
+   "question": "What is the FY2021 capital expenditure amount (in USD billions) for PepsiCo? Respond to the question by assuming the perspective of an investment analyst who can only use the details shown within the statement of cash flows.",
+   "gold_answer": "$4.60",
+   "has_numeric": true
+  },
+  {
+   "id": "fb_00407",
+   "role": "consumer",
+   "type": "answerable",
+   "tags": [
+    "dev"
+   ],
+   "gold": [
+    {
+     "doc_id": "MGMRESORTS_2023Q2_10Q",
+     "pages": [
+      11
+     ]
+    }
+   ],
+   "doc_types": [
+    "10q"
+   ],
+   "latency_ms": 262.1,
+   "rerank_ms": null,
+   "acl_leaks": 0,
+   "top10": [
+    {
+     "doc_id": "MGMRESORTS_2023Q2_10Q",
+     "page": 11,
+     "score": 0.73875
+    },
+    {
+     "doc_id": "MGMRESORTS_2023Q2_10Q",
+     "page": 10,
+     "score": 0.72554
+    },
+    {
+     "doc_id": "MGMRESORTS_2023Q2_10Q",
+     "page": 39,
+     "score": 0.71579
+    },
+    {
+     "doc_id": "MGMRESORTS_2023Q2_10Q",
+     "page": 39,
+     "score": 0.71509
+    },
+    {
+     "doc_id": "MGMRESORTS_2023Q2_10Q",
+     "page": 6,
+     "score": 0.71475
+    },
+    {
+     "doc_id": "MGMRESORTS_2023Q2_10Q",
+     "page": 3,
+     "score": 0.71149
+    },
+    {
+     "doc_id": "MGMRESORTS_2023Q2_10Q",
+     "page": 36,
+     "score": 0.7082
+    },
+    {
+     "doc_id": "MGMRESORTS_2023_8K_dated-2023-03-01",
+     "page": 1,
+     "score": 0.70169
+    },
+    {
+     "doc_id": "MGMRESORTS_2023Q2_10Q",
+     "page": 37,
+     "score": 0.70142
+    },
+    {
+     "doc_id": "MGMRESORTS_2023_8K_dated-2023-09-12",
+     "page": 1,
+     "score": 0.70004
+    }
+   ],
+   "metrics": {
+    "doc_hit@5": 1.0,
+    "page_hit@5": 1.0,
+    "gold_page_recall@5": 1.0,
+    "doc_hit@10": 1.0,
+    "page_hit@10": 1.0,
+    "gold_page_recall@10": 1.0,
+    "doc_hit@20": 1.0,
+    "page_hit@20": 1.0,
+    "gold_page_recall@20": 1.0,
+    "mrr@10": 1.0,
+    "askk_page_hit": 1.0,
+    "ctx_page_hit": 1.0,
+    "ctx_gold_recall": 1.0
+   },
+   "ctx": [
+    {
+     "doc_id": "MGMRESORTS_2023Q2_10Q",
+     "page": 11
+    },
+    {
+     "doc_id": "MGMRESORTS_2023Q2_10Q",
+     "page": 10
+    },
+    {
+     "doc_id": "MGMRESORTS_2023Q2_10Q",
+     "page": 39
+    },
+    {
+     "doc_id": "MGMRESORTS_2023Q2_10Q",
+     "page": 39
+    },
+    {
+     "doc_id": "MGMRESORTS_2023Q2_10Q",
+     "page": 6
+    },
+    {
+     "doc_id": "MGMRESORTS_2023Q2_10Q",
+     "page": 3
+    },
+    {
+     "doc_id": "MGMRESORTS_2023Q2_10Q",
+     "page": 36
+    },
+    {
+     "doc_id": "MGMRESORTS_2023_8K_dated-2023-03-01",
+     "page": 1
+    }
+   ],
+   "answer": {
+    "status": "answered",
+    "answer": "In the six months ended June 30, 2023 (H1 FY2023), corporate bonds were the short-term debt investment with the largest amount, totaling $416,420 thousand (i.e., $416.42 million) of short-term investments. This is shown in the short-term investments table where corporate bonds are listed at $416,420 thousand, which exceeds U.S. government securities ($57,696 thousand), U.S. agency securities ($29,049 thousand), and commercial paper and certificates of deposit ($4,561 thousand) [C1].",
+    "citations": [
+     {
+      "doc_id": "MGMRESORTS_2023Q2_10Q",
+      "page": 11,
+      "chunk_id": "59e7913c9645ea83"
+     }
+    ]
+   },
+   "answer_metrics": {
+    "status_ok": true,
+    "expected": "answered",
+    "got": "answered",
+    "seconds": 0.25,
+    "waited_s": 0.0,
+    "seconds_net": 0.25,
+    "llm_called": true,
+    "ungrounded_warnings": 1,
+    "numeric_ok": null,
+    "cite_hit": true,
+    "cite_precision": 1.0,
+    "answer_ok": null,
+    "context_chunks": 8,
+    "llm_cached": true
+   },
+   "question": "Which type of debt received the largest investment among the short term investments for MGM in H1 FY2023?",
+   "gold_answer": "the biggest short term investment is in corporate bonds (almost 82% of the total investment)",
+   "has_numeric": false
+  },
+  {
+   "id": "fb_00941",
+   "role": "health_industrials",
+   "type": "answerable",
+   "tags": [
+    "dev"
+   ],
+   "gold": [
+    {
+     "doc_id": "3M_2023Q2_10Q",
+     "pages": [
+      1
+     ]
+    }
+   ],
+   "doc_types": [
+    "10q"
+   ],
+   "latency_ms": 208.8,
+   "rerank_ms": null,
+   "acl_leaks": 0,
+   "top10": [
+    {
+     "doc_id": "3M_2023Q2_10Q",
+     "page": 71,
+     "score": 0.75442
+    },
+    {
+     "doc_id": "3M_2023Q2_10Q",
+     "page": 73,
+     "score": 0.75258
+    },
+    {
+     "doc_id": "3M_2023Q2_10Q",
+     "page": 70,
+     "score": 0.74169
+    },
+    {
+     "doc_id": "3M_2023Q2_10Q",
+     "page": 87,
+     "score": 0.74164
+    },
+    {
+     "doc_id": "3M_2023Q2_10Q",
+     "page": 1,
+     "score": 0.73856
+    },
+    {
+     "doc_id": "3M_2023Q2_10Q",
+     "page": 21,
+     "score": 0.73825
+    },
+    {
+     "doc_id": "3M_2023Q2_10Q",
+     "page": 19,
+     "score": 0.7379
+    },
+    {
+     "doc_id": "3M_2023Q2_10Q",
+     "page": 91,
+     "score": 0.73611
+    },
+    {
+     "doc_id": "3M_2023Q2_10Q",
+     "page": 71,
+     "score": 0.73298
+    },
+    {
+     "doc_id": "3M_2023Q2_10Q",
+     "page": 73,
+     "score": 0.73149
+    }
+   ],
+   "metrics": {
+    "doc_hit@5": 1.0,
+    "page_hit@5": 1.0,
+    "gold_page_recall@5": 1.0,
+    "doc_hit@10": 1.0,
+    "page_hit@10": 1.0,
+    "gold_page_recall@10": 1.0,
+    "doc_hit@20": 1.0,
+    "page_hit@20": 1.0,
+    "gold_page_recall@20": 1.0,
+    "mrr@10": 0.2,
+    "askk_page_hit": 1.0,
+    "ctx_page_hit": 1.0,
+    "ctx_gold_recall": 1.0
+   },
+   "ctx": [
+    {
+     "doc_id": "3M_2023Q2_10Q",
+     "page": 71
+    },
+    {
+     "doc_id": "3M_2023Q2_10Q",
+     "page": 73
+    },
+    {
+     "doc_id": "3M_2023Q2_10Q",
+     "page": 70
+    },
+    {
+     "doc_id": "3M_2023Q2_10Q",
+     "page": 87
+    },
+    {
+     "doc_id": "3M_2023Q2_10Q",
+     "page": 1
+    },
+    {
+     "doc_id": "3M_2023Q2_10Q",
+     "page": 21
+    },
+    {
+     "doc_id": "3M_2023Q2_10Q",
+     "page": 19
+    },
+    {
+     "doc_id": "3M_2023Q2_10Q",
+     "page": 91
+    }
+   ],
+   "answer": {
+    "status": "answered",
+    "answer": "As of the second quarter of 2023 (the quarterly period ended June 30, 2023), 3M had three debt securities registered to trade on a national securities exchange:\n- 1.500% Notes due 2026, ticker MMM26, listed on the New York Stock Exchange [C5]\n- 1.750% Notes due 2030, ticker MMM30, listed on the New York Stock Exchange [C5]\n- 1.500% Notes due 2031, ticker MMM31, listed on the New York Stock Exchange [C5]",
+    "citations": [
+     {
+      "doc_id": "3M_2023Q2_10Q",
+      "page": 1,
+      "chunk_id": "93b91aa9e1b45709"
+     }
+    ]
+   },
+   "answer_metrics": {
+    "status_ok": true,
+    "expected": "answered",
+    "got": "answered",
+    "seconds": 0.24,
+    "waited_s": 0.0,
+    "seconds_net": 0.24,
+    "llm_called": true,
+    "ungrounded_warnings": 0,
+    "numeric_ok": null,
+    "cite_hit": true,
+    "cite_precision": 1.0,
+    "answer_ok": null,
+    "context_chunks": 8,
+    "llm_cached": true
+   },
+   "question": "Which debt securities are registered to trade on a national securities exchange under 3M's name as of Q2 of 2023?",
+   "gold_answer": "Following debt securities registered under 3M's name are listed to trade on the New York Stock Exchange:\n-1.500% Notes due 2026 (Trading Symbol: MMM26)\n-1.750% Notes due 2030 (Trading Symbol: MMM30)\n-1.500% Notes due 2031 (Trading Symbol: MMM31)",
+   "has_numeric": false
+  },
+  {
+   "id": "fb_03029",
+   "role": "health_industrials",
+   "type": "answerable",
+   "tags": [
+    "dev"
+   ],
+   "gold": [
+    {
+     "doc_id": "3M_2018_10K",
+     "pages": [
+      60
+     ]
+    }
+   ],
+   "doc_types": [
+    "10k"
+   ],
+   "latency_ms": 244.9,
+   "rerank_ms": null,
+   "acl_leaks": 0,
+   "top10": [
+    {
+     "doc_id": "3M_2018_10K",
+     "page": 47,
+     "score": 0.77292
+    },
+    {
+     "doc_id": "3M_2018_10K",
+     "page": 44,
+     "score": 0.77177
+    },
+    {
+     "doc_id": "3M_2018_10K",
+     "page": 83,
+     "score": 0.76293
+    },
+    {
+     "doc_id": "3M_2018_10K",
+     "page": 44,
+     "score": 0.76174
+    },
+    {
+     "doc_id": "3M_2018_10K",
+     "page": 14,
+     "score": 0.75743
+    },
+    {
+     "doc_id": "3M_2018_10K",
+     "page": 43,
+     "score": 0.75521
+    },
+    {
+     "doc_id": "3M_2018_10K",
+     "page": 47,
+     "score": 0.7481
+    },
+    {
+     "doc_id": "3M_2018_10K",
+     "page": 60,
+     "score": 0.74719
+    },
+    {
+     "doc_id": "3M_2018_10K",
+     "page": 51,
+     "score": 0.7471
+    },
+    {
+     "doc_id": "3M_2018_10K",
+     "page": 60,
+     "score": 0.74437
+    }
+   ],
+   "metrics": {
+    "doc_hit@5": 1.0,
+    "page_hit@5": 0.0,
+    "gold_page_recall@5": 0.0,
+    "doc_hit@10": 1.0,
+    "page_hit@10": 1.0,
+    "gold_page_recall@10": 1.0,
+    "doc_hit@20": 1.0,
+    "page_hit@20": 1.0,
+    "gold_page_recall@20": 1.0,
+    "mrr@10": 0.125,
+    "askk_page_hit": 1.0,
+    "ctx_page_hit": 1.0,
+    "ctx_gold_recall": 1.0
+   },
+   "ctx": [
+    {
+     "doc_id": "3M_2018_10K",
+     "page": 47
+    },
+    {
+     "doc_id": "3M_2018_10K",
+     "page": 44
+    },
+    {
+     "doc_id": "3M_2018_10K",
+     "page": 83
+    },
+    {
+     "doc_id": "3M_2018_10K",
+     "page": 44
+    },
+    {
+     "doc_id": "3M_2018_10K",
+     "page": 14
+    },
+    {
+     "doc_id": "3M_2018_10K",
+     "page": 43
+    },
+    {
+     "doc_id": "3M_2018_10K",
+     "page": 47
+    },
+    {
+     "doc_id": "3M_2018_10K",
+     "page": 60
+    }
+   ],
+   "answer": {
+    "status": "answered",
+    "answer": "For fiscal year 2018, 3M�s capital expenditures (recorded as Purchases of property, plant and equipment in the cash flow statement) were $1,577 million USD. This figure is shown in the Consolidated Statement of Cash Flows for the year ended December 31, 2018, which reports amounts in millions of dollars [C8].",
+    "citations": [
+     {
+      "doc_id": "3M_2018_10K",
+      "page": 60,
+      "chunk_id": "af94f57cb4245f6e"
+     }
+    ]
+   },
+   "answer_metrics": {
+    "status_ok": true,
+    "expected": "answered",
+    "got": "answered",
+    "seconds": 0.23,
+    "waited_s": 0.0,
+    "seconds_net": 0.23,
+    "llm_called": true,
+    "ungrounded_warnings": 0,
+    "numeric_ok": true,
+    "cite_hit": true,
+    "cite_precision": 1.0,
+    "answer_ok": true,
+    "context_chunks": 8,
+    "llm_cached": true
+   },
+   "question": "What is the FY2018 capital expenditure amount (in USD millions) for 3M? Give a response to the question by relying on the details shown in the cash flow statement.",
+   "gold_answer": "$1577.00",
+   "has_numeric": true
+  },
+  {
+   "id": "fb_01484",
+   "role": "health_industrials",
+   "type": "answerable",
+   "tags": [
+    "dev"
+   ],
+   "gold": [
+    {
+     "doc_id": "JOHNSON_JOHNSON_2022Q4_EARNINGS",
+     "pages": [
+      2
+     ]
+    }
+   ],
+   "doc_types": [
+    "Earnings"
+   ],
+   "latency_ms": 207.6,
+   "rerank_ms": null,
+   "acl_leaks": 0,
+   "top10": [
+    {
+     "doc_id": "JOHNSON_JOHNSON_2022_10K",
+     "page": 28,
+     "score": 0.76902
+    },
+    {
+     "doc_id": "JOHNSON_JOHNSON_2022_10K",
+     "page": 28,
+     "score": 0.75585
+    },
+    {
+     "doc_id": "JOHNSON_JOHNSON_2022Q4_EARNINGS",
+     "page": 1,
+     "score": 0.751
+    },
+    {
+     "doc_id": "JOHNSON_JOHNSON_2022Q4_EARNINGS",
+     "page": 2,
+     "score": 0.72584
+    },
+    {
+     "doc_id": "JOHNSON_JOHNSON_2022_10K",
+     "page": 81,
+     "score": 0.72152
+    },
+    {
+     "doc_id": "JOHNSON_JOHNSON_2022Q4_EARNINGS",
+     "page": 20,
+     "score": 0.72054
+    },
+    {
+     "doc_id": "JOHNSON_JOHNSON_2022_10K",
+     "page": 33,
+     "score": 0.71995
+    },
+    {
+     "doc_id": "JOHNSON_JOHNSON_2022_10K",
+     "page": 30,
+     "score": 0.71725
+    },
+    {
+     "doc_id": "JOHNSON_JOHNSON_2022_10K",
+     "page": 87,
+     "score": 0.71471
+    },
+    {
+     "doc_id": "JOHNSON_JOHNSON_2022Q4_EARNINGS",
+     "page": 9,
+     "score": 0.71464
+    }
+   ],
+   "metrics": {
+    "doc_hit@5": 1.0,
+    "page_hit@5": 1.0,
+    "gold_page_recall@5": 1.0,
+    "doc_hit@10": 1.0,
+    "page_hit@10": 1.0,
+    "gold_page_recall@10": 1.0,
+    "doc_hit@20": 1.0,
+    "page_hit@20": 1.0,
+    "gold_page_recall@20": 1.0,
+    "mrr@10": 0.25,
+    "askk_page_hit": 1.0,
+    "ctx_page_hit": 1.0,
+    "ctx_gold_recall": 1.0
+   },
+   "ctx": [
+    {
+     "doc_id": "JOHNSON_JOHNSON_2022_10K",
+     "page": 28
+    },
+    {
+     "doc_id": "JOHNSON_JOHNSON_2022_10K",
+     "page": 28
+    },
+    {
+     "doc_id": "JOHNSON_JOHNSON_2022Q4_EARNINGS",
+     "page": 1
+    },
+    {
+     "doc_id": "JOHNSON_JOHNSON_2022Q4_EARNINGS",
+     "page": 2
+    },
+    {
+     "doc_id": "JOHNSON_JOHNSON_2022_10K",
+     "page": 81
+    },
+    {
+     "doc_id": "JOHNSON_JOHNSON_2022Q4_EARNINGS",
+     "page": 20
+    },
+    {
+     "doc_id": "JOHNSON_JOHNSON_2022_10K",
+     "page": 33
+    },
+    {
+     "doc_id": "JOHNSON_JOHNSON_2022_10K",
+     "page": 30
+    }
+   ],
+   "answer": {
+    "status": "answered",
+    "answer": "In fiscal year 2022, Johnson & Johnson�s U.S. sales grew 3.0% (to $48.6 billion) while international sales fell 0.6% (to $46.4 billion)[C1]. The difference in growth rates is 3.0% - (-0.6%) = 3.6 percentage points, meaning U.S. sales outperformed international sales by 3.6 pp.",
+    "citations": [
+     {
+      "doc_id": "JOHNSON_JOHNSON_2022_10K",
+      "page": 28,
+      "chunk_id": "cd3a305b18d47818"
+     }
+    ]
+   },
+   "answer_metrics": {
+    "status_ok": true,
+    "expected": "answered",
+    "got": "answered",
+    "seconds": 0.26,
+    "waited_s": 0.0,
+    "seconds_net": 0.26,
+    "llm_called": true,
+    "ungrounded_warnings": 1,
+    "numeric_ok": null,
+    "cite_hit": false,
+    "cite_precision": 0.0,
+    "answer_ok": null,
+    "context_chunks": 8,
+    "llm_cached": true
+   },
+   "question": "How did JnJ's US sales growth compare to international sales growth in FY2022?",
+   "gold_answer": "US sales increased 3.0% vs international sales decline of 0.6%.",
+   "has_numeric": false
+  },
+  {
+   "id": "fb_00005",
+   "role": "tech_telecom",
+   "type": "answerable",
+   "tags": [
+    "dev"
+   ],
+   "gold": [
+    {
+     "doc_id": "CORNING_2022_10K",
+     "pages": [
+      60
+     ]
+    }
+   ],
+   "doc_types": [
+    "10k"
+   ],
+   "latency_ms": 267.7,
+   "rerank_ms": null,
+   "acl_leaks": 0,
+   "top10": [
+    {
+     "doc_id": "CORNING_2022_10K",
+     "page": 34,
+     "score": 0.7987
+    },
+    {
+     "doc_id": "CORNING_2022_10K",
+     "page": 60,
+     "score": 0.7548
+    },
+    {
+     "doc_id": "CORNING_2022_10K",
+     "page": 101,
+     "score": 0.75345
+    },
+    {
+     "doc_id": "CORNING_2022_10K",
+     "page": 103,
+     "score": 0.75336
+    },
+    {
+     "doc_id": "CORNING_2022_10K",
+     "page": 102,
+     "score": 0.74965
+    },
+    {
+     "doc_id": "CORNING_2022_10K",
+     "page": 91,
+     "score": 0.74951
+    },
+    {
+     "doc_id": "CORNING_2022_10K",
+     "page": 34,
+     "score": 0.74346
+    },
+    {
+     "doc_id": "CORNING_2022_10K",
+     "page": 21,
+     "score": 0.74188
+    },
+    {
+     "doc_id": "CORNING_2022_10K",
+     "page": 64,
+     "score": 0.74151
+    },
+    {
+     "doc_id": "CORNING_2022_10K",
+     "page": 32,
+     "score": 0.74014
+    }
+   ],
+   "metrics": {
+    "doc_hit@5": 1.0,
+    "page_hit@5": 1.0,
+    "gold_page_recall@5": 1.0,
+    "doc_hit@10": 1.0,
+    "page_hit@10": 1.0,
+    "gold_page_recall@10": 1.0,
+    "doc_hit@20": 1.0,
+    "page_hit@20": 1.0,
+    "gold_page_recall@20": 1.0,
+    "mrr@10": 0.5,
+    "askk_page_hit": 1.0,
+    "ctx_page_hit": 1.0,
+    "ctx_gold_recall": 1.0
+   },
+   "ctx": [
+    {
+     "doc_id": "CORNING_2022_10K",
+     "page": 34
+    },
+    {
+     "doc_id": "CORNING_2022_10K",
+     "page": 60
+    },
+    {
+     "doc_id": "CORNING_2022_10K",
+     "page": 101
+    },
+    {
+     "doc_id": "CORNING_2022_10K",
+     "page": 103
+    },
+    {
+     "doc_id": "CORNING_2022_10K",
+     "page": 102
+    },
+    {
+     "doc_id": "CORNING_2022_10K",
+     "page": 91
+    },
+    {
+     "doc_id": "CORNING_2022_10K",
+     "page": 34
+    },
+    {
+     "doc_id": "CORNING_2022_10K",
+     "page": 21
+    }
+   ],
+   "answer": {
+    "status": "answered",
+    "answer": "Yes. Corning reported working capital of $2,278 million for fiscal year 2022, indicating a positive working capital position (the figure is presented in millions) [C1].",
+    "citations": [
+     {
+      "doc_id": "CORNING_2022_10K",
+      "page": 34,
+      "chunk_id": "c58d8d6a32537ace"
+     }
+    ]
+   },
+   "answer_metrics": {
+    "status_ok": true,
+    "expected": "answered",
+    "got": "answered",
+    "seconds": 0.23,
+    "waited_s": 0.0,
+    "seconds_net": 0.23,
+    "llm_called": true,
+    "ungrounded_warnings": 0,
+    "numeric_ok": null,
+    "cite_hit": false,
+    "cite_precision": 0.0,
+    "answer_ok": null,
+    "context_chunks": 8,
+    "llm_cached": true
+   },
+   "question": "Does Corning have positive working capital based on FY2022 data? If working capital is not a useful or relevant metric for this company, then please state that and explain why.",
+   "gold_answer": "Yes. Corning had a positive working capital amount of $831 million by FY 2022 close. This answer considers only operating current assets and current liabilities that were clearly shown in the balance sheet.",
+   "has_numeric": false
+  },
+  {
+   "id": "fb_03069",
+   "role": "tech_telecom",
+   "type": "answerable",
+   "tags": [
+    "dev",
+    "multi_page"
+   ],
+   "gold": [
+    {
+     "doc_id": "AMD_2015_10K",
+     "pages": [
+      56,
+      60
+     ]
+    }
+   ],
+   "doc_types": [
+    "10k"
+   ],
+   "latency_ms": 236.1,
+   "rerank_ms": null,
+   "acl_leaks": 0,
+   "top10": [
+    {
+     "doc_id": "AMD_2015_10K",
+     "page": 39,
+     "score": 0.80666
+    },
+    {
+     "doc_id": "AMD_2015_10K",
+     "page": 4,
+     "score": 0.80612
+    },
+    {
+     "doc_id": "AMD_2015_10K",
+     "page": 36,
+     "score": 0.803
+    },
+    {
+     "doc_id": "AMD_2015_10K",
+     "page": 48,
+     "score": 0.80185
+    },
+    {
+     "doc_id": "AMD_2015_10K",
+     "page": 94,
+     "score": 0.7982
+    },
+    {
+     "doc_id": "AMD_2015_10K",
+     "page": 32,
+     "score": 0.79731
+    },
+    {
+     "doc_id": "AMD_2015_10K",
+     "page": 34,
+     "score": 0.7954
+    },
+    {
+     "doc_id": "AMD_2015_10K",
+     "page": 94,
+     "score": 0.79419
+    },
+    {
+     "doc_id": "AMD_2015_10K",
+     "page": 43,
+     "score": 0.79254
+    },
+    {
+     "doc_id": "AMD_2015_10K",
+     "page": 59,
+     "score": 0.79224
+    }
+   ],
+   "metrics": {
+    "doc_hit@5": 1.0,
+    "page_hit@5": 0.0,
+    "gold_page_recall@5": 0.0,
+    "doc_hit@10": 1.0,
+    "page_hit@10": 0.0,
+    "gold_page_recall@10": 0.0,
+    "doc_hit@20": 1.0,
+    "page_hit@20": 0.0,
+    "gold_page_recall@20": 0.0,
+    "mrr@10": 0.0,
+    "askk_page_hit": 0.0,
+    "ctx_page_hit": 0.0,
+    "ctx_gold_recall": 0.0
+   },
+   "ctx": [
+    {
+     "doc_id": "AMD_2015_10K",
+     "page": 39
+    },
+    {
+     "doc_id": "AMD_2015_10K",
+     "page": 4
+    },
+    {
+     "doc_id": "AMD_2015_10K",
+     "page": 36
+    },
+    {
+     "doc_id": "AMD_2015_10K",
+     "page": 48
+    },
+    {
+     "doc_id": "AMD_2015_10K",
+     "page": 94
+    },
+    {
+     "doc_id": "AMD_2015_10K",
+     "page": 32
+    },
+    {
+     "doc_id": "AMD_2015_10K",
+     "page": 34
+    },
+    {
+     "doc_id": "AMD_2015_10K",
+     "page": 94
+    }
+   ],
+   "answer": {
+    "status": "answered",
+    "answer": "For fiscal year 2015 AMD reported net revenue of $958 million (in millions)[C5]. The cash flow statement in the provided excerpts does not include a line for depreciation and amortization, so the D&A amount and therefore the D&A % margin cannot be calculated from the given filings.",
+    "citations": [
+     {
+      "doc_id": "AMD_2015_10K",
+      "page": 94,
+      "chunk_id": "acb91eb9f36a311c"
+     }
+    ]
+   },
+   "answer_metrics": {
+    "status_ok": true,
+    "expected": "answered",
+    "got": "answered",
+    "seconds": 0.22,
+    "waited_s": 0.0,
+    "seconds_net": 0.22,
+    "llm_called": true,
+    "ungrounded_warnings": 0,
+    "numeric_ok": false,
+    "cite_hit": false,
+    "cite_precision": 0.0,
+    "answer_ok": false,
+    "context_chunks": 8,
+    "llm_cached": true
+   },
+   "question": "Answer the following question as if you are an equity research analyst and have lost internet connection so you do not have access to financial metric providers. According to the details clearly outlined within the P&L statement and the statement of cash flows, what is the FY2015 depreciation and amortization (D&A from cash flow statement) % margin for AMD?",
+   "gold_answer": "4.2%",
+   "has_numeric": true
+  },
+  {
+   "id": "fb_00591",
+   "role": "tech_telecom",
+   "type": "answerable",
+   "tags": [
+    "dev"
+   ],
+   "gold": [
+    {
+     "doc_id": "ADOBE_2022_10K",
+     "pages": [
+      57
+     ]
+    }
+   ],
+   "doc_types": [
+    "10k"
+   ],
+   "latency_ms": 180.4,
+   "rerank_ms": null,
+   "acl_leaks": 0,
+   "top10": [
+    {
+     "doc_id": "ADOBE_2022_10K",
+     "page": 57,
+     "score": 0.78138
+    },
+    {
+     "doc_id": "ADOBE_2022_10K",
+     "page": 70,
+     "score": 0.75622
+    },
+    {
+     "doc_id": "ADOBE_2022_10K",
+     "page": 72,
+     "score": 0.75148
+    },
+    {
+     "doc_id": "ADOBE_2022_10K",
+     "page": 47,
+     "score": 0.74722
+    },
+    {
+     "doc_id": "ADOBE_2022_10K",
+     "page": 57,
+     "score": 0.74312
+    },
+    {
+     "doc_id": "ADOBE_2022_10K",
+     "page": 53,
+     "score": 0.7403
+    },
+    {
+     "doc_id": "ADOBE_2022_10K",
+     "page": 54,
+     "score": 0.7384
+    },
+    {
+     "doc_id": "ADOBE_2022_10K",
+     "page": 67,
+     "score": 0.7368
+    },
+    {
+     "doc_id": "ADOBE_2022_10K",
+     "page": 65,
+     "score": 0.73642
+    },
+    {
+     "doc_id": "ADOBE_2022_10K",
+     "page": 40,
+     "score": 0.73543
+    }
+   ],
+   "metrics": {
+    "doc_hit@5": 1.0,
+    "page_hit@5": 1.0,
+    "gold_page_recall@5": 1.0,
+    "doc_hit@10": 1.0,
+    "page_hit@10": 1.0,
+    "gold_page_recall@10": 1.0,
+    "doc_hit@20": 1.0,
+    "page_hit@20": 1.0,
+    "gold_page_recall@20": 1.0,
+    "mrr@10": 1.0,
+    "askk_page_hit": 1.0,
+    "ctx_page_hit": 1.0,
+    "ctx_gold_recall": 1.0
+   },
+   "ctx": [
+    {
+     "doc_id": "ADOBE_2022_10K",
+     "page": 57
+    },
+    {
+     "doc_id": "ADOBE_2022_10K",
+     "page": 70
+    },
+    {
+     "doc_id": "ADOBE_2022_10K",
+     "page": 72
+    },
+    {
+     "doc_id": "ADOBE_2022_10K",
+     "page": 47
+    },
+    {
+     "doc_id": "ADOBE_2022_10K",
+     "page": 57
+    },
+    {
+     "doc_id": "ADOBE_2022_10K",
+     "page": 53
+    },
+    {
+     "doc_id": "ADOBE_2022_10K",
+     "page": 54
+    },
+    {
+     "doc_id": "ADOBE_2022_10K",
+     "page": 67
+    }
+   ],
+   "answer": {
+    "status": "answered",
+    "answer": "Yes. Adobe�s free-cash-flow (FCF) conversion improved in FY2022 compared with FY2021. \n\n- FY2022 net cash provided by operating activities: $7,838 million [C4].\n- FY2022 purchases of property and equipment (capex): $442 million [C1].\n- FY2022 free cash flow = $7,838 m � $442 m = $7,396 million.\n- FY2022 net income: $4,756 million [C7].\n- FY2022 FCF conversion = $7,396 m � $4,756 m = 1.56, or 156 %.\n\n- FY2021 net cash provided by operating activities: $7,230 million [C4].\n- FY2021 purchases of property and equipment: $348 million [C1].\n- FY2021 free cash flow = $7,230 m � $348 m = $6,882 million.\n- FY2021 net income: $4,822 million [C7].\n- FY2021 FCF conversion = $6,882 m � $4,822 m = 1.43, or 143 %.\n\nSince the conversion rose from about 143 % in FY2021 to about 156 % in FY2022, Adobe�s free-cash-flow conversion improved in FY2022.",
+    "citations": [
+     {
+      "doc_id": "ADOBE_2022_10K",
+      "page": 47,
+      "chunk_id": "844a1b38b4c9b2fe"
+     },
+     {
+      "doc_id": "ADOBE_2022_10K",
+      "page": 57,
+      "chunk_id": "363f8d5742a21b47"
+     },
+     {
+      "doc_id": "ADOBE_2022_10K",
+      "page": 54,
+      "chunk_id": "02df5545101115dd"
+     }
+    ]
+   },
+   "answer_metrics": {
+    "status_ok": true,
+    "expected": "answered",
+    "got": "answered",
+    "seconds": 0.22,
+    "waited_s": 0.0,
+    "seconds_net": 0.22,
+    "llm_called": true,
+    "ungrounded_warnings": 2,
+    "numeric_ok": null,
+    "cite_hit": true,
+    "cite_precision": 0.3333333333333333,
+    "answer_ok": null,
+    "context_chunks": 8,
+    "llm_cached": true
+   },
+   "question": "Does Adobe have an improving Free cashflow conversion as of FY2022?",
+   "gold_answer": "Yes, the FCF conversion (using net income as the denominator) for Adobe has improved by ~13% from 143% in 2021 to 156% in 2022",
+   "has_numeric": false
+  },
+  {
+   "id": "fb_01254",
+   "role": "consumer",
+   "type": "answerable",
+   "tags": [
+    "dev"
+   ],
+   "gold": [
+    {
+     "doc_id": "MGMRESORTS_2022_10K",
+     "pages": [
+      32
+     ]
+    }
+   ],
+   "doc_types": [
+    "10k"
+   ],
+   "latency_ms": 224.5,
+   "rerank_ms": null,
+   "acl_leaks": 0,
+   "top10": [
+    {
+     "doc_id": "MGMRESORTS_2022_10K",
+     "page": 32,
+     "score": 0.88172
+    },
+    {
+     "doc_id": "MGMRESORTS_2022_10K",
+     "page": 64,
+     "score": 0.87512
+    },
+    {
+     "doc_id": "MGMRESORTS_2022_10K",
+     "page": 64,
+     "score": 0.85742
+    },
+    {
+     "doc_id": "MGMRESORTS_2022_10K",
+     "page": 64,
+     "score": 0.84114
+    },
+    {
+     "doc_id": "MGMRESORTS_2022_10K",
+     "page": 48,
+     "score": 0.83668
+    },
+    {
+     "doc_id": "MGMRESORTS_2022_10K",
+     "page": 47,
+     "score": 0.83225
+    },
+    {
+     "doc_id": "MGMRESORTS_2022_10K",
+     "page": 32,
+     "score": 0.82935
+    },
+    {
+     "doc_id": "MGMRESORTS_2022Q4_EARNINGS",
+     "page": 6,
+     "score": 0.82316
+    },
+    {
+     "doc_id": "MGMRESORTS_2022_10K",
+     "page": 48,
+     "score": 0.82175
+    },
+    {
+     "doc_id": "MGMRESORTS_2022_10K",
+     "page": 97,
+     "score": 0.81778
+    }
+   ],
+   "metrics": {
+    "doc_hit@5": 1.0,
+    "page_hit@5": 1.0,
+    "gold_page_recall@5": 1.0,
+    "doc_hit@10": 1.0,
+    "page_hit@10": 1.0,
+    "gold_page_recall@10": 1.0,
+    "doc_hit@20": 1.0,
+    "page_hit@20": 1.0,
+    "gold_page_recall@20": 1.0,
+    "mrr@10": 1.0,
+    "askk_page_hit": 1.0,
+    "ctx_page_hit": 1.0,
+    "ctx_gold_recall": 1.0
+   },
+   "ctx": [
+    {
+     "doc_id": "MGMRESORTS_2022_10K",
+     "page": 32
+    },
+    {
+     "doc_id": "MGMRESORTS_2022_10K",
+     "page": 64
+    },
+    {
+     "doc_id": "MGMRESORTS_2022_10K",
+     "page": 64
+    },
+    {
+     "doc_id": "MGMRESORTS_2022_10K",
+     "page": 64
+    },
+    {
+     "doc_id": "MGMRESORTS_2022_10K",
+     "page": 48
+    },
+    {
+     "doc_id": "MGMRESORTS_2022_10K",
+     "page": 47
+    },
+    {
+     "doc_id": "MGMRESORTS_2022_10K",
+     "page": 32
+    },
+    {
+     "doc_id": "MGMRESORTS_2022Q4_EARNINGS",
+     "page": 6
+    }
+   ],
+   "answer": {
+    "status": "answered",
+    "answer": "Yes. MGM Resorts paid dividends to its common shareholders in fiscal year 2022 (year ended December 31, 2022). The company maintained an annual dividend of $0.01 per share throughout 2022 [C1] and recorded a dividend of $4,048 thousand (i.e., $4.048 million) in its consolidated statements of stockholders' equity for 2022 [C4]. Additionally, the company reported paying quarterly dividends of $0.0025 per share in March, June, September and December 2022, totaling about $4 million for the year [C6].",
+    "citations": [
+     {
+      "doc_id": "MGMRESORTS_2022_10K",
+      "page": 32,
+      "chunk_id": "696a98a687a41d78"
+     },
+     {
+      "doc_id": "MGMRESORTS_2022_10K",
+      "page": 64,
+      "chunk_id": "cdeff1d44cc35243"
+     },
+     {
+      "doc_id": "MGMRESORTS_2022_10K",
+      "page": 47,
+      "chunk_id": "34372acb9aa3f2da"
+     }
+    ]
+   },
+   "answer_metrics": {
+    "status_ok": true,
+    "expected": "answered",
+    "got": "answered",
+    "seconds": 0.27,
+    "waited_s": 0.0,
+    "seconds_net": 0.27,
+    "llm_called": true,
+    "ungrounded_warnings": 1,
+    "numeric_ok": null,
+    "cite_hit": true,
+    "cite_precision": 0.3333333333333333,
+    "answer_ok": null,
+    "context_chunks": 8,
+    "llm_cached": true
+   },
+   "question": "Has MGM Resorts paid dividends to common shareholders in FY2022?",
+   "gold_answer": "Yes. MGM maintained 0.01$ per share annual dividend through out FY 2022.",
+   "has_numeric": false
+  },
+  {
+   "id": "fb_02608",
+   "role": "consumer",
+   "type": "answerable",
+   "tags": [
+    "dev"
+   ],
+   "gold": [
+    {
+     "doc_id": "BESTBUY_2017_10K",
+     "pages": [
+      56
+     ]
+    }
+   ],
+   "doc_types": [
+    "10k"
+   ],
+   "latency_ms": 244.8,
+   "rerank_ms": null,
+   "acl_leaks": 0,
+   "top10": [
+    {
+     "doc_id": "BESTBUY_2017_10K",
+     "page": 91,
+     "score": 0.79956
+    },
+    {
+     "doc_id": "BESTBUY_2017_10K",
+     "page": 27,
+     "score": 0.79129
+    },
+    {
+     "doc_id": "BESTBUY_2017_10K",
+     "page": 68,
+     "score": 0.79064
+    },
+    {
+     "doc_id": "BESTBUY_2017_10K",
+     "page": 31,
+     "score": 0.78855
+    },
+    {
+     "doc_id": "BESTBUY_2017_10K",
+     "page": 91,
+     "score": 0.78785
+    },
+    {
+     "doc_id": "BESTBUY_2017_10K",
+     "page": 33,
+     "score": 0.78623
+    },
+    {
+     "doc_id": "BESTBUY_2017_10K",
+     "page": 81,
+     "score": 0.78458
+    },
+    {
+     "doc_id": "BESTBUY_2017_10K",
+     "page": 33,
+     "score": 0.77559
+    },
+    {
+     "doc_id": "BESTBUY_2017_10K",
+     "page": 25,
+     "score": 0.77326
+    },
+    {
+     "doc_id": "BESTBUY_2017_10K",
+     "page": 56,
+     "score": 0.77247
+    }
+   ],
+   "metrics": {
+    "doc_hit@5": 1.0,
+    "page_hit@5": 0.0,
+    "gold_page_recall@5": 0.0,
+    "doc_hit@10": 1.0,
+    "page_hit@10": 1.0,
+    "gold_page_recall@10": 1.0,
+    "doc_hit@20": 1.0,
+    "page_hit@20": 1.0,
+    "gold_page_recall@20": 1.0,
+    "mrr@10": 0.1,
+    "askk_page_hit": 0.0,
+    "ctx_page_hit": 0.0,
+    "ctx_gold_recall": 0.0
+   },
+   "ctx": [
+    {
+     "doc_id": "BESTBUY_2017_10K",
+     "page": 91
+    },
+    {
+     "doc_id": "BESTBUY_2017_10K",
+     "page": 27
+    },
+    {
+     "doc_id": "BESTBUY_2017_10K",
+     "page": 68
+    },
+    {
+     "doc_id": "BESTBUY_2017_10K",
+     "page": 31
+    },
+    {
+     "doc_id": "BESTBUY_2017_10K",
+     "page": 91
+    },
+    {
+     "doc_id": "BESTBUY_2017_10K",
+     "page": 33
+    },
+    {
+     "doc_id": "BESTBUY_2017_10K",
+     "page": 81
+    },
+    {
+     "doc_id": "BESTBUY_2017_10K",
+     "page": 33
+    }
+   ],
+   "answer": {
+    "status": "answered",
+    "answer": "The three-year average net profit margin for FY2015-FY2017 is 2.8 % (calculated as (Net earnings FY2015 $1,233 M + FY2016 $897 M + FY2017 $1,228 M) � (Revenue FY2015 $40,339 M + FY2016 $39,528 M + FY2017 $39,403 M) � 100 = 2.8 %). Sources: Revenue FY2015 $40,339 M and Net earnings $1,233 M [C4]; Revenue FY2016 $39,528 M and Net earnings $897 M [C4]; Revenue FY2017 $39,403 M and Net earnings $1,228 M [C4].",
+    "citations": [
+     {
+      "doc_id": "BESTBUY_2017_10K",
+      "page": 31,
+      "chunk_id": "a3b96524ed7cc44a"
+     }
+    ]
+   },
+   "answer_metrics": {
+    "status_ok": true,
+    "expected": "answered",
+    "got": "answered",
+    "seconds": 0.26,
+    "waited_s": 0.0,
+    "seconds_net": 0.26,
+    "llm_called": true,
+    "ungrounded_warnings": 0,
+    "numeric_ok": true,
+    "cite_hit": false,
+    "cite_precision": 0.0,
+    "answer_ok": true,
+    "context_chunks": 8,
+    "llm_cached": true
+   },
+   "question": "In agreement with the information outlined in the income statement, what is the FY2015 - FY2017 3 year average net profit margin (as a %) for Best Buy? Answer in units of percents and round to one decimal place.",
+   "gold_answer": "2.8%",
+   "has_numeric": true
+  },
+  {
+   "id": "g_s02",
+   "role": "health_industrials",
+   "type": "answerable",
+   "tags": [
+    "calc",
+    "generated",
+    "statement_table",
+    "tune"
+   ],
+   "gold": [
+    {
+     "doc_id": "BOEING_2019_10K",
+     "pages": [
+      22
+     ]
+    }
+   ],
+   "doc_types": [
+    "10k"
+   ],
+   "latency_ms": 301.2,
+   "rerank_ms": null,
+   "acl_leaks": 0,
+   "top10": [
+    {
+     "doc_id": "BOEING_2019_10K",
+     "page": 25,
+     "score": 0.77213
+    },
+    {
+     "doc_id": "BOEING_2019_10K",
+     "page": 40,
+     "score": 0.76628
+    },
+    {
+     "doc_id": "BOEING_2019_10K",
+     "page": 40,
+     "score": 0.76578
+    },
+    {
+     "doc_id": "BOEING_2019_10K",
+     "page": 120,
+     "score": 0.75265
+    },
+    {
+     "doc_id": "BOEING_2019_10K",
+     "page": 40,
+     "score": 0.7482
+    },
+    {
+     "doc_id": "BOEING_2019_10K",
+     "page": 59,
+     "score": 0.74681
+    },
+    {
+     "doc_id": "BOEING_2019_10K",
+     "page": 23,
+     "score": 0.74444
+    },
+    {
+     "doc_id": "BOEING_2019_10K",
+     "page": 56,
+     "score": 0.74258
+    },
+    {
+     "doc_id": "BOEING_2019_10K",
+     "page": 40,
+     "score": 0.74051
+    },
+    {
+     "doc_id": "BOEING_2019_10K",
+     "page": 29,
+     "score": 0.74024
+    }
+   ],
+   "metrics": {
+    "doc_hit@5": 1.0,
+    "page_hit@5": 0.0,
+    "gold_page_recall@5": 0.0,
+    "doc_hit@10": 1.0,
+    "page_hit@10": 0.0,
+    "gold_page_recall@10": 0.0,
+    "doc_hit@20": 1.0,
+    "page_hit@20": 1.0,
+    "gold_page_recall@20": 1.0,
+    "mrr@10": 0.0,
+    "askk_page_hit": 0.0,
+    "ctx_page_hit": 0.0,
+    "ctx_gold_recall": 0.0
+   },
+   "ctx": [
+    {
+     "doc_id": "BOEING_2019_10K",
+     "page": 25
+    },
+    {
+     "doc_id": "BOEING_2019_10K",
+     "page": 40
+    },
+    {
+     "doc_id": "BOEING_2019_10K",
+     "page": 40
+    },
+    {
+     "doc_id": "BOEING_2019_10K",
+     "page": 120
+    },
+    {
+     "doc_id": "BOEING_2019_10K",
+     "page": 40
+    },
+    {
+     "doc_id": "BOEING_2019_10K",
+     "page": 59
+    },
+    {
+     "doc_id": "BOEING_2019_10K",
+     "page": 23
+    },
+    {
+     "doc_id": "BOEING_2019_10K",
+     "page": 56
+    }
+   ],
+   "answer": {
+    "status": "answered",
+    "answer": "Boeing�s net earnings fell from $10,460 million in 2018 [C6] to a $636 million loss in 2019 [C6], a deterioration of $11,096 million (calculated as $10,460 million � (-$636 million) = $11,096 million).",
+    "citations": [
+     {
+      "doc_id": "BOEING_2019_10K",
+      "page": 59,
+      "chunk_id": "f455c396f8d990f8"
+     }
+    ]
+   },
+   "answer_metrics": {
+    "status_ok": true,
+    "expected": "answered",
+    "got": "answered",
+    "seconds": 0.26,
+    "waited_s": 0.0,
+    "seconds_net": 0.26,
+    "llm_called": true,
+    "ungrounded_warnings": 0,
+    "numeric_ok": true,
+    "cite_hit": false,
+    "cite_precision": 0.0,
+    "answer_ok": true,
+    "context_chunks": 8,
+    "llm_cached": true
+   },
+   "question": "By how much did Boeing's bottom line deteriorate going from 2018 to 2019, in $ millions?",
+   "gold_answer": "$11,096M: net earnings of $10,460M in 2018 became a net loss of $636M in 2019.",
+   "has_numeric": true
+  },
+  {
+   "id": "g_s04",
+   "role": "consumer",
+   "type": "answerable",
+   "tags": [
+    "calc",
+    "generated",
+    "statement_table",
+    "tune"
+   ],
+   "gold": [
+    {
+     "doc_id": "MGMRESORTS_2020_10K",
+     "pages": [
+      42
+     ]
+    }
+   ],
+   "doc_types": [
+    "10k"
+   ],
+   "latency_ms": 285.6,
+   "rerank_ms": null,
+   "acl_leaks": 0,
+   "top10": [
+    {
+     "doc_id": "MGMRESORTS_2020_10K",
+     "page": 44,
+     "score": 0.73359
+    },
+    {
+     "doc_id": "MGMRESORTS_2020_10K",
+     "page": 46,
+     "score": 0.72653
+    },
+    {
+     "doc_id": "MGMRESORTS_2020_10K",
+     "page": 46,
+     "score": 0.72352
+    },
+    {
+     "doc_id": "MGMRESORTS_2020_10K",
+     "page": 42,
+     "score": 0.72011
+    },
+    {
+     "doc_id": "MGMRESORTS_2020_10K",
+     "page": 43,
+     "score": 0.71422
+    },
+    {
+     "doc_id": "MGMRESORTS_2020_10K",
+     "page": 65,
+     "score": 0.71239
+    },
+    {
+     "doc_id": "MGMRESORTS_2020_10K",
+     "page": 42,
+     "score": 0.71235
+    },
+    {
+     "doc_id": "MGMRESORTS_2020_10K",
+     "page": 67,
+     "score": 0.7116
+    },
+    {
+     "doc_id": "MGMRESORTS_2020_10K",
+     "page": 102,
+     "score": 0.70748
+    },
+    {
+     "doc_id": "MGMRESORTS_2020_10K",
+     "page": 46,
+     "score": 0.70628
+    }
+   ],
+   "metrics": {
+    "doc_hit@5": 1.0,
+    "page_hit@5": 1.0,
+    "gold_page_recall@5": 1.0,
+    "doc_hit@10": 1.0,
+    "page_hit@10": 1.0,
+    "gold_page_recall@10": 1.0,
+    "doc_hit@20": 1.0,
+    "page_hit@20": 1.0,
+    "gold_page_recall@20": 1.0,
+    "mrr@10": 0.25,
+    "askk_page_hit": 1.0,
+    "ctx_page_hit": 1.0,
+    "ctx_gold_recall": 1.0
+   },
+   "ctx": [
+    {
+     "doc_id": "MGMRESORTS_2020_10K",
+     "page": 44
+    },
+    {
+     "doc_id": "MGMRESORTS_2020_10K",
+     "page": 46
+    },
+    {
+     "doc_id": "MGMRESORTS_2020_10K",
+     "page": 46
+    },
+    {
+     "doc_id": "MGMRESORTS_2020_10K",
+     "page": 42
+    },
+    {
+     "doc_id": "MGMRESORTS_2020_10K",
+     "page": 43
+    },
+    {
+     "doc_id": "MGMRESORTS_2020_10K",
+     "page": 65
+    },
+    {
+     "doc_id": "MGMRESORTS_2020_10K",
+     "page": 42
+    },
+    {
+     "doc_id": "MGMRESORTS_2020_10K",
+     "page": 67
+    }
+   ],
+   "answer": {
+    "status": "answered",
+    "answer": "MGM's net revenues decreased by $7.74 billion (7.73759 billion dollars) from 2019 to 2020. The 2019 net revenues were $12,899,672 thousand ($12.899 billion) and the 2020 net revenues were $5,162,082 thousand ($5.162 billion) [C7]. The fall is calculated as 12,899,672 � 5,162,082 = 7,737,590 thousand dollars, which equals $7,737,590,000 or $7.73759 billion [C7].",
+    "citations": [
+     {
+      "doc_id": "MGMRESORTS_2020_10K",
+      "page": 42,
+      "chunk_id": "81f0c5df1533300c"
+     }
+    ]
+   },
+   "answer_metrics": {
+    "status_ok": true,
+    "expected": "answered",
+    "got": "answered",
+    "seconds": 0.22,
+    "waited_s": 0.0,
+    "seconds_net": 0.22,
+    "llm_called": true,
+    "ungrounded_warnings": 4,
+    "numeric_ok": true,
+    "cite_hit": true,
+    "cite_precision": 1.0,
+    "answer_ok": true,
+    "context_chunks": 8,
+    "llm_cached": true
+   },
+   "question": "How far did MGM's net revenues fall from 2019 to 2020, in billions of dollars?",
+   "gold_answer": "About $7.74 billion: net revenues fell from $12.90B (2019) to $5.16B (2020); the filing reports thousands.",
+   "has_numeric": true
+  },
+  {
+   "id": "g_s05",
+   "role": "tech_telecom",
+   "type": "answerable",
+   "tags": [
+    "generated",
+    "statement_table",
+    "tune"
+   ],
+   "gold": [
+    {
+     "doc_id": "ADOBE_2022_10K",
+     "pages": [
+      54
+     ]
+    }
+   ],
+   "doc_types": [
+    "10k"
+   ],
+   "latency_ms": 266.5,
+   "rerank_ms": null,
+   "acl_leaks": 0,
+   "top10": [
+    {
+     "doc_id": "ADOBE_2022_10K",
+     "page": 65,
+     "score": 0.82691
+    },
+    {
+     "doc_id": "ADOBE_2022_10K",
+     "page": 40,
+     "score": 0.8175
+    },
+    {
+     "doc_id": "ADOBE_2022_10K",
+     "page": 65,
+     "score": 0.80063
+    },
+    {
+     "doc_id": "ADOBE_2022_10K",
+     "page": 42,
+     "score": 0.79639
+    },
+    {
+     "doc_id": "ADOBE_2022_10K",
+     "page": 54,
+     "score": 0.78837
+    },
+    {
+     "doc_id": "ADOBE_2022_10K",
+     "page": 42,
+     "score": 0.78265
+    },
+    {
+     "doc_id": "ADOBE_2022_10K",
+     "page": 89,
+     "score": 0.77499
+    },
+    {
+     "doc_id": "ADOBE_2022_10K",
+     "page": 40,
+     "score": 0.77361
+    },
+    {
+     "doc_id": "ADOBE_2022_10K",
+     "page": 76,
+     "score": 0.77286
+    },
+    {
+     "doc_id": "ADOBE_2022_10K",
+     "page": 77,
+     "score": 0.771
+    }
+   ],
+   "metrics": {
+    "doc_hit@5": 1.0,
+    "page_hit@5": 1.0,
+    "gold_page_recall@5": 1.0,
+    "doc_hit@10": 1.0,
+    "page_hit@10": 1.0,
+    "gold_page_recall@10": 1.0,
+    "doc_hit@20": 1.0,
+    "page_hit@20": 1.0,
+    "gold_page_recall@20": 1.0,
+    "mrr@10": 0.2,
+    "askk_page_hit": 1.0,
+    "ctx_page_hit": 1.0,
+    "ctx_gold_recall": 1.0
+   },
+   "ctx": [
+    {
+     "doc_id": "ADOBE_2022_10K",
+     "page": 65
+    },
+    {
+     "doc_id": "ADOBE_2022_10K",
+     "page": 40
+    },
+    {
+     "doc_id": "ADOBE_2022_10K",
+     "page": 65
+    },
+    {
+     "doc_id": "ADOBE_2022_10K",
+     "page": 42
+    },
+    {
+     "doc_id": "ADOBE_2022_10K",
+     "page": 54
+    },
+    {
+     "doc_id": "ADOBE_2022_10K",
+     "page": 42
+    },
+    {
+     "doc_id": "ADOBE_2022_10K",
+     "page": 89
+    },
+    {
+     "doc_id": "ADOBE_2022_10K",
+     "page": 40
+    }
+   ],
+   "answer": {
+    "status": "answered",
+    "answer": "Adobe's operating profit for fiscal 2022 was $6,098 million [C5].",
+    "citations": [
+     {
+      "doc_id": "ADOBE_2022_10K",
+      "page": 54,
+      "chunk_id": "02df5545101115dd"
+     }
+    ]
+   },
+   "answer_metrics": {
+    "status_ok": true,
+    "expected": "answered",
+    "got": "answered",
+    "seconds": 0.43,
+    "waited_s": 0.0,
+    "seconds_net": 0.43,
+    "llm_called": true,
+    "ungrounded_warnings": 0,
+    "numeric_ok": true,
+    "cite_hit": true,
+    "cite_precision": 1.0,
+    "answer_ok": true,
+    "context_chunks": 8,
+    "llm_cached": true
+   },
+   "question": "What was Adobe's operating profit for fiscal 2022, in $ millions?",
+   "gold_answer": "$6,098 million.",
+   "has_numeric": true
+  },
+  {
+   "id": "g_s08",
+   "role": "tech_telecom",
+   "type": "answerable",
+   "tags": [
+    "generated",
+    "narrative",
+    "tune"
+   ],
+   "gold": [
+    {
+     "doc_id": "ADOBE_2016_10K",
+     "pages": [
+      17
+     ]
+    }
+   ],
+   "doc_types": [
+    "10k"
+   ],
+   "latency_ms": 252.2,
+   "rerank_ms": null,
+   "acl_leaks": 0,
+   "top10": [
+    {
+     "doc_id": "ADOBE_2016_10K",
+     "page": 43,
+     "score": 0.82406
+    },
+    {
+     "doc_id": "ADOBE_2016_10K",
+     "page": 43,
+     "score": 0.79641
+    },
+    {
+     "doc_id": "ADOBE_2016_10K",
+     "page": 49,
+     "score": 0.79067
+    },
+    {
+     "doc_id": "ADOBE_2016_10K",
+     "page": 43,
+     "score": 0.7886
+    },
+    {
+     "doc_id": "ADOBE_2016_10K",
+     "page": 44,
+     "score": 0.78623
+    },
+    {
+     "doc_id": "ADOBE_2016_10K",
+     "page": 84,
+     "score": 0.78148
+    },
+    {
+     "doc_id": "ADOBE_2016_10K",
+     "page": 101,
+     "score": 0.78002
+    },
+    {
+     "doc_id": "ADOBE_2016_10K",
+     "page": 83,
+     "score": 0.77979
+    },
+    {
+     "doc_id": "ADOBE_2016_10K",
+     "page": 42,
+     "score": 0.77482
+    },
+    {
+     "doc_id": "ADOBE_2016_10K",
+     "page": 100,
+     "score": 0.77435
+    }
+   ],
+   "metrics": {
+    "doc_hit@5": 1.0,
+    "page_hit@5": 0.0,
+    "gold_page_recall@5": 0.0,
+    "doc_hit@10": 1.0,
+    "page_hit@10": 0.0,
+    "gold_page_recall@10": 0.0,
+    "doc_hit@20": 1.0,
+    "page_hit@20": 0.0,
+    "gold_page_recall@20": 0.0,
+    "mrr@10": 0.0,
+    "askk_page_hit": 0.0,
+    "ctx_page_hit": 0.0,
+    "ctx_gold_recall": 0.0
+   },
+   "ctx": [
+    {
+     "doc_id": "ADOBE_2016_10K",
+     "page": 43
+    },
+    {
+     "doc_id": "ADOBE_2016_10K",
+     "page": 43
+    },
+    {
+     "doc_id": "ADOBE_2016_10K",
+     "page": 49
+    },
+    {
+     "doc_id": "ADOBE_2016_10K",
+     "page": 43
+    },
+    {
+     "doc_id": "ADOBE_2016_10K",
+     "page": 44
+    },
+    {
+     "doc_id": "ADOBE_2016_10K",
+     "page": 84
+    },
+    {
+     "doc_id": "ADOBE_2016_10K",
+     "page": 101
+    },
+    {
+     "doc_id": "ADOBE_2016_10K",
+     "page": 83
+    }
+   ],
+   "answer": {
+    "status": "refused",
+    "answer": "The provided documents do not contain the answer for the exact company and period asked.",
+    "citations": []
+   },
+   "answer_metrics": {
+    "status_ok": false,
+    "expected": "answered",
+    "got": "refused",
+    "seconds": 0.38,
+    "waited_s": 0.0,
+    "seconds_net": 0.38,
+    "llm_called": true,
+    "ungrounded_warnings": 0,
+    "numeric_ok": false,
+    "cite_hit": null,
+    "cite_precision": null,
+    "answer_ok": false,
+    "context_chunks": 8,
+    "llm_cached": true
+   },
+   "question": "What was Adobe's headcount at the end of fiscal 2016?",
+   "gold_answer": "15,706 people (as of December 2, 2016).",
+   "has_numeric": true
+  },
+  {
+   "id": "g_s09",
+   "role": "tech_telecom",
+   "type": "answerable",
+   "tags": [
+    "10q",
+    "calc",
+    "generated",
+    "statement_table",
+    "tune"
+   ],
+   "gold": [
+    {
+     "doc_id": "CORNING_2023Q2_10Q",
+     "pages": [
+      3
+     ]
+    }
+   ],
+   "doc_types": [
+    "10q"
+   ],
+   "latency_ms": 200.9,
+   "rerank_ms": null,
+   "acl_leaks": 0,
+   "top10": [
+    {
+     "doc_id": "CORNING_2023Q2_10Q",
+     "page": 24,
+     "score": 0.81116
+    },
+    {
+     "doc_id": "CORNING_2023Q2_10Q",
+     "page": 24,
+     "score": 0.79489
+    },
+    {
+     "doc_id": "CORNING_2023Q2_10Q",
+     "page": 24,
+     "score": 0.78794
+    },
+    {
+     "doc_id": "CORNING_2023Q2_10Q",
+     "page": 3,
+     "score": 0.74739
+    },
+    {
+     "doc_id": "CORNING_2023Q2_10Q",
+     "page": 23,
+     "score": 0.73501
+    },
+    {
+     "doc_id": "CORNING_2023Q2_10Q",
+     "page": 23,
+     "score": 0.72978
+    },
+    {
+     "doc_id": "CORNING_2023Q2_10Q",
+     "page": 9,
+     "score": 0.72861
+    },
+    {
+     "doc_id": "CORNING_2023Q2_10Q",
+     "page": 8,
+     "score": 0.72515
+    },
+    {
+     "doc_id": "CORNING_2023Q2_10Q",
+     "page": 27,
+     "score": 0.72306
+    },
+    {
+     "doc_id": "CORNING_2023Q2_10Q",
+     "page": 28,
+     "score": 0.72255
+    }
+   ],
+   "metrics": {
+    "doc_hit@5": 1.0,
+    "page_hit@5": 1.0,
+    "gold_page_recall@5": 1.0,
+    "doc_hit@10": 1.0,
+    "page_hit@10": 1.0,
+    "gold_page_recall@10": 1.0,
+    "doc_hit@20": 1.0,
+    "page_hit@20": 1.0,
+    "gold_page_recall@20": 1.0,
+    "mrr@10": 0.25,
+    "askk_page_hit": 1.0,
+    "ctx_page_hit": 1.0,
+    "ctx_gold_recall": 1.0
+   },
+   "ctx": [
+    {
+     "doc_id": "CORNING_2023Q2_10Q",
+     "page": 24
+    },
+    {
+     "doc_id": "CORNING_2023Q2_10Q",
+     "page": 24
+    },
+    {
+     "doc_id": "CORNING_2023Q2_10Q",
+     "page": 24
+    },
+    {
+     "doc_id": "CORNING_2023Q2_10Q",
+     "page": 3
+    },
+    {
+     "doc_id": "CORNING_2023Q2_10Q",
+     "page": 23
+    },
+    {
+     "doc_id": "CORNING_2023Q2_10Q",
+     "page": 23
+    },
+    {
+     "doc_id": "CORNING_2023Q2_10Q",
+     "page": 9
+    },
+    {
+     "doc_id": "CORNING_2023Q2_10Q",
+     "page": 8
+    }
+   ],
+   "answer": {
+    "status": "answered",
+    "answer": "Corning's net sales for the quarter ended June 30, 2023 (Q2 2023) declined by 10% versus the same quarter in 2022, decreasing $372 million from $3,615 million to $3,243 million [C1][C4].",
+    "citations": [
+     {
+      "doc_id": "CORNING_2023Q2_10Q",
+      "page": 24,
+      "chunk_id": "d4b14353212fd5d3"
+     },
+     {
+      "doc_id": "CORNING_2023Q2_10Q",
+      "page": 3,
+      "chunk_id": "cd4384d709398812"
+     }
+    ]
+   },
+   "answer_metrics": {
+    "status_ok": true,
+    "expected": "answered",
+    "got": "answered",
+    "seconds": 0.2,
+    "waited_s": 0.0,
+    "seconds_net": 0.2,
+    "llm_called": true,
+    "ungrounded_warnings": 0,
+    "numeric_ok": true,
+    "cite_hit": true,
+    "cite_precision": 0.5,
+    "answer_ok": true,
+    "context_chunks": 8,
+    "llm_cached": true
+   },
+   "question": "By what percentage did Corning's quarterly net sales decline in Q2 2023 versus the same quarter of 2022?",
+   "gold_answer": "About 10.3%: net sales of $3,243M vs $3,615M.",
+   "has_numeric": true
+  },
+  {
+   "id": "g_s11",
+   "role": "consumer",
+   "type": "answerable",
+   "tags": [
+    "earnings",
+    "generated",
+    "tune"
+   ],
+   "gold": [
+    {
+     "doc_id": "PEPSICO_2023Q1_EARNINGS",
+     "pages": [
+      1
+     ]
+    }
+   ],
+   "doc_types": [
+    "Earnings"
+   ],
+   "latency_ms": 314.7,
+   "rerank_ms": null,
+   "acl_leaks": 0,
+   "top10": [
+    {
+     "doc_id": "PEPSICO_2023Q1_EARNINGS",
+     "page": 1,
+     "score": 0.82391
+    },
+    {
+     "doc_id": "PEPSICO_2023Q1_EARNINGS",
+     "page": 2,
+     "score": 0.78565
+    },
+    {
+     "doc_id": "PEPSICO_2023Q1_EARNINGS",
+     "page": 11,
+     "score": 0.78409
+    },
+    {
+     "doc_id": "PEPSICO_2023Q2_EARNINGS",
+     "page": 1,
+     "score": 0.78058
+    },
+    {
+     "doc_id": "PEPSICO_2023Q2_EARNINGS",
+     "page": 12,
+     "score": 0.76547
+    },
+    {
+     "doc_id": "PEPSICO_2023Q1_EARNINGS",
+     "page": 1,
+     "score": 0.76149
+    },
+    {
+     "doc_id": "PEPSICO_2023Q2_EARNINGS",
+     "page": 3,
+     "score": 0.75886
+    },
+    {
+     "doc_id": "PEPSICO_2023Q2_EARNINGS",
+     "page": 1,
+     "score": 0.75476
+    },
+    {
+     "doc_id": "PEPSICO_2023Q1_EARNINGS",
+     "page": 3,
+     "score": 0.75059
+    },
+    {
+     "doc_id": "PEPSICO_2023Q2_EARNINGS",
+     "page": 2,
+     "score": 0.74691
+    }
+   ],
+   "metrics": {
+    "doc_hit@5": 1.0,
+    "page_hit@5": 1.0,
+    "gold_page_recall@5": 1.0,
+    "doc_hit@10": 1.0,
+    "page_hit@10": 1.0,
+    "gold_page_recall@10": 1.0,
+    "doc_hit@20": 1.0,
+    "page_hit@20": 1.0,
+    "gold_page_recall@20": 1.0,
+    "mrr@10": 1.0,
+    "askk_page_hit": 1.0,
+    "ctx_page_hit": 1.0,
+    "ctx_gold_recall": 1.0
+   },
+   "ctx": [
+    {
+     "doc_id": "PEPSICO_2023Q1_EARNINGS",
+     "page": 1
+    },
+    {
+     "doc_id": "PEPSICO_2023Q1_EARNINGS",
+     "page": 2
+    },
+    {
+     "doc_id": "PEPSICO_2023Q1_EARNINGS",
+     "page": 11
+    },
+    {
+     "doc_id": "PEPSICO_2023Q2_EARNINGS",
+     "page": 1
+    },
+    {
+     "doc_id": "PEPSICO_2023Q2_EARNINGS",
+     "page": 12
+    },
+    {
+     "doc_id": "PEPSICO_2023Q1_EARNINGS",
+     "page": 1
+    },
+    {
+     "doc_id": "PEPSICO_2023Q2_EARNINGS",
+     "page": 3
+    },
+    {
+     "doc_id": "PEPSICO_2023Q2_EARNINGS",
+     "page": 1
+    }
+   ],
+   "answer": {
+    "status": "answered",
+    "answer": "PepsiCo�s organic revenue grew 14.3% in the first quarter of 2023 (Q1 2023) [C1].",
+    "citations": [
+     {
+      "doc_id": "PEPSICO_2023Q1_EARNINGS",
+      "page": 1,
+      "chunk_id": "190f34ddff1fadd5"
+     }
+    ]
+   },
+   "answer_metrics": {
+    "status_ok": true,
+    "expected": "answered",
+    "got": "answered",
+    "seconds": 0.22,
+    "waited_s": 0.0,
+    "seconds_net": 0.22,
+    "llm_called": true,
+    "ungrounded_warnings": 0,
+    "numeric_ok": true,
+    "cite_hit": true,
+    "cite_precision": 1.0,
+    "answer_ok": true,
+    "context_chunks": 8,
+    "llm_cached": true
+   },
+   "question": "How fast did PepsiCo's organic sales grow in the first quarter of 2023?",
+   "gold_answer": "14.3% organic revenue growth.",
+   "has_numeric": true
+  },
+  {
+   "id": "g_s12",
+   "role": "consumer",
+   "type": "answerable",
+   "tags": [
+    "calc",
+    "earnings",
+    "generated",
+    "tune"
+   ],
+   "gold": [
+    {
+     "doc_id": "ULTABEAUTY_2024Q1_EARNINGS",
+     "pages": [
+      1
+     ]
+    }
+   ],
+   "doc_types": [
+    "Earnings"
+   ],
+   "latency_ms": 344.4,
+   "rerank_ms": null,
+   "acl_leaks": 0,
+   "top10": [
+    {
+     "doc_id": "ULTABEAUTY_2024Q2_EARNINGS",
+     "page": 2,
+     "score": 0.8047
+    },
+    {
+     "doc_id": "ULTABEAUTY_2024Q1_EARNINGS",
+     "page": 1,
+     "score": 0.78508
+    },
+    {
+     "doc_id": "ULTABEAUTY_2024Q2_EARNINGS",
+     "page": 2,
+     "score": 0.78239
+    },
+    {
+     "doc_id": "ULTABEAUTY_2024Q1_EARNINGS",
+     "page": 1,
+     "score": 0.77981
+    },
+    {
+     "doc_id": "ULTABEAUTY_2024Q2_EARNINGS",
+     "page": 2,
+     "score": 0.77023
+    },
+    {
+     "doc_id": "ULTABEAUTY_2024Q1_EARNINGS",
+     "page": 2,
+     "score": 0.76782
+    },
+    {
+     "doc_id": "ULTABEAUTY_2024Q2_EARNINGS",
+     "page": 3,
+     "score": 0.76394
+    },
+    {
+     "doc_id": "ULTABEAUTY_2024Q2_EARNINGS",
+     "page": 1,
+     "score": 0.75542
+    },
+    {
+     "doc_id": "ULTABEAUTY_2024Q2_EARNINGS",
+     "page": 9,
+     "score": 0.75264
+    },
+    {
+     "doc_id": "ULTABEAUTY_2024Q2_EARNINGS",
+     "page": 1,
+     "score": 0.74444
+    }
+   ],
+   "metrics": {
+    "doc_hit@5": 1.0,
+    "page_hit@5": 1.0,
+    "gold_page_recall@5": 1.0,
+    "doc_hit@10": 1.0,
+    "page_hit@10": 1.0,
+    "gold_page_recall@10": 1.0,
+    "doc_hit@20": 1.0,
+    "page_hit@20": 1.0,
+    "gold_page_recall@20": 1.0,
+    "mrr@10": 0.5,
+    "askk_page_hit": 1.0,
+    "ctx_page_hit": 1.0,
+    "ctx_gold_recall": 1.0
+   },
+   "ctx": [
+    {
+     "doc_id": "ULTABEAUTY_2024Q2_EARNINGS",
+     "page": 2
+    },
+    {
+     "doc_id": "ULTABEAUTY_2024Q1_EARNINGS",
+     "page": 1
+    },
+    {
+     "doc_id": "ULTABEAUTY_2024Q2_EARNINGS",
+     "page": 2
+    },
+    {
+     "doc_id": "ULTABEAUTY_2024Q1_EARNINGS",
+     "page": 1
+    },
+    {
+     "doc_id": "ULTABEAUTY_2024Q2_EARNINGS",
+     "page": 2
+    },
+    {
+     "doc_id": "ULTABEAUTY_2024Q1_EARNINGS",
+     "page": 2
+    },
+    {
+     "doc_id": "ULTABEAUTY_2024Q2_EARNINGS",
+     "page": 3
+    },
+    {
+     "doc_id": "ULTABEAUTY_2024Q2_EARNINGS",
+     "page": 1
+    }
+   ],
+   "answer": {
+    "status": "refused",
+    "answer": "The provided documents do not contain the answer for the exact company and period asked.",
+    "citations": []
+   },
+   "answer_metrics": {
+    "status_ok": false,
+    "expected": "answered",
+    "got": "refused",
+    "seconds": 0.29,
+    "waited_s": 0.0,
+    "seconds_net": 0.29,
+    "llm_called": true,
+    "ungrounded_warnings": 0,
+    "numeric_ok": false,
+    "cite_hit": null,
+    "cite_precision": null,
+    "answer_ok": false,
+    "context_chunks": 8,
+    "llm_cached": true
+   },
+   "question": "How much did Ulta's net sales grow year over year in the first quarter of fiscal 2024?",
+   "gold_answer": "About 12.3%: net sales of $2,634.3M vs $2,345.9M.",
+   "has_numeric": true
+  },
+  {
+   "id": "g_s14",
+   "role": "health_industrials",
+   "type": "answerable",
+   "tags": [
+    "8k",
+    "calc",
+    "generated",
+    "tune"
+   ],
+   "gold": [
+    {
+     "doc_id": "JOHNSON_JOHNSON_2023_8K_dated-2023-08-23",
+     "pages": [
+      2
+     ]
+    }
+   ],
+   "doc_types": [
+    "8k"
+   ],
+   "latency_ms": 255.0,
+   "rerank_ms": null,
+   "acl_leaks": 0,
+   "top10": [
+    {
+     "doc_id": "JOHNSON_JOHNSON_2023_8K_dated-2023-08-23",
+     "page": 2,
+     "score": 0.81695
+    },
+    {
+     "doc_id": "JOHNSON_JOHNSON_2023_8K_dated-2023-08-30",
+     "page": 6,
+     "score": 0.72642
+    },
+    {
+     "doc_id": "JOHNSON_JOHNSON_2023_8K_dated-2023-08-30",
+     "page": 2,
+     "score": 0.71322
+    },
+    {
+     "doc_id": "JOHNSON_JOHNSON_2023_8K_dated-2023-08-30",
+     "page": 4,
+     "score": 0.68745
+    },
+    {
+     "doc_id": "JOHNSON_JOHNSON_2016_10K",
+     "page": 17,
+     "score": 0.68679
+    },
+    {
+     "doc_id": "JOHNSON_JOHNSON_2023_8K_dated-2023-08-30",
+     "page": 4,
+     "score": 0.68616
+    },
+    {
+     "doc_id": "JOHNSON_JOHNSON_2023Q2_EARNINGS",
+     "page": 1,
+     "score": 0.68276
+    },
+    {
+     "doc_id": "JOHNSON_JOHNSON_2017_10K",
+     "page": 18,
+     "score": 0.68267
+    },
+    {
+     "doc_id": "JOHNSON_JOHNSON_2016_10K",
+     "page": 18,
+     "score": 0.67917
+    },
+    {
+     "doc_id": "JOHNSON_JOHNSON_2017_10K",
+     "page": 70,
+     "score": 0.67855
+    }
+   ],
+   "metrics": {
+    "doc_hit@5": 1.0,
+    "page_hit@5": 1.0,
+    "gold_page_recall@5": 1.0,
+    "doc_hit@10": 1.0,
+    "page_hit@10": 1.0,
+    "gold_page_recall@10": 1.0,
+    "doc_hit@20": 1.0,
+    "page_hit@20": 1.0,
+    "gold_page_recall@20": 1.0,
+    "mrr@10": 1.0,
+    "askk_page_hit": 1.0,
+    "ctx_page_hit": 1.0,
+    "ctx_gold_recall": 1.0
+   },
+   "ctx": [
+    {
+     "doc_id": "JOHNSON_JOHNSON_2023_8K_dated-2023-08-23",
+     "page": 2
+    },
+    {
+     "doc_id": "JOHNSON_JOHNSON_2023_8K_dated-2023-08-30",
+     "page": 6
+    },
+    {
+     "doc_id": "JOHNSON_JOHNSON_2023_8K_dated-2023-08-30",
+     "page": 2
+    },
+    {
+     "doc_id": "JOHNSON_JOHNSON_2023_8K_dated-2023-08-30",
+     "page": 4
+    },
+    {
+     "doc_id": "JOHNSON_JOHNSON_2016_10K",
+     "page": 17
+    },
+    {
+     "doc_id": "JOHNSON_JOHNSON_2023_8K_dated-2023-08-30",
+     "page": 4
+    },
+    {
+     "doc_id": "JOHNSON_JOHNSON_2023Q2_EARNINGS",
+     "page": 1
+    },
+    {
+     "doc_id": "JOHNSON_JOHNSON_2017_10K",
+     "page": 18
+    }
+   ],
+   "answer": {
+    "status": "answered",
+    "answer": "The split-off exchange offered 1,533,830,450 Kenvue shares in exchange for 190,955,435 Johnson & Johnson shares (both figures from the 8-K filing)[C1]. The exchange ratio is calculated as:\n\n1,533,830,450 Kenvue shares � 190,955,435 J&J shares = 8.0324 Kenvue shares per J&J share (rounded to four decimal places).\n\nThus, each Johnson & Johnson share tendered received about 8.03 Kenvue shares. This ratio applies to the 2023 Kenvue split-off completed on August 23 2023[C1].",
+    "citations": [
+     {
+      "doc_id": "JOHNSON_JOHNSON_2023_8K_dated-2023-08-23",
+      "page": 2,
+      "chunk_id": "23f3c56b59888382"
+     }
+    ]
+   },
+   "answer_metrics": {
+    "status_ok": true,
+    "expected": "answered",
+    "got": "answered",
+    "seconds": 0.18,
+    "waited_s": 0.0,
+    "seconds_net": 0.18,
+    "llm_called": true,
+    "ungrounded_warnings": 1,
+    "numeric_ok": true,
+    "cite_hit": true,
+    "cite_precision": 1.0,
+    "answer_ok": true,
+    "context_chunks": 8,
+    "llm_cached": true
+   },
+   "question": "In J&J's Kenvue split-off, how many Kenvue shares were exchanged for each J&J share tendered?",
+   "gold_answer": "About 8.03: 1,533,830,450 Kenvue shares for 190,955,435 J&J shares.",
+   "has_numeric": true
+  },
+  {
+   "id": "g_l03",
+   "role": "lead",
+   "type": "answerable",
+   "tags": [
+    "compare",
+    "generated",
+    "statement_table",
+    "tune"
+   ],
+   "gold": [
+    {
+     "doc_id": "PFIZER_2022_10K",
+     "pages": [
+      54
+     ]
+    },
+    {
+     "doc_id": "JOHNSON_JOHNSON_2022_10K",
+     "pages": [
+      47
+     ]
+    }
+   ],
+   "doc_types": [
+    "10k"
+   ],
+   "latency_ms": 356.5,
+   "rerank_ms": null,
+   "acl_leaks": 0,
+   "top10": [
+    {
+     "doc_id": "JOHNSON_JOHNSON_2022Q4_EARNINGS",
+     "page": 1,
+     "score": 0.75033
+    },
+    {
+     "doc_id": "PFIZER_2022_10K",
+     "page": 34,
+     "score": 0.74412
+    },
+    {
+     "doc_id": "JOHNSON_JOHNSON_2022_10K",
+     "page": 30,
+     "score": 0.74099
+    },
+    {
+     "doc_id": "JOHNSON_JOHNSON_2022_10K",
+     "page": 30,
+     "score": 0.73665
+    },
+    {
+     "doc_id": "PFIZER_2022_10K",
+     "page": 69,
+     "score": 0.73306
+    },
+    {
+     "doc_id": "PFIZER_2022_10K",
+     "page": 70,
+     "score": 0.73067
+    },
+    {
+     "doc_id": "JOHNSON_JOHNSON_2022_10K",
+     "page": 30,
+     "score": 0.72903
+    },
+    {
+     "doc_id": "JOHNSON_JOHNSON_2022_10K",
+     "page": 33,
+     "score": 0.72201
+    },
+    {
+     "doc_id": "PFIZER_2022_10K",
+     "page": 73,
+     "score": 0.71864
+    },
+    {
+     "doc_id": "PFIZER_2022_10K",
+     "page": 33,
+     "score": 0.71863
+    }
+   ],
+   "metrics": {
+    "doc_hit@5": 1.0,
+    "page_hit@5": 0.0,
+    "gold_page_recall@5": 0.0,
+    "doc_hit@10": 1.0,
+    "page_hit@10": 0.0,
+    "gold_page_recall@10": 0.0,
+    "doc_hit@20": 1.0,
+    "page_hit@20": 0.0,
+    "gold_page_recall@20": 0.0,
+    "mrr@10": 0.0,
+    "askk_page_hit": 1.0,
+    "ctx_page_hit": 1.0,
+    "ctx_gold_recall": 0.5
+   },
+   "ctx": [
+    {
+     "doc_id": "JOHNSON_JOHNSON_2022Q4_EARNINGS",
+     "page": 1
+    },
+    {
+     "doc_id": "PFIZER_2022_10K",
+     "page": 34
+    },
+    {
+     "doc_id": "JOHNSON_JOHNSON_2022_10K",
+     "page": 28
+    },
+    {
+     "doc_id": "PFIZER_2022_10K",
+     "page": 105
+    },
+    {
+     "doc_id": "JOHNSON_JOHNSON_2022_10K",
+     "page": 87
+    },
+    {
+     "doc_id": "PFIZER_2022_10K",
+     "page": 22
+    },
+    {
+     "doc_id": "JOHNSON_JOHNSON_2022Q4_EARNINGS",
+     "page": 2
+    },
+    {
+     "doc_id": "PFIZER_2022_10K",
+     "page": 106
+    },
+    {
+     "doc_id": "JOHNSON_JOHNSON_2022Q4_EARNINGS",
+     "page": 11
+    },
+    {
+     "doc_id": "PFIZER_2022_10K",
+     "page": 54
+    },
+    {
+     "doc_id": "PFIZER_2022_10K",
+     "page": 70
+    }
+   ],
+   "answer": {
+    "status": "answered",
+    "answer": "In fiscal year 2022, Johnson & Johnson reported net earnings of $17,941 million (full-year net earnings)[C9], while Pfizer reported net income attributable to its common shareholders of $31,372 million[C10]. Therefore, Pfizer had the larger bottom line in 2022.",
+    "citations": [
+     {
+      "doc_id": "JOHNSON_JOHNSON_2022Q4_EARNINGS",
+      "page": 11,
+      "chunk_id": "5bcebedc8c0949d2"
+     },
+     {
+      "doc_id": "PFIZER_2022_10K",
+      "page": 54,
+      "chunk_id": "d796baa34753ab3c"
+     }
+    ]
+   },
+   "answer_metrics": {
+    "status_ok": true,
+    "expected": "answered",
+    "got": "answered",
+    "seconds": 0.15,
+    "waited_s": 0.0,
+    "seconds_net": 0.15,
+    "llm_called": true,
+    "ungrounded_warnings": 0,
+    "numeric_ok": true,
+    "cite_hit": true,
+    "cite_precision": 0.5,
+    "answer_ok": true,
+    "context_chunks": 11,
+    "llm_cached": true
+   },
+   "question": "Which had the bigger bottom line in 2022, Pfizer or J&J? Give both figures.",
+   "gold_answer": "Pfizer: net income attributable to common shareholders $31,372M; J&J: net earnings $17,941M.",
+   "has_numeric": true
+  },
+  {
+   "id": "g_l04",
+   "role": "lead",
+   "type": "answerable",
+   "tags": [
+    "compare",
+    "generated",
+    "statement_table",
+    "tune"
+   ],
+   "gold": [
+    {
+     "doc_id": "VERIZON_2022_10K",
+     "pages": [
+      54
+     ]
+    },
+    {
+     "doc_id": "AMD_2022_10K",
+     "pages": [
+      54
+     ]
+    }
+   ],
+   "doc_types": [
+    "10k"
+   ],
+   "latency_ms": 214.5,
+   "rerank_ms": null,
+   "acl_leaks": 0,
+   "top10": [
+    {
+     "doc_id": "AMD_2022_10K",
+     "page": 68,
+     "score": 0.72364
+    },
+    {
+     "doc_id": "VERIZON_2022_10K",
+     "page": 54,
+     "score": 0.72028
+    },
+    {
+     "doc_id": "VERIZON_2022_10K",
+     "page": 55,
+     "score": 0.71816
+    },
+    {
+     "doc_id": "VERIZON_2022_10K",
+     "page": 27,
+     "score": 0.71204
+    },
+    {
+     "doc_id": "VERIZON_2022_10K",
+     "page": 25,
+     "score": 0.70961
+    },
+    {
+     "doc_id": "AMD_2022_10K",
+     "page": 55,
+     "score": 0.70893
+    },
+    {
+     "doc_id": "AMD_2022_10K",
+     "page": 86,
+     "score": 0.70831
+    },
+    {
+     "doc_id": "VERIZON_2022_10K",
+     "page": 54,
+     "score": 0.70618
+    },
+    {
+     "doc_id": "VERIZON_2022_10K",
+     "page": 98,
+     "score": 0.70395
+    },
+    {
+     "doc_id": "AMD_2022_10K",
+     "page": 85,
+     "score": 0.7033
+    }
+   ],
+   "metrics": {
+    "doc_hit@5": 1.0,
+    "page_hit@5": 1.0,
+    "gold_page_recall@5": 0.5,
+    "doc_hit@10": 1.0,
+    "page_hit@10": 1.0,
+    "gold_page_recall@10": 0.5,
+    "doc_hit@20": 1.0,
+    "page_hit@20": 1.0,
+    "gold_page_recall@20": 0.5,
+    "mrr@10": 0.5,
+    "askk_page_hit": 1.0,
+    "ctx_page_hit": 1.0,
+    "ctx_gold_recall": 0.5
+   },
+   "ctx": [
+    {
+     "doc_id": "AMD_2022_10K",
+     "page": 68
+    },
+    {
+     "doc_id": "VERIZON_2022_10K",
+     "page": 54
+    },
+    {
+     "doc_id": "AMD_2022_10K",
+     "page": 86
+    },
+    {
+     "doc_id": "VERIZON_2022_10K",
+     "page": 55
+    },
+    {
+     "doc_id": "AMD_2022_10K",
+     "page": 50
+    },
+    {
+     "doc_id": "VERIZON_2022_10K",
+     "page": 54
+    },
+    {
+     "doc_id": "AMD_2022_10K",
+     "page": 52
+    },
+    {
+     "doc_id": "VERIZON_2022_10K",
+     "page": 103
+    },
+    {
+     "doc_id": "AMD_2022_10K",
+     "page": 52
+    },
+    {
+     "doc_id": "VERIZON_2022_10K",
+     "page": 27
+    },
+    {
+     "doc_id": "VERIZON_2022_10K",
+     "page": 25
+    }
+   ],
+   "answer": {
+    "status": "answered",
+    "answer": "In fiscal year 2022, Verizon reported net income of $21,748 million [C2]. AMD reported net income of $1.3 billion, which converts to $1,300 million (1.3 billion � 1,000 = 1,300 million) [C5]. Therefore, Verizon earned more in 2022.",
+    "citations": [
+     {
+      "doc_id": "VERIZON_2022_10K",
+      "page": 54,
+      "chunk_id": "09302b92e4117a82"
+     },
+     {
+      "doc_id": "AMD_2022_10K",
+      "page": 50,
+      "chunk_id": "52a5af267e770e24"
+     }
+    ]
+   },
+   "answer_metrics": {
+    "status_ok": true,
+    "expected": "answered",
+    "got": "answered",
+    "seconds": 0.14,
+    "waited_s": 0.0,
+    "seconds_net": 0.14,
+    "llm_called": true,
+    "ungrounded_warnings": 0,
+    "numeric_ok": true,
+    "cite_hit": true,
+    "cite_precision": 0.5,
+    "answer_ok": true,
+    "context_chunks": 11,
+    "llm_cached": true
+   },
+   "question": "Which earned more in 2022, Verizon or AMD? State each company's net income.",
+   "gold_answer": "Verizon: net income attributable to Verizon $21,256M; AMD: net income $1,320M.",
+   "has_numeric": true
+  },
+  {
+   "id": "g_l05",
+   "role": "lead",
+   "type": "answerable",
+   "tags": [
+    "compare",
+    "generated",
+    "statement_table",
+    "tune"
+   ],
+   "gold": [
+    {
+     "doc_id": "ADOBE_2022_10K",
+     "pages": [
+      54
+     ]
+    },
+    {
+     "doc_id": "AMD_2022_10K",
+     "pages": [
+      54
+     ]
+    }
+   ],
+   "doc_types": [
+    "10k"
+   ],
+   "latency_ms": 191.4,
+   "rerank_ms": null,
+   "acl_leaks": 0,
+   "top10": [
+    {
+     "doc_id": "ADOBE_2022_10K",
+     "page": 40,
+     "score": 0.83449
+    },
+    {
+     "doc_id": "ADOBE_2022_10K",
+     "page": 65,
+     "score": 0.83026
+    },
+    {
+     "doc_id": "ADOBE_2022_10K",
+     "page": 42,
+     "score": 0.81687
+    },
+    {
+     "doc_id": "ADOBE_2022_10K",
+     "page": 65,
+     "score": 0.81642
+    },
+    {
+     "doc_id": "ADOBE_2022_10K",
+     "page": 42,
+     "score": 0.80349
+    },
+    {
+     "doc_id": "ADOBE_2022_10K",
+     "page": 40,
+     "score": 0.80232
+    },
+    {
+     "doc_id": "ADOBE_2022_10K",
+     "page": 42,
+     "score": 0.79813
+    },
+    {
+     "doc_id": "ADOBE_2022_10K",
+     "page": 39,
+     "score": 0.79753
+    },
+    {
+     "doc_id": "ADOBE_2022_10K",
+     "page": 77,
+     "score": 0.79454
+    },
+    {
+     "doc_id": "ADOBE_2022_10K",
+     "page": 76,
+     "score": 0.79371
+    }
+   ],
+   "metrics": {
+    "doc_hit@5": 1.0,
+    "page_hit@5": 0.0,
+    "gold_page_recall@5": 0.0,
+    "doc_hit@10": 1.0,
+    "page_hit@10": 0.0,
+    "gold_page_recall@10": 0.0,
+    "doc_hit@20": 1.0,
+    "page_hit@20": 1.0,
+    "gold_page_recall@20": 0.5,
+    "mrr@10": 0.0,
+    "askk_page_hit": 0.0,
+    "ctx_page_hit": 0.0,
+    "ctx_gold_recall": 0.0
+   },
+   "ctx": [
+    {
+     "doc_id": "AMD_2022_10K",
+     "page": 68
+    },
+    {
+     "doc_id": "ADOBE_2022_10K",
+     "page": 65
+    },
+    {
+     "doc_id": "AMD_2022_10K",
+     "page": 43
+    },
+    {
+     "doc_id": "ADOBE_2022_10K",
+     "page": 40
+    },
+    {
+     "doc_id": "AMD_2022_10K",
+     "page": 50
+    },
+    {
+     "doc_id": "ADOBE_2022_10K",
+     "page": 42
+    },
+    {
+     "doc_id": "AMD_2022_10K",
+     "page": 86
+    },
+    {
+     "doc_id": "ADOBE_2022_10K",
+     "page": 65
+    },
+    {
+     "doc_id": "AMD_2022_10K",
+     "page": 67
+    },
+    {
+     "doc_id": "ADOBE_2022_10K",
+     "page": 76
+    },
+    {
+     "doc_id": "ADOBE_2022_10K",
+     "page": 42
+    }
+   ],
+   "answer": {
+    "status": "answered",
+    "answer": "Adobe reported fiscal 2022 revenue of $17,606 million (≈ $17.6 billion) [C2]. AMD reported 2022 revenue of $23,601 million (≈ $23.6 billion) [C1]. The difference is $23,601 million − $17,606 million = $5,995 million (≈ $6.0 billion) [C1][C2].",
+    "citations": [
+     {
+      "doc_id": "ADOBE_2022_10K",
+      "page": 65,
+      "chunk_id": "aa877984d0f1bed4"
+     },
+     {
+      "doc_id": "AMD_2022_10K",
+      "page": 68,
+      "chunk_id": "ac90ac2e20bde9b5"
+     }
+    ]
+   },
+   "answer_metrics": {
+    "status_ok": true,
+    "expected": "answered",
+    "got": "answered",
+    "seconds": 0.25,
+    "waited_s": 0.0,
+    "seconds_net": 0.25,
+    "llm_called": true,
+    "ungrounded_warnings": 2,
+    "numeric_ok": true,
+    "cite_hit": false,
+    "cite_precision": 0.0,
+    "answer_ok": true,
+    "context_chunks": 11,
+    "llm_cached": true
+   },
+   "question": "How did Adobe's fiscal 2022 revenue stack up against AMD's 2022 revenue?",
+   "gold_answer": "Adobe's total revenue was $17,606M vs AMD's net revenue of $23,601M; AMD was higher by $5,995M.",
+   "has_numeric": true
+  },
+  {
+   "id": "g_y02",
+   "role": "health_industrials",
+   "type": "answerable",
+   "tags": [
+    "generated",
+    "statement_table",
+    "tune",
+    "year_ambiguous"
+   ],
+   "gold": [
+    {
+     "doc_id": "JOHNSON_JOHNSON_2021_10K",
+     "pages": [
+      48,
+      49
+     ]
+    },
+    {
+     "doc_id": "JOHNSON_JOHNSON_2022_10K",
+     "pages": [
+      47,
+      48
+     ]
+    }
+   ],
+   "doc_types": [
+    "10k"
+   ],
+   "latency_ms": 257.3,
+   "rerank_ms": null,
+   "acl_leaks": 0,
+   "top10": [
+    {
+     "doc_id": "JOHNSON_JOHNSON_2021_10K",
+     "page": 48,
+     "score": 0.83833
+    },
+    {
+     "doc_id": "JOHNSON_JOHNSON_2021_10K",
+     "page": 36,
+     "score": 0.83657
+    },
+    {
+     "doc_id": "JOHNSON_JOHNSON_2021_10K",
+     "page": 36,
+     "score": 0.83262
+    },
+    {
+     "doc_id": "JOHNSON_JOHNSON_2021_10K",
+     "page": 36,
+     "score": 0.82437
+    },
+    {
+     "doc_id": "JOHNSON_JOHNSON_2021_10K",
+     "page": 49,
+     "score": 0.81716
+    },
+    {
+     "doc_id": "JOHNSON_JOHNSON_2021_10K",
+     "page": 51,
+     "score": 0.79561
+    },
+    {
+     "doc_id": "JOHNSON_JOHNSON_2021_10K",
+     "page": 80,
+     "score": 0.79508
+    },
+    {
+     "doc_id": "JOHNSON_JOHNSON_2021_10K",
+     "page": 88,
+     "score": 0.79364
+    },
+    {
+     "doc_id": "JOHNSON_JOHNSON_2021_10K",
+     "page": 28,
+     "score": 0.79229
+    },
+    {
+     "doc_id": "JOHNSON_JOHNSON_2021_10K",
+     "page": 66,
+     "score": 0.78982
+    }
+   ],
+   "metrics": {
+    "doc_hit@5": 1.0,
+    "page_hit@5": 1.0,
+    "gold_page_recall@5": 0.5,
+    "doc_hit@10": 1.0,
+    "page_hit@10": 1.0,
+    "gold_page_recall@10": 0.5,
+    "doc_hit@20": 1.0,
+    "page_hit@20": 1.0,
+    "gold_page_recall@20": 0.5,
+    "mrr@10": 1.0,
+    "askk_page_hit": 1.0,
+    "ctx_page_hit": 1.0,
+    "ctx_gold_recall": 0.5
+   },
+   "ctx": [
+    {
+     "doc_id": "JOHNSON_JOHNSON_2021_10K",
+     "page": 48
+    },
+    {
+     "doc_id": "JOHNSON_JOHNSON_2021_10K",
+     "page": 36
+    },
+    {
+     "doc_id": "JOHNSON_JOHNSON_2021_10K",
+     "page": 36
+    },
+    {
+     "doc_id": "JOHNSON_JOHNSON_2021_10K",
+     "page": 36
+    },
+    {
+     "doc_id": "JOHNSON_JOHNSON_2021_10K",
+     "page": 49
+    },
+    {
+     "doc_id": "JOHNSON_JOHNSON_2021_10K",
+     "page": 51
+    },
+    {
+     "doc_id": "JOHNSON_JOHNSON_2021_10K",
+     "page": 80
+    },
+    {
+     "doc_id": "JOHNSON_JOHNSON_2021_10K",
+     "page": 88
+    }
+   ],
+   "answer": {
+    "status": "answered",
+    "answer": "Johnson & Johnson reported net earnings of $20,878 million for fiscal year 2021. [C1][C5]",
+    "citations": [
+     {
+      "doc_id": "JOHNSON_JOHNSON_2021_10K",
+      "page": 48,
+      "chunk_id": "e1e4541b9ae29d0b"
+     },
+     {
+      "doc_id": "JOHNSON_JOHNSON_2021_10K",
+      "page": 49,
+      "chunk_id": "0c1d4885f1378dea"
+     }
+    ]
+   },
+   "answer_metrics": {
+    "status_ok": true,
+    "expected": "answered",
+    "got": "answered",
+    "seconds": 0.33,
+    "waited_s": 0.0,
+    "seconds_net": 0.33,
+    "llm_called": true,
+    "ungrounded_warnings": 0,
+    "numeric_ok": true,
+    "cite_hit": true,
+    "cite_precision": 1.0,
+    "answer_ok": true,
+    "context_chunks": 8,
+    "llm_cached": true
+   },
+   "question": "What were Johnson & Johnson's net earnings in 2021?",
+   "gold_answer": "$20,878 million (fiscal 2021, ended Jan 2, 2022); also shown as the prior-year column of the 2022 10-K.",
+   "has_numeric": true
+  },
+  {
+   "id": "g_y03",
+   "role": "consumer",
+   "type": "answerable",
+   "tags": [
+    "generated",
+    "statement_table",
+    "tune",
+    "year_ambiguous"
+   ],
+   "gold": [
+    {
+     "doc_id": "ULTABEAUTY_2023_10K",
+     "pages": [
+      37
+     ]
+    },
+    {
+     "doc_id": "ULTABEAUTY_2023Q4_EARNINGS",
+     "pages": [
+      1,
+      6
+     ]
+    }
+   ],
+   "doc_types": [
+    "10k",
+    "Earnings"
+   ],
+   "latency_ms": 159.7,
+   "rerank_ms": null,
+   "acl_leaks": 0,
+   "top10": [
+    {
+     "doc_id": "ULTABEAUTY_2023_10K",
+     "page": 38,
+     "score": 0.86096
+    },
+    {
+     "doc_id": "ULTABEAUTY_2024Q2_EARNINGS",
+     "page": 1,
+     "score": 0.82015
+    },
+    {
+     "doc_id": "ULTABEAUTY_2024Q2_EARNINGS",
+     "page": 2,
+     "score": 0.81821
+    },
+    {
+     "doc_id": "ULTABEAUTY_2023Q4_EARNINGS",
+     "page": 1,
+     "score": 0.81612
+    },
+    {
+     "doc_id": "ULTABEAUTY_2023Q4_EARNINGS",
+     "page": 1,
+     "score": 0.8157
+    },
+    {
+     "doc_id": "ULTABEAUTY_2024Q2_EARNINGS",
+     "page": 2,
+     "score": 0.80889
+    },
+    {
+     "doc_id": "ULTABEAUTY_2023_10K",
+     "page": 42,
+     "score": 0.80633
+    },
+    {
+     "doc_id": "ULTABEAUTY_2024Q1_EARNINGS",
+     "page": 1,
+     "score": 0.80606
+    },
+    {
+     "doc_id": "ULTABEAUTY_2024Q2_EARNINGS",
+     "page": 1,
+     "score": 0.80588
+    },
+    {
+     "doc_id": "ULTABEAUTY_2023Q4_EARNINGS",
+     "page": 1,
+     "score": 0.79782
+    }
+   ],
+   "metrics": {
+    "doc_hit@5": 1.0,
+    "page_hit@5": 1.0,
+    "gold_page_recall@5": 0.3333333333333333,
+    "doc_hit@10": 1.0,
+    "page_hit@10": 1.0,
+    "gold_page_recall@10": 0.3333333333333333,
+    "doc_hit@20": 1.0,
+    "page_hit@20": 1.0,
+    "gold_page_recall@20": 0.3333333333333333,
+    "mrr@10": 0.25,
+    "askk_page_hit": 1.0,
+    "ctx_page_hit": 1.0,
+    "ctx_gold_recall": 0.3333333333333333
+   },
+   "ctx": [
+    {
+     "doc_id": "ULTABEAUTY_2023_10K",
+     "page": 38
+    },
+    {
+     "doc_id": "ULTABEAUTY_2024Q2_EARNINGS",
+     "page": 1
+    },
+    {
+     "doc_id": "ULTABEAUTY_2024Q2_EARNINGS",
+     "page": 2
+    },
+    {
+     "doc_id": "ULTABEAUTY_2023Q4_EARNINGS",
+     "page": 1
+    },
+    {
+     "doc_id": "ULTABEAUTY_2023Q4_EARNINGS",
+     "page": 1
+    },
+    {
+     "doc_id": "ULTABEAUTY_2024Q2_EARNINGS",
+     "page": 2
+    },
+    {
+     "doc_id": "ULTABEAUTY_2023_10K",
+     "page": 42
+    },
+    {
+     "doc_id": "ULTABEAUTY_2024Q1_EARNINGS",
+     "page": 1
+    }
+   ],
+   "answer": {
+    "status": "answered",
+    "answer": "Ulta Beauty's full-year net sales for fiscal 2022 were $10.2 billion. This is based on the reported $10.2 billion in net sales for fiscal 2022 [C1] and the $10,208.6 million figure for the 52-week period ending January 28, 2023, which converts to $10.2086 billion (≈$10.2 billion) [C5].",
+    "citations": [
+     {
+      "doc_id": "ULTABEAUTY_2023_10K",
+      "page": 38,
+      "chunk_id": "50d2f52fc9fdd053"
+     },
+     {
+      "doc_id": "ULTABEAUTY_2023Q4_EARNINGS",
+      "page": 1,
+      "chunk_id": "e7e26e21803211d6"
+     }
+    ]
+   },
+   "answer_metrics": {
+    "status_ok": true,
+    "expected": "answered",
+    "got": "answered",
+    "seconds": 0.19,
+    "waited_s": 0.0,
+    "seconds_net": 0.19,
+    "llm_called": true,
+    "ungrounded_warnings": 1,
+    "numeric_ok": true,
+    "cite_hit": true,
+    "cite_precision": 0.5,
+    "answer_ok": true,
+    "context_chunks": 8,
+    "llm_cached": true
+   },
+   "question": "What were Ulta Beauty's full-year net sales for fiscal 2022?",
+   "gold_answer": "$10,208.6 million (fiscal 2022, ended Jan 28, 2023); the corpus files it as period 2023 (10-K and Q4 earnings release).",
+   "has_numeric": true
+  },
+  {
+   "id": "g_o01",
+   "role": "consumer",
+   "type": "off_desk",
+   "tags": [
+    "generated",
+    "off_desk",
+    "tune"
+   ],
+   "gold": [],
+   "doc_types": [],
+   "latency_ms": 355.3,
+   "rerank_ms": null,
+   "acl_leaks": 0,
+   "top10": [
+    {
+     "doc_id": "PEPSICO_2022_10K",
+     "page": 73,
+     "score": 0.69759
+    },
+    {
+     "doc_id": "PEPSICO_2022_10K",
+     "page": 78,
+     "score": 0.69023
+    },
+    {
+     "doc_id": "PEPSICO_2022_10K",
+     "page": 62,
+     "score": 0.68392
+    },
+    {
+     "doc_id": "PEPSICO_2022_10K",
+     "page": 76,
+     "score": 0.67954
+    },
+    {
+     "doc_id": "PEPSICO_2022_10K",
+     "page": 74,
+     "score": 0.67802
+    },
+    {
+     "doc_id": "MGMRESORTS_2022_10K",
+     "page": 38,
+     "score": 0.67786
+    },
+    {
+     "doc_id": "PEPSICO_2022_10K",
+     "page": 73,
+     "score": 0.67692
+    },
+    {
+     "doc_id": "PEPSICO_2022_10K",
+     "page": 76,
+     "score": 0.67517
+    },
+    {
+     "doc_id": "BESTBUY_2022_10K",
+     "page": 26,
+     "score": 0.67429
+    },
+    {
+     "doc_id": "ULTABEAUTY_2023_10K",
+     "page": 38,
+     "score": 0.67388
+    }
+   ],
+   "metrics": null,
+   "answer": {
+    "status": "refused",
+    "answer": "This question concerns a company outside your desk's coverage.",
+    "citations": []
+   },
+   "answer_metrics": {
+    "status_ok": true,
+    "expected": "refused",
+    "got": "refused",
+    "seconds": 0.0,
+    "waited_s": 0.0,
+    "seconds_net": 0.0,
+    "llm_called": false,
+    "ungrounded_warnings": 0,
+    "numeric_ok": null,
+    "cite_hit": null,
+    "cite_precision": null,
+    "answer_ok": true,
+    "context_chunks": 0,
+    "llm_cached": false
+   },
+   "question": "What was Pfizer's total revenue in 2022?",
+   "gold_answer": "REFUSE (Pfizer is not on the consumer desk).",
+   "has_numeric": false
+  },
+  {
+   "id": "g_o02",
+   "role": "consumer",
+   "type": "off_desk",
+   "tags": [
+    "generated",
+    "off_desk",
+    "tune"
+   ],
+   "gold": [],
+   "doc_types": [],
+   "latency_ms": 352.7,
+   "rerank_ms": null,
+   "acl_leaks": 0,
+   "top10": [
+    {
+     "doc_id": "MGMRESORTS_2021_10K",
+     "page": 106,
+     "score": 0.68895
+    },
+    {
+     "doc_id": "MGMRESORTS_2021_10K",
+     "page": 86,
+     "score": 0.68826
+    },
+    {
+     "doc_id": "ULTABEAUTY_2023_10K",
+     "page": 42,
+     "score": 0.68485
+    },
+    {
+     "doc_id": "MGMRESORTS_2021_10K",
+     "page": 106,
+     "score": 0.68252
+    },
+    {
+     "doc_id": "ULTABEAUTY_2023_10K",
+     "page": 42,
+     "score": 0.67845
+    },
+    {
+     "doc_id": "BESTBUY_2021_10K",
+     "page": 66,
+     "score": 0.67754
+    },
+    {
+     "doc_id": "MGMRESORTS_2021_10K",
+     "page": 78,
+     "score": 0.67273
+    },
+    {
+     "doc_id": "MGMRESORTS_2021_10K",
+     "page": 103,
+     "score": 0.67046
+    },
+    {
+     "doc_id": "PEPSICO_2021_10K",
+     "page": 71,
+     "score": 0.67022
+    },
+    {
+     "doc_id": "MGMRESORTS_2021_10K",
+     "page": 46,
+     "score": 0.6677
+    }
+   ],
+   "metrics": null,
+   "answer": {
+    "status": "refused",
+    "answer": "This question concerns a company outside your desk's coverage.",
+    "citations": []
+   },
+   "answer_metrics": {
+    "status_ok": true,
+    "expected": "refused",
+    "got": "refused",
+    "seconds": 0.0,
+    "waited_s": 0.0,
+    "seconds_net": 0.0,
+    "llm_called": false,
+    "ungrounded_warnings": 0,
+    "numeric_ok": null,
+    "cite_hit": null,
+    "cite_precision": null,
+    "answer_ok": true,
+    "context_chunks": 0,
+    "llm_cached": false
+   },
+   "question": "How much did AMD spend on research and development in 2021?",
+   "gold_answer": "REFUSE (AMD is not on the consumer desk).",
+   "has_numeric": false
+  },
+  {
+   "id": "g_o05",
+   "role": "tech_telecom",
+   "type": "off_desk",
+   "tags": [
+    "generated",
+    "off_desk",
+    "tune"
+   ],
+   "gold": [],
+   "doc_types": [],
+   "latency_ms": 348.5,
+   "rerank_ms": null,
+   "acl_leaks": 0,
+   "top10": [
+    {
+     "doc_id": "AMD_2022_10K",
+     "page": 68,
+     "score": 0.66169
+    },
+    {
+     "doc_id": "AMD_2022_10K",
+     "page": 66,
+     "score": 0.65446
+    },
+    {
+     "doc_id": "AMD_2022_10K",
+     "page": 87,
+     "score": 0.65412
+    },
+    {
+     "doc_id": "AMD_2022_10K",
+     "page": 88,
+     "score": 0.65373
+    },
+    {
+     "doc_id": "AMD_2022_10K",
+     "page": 68,
+     "score": 0.65241
+    },
+    {
+     "doc_id": "AMD_2022_10K",
+     "page": 88,
+     "score": 0.6519
+    },
+    {
+     "doc_id": "CORNING_2022_10K",
+     "page": 23,
+     "score": 0.64851
+    },
+    {
+     "doc_id": "AMD_2022_10K",
+     "page": 88,
+     "score": 0.64677
+    },
+    {
+     "doc_id": "AMD_2022_10K",
+     "page": 87,
+     "score": 0.64457
+    },
+    {
+     "doc_id": "CORNING_2022_10K",
+     "page": 23,
+     "score": 0.64457
+    }
+   ],
+   "metrics": null,
+   "answer": {
+    "status": "refused",
+    "answer": "This question concerns a company outside your desk's coverage.",
+    "citations": []
+   },
+   "answer_metrics": {
+    "status_ok": true,
+    "expected": "refused",
+    "got": "refused",
+    "seconds": 0.0,
+    "waited_s": 0.0,
+    "seconds_net": 0.0,
+    "llm_called": false,
+    "ungrounded_warnings": 0,
+    "numeric_ok": null,
+    "cite_hit": null,
+    "cite_precision": null,
+    "answer_ok": true,
+    "context_chunks": 0,
+    "llm_cached": false
+   },
+   "question": "What was Boeing's backlog at the end of 2022?",
+   "gold_answer": "REFUSE (Boeing is not on the tech_telecom desk).",
+   "has_numeric": false
+  },
+  {
+   "id": "g_o06",
+   "role": "tech_telecom",
+   "type": "off_desk",
+   "tags": [
+    "generated",
+    "off_desk",
+    "tune"
+   ],
+   "gold": [],
+   "doc_types": [],
+   "latency_ms": 288.5,
+   "rerank_ms": null,
+   "acl_leaks": 0,
+   "top10": [
+    {
+     "doc_id": "AMD_2021_10K",
+     "page": 46,
+     "score": 0.70657
+    },
+    {
+     "doc_id": "AMD_2022_10K",
+     "page": 68,
+     "score": 0.69912
+    },
+    {
+     "doc_id": "ADOBE_2022_10K",
+     "page": 40,
+     "score": 0.69807
+    },
+    {
+     "doc_id": "AMD_2021_10K",
+     "page": 47,
+     "score": 0.698
+    },
+    {
+     "doc_id": "CORNING_2023Q2_10Q",
+     "page": 23,
+     "score": 0.69535
+    },
+    {
+     "doc_id": "CORNING_2023Q2_10Q",
+     "page": 23,
+     "score": 0.695
+    },
+    {
+     "doc_id": "ADOBE_2019_10K",
+     "page": 42,
+     "score": 0.69456
+    },
+    {
+     "doc_id": "AMD_2022_10K",
+     "page": 68,
+     "score": 0.69335
+    },
+    {
+     "doc_id": "AMD_2021_10K",
+     "page": 47,
+     "score": 0.68989
+    },
+    {
+     "doc_id": "AMD_2020_10K",
+     "page": 42,
+     "score": 0.68845
+    }
+   ],
+   "metrics": null,
+   "answer": {
+    "status": "refused",
+    "answer": "This question concerns a company outside your desk's coverage.",
+    "citations": []
+   },
+   "answer_metrics": {
+    "status_ok": true,
+    "expected": "refused",
+    "got": "refused",
+    "seconds": 0.0,
+    "waited_s": 0.0,
+    "seconds_net": 0.0,
+    "llm_called": false,
+    "ungrounded_warnings": 0,
+    "numeric_ok": null,
+    "cite_hit": null,
+    "cite_precision": null,
+    "answer_ok": true,
+    "context_chunks": 0,
+    "llm_cached": false
+   },
+   "question": "How much revenue did Best Buy generate in fiscal 2023?",
+   "gold_answer": "REFUSE (Best Buy is not on the tech_telecom desk).",
+   "has_numeric": false
+  },
+  {
+   "id": "g_u02",
+   "role": "tech_telecom",
+   "type": "unanswerable",
+   "tags": [
+    "generated",
+    "tune",
+    "unanswerable",
+    "year_beyond_corpus"
+   ],
+   "gold": [],
+   "doc_types": [],
+   "latency_ms": 195.9,
+   "rerank_ms": null,
+   "acl_leaks": 0,
+   "top10": [
+    {
+     "doc_id": "VERIZON_2020_10K",
+     "page": 54,
+     "score": 0.83431
+    },
+    {
+     "doc_id": "VERIZON_2020_10K",
+     "page": 25,
+     "score": 0.83334
+    },
+    {
+     "doc_id": "VERIZON_2021_10K",
+     "page": 51,
+     "score": 0.83253
+    },
+    {
+     "doc_id": "VERIZON_2022_10K",
+     "page": 54,
+     "score": 0.82968
+    },
+    {
+     "doc_id": "VERIZON_2019_10K",
+     "page": 72,
+     "score": 0.82521
+    },
+    {
+     "doc_id": "VERIZON_2018_10K",
+     "page": 111,
+     "score": 0.82307
+    },
+    {
+     "doc_id": "VERIZON_2021_10K",
+     "page": 23,
+     "score": 0.82115
+    },
+    {
+     "doc_id": "VERIZON_2022_10K",
+     "page": 35,
+     "score": 0.80898
+    },
+    {
+     "doc_id": "VERIZON_2022_10K",
+     "page": 27,
+     "score": 0.80469
+    },
+    {
+     "doc_id": "VERIZON_2020_10K",
+     "page": 100,
+     "score": 0.80144
+    }
+   ],
+   "metrics": null,
+   "answer": {
+    "status": "refused",
+    "answer": "No filings in the corpus cover FY2024 for Verizon.",
+    "citations": []
+   },
+   "answer_metrics": {
+    "status_ok": true,
+    "expected": "refused",
+    "got": "refused",
+    "seconds": 0.0,
+    "waited_s": 0.0,
+    "seconds_net": 0.0,
+    "llm_called": false,
+    "ungrounded_warnings": 0,
+    "numeric_ok": null,
+    "cite_hit": null,
+    "cite_precision": null,
+    "answer_ok": true,
+    "context_chunks": 0,
+    "llm_cached": false
+   },
+   "question": "What was Verizon's total revenue in fiscal 2024?",
+   "gold_answer": "REFUSE (latest Verizon filing is the FY2022 10-K).",
+   "has_numeric": false
+  },
+  {
+   "id": "g_u03",
+   "role": "consumer",
+   "type": "unanswerable",
+   "tags": [
+    "generated",
+    "proxy_only",
+    "tune",
+    "unanswerable"
+   ],
+   "gold": [],
+   "doc_types": [],
+   "latency_ms": 237.4,
+   "rerank_ms": null,
+   "acl_leaks": 0,
+   "top10": [
+    {
+     "doc_id": "PEPSICO_2022_10K",
+     "page": 62,
+     "score": 0.80165
+    },
+    {
+     "doc_id": "PEPSICO_2022_10K",
+     "page": 79,
+     "score": 0.78806
+    },
+    {
+     "doc_id": "PEPSICO_2022_10K",
+     "page": 63,
+     "score": 0.78303
+    },
+    {
+     "doc_id": "PEPSICO_2022Q4_EARNINGS",
+     "page": 19,
+     "score": 0.7819
+    },
+    {
+     "doc_id": "PEPSICO_2022Q4_EARNINGS",
+     "page": 20,
+     "score": 0.77833
+    },
+    {
+     "doc_id": "PEPSICO_2022_10K",
+     "page": 64,
+     "score": 0.77823
+    },
+    {
+     "doc_id": "PEPSICO_2022_10K",
+     "page": 128,
+     "score": 0.77795
+    },
+    {
+     "doc_id": "PEPSICO_2022Q4_EARNINGS",
+     "page": 20,
+     "score": 0.7755
+    },
+    {
+     "doc_id": "PEPSICO_2022Q4_EARNINGS",
+     "page": 9,
+     "score": 0.7738
+    },
+    {
+     "doc_id": "PEPSICO_2022Q4_EARNINGS",
+     "page": 18,
+     "score": 0.77334
+    }
+   ],
+   "metrics": null,
+   "answer": {
+    "status": "refused",
+    "answer": "The provided documents do not contain the answer for the exact company and period asked.",
+    "citations": []
+   },
+   "answer_metrics": {
+    "status_ok": true,
+    "expected": "refused",
+    "got": "refused",
+    "seconds": 0.23,
+    "waited_s": 0.0,
+    "seconds_net": 0.23,
+    "llm_called": true,
+    "ungrounded_warnings": 0,
+    "numeric_ok": null,
+    "cite_hit": null,
+    "cite_precision": null,
+    "answer_ok": true,
+    "context_chunks": 8,
+    "llm_cached": true
+   },
+   "question": "What was the total compensation of PepsiCo's CEO in 2022?",
+   "gold_answer": "REFUSE (executive pay is in the proxy statement, which is not in the corpus).",
+   "has_numeric": false
+  },
+  {
+   "id": "g_u05",
+   "role": "tech_telecom",
+   "type": "unanswerable",
+   "tags": [
+    "generated",
+    "nonexistent_metric",
+    "tune",
+    "unanswerable"
+   ],
+   "gold": [],
+   "doc_types": [],
+   "latency_ms": 191.5,
+   "rerank_ms": null,
+   "acl_leaks": 0,
+   "top10": [
+    {
+     "doc_id": "AMD_2022_10K",
+     "page": 69,
+     "score": 0.78525
+    },
+    {
+     "doc_id": "AMD_2022_10K",
+     "page": 44,
+     "score": 0.76526
+    },
+    {
+     "doc_id": "AMD_2022_10K",
+     "page": 68,
+     "score": 0.76091
+    },
+    {
+     "doc_id": "AMD_2022_10K",
+     "page": 43,
+     "score": 0.758
+    },
+    {
+     "doc_id": "AMD_2022_10K",
+     "page": 67,
+     "score": 0.75436
+    },
+    {
+     "doc_id": "AMD_2022_10K",
+     "page": 68,
+     "score": 0.74276
+    },
+    {
+     "doc_id": "AMD_2022_10K",
+     "page": 43,
+     "score": 0.73996
+    },
+    {
+     "doc_id": "AMD_2022_10K",
+     "page": 89,
+     "score": 0.73576
+    },
+    {
+     "doc_id": "AMD_2022_10K",
+     "page": 42,
+     "score": 0.73536
+    },
+    {
+     "doc_id": "AMD_2022_10K",
+     "page": 44,
+     "score": 0.73246
+    }
+   ],
+   "metrics": null,
+   "answer": {
+    "status": "refused",
+    "answer": "No supported answer could be cited from the available documents.",
+    "citations": []
+   },
+   "answer_metrics": {
+    "status_ok": true,
+    "expected": "refused",
+    "got": "refused",
+    "seconds": 0.24,
+    "waited_s": 0.0,
+    "seconds_net": 0.24,
+    "llm_called": true,
+    "ungrounded_warnings": 0,
+    "numeric_ok": null,
+    "cite_hit": null,
+    "cite_precision": null,
+    "answer_ok": true,
+    "context_chunks": 8,
+    "llm_cached": true
+   },
+   "question": "What was AMD's customer churn rate in 2022?",
+   "gold_answer": "REFUSE (AMD does not report a churn metric).",
+   "has_numeric": false
+  },
+  {
+   "id": "g_u06",
+   "role": "health_industrials",
+   "type": "unanswerable",
+   "tags": [
+    "forecast",
+    "generated",
+    "tune",
+    "unanswerable"
+   ],
+   "gold": [],
+   "doc_types": [],
+   "latency_ms": 242.4,
+   "rerank_ms": null,
+   "acl_leaks": 0,
+   "top10": [
+    {
+     "doc_id": "PFIZER_2019_10K",
+     "page": 115,
+     "score": 0.80313
+    },
+    {
+     "doc_id": "PFIZER_2022_10K",
+     "page": 34,
+     "score": 0.80218
+    },
+    {
+     "doc_id": "PFIZER_2022_10K",
+     "page": 34,
+     "score": 0.79462
+    },
+    {
+     "doc_id": "PFIZER_2022_10K",
+     "page": 105,
+     "score": 0.79406
+    },
+    {
+     "doc_id": "PFIZER_2015_10K",
+     "page": 92,
+     "score": 0.79135
+    },
+    {
+     "doc_id": "PFIZER_2018_10K",
+     "page": 377,
+     "score": 0.78369
+    },
+    {
+     "doc_id": "PFIZER_2023Q2_EARNINGS",
+     "page": 5,
+     "score": 0.78362
+    },
+    {
+     "doc_id": "PFIZER_2021_10K",
+     "page": 44,
+     "score": 0.78315
+    },
+    {
+     "doc_id": "PFIZER_2022_10K",
+     "page": 42,
+     "score": 0.78216
+    },
+    {
+     "doc_id": "PFIZER_2019_10K",
+     "page": 113,
+     "score": 0.77895
+    }
+   ],
+   "metrics": null,
+   "answer": {
+    "status": "refused",
+    "answer": "The provided documents do not contain the answer for the exact company and period asked.",
+    "citations": []
+   },
+   "answer_metrics": {
+    "status_ok": true,
+    "expected": "refused",
+    "got": "refused",
+    "seconds": 0.25,
+    "waited_s": 0.0,
+    "seconds_net": 0.25,
+    "llm_called": true,
+    "ungrounded_warnings": 0,
+    "numeric_ok": null,
+    "cite_hit": null,
+    "cite_precision": null,
+    "answer_ok": true,
+    "context_chunks": 8,
+    "llm_cached": true
+   },
+   "question": "What will Pfizer's research and development spending be in 2024?",
+   "gold_answer": "REFUSE (no filing in the corpus forecasts 2024 R&D spending).",
+   "has_numeric": false
+  }
+ ]
+}

@@ -1,0 +1,335 @@
+index metadata: {'context_header': True, 'embed_model': 'BAAI/bge-small-en-v1.5', 'chunk_tokens': 200, 'chunk_overlap': 40, 'max_chunk_tokens': 500, 'written': '2026-11-09T13:26:06+05:00'}
+NOTE --split all includes the HOLDOUT questions (reported separately; do not tune on them)
+54 questions, k=[5, 10, 20], index=D:\Assignment DRG\index
+query parse: companies=[] year=None searching=['PepsiCo', 'Best Buy', 'MGM Resorts', 'Ulta Beauty', 'Johnson & Johnson', 'Pfizer', '3M', 'Boeing', 'AMD', 'Adobe', 'Corning', 'Verizon'] where={"company": {"$in": ["PepsiCo", "Best Buy", "MGM Resorts", "Ulta Beauty", "Johnson & Johnson", "Pfizer", "3M", "Boeing", "AMD", "Adobe", "Corning", "Verizon"]}}
+onnx query encoder loaded in 0.70s
+query latency: model_load=0.703s embed=0.005s chroma=1.290s total=1.998s
+query parse: companies=['PepsiCo'] year=2022 searching=['PepsiCo'] where={"$and": [{"company": {"$in": ["PepsiCo", "Best Buy", "MGM Resorts", "Ulta Beauty"]}}, {"$and": [{"company": "PepsiCo"}, {"period": {"$in": ["2022"]}}]}]}
+query latency: model_load=0.000s embed=0.006s chroma=0.141s total=0.147s
+query parse: companies=['PepsiCo'] year=2022 searching=['PepsiCo'] where={"$and": [{"company": {"$in": ["PepsiCo", "Best Buy", "MGM Resorts", "Ulta Beauty"]}}, {"$and": [{"company": "PepsiCo"}, {"period": {"$in": ["2022"]}}]}]}
+query latency: model_load=0.000s embed=0.005s chroma=0.133s total=0.138s
+context budget 4500 tokens: kept 14 chunks (3070 tokens), dropped 0
+query parse: companies=['MGM Resorts'] year=2018 searching=['MGM Resorts'] where={"$and": [{"company": {"$in": ["PepsiCo", "Best Buy", "MGM Resorts", "Ulta Beauty"]}}, {"$and": [{"company": "MGM Resorts"}, {"period": {"$in": ["2018"]}}]}]}
+query expand: +['consolidated balance sheets; statement of financial position; total assets; total liabilities']
+query latency: model_load=0.000s embed=0.009s chroma=0.122s total=0.130s
+query parse: companies=['MGM Resorts'] year=2018 searching=['MGM Resorts'] where={"$and": [{"company": {"$in": ["PepsiCo", "Best Buy", "MGM Resorts", "Ulta Beauty"]}}, {"$and": [{"company": "MGM Resorts"}, {"period": {"$in": ["2018"]}}]}]}
+query expand: +['consolidated balance sheets; statement of financial position; total assets; total liabilities']
+query latency: model_load=0.000s embed=0.009s chroma=0.127s total=0.136s
+context budget 4500 tokens: kept 14 chunks (2978 tokens), dropped 0
+query parse: companies=['Ulta Beauty'] year=2023 searching=['Ulta Beauty'] where={"$and": [{"company": {"$in": ["PepsiCo", "Best Buy", "MGM Resorts", "Ulta Beauty"]}}, {"$and": [{"company": "Ulta Beauty"}, {"period": {"$in": ["2023"]}}]}]}
+query latency: model_load=0.000s embed=0.005s chroma=0.093s total=0.098s
+query parse: companies=['Ulta Beauty'] year=2023 searching=['Ulta Beauty'] where={"$and": [{"company": {"$in": ["PepsiCo", "Best Buy", "MGM Resorts", "Ulta Beauty"]}}, {"$and": [{"company": "Ulta Beauty"}, {"period": {"$in": ["2023"]}}]}]}
+query latency: model_load=0.000s embed=0.005s chroma=0.098s total=0.103s
+context budget 4500 tokens: kept 14 chunks (3256 tokens), dropped 0
+query parse: companies=['3M'] year=2022 searching=['3M'] where={"$and": [{"company": {"$in": ["Johnson & Johnson", "Pfizer", "3M", "Boeing"]}}, {"$and": [{"company": "3M"}, {"period": {"$in": ["2022"]}}]}]}
+query expand: +['capital expenditures; purchases of property, plant and equipment; additions to property and equipment']
+query latency: model_load=0.000s embed=0.042s chroma=0.901s total=0.943s
+query parse: companies=['3M'] year=2022 searching=['3M'] where={"$and": [{"company": {"$in": ["Johnson & Johnson", "Pfizer", "3M", "Boeing"]}}, {"$and": [{"company": "3M"}, {"period": {"$in": ["2022"]}}]}]}
+query expand: +['capital expenditures; purchases of property, plant and equipment; additions to property and equipment']
+query latency: model_load=0.000s embed=0.183s chroma=1.009s total=1.193s
+context budget 4500 tokens: kept 14 chunks (3384 tokens), dropped 0
+query parse: companies=['Boeing'] year=2018 searching=['Boeing'] where={"$and": [{"company": {"$in": ["Johnson & Johnson", "Pfizer", "3M", "Boeing"]}}, {"$and": [{"company": "Boeing"}, {"period": {"$in": ["2018"]}}]}]}
+query expand: +['consolidated balance sheets; statement of financial position; total assets; total liabilities']
+query latency: model_load=0.000s embed=0.181s chroma=0.914s total=1.095s
+query parse: companies=['Boeing'] year=2018 searching=['Boeing'] where={"$and": [{"company": {"$in": ["Johnson & Johnson", "Pfizer", "3M", "Boeing"]}}, {"$and": [{"company": "Boeing"}, {"period": {"$in": ["2018"]}}]}]}
+query expand: +['consolidated balance sheets; statement of financial position; total assets; total liabilities']
+query latency: model_load=0.000s embed=0.203s chroma=0.820s total=1.022s
+context budget 4500 tokens: kept 14 chunks (2916 tokens), dropped 0
+query parse: companies=['Boeing'] year=2023 searching=['Boeing'] where={"$and": [{"company": {"$in": ["Johnson & Johnson", "Pfizer", "3M", "Boeing"]}}, {"company": "Boeing"}]}
+query latency: model_load=0.000s embed=0.072s chroma=0.822s total=0.895s
+query parse: companies=['Boeing'] year=2023 searching=['Boeing'] where={"$and": [{"company": {"$in": ["Johnson & Johnson", "Pfizer", "3M", "Boeing"]}}, {"company": "Boeing"}]}
+query latency: model_load=0.000s embed=0.095s chroma=0.780s total=0.875s
+context budget 4500 tokens: kept 14 chunks (3420 tokens), dropped 0
+query parse: companies=['Verizon'] year=2022 searching=['Verizon'] where={"$and": [{"company": {"$in": ["AMD", "Adobe", "Corning", "Verizon"]}}, {"$and": [{"company": "Verizon"}, {"period": {"$in": ["2022"]}}]}]}
+query expand: +['capital expenditures; purchases of property, plant and equipment; additions to property and equipment']
+query latency: model_load=0.000s embed=0.145s chroma=0.747s total=0.892s
+query parse: companies=['Verizon'] year=2022 searching=['Verizon'] where={"$and": [{"company": {"$in": ["AMD", "Adobe", "Corning", "Verizon"]}}, {"$and": [{"company": "Verizon"}, {"period": {"$in": ["2022"]}}]}]}
+query expand: +['capital expenditures; purchases of property, plant and equipment; additions to property and equipment']
+query latency: model_load=0.000s embed=0.122s chroma=0.636s total=0.758s
+context budget 4500 tokens: kept 14 chunks (3318 tokens), dropped 0
+query parse: companies=['Corning'] year=2020 searching=['Corning'] where={"$and": [{"company": {"$in": ["AMD", "Adobe", "Corning", "Verizon"]}}, {"$and": [{"company": "Corning"}, {"period": {"$in": ["2020"]}}]}]}
+query expand: +['cost of sales; cost of goods sold; cost of revenue', 'consolidated balance sheets; statement of financial position; total assets; total liabilities']
+query latency: model_load=0.000s embed=0.298s chroma=0.708s total=1.006s
+query parse: companies=['Corning'] year=2020 searching=['Corning'] where={"$and": [{"company": {"$in": ["AMD", "Adobe", "Corning", "Verizon"]}}, {"$and": [{"company": "Corning"}, {"period": {"$in": ["2020"]}}]}]}
+query expand: +['cost of sales; cost of goods sold; cost of revenue', 'consolidated balance sheets; statement of financial position; total assets; total liabilities']
+query latency: model_load=0.000s embed=0.321s chroma=0.790s total=1.111s
+context budget 4500 tokens: kept 14 chunks (3069 tokens), dropped 0
+query parse: companies=['AMD'] year=2022 searching=['AMD'] where={"$and": [{"company": {"$in": ["AMD", "Adobe", "Corning", "Verizon"]}}, {"$and": [{"company": "AMD"}, {"period": {"$in": ["2022"]}}]}]}
+query latency: model_load=0.000s embed=0.098s chroma=0.852s total=0.950s
+query parse: companies=['AMD'] year=2022 searching=['AMD'] where={"$and": [{"company": {"$in": ["AMD", "Adobe", "Corning", "Verizon"]}}, {"$and": [{"company": "AMD"}, {"period": {"$in": ["2022"]}}]}]}
+query latency: model_load=0.000s embed=0.092s chroma=0.890s total=0.982s
+context budget 4500 tokens: kept 14 chunks (3498 tokens), dropped 0
+query parse: companies=['Best Buy'] year=2023 searching=['Best Buy'] where={"$and": [{"company": {"$in": ["PepsiCo", "Best Buy", "MGM Resorts", "Ulta Beauty"]}}, {"$and": [{"company": "Best Buy"}, {"period": {"$in": ["2023"]}}]}]}
+query expand: +['consolidated statements of cash flows; net cash provided by operating activities']
+query latency: model_load=0.000s embed=0.191s chroma=0.849s total=1.040s
+query parse: companies=['Best Buy'] year=2023 searching=['Best Buy'] where={"$and": [{"company": {"$in": ["PepsiCo", "Best Buy", "MGM Resorts", "Ulta Beauty"]}}, {"$and": [{"company": "Best Buy"}, {"period": {"$in": ["2023"]}}]}]}
+query expand: +['consolidated statements of cash flows; net cash provided by operating activities']
+query latency: model_load=0.000s embed=0.217s chroma=0.830s total=1.047s
+context budget 4500 tokens: kept 14 chunks (3340 tokens), dropped 0
+query parse: companies=['PepsiCo'] year=2021 searching=['PepsiCo'] where={"$and": [{"company": {"$in": ["PepsiCo", "Best Buy", "MGM Resorts", "Ulta Beauty"]}}, {"$and": [{"company": "PepsiCo"}, {"period": {"$in": ["2021"]}}]}]}
+query expand: +['capital expenditures; purchases of property, plant and equipment; additions to property and equipment', 'consolidated statements of cash flows; net cash provided by operating activities']
+query latency: model_load=0.000s embed=0.240s chroma=1.091s total=1.331s
+query parse: companies=['PepsiCo'] year=2021 searching=['PepsiCo'] where={"$and": [{"company": {"$in": ["PepsiCo", "Best Buy", "MGM Resorts", "Ulta Beauty"]}}, {"$and": [{"company": "PepsiCo"}, {"period": {"$in": ["2021"]}}]}]}
+query expand: +['capital expenditures; purchases of property, plant and equipment; additions to property and equipment', 'consolidated statements of cash flows; net cash provided by operating activities']
+query latency: model_load=0.000s embed=0.252s chroma=1.115s total=1.366s
+context budget 4500 tokens: kept 14 chunks (3157 tokens), dropped 0
+query parse: companies=['MGM Resorts'] year=2023 searching=['MGM Resorts'] where={"$and": [{"company": {"$in": ["PepsiCo", "Best Buy", "MGM Resorts", "Ulta Beauty"]}}, {"$and": [{"company": "MGM Resorts"}, {"period": {"$in": ["2023"]}}]}]}
+query latency: model_load=0.000s embed=0.137s chroma=0.768s total=0.905s
+query parse: companies=['MGM Resorts'] year=2023 searching=['MGM Resorts'] where={"$and": [{"company": {"$in": ["PepsiCo", "Best Buy", "MGM Resorts", "Ulta Beauty"]}}, {"$and": [{"company": "MGM Resorts"}, {"period": {"$in": ["2023"]}}]}]}
+query latency: model_load=0.000s embed=0.116s chroma=0.813s total=0.929s
+context budget 4500 tokens: kept 14 chunks (3326 tokens), dropped 0
+query parse: companies=['3M'] year=2023 searching=['3M'] where={"$and": [{"company": {"$in": ["Johnson & Johnson", "Pfizer", "3M", "Boeing"]}}, {"$and": [{"company": "3M"}, {"period": {"$in": ["2023"]}}]}]}
+query latency: model_load=0.000s embed=0.170s chroma=0.953s total=1.123s
+query parse: companies=['3M'] year=2023 searching=['3M'] where={"$and": [{"company": {"$in": ["Johnson & Johnson", "Pfizer", "3M", "Boeing"]}}, {"$and": [{"company": "3M"}, {"period": {"$in": ["2023"]}}]}]}
+query latency: model_load=0.000s embed=0.132s chroma=0.923s total=1.056s
+context budget 4500 tokens: kept 14 chunks (3373 tokens), dropped 0
+query parse: companies=['3M'] year=2018 searching=['3M'] where={"$and": [{"company": {"$in": ["Johnson & Johnson", "Pfizer", "3M", "Boeing"]}}, {"$and": [{"company": "3M"}, {"period": {"$in": ["2018"]}}]}]}
+query expand: +['capital expenditures; purchases of property, plant and equipment; additions to property and equipment', 'consolidated statements of cash flows; net cash provided by operating activities']
+query latency: model_load=0.000s embed=0.245s chroma=0.986s total=1.232s
+query parse: companies=['3M'] year=2018 searching=['3M'] where={"$and": [{"company": {"$in": ["Johnson & Johnson", "Pfizer", "3M", "Boeing"]}}, {"$and": [{"company": "3M"}, {"period": {"$in": ["2018"]}}]}]}
+query expand: +['capital expenditures; purchases of property, plant and equipment; additions to property and equipment', 'consolidated statements of cash flows; net cash provided by operating activities']
+query latency: model_load=0.000s embed=0.255s chroma=0.855s total=1.110s
+context budget 4500 tokens: kept 14 chunks (3275 tokens), dropped 0
+query parse: companies=['Johnson & Johnson'] year=2022 searching=['Johnson & Johnson'] where={"$and": [{"company": {"$in": ["Johnson & Johnson", "Pfizer", "3M", "Boeing"]}}, {"$and": [{"company": "Johnson & Johnson"}, {"period": {"$in": ["2022"]}}]}]}
+query expand: +['total revenues; net sales; net revenue']
+query latency: model_load=0.000s embed=0.139s chroma=0.859s total=0.998s
+query parse: companies=['Johnson & Johnson'] year=2022 searching=['Johnson & Johnson'] where={"$and": [{"company": {"$in": ["Johnson & Johnson", "Pfizer", "3M", "Boeing"]}}, {"$and": [{"company": "Johnson & Johnson"}, {"period": {"$in": ["2022"]}}]}]}
+query expand: +['total revenues; net sales; net revenue']
+query latency: model_load=0.000s embed=0.156s chroma=0.902s total=1.059s
+context budget 4500 tokens: kept 14 chunks (2965 tokens), dropped 0
+query parse: companies=['Corning'] year=2022 searching=['Corning'] where={"$and": [{"company": {"$in": ["AMD", "Adobe", "Corning", "Verizon"]}}, {"$and": [{"company": "Corning"}, {"period": {"$in": ["2022"]}}]}]}
+query expand: +['total current assets; total current liabilities']
+query latency: model_load=0.000s embed=0.170s chroma=0.749s total=0.919s
+query parse: companies=['Corning'] year=2022 searching=['Corning'] where={"$and": [{"company": {"$in": ["AMD", "Adobe", "Corning", "Verizon"]}}, {"$and": [{"company": "Corning"}, {"period": {"$in": ["2022"]}}]}]}
+query expand: +['total current assets; total current liabilities']
+query latency: model_load=0.000s embed=0.183s chroma=0.787s total=0.970s
+context budget 4500 tokens: kept 14 chunks (3212 tokens), dropped 0
+query parse: companies=['AMD'] year=2015 searching=['AMD'] where={"$and": [{"company": {"$in": ["AMD", "Adobe", "Corning", "Verizon"]}}, {"$and": [{"company": "AMD"}, {"period": {"$in": ["2015"]}}]}]}
+query expand: +['depreciation and amortization', 'consolidated statements of operations; statements of income; statements of earnings; operating income', 'consolidated statements of cash flows; net cash provided by operating activities']
+query latency: model_load=0.000s embed=0.362s chroma=0.783s total=1.145s
+query parse: companies=['AMD'] year=2015 searching=['AMD'] where={"$and": [{"company": {"$in": ["AMD", "Adobe", "Corning", "Verizon"]}}, {"$and": [{"company": "AMD"}, {"period": {"$in": ["2015"]}}]}]}
+query expand: +['depreciation and amortization', 'consolidated statements of operations; statements of income; statements of earnings; operating income', 'consolidated statements of cash flows; net cash provided by operating activities']
+query latency: model_load=0.000s embed=0.294s chroma=0.777s total=1.072s
+context budget 4500 tokens: kept 14 chunks (3245 tokens), dropped 0
+query parse: companies=['Adobe'] year=2022 searching=['Adobe'] where={"$and": [{"company": {"$in": ["AMD", "Adobe", "Corning", "Verizon"]}}, {"$and": [{"company": "Adobe"}, {"period": {"$in": ["2022"]}}]}]}
+query latency: model_load=0.000s embed=0.060s chroma=0.737s total=0.797s
+query parse: companies=['Adobe'] year=2022 searching=['Adobe'] where={"$and": [{"company": {"$in": ["AMD", "Adobe", "Corning", "Verizon"]}}, {"$and": [{"company": "Adobe"}, {"period": {"$in": ["2022"]}}]}]}
+query latency: model_load=0.000s embed=0.081s chroma=0.809s total=0.890s
+context budget 4500 tokens: kept 14 chunks (3026 tokens), dropped 0
+query parse: companies=['MGM Resorts'] year=2022 searching=['MGM Resorts'] where={"$and": [{"company": {"$in": ["PepsiCo", "Best Buy", "MGM Resorts", "Ulta Beauty"]}}, {"$and": [{"company": "MGM Resorts"}, {"period": {"$in": ["2022"]}}]}]}
+query expand: +['dividends declared per share; cash dividends paid']
+query latency: model_load=0.000s embed=0.122s chroma=0.999s total=1.121s
+query parse: companies=['MGM Resorts'] year=2022 searching=['MGM Resorts'] where={"$and": [{"company": {"$in": ["PepsiCo", "Best Buy", "MGM Resorts", "Ulta Beauty"]}}, {"$and": [{"company": "MGM Resorts"}, {"period": {"$in": ["2022"]}}]}]}
+query expand: +['dividends declared per share; cash dividends paid']
+query latency: model_load=0.000s embed=0.153s chroma=1.033s total=1.185s
+context budget 4500 tokens: kept 14 chunks (2902 tokens), dropped 0
+query parse: companies=['Best Buy'] year=2017 searching=['Best Buy'] where={"$and": [{"company": {"$in": ["PepsiCo", "Best Buy", "MGM Resorts", "Ulta Beauty"]}}, {"$and": [{"company": "Best Buy"}, {"period": {"$in": ["2017"]}}]}]}
+query expand: +['net income; net earnings; net income attributable', 'consolidated statements of operations; statements of income; statements of earnings; operating income']
+query latency: model_load=0.000s embed=0.297s chroma=0.936s total=1.233s
+query parse: companies=['Best Buy'] year=2017 searching=['Best Buy'] where={"$and": [{"company": {"$in": ["PepsiCo", "Best Buy", "MGM Resorts", "Ulta Beauty"]}}, {"$and": [{"company": "Best Buy"}, {"period": {"$in": ["2017"]}}]}]}
+query expand: +['net income; net earnings; net income attributable', 'consolidated statements of operations; statements of income; statements of earnings; operating income']
+query latency: model_load=0.000s embed=0.260s chroma=0.941s total=1.201s
+context budget 4500 tokens: kept 14 chunks (3548 tokens), dropped 0
+query parse: companies=['3M'] year=2021 searching=['3M'] where={"$and": [{"company": {"$in": ["Johnson & Johnson", "Pfizer", "3M", "Boeing"]}}, {"$and": [{"company": "3M"}, {"period": {"$in": ["2021"]}}]}]}
+query expand: +['capital expenditures; purchases of property, plant and equipment; additions to property and equipment', 'total revenues; net sales; net revenue']
+query latency: model_load=0.000s embed=0.180s chroma=0.992s total=1.171s
+query parse: companies=['3M'] year=2021 searching=['3M'] where={"$and": [{"company": {"$in": ["Johnson & Johnson", "Pfizer", "3M", "Boeing"]}}, {"$and": [{"company": "3M"}, {"period": {"$in": ["2021"]}}]}]}
+query expand: +['capital expenditures; purchases of property, plant and equipment; additions to property and equipment', 'total revenues; net sales; net revenue']
+query latency: model_load=0.000s embed=0.200s chroma=0.973s total=1.174s
+context budget 4500 tokens: kept 14 chunks (3340 tokens), dropped 0
+query parse: companies=['Boeing'] year=2019 searching=['Boeing'] where={"$and": [{"company": {"$in": ["Johnson & Johnson", "Pfizer", "3M", "Boeing"]}}, {"$and": [{"company": "Boeing"}, {"period": {"$in": ["2019"]}}]}]}
+query expand: +['net income; net earnings; net income attributable']
+query latency: model_load=0.000s embed=0.124s chroma=0.975s total=1.099s
+query parse: companies=['Boeing'] year=2019 searching=['Boeing'] where={"$and": [{"company": {"$in": ["Johnson & Johnson", "Pfizer", "3M", "Boeing"]}}, {"$and": [{"company": "Boeing"}, {"period": {"$in": ["2019"]}}]}]}
+query expand: +['net income; net earnings; net income attributable']
+query latency: model_load=0.000s embed=0.163s chroma=0.982s total=1.145s
+context budget 4500 tokens: kept 14 chunks (2771 tokens), dropped 0
+query parse: companies=['Pfizer'] year=2021 searching=['Pfizer'] where={"$and": [{"company": {"$in": ["Johnson & Johnson", "Pfizer", "3M", "Boeing"]}}, {"$and": [{"company": "Pfizer"}, {"period": {"$in": ["2021"]}}]}]}
+query expand: +['total revenues; net sales; net revenue']
+query latency: model_load=0.000s embed=0.140s chroma=1.054s total=1.194s
+query parse: companies=['Pfizer'] year=2021 searching=['Pfizer'] where={"$and": [{"company": {"$in": ["Johnson & Johnson", "Pfizer", "3M", "Boeing"]}}, {"$and": [{"company": "Pfizer"}, {"period": {"$in": ["2021"]}}]}]}
+query expand: +['total revenues; net sales; net revenue']
+query latency: model_load=0.000s embed=0.159s chroma=1.015s total=1.173s
+context budget 4500 tokens: kept 14 chunks (3297 tokens), dropped 0
+query parse: companies=['MGM Resorts'] year=2020 searching=['MGM Resorts'] where={"$and": [{"company": {"$in": ["PepsiCo", "Best Buy", "MGM Resorts", "Ulta Beauty"]}}, {"$and": [{"company": "MGM Resorts"}, {"period": {"$in": ["2020"]}}]}]}
+query expand: +['total revenues; net sales; net revenue']
+query latency: model_load=0.000s embed=0.117s chroma=0.988s total=1.105s
+query parse: companies=['MGM Resorts'] year=2020 searching=['MGM Resorts'] where={"$and": [{"company": {"$in": ["PepsiCo", "Best Buy", "MGM Resorts", "Ulta Beauty"]}}, {"$and": [{"company": "MGM Resorts"}, {"period": {"$in": ["2020"]}}]}]}
+query expand: +['total revenues; net sales; net revenue']
+query latency: model_load=0.000s embed=0.159s chroma=1.004s total=1.163s
+context budget 4500 tokens: kept 14 chunks (3237 tokens), dropped 0
+query parse: companies=['Adobe'] year=2022 searching=['Adobe'] where={"$and": [{"company": {"$in": ["AMD", "Adobe", "Corning", "Verizon"]}}, {"$and": [{"company": "Adobe"}, {"period": {"$in": ["2022"]}}]}]}
+query expand: +['consolidated statements of operations; statements of income; statements of earnings; operating income']
+query latency: model_load=0.000s embed=0.142s chroma=0.810s total=0.952s
+query parse: companies=['Adobe'] year=2022 searching=['Adobe'] where={"$and": [{"company": {"$in": ["AMD", "Adobe", "Corning", "Verizon"]}}, {"$and": [{"company": "Adobe"}, {"period": {"$in": ["2022"]}}]}]}
+query expand: +['consolidated statements of operations; statements of income; statements of earnings; operating income']
+query latency: model_load=0.000s embed=0.139s chroma=0.852s total=0.990s
+context budget 4500 tokens: kept 14 chunks (3155 tokens), dropped 0
+query parse: companies=['Johnson & Johnson'] year=2020 searching=['Johnson & Johnson'] where={"$and": [{"company": {"$in": ["Johnson & Johnson", "Pfizer", "3M", "Boeing"]}}, {"$and": [{"company": "Johnson & Johnson"}, {"period": {"$in": ["2020"]}}]}]}
+query expand: +['employees; number of employees; we employed']
+query latency: model_load=0.000s embed=0.129s chroma=0.910s total=1.040s
+query parse: companies=['Johnson & Johnson'] year=2020 searching=['Johnson & Johnson'] where={"$and": [{"company": {"$in": ["Johnson & Johnson", "Pfizer", "3M", "Boeing"]}}, {"$and": [{"company": "Johnson & Johnson"}, {"period": {"$in": ["2020"]}}]}]}
+query expand: +['employees; number of employees; we employed']
+query latency: model_load=0.000s embed=0.153s chroma=0.948s total=1.102s
+context budget 4500 tokens: kept 14 chunks (3464 tokens), dropped 0
+query parse: companies=['Corning'] year=2021 searching=['Corning'] where={"$and": [{"company": {"$in": ["AMD", "Adobe", "Corning", "Verizon"]}}, {"$and": [{"company": "Corning"}, {"period": {"$in": ["2021"]}}]}]}
+query expand: +['net income; net earnings; net income attributable']
+query latency: model_load=0.000s embed=0.159s chroma=0.845s total=1.004s
+query parse: companies=['Corning'] year=2021 searching=['Corning'] where={"$and": [{"company": {"$in": ["AMD", "Adobe", "Corning", "Verizon"]}}, {"$and": [{"company": "Corning"}, {"period": {"$in": ["2021"]}}]}]}
+query expand: +['net income; net earnings; net income attributable']
+query latency: model_load=0.000s embed=0.160s chroma=0.853s total=1.013s
+context budget 4500 tokens: kept 14 chunks (2933 tokens), dropped 0
+query parse: companies=['Adobe'] year=2016 searching=['Adobe'] where={"$and": [{"company": {"$in": ["AMD", "Adobe", "Corning", "Verizon"]}}, {"$and": [{"company": "Adobe"}, {"period": {"$in": ["2016"]}}]}]}
+query expand: +['employees; number of employees; we employed']
+query latency: model_load=0.000s embed=0.114s chroma=0.864s total=0.977s
+query parse: companies=['Adobe'] year=2016 searching=['Adobe'] where={"$and": [{"company": {"$in": ["AMD", "Adobe", "Corning", "Verizon"]}}, {"$and": [{"company": "Adobe"}, {"period": {"$in": ["2016"]}}]}]}
+query expand: +['employees; number of employees; we employed']
+query latency: model_load=0.000s embed=0.101s chroma=0.853s total=0.954s
+context budget 4500 tokens: kept 14 chunks (3073 tokens), dropped 0
+query parse: companies=['Corning'] year=2023 searching=['Corning'] where={"$and": [{"company": {"$in": ["AMD", "Adobe", "Corning", "Verizon"]}}, {"$and": [{"company": "Corning"}, {"period": {"$in": ["2023"]}}]}]}
+query expand: +['total revenues; net sales; net revenue']
+query latency: model_load=0.000s embed=0.187s chroma=0.767s total=0.955s
+query parse: companies=['Corning'] year=2023 searching=['Corning'] where={"$and": [{"company": {"$in": ["AMD", "Adobe", "Corning", "Verizon"]}}, {"$and": [{"company": "Corning"}, {"period": {"$in": ["2023"]}}]}]}
+query expand: +['total revenues; net sales; net revenue']
+query latency: model_load=0.000s embed=0.148s chroma=0.766s total=0.914s
+context budget 4500 tokens: kept 14 chunks (3264 tokens), dropped 0
+query parse: companies=['Best Buy'] year=2024 searching=['Best Buy'] where={"$and": [{"company": {"$in": ["PepsiCo", "Best Buy", "MGM Resorts", "Ulta Beauty"]}}, {"$and": [{"company": "Best Buy"}, {"period": {"$in": ["2024"]}}]}]}
+query expand: +['gross profit; gross margin']
+query latency: model_load=0.000s embed=0.130s chroma=0.770s total=0.900s
+query parse: companies=['Best Buy'] year=2024 searching=['Best Buy'] where={"$and": [{"company": {"$in": ["PepsiCo", "Best Buy", "MGM Resorts", "Ulta Beauty"]}}, {"$and": [{"company": "Best Buy"}, {"period": {"$in": ["2024"]}}]}]}
+query expand: +['gross profit; gross margin']
+query latency: model_load=0.000s embed=0.104s chroma=0.758s total=0.862s
+context budget 4500 tokens: kept 14 chunks (3386 tokens), dropped 0
+query parse: companies=['PepsiCo'] year=2023 searching=['PepsiCo'] where={"$and": [{"company": {"$in": ["PepsiCo", "Best Buy", "MGM Resorts", "Ulta Beauty"]}}, {"$and": [{"company": "PepsiCo"}, {"period": {"$in": ["2023"]}}]}]}
+query expand: +['total revenues; net sales; net revenue']
+query latency: model_load=0.000s embed=0.118s chroma=0.956s total=1.075s
+query parse: companies=['PepsiCo'] year=2023 searching=['PepsiCo'] where={"$and": [{"company": {"$in": ["PepsiCo", "Best Buy", "MGM Resorts", "Ulta Beauty"]}}, {"$and": [{"company": "PepsiCo"}, {"period": {"$in": ["2023"]}}]}]}
+query expand: +['total revenues; net sales; net revenue']
+query latency: model_load=0.000s embed=0.143s chroma=0.930s total=1.074s
+context budget 4500 tokens: kept 14 chunks (3305 tokens), dropped 0
+query parse: companies=['Ulta Beauty'] year=2024 searching=['Ulta Beauty'] where={"$and": [{"company": {"$in": ["PepsiCo", "Best Buy", "MGM Resorts", "Ulta Beauty"]}}, {"$and": [{"company": "Ulta Beauty"}, {"period": {"$in": ["2024"]}}]}]}
+query expand: +['total revenues; net sales; net revenue']
+query latency: model_load=0.000s embed=0.163s chroma=0.933s total=1.096s
+query parse: companies=['Ulta Beauty'] year=2024 searching=['Ulta Beauty'] where={"$and": [{"company": {"$in": ["PepsiCo", "Best Buy", "MGM Resorts", "Ulta Beauty"]}}, {"$and": [{"company": "Ulta Beauty"}, {"period": {"$in": ["2024"]}}]}]}
+query expand: +['total revenues; net sales; net revenue']
+query latency: model_load=0.000s embed=0.136s chroma=0.995s total=1.130s
+context budget 4500 tokens: kept 14 chunks (2965 tokens), dropped 0
+query parse: companies=['MGM Resorts'] year=2023 searching=['MGM Resorts'] where={"$and": [{"company": {"$in": ["PepsiCo", "Best Buy", "MGM Resorts", "Ulta Beauty"]}}, {"$and": [{"company": "MGM Resorts"}, {"period": {"$in": ["2023"]}}]}]}
+query latency: model_load=0.000s embed=0.097s chroma=0.885s total=0.982s
+query parse: companies=['MGM Resorts'] year=2023 searching=['MGM Resorts'] where={"$and": [{"company": {"$in": ["PepsiCo", "Best Buy", "MGM Resorts", "Ulta Beauty"]}}, {"$and": [{"company": "MGM Resorts"}, {"period": {"$in": ["2023"]}}]}]}
+query latency: model_load=0.000s embed=0.106s chroma=0.866s total=0.972s
+context budget 4500 tokens: kept 14 chunks (3074 tokens), dropped 0
+query parse: companies=['Johnson & Johnson'] year=None searching=['Johnson & Johnson'] where={"$and": [{"company": {"$in": ["Johnson & Johnson", "Pfizer", "3M", "Boeing"]}}, {"company": {"$in": ["Johnson & Johnson"]}}]}
+query latency: model_load=0.000s embed=0.174s chroma=0.917s total=1.091s
+query parse: companies=['Johnson & Johnson'] year=None searching=['Johnson & Johnson'] where={"$and": [{"company": {"$in": ["Johnson & Johnson", "Pfizer", "3M", "Boeing"]}}, {"company": {"$in": ["Johnson & Johnson"]}}]}
+query latency: model_load=0.000s embed=0.150s chroma=0.900s total=1.050s
+context budget 4500 tokens: kept 14 chunks (3111 tokens), dropped 0
+query parse: companies=['AMD', 'Pfizer'] year=2022 searching=['Pfizer', 'AMD'] where={"$and": [{"company": {"$in": ["PepsiCo", "Best Buy", "MGM Resorts", "Ulta Beauty", "Johnson & Johnson", "Pfizer", "3M", "Boeing", "AMD", "Adobe", "Corning", "Verizon"]}}, {"$or": [{"$and": [{"company": "Pfizer"}, {"period": {"$in": ["2022"]}}]}, {"$and": [{"company": "AMD"}, {"period": {"$in": ["2022"]}}]}]}]}
+query expand: +['research and development']
+query latency: model_load=0.000s embed=0.094s chroma=1.465s total=1.559s
+sub-query [AMD]: 'R&D spending at AMD in 2022.'
+query parse: companies=['AMD'] year=2022 searching=['AMD'] where={"$and": [{"company": {"$in": ["AMD"]}}, {"$and": [{"company": "AMD"}, {"period": {"$in": ["2022"]}}]}]}
+query expand: +['research and development']
+query latency: model_load=0.000s embed=0.079s chroma=0.545s total=0.624s
+sub-query [Pfizer]: 'R&D spending at Pfizer in 2022.'
+query parse: companies=['Pfizer'] year=2022 searching=['Pfizer'] where={"$and": [{"company": {"$in": ["Pfizer"]}}, {"$and": [{"company": "Pfizer"}, {"period": {"$in": ["2022"]}}]}]}
+query expand: +['research and development']
+query latency: model_load=0.000s embed=0.077s chroma=0.782s total=0.858s
+context budget 4500 tokens: kept 17 chunks (4261 tokens) (AMD: 2172/2250, Pfizer: 2089/2250), dropped 3: PFIZER_2022_10K p.12, AMD_2022_10K p.71, PFIZER_2022_10K p.13
+query parse: companies=['3M', 'Boeing'] year=2021 searching=['3M', 'Boeing'] where={"$and": [{"company": {"$in": ["PepsiCo", "Best Buy", "MGM Resorts", "Ulta Beauty", "Johnson & Johnson", "Pfizer", "3M", "Boeing", "AMD", "Adobe", "Corning", "Verizon"]}}, {"$or": [{"$and": [{"company": "3M"}, {"period": {"$in": ["2021"]}}]}, {"$and": [{"company": "Boeing"}, {"period": {"$in": ["2021"]}}]}]}]}
+query expand: +['total revenues; net sales; net revenue']
+query latency: model_load=0.000s embed=0.163s chroma=1.632s total=1.796s
+sub-query [3M]: 'Between 3M, who booked more top-line sales in 2021, and what were the two figures?'
+query parse: companies=['3M'] year=2021 searching=['3M'] where={"$and": [{"company": {"$in": ["3M"]}}, {"$and": [{"company": "3M"}, {"period": {"$in": ["2021"]}}]}]}
+query expand: +['total revenues; net sales; net revenue']
+query latency: model_load=0.000s embed=0.142s chroma=0.551s total=0.693s
+sub-query [Boeing]: 'Between Boeing, who booked more top-line sales in 2021, and what were the two figures?'
+query parse: companies=['Boeing'] year=2021 searching=['Boeing'] where={"$and": [{"company": {"$in": ["Boeing"]}}, {"$and": [{"company": "Boeing"}, {"period": {"$in": ["2021"]}}]}]}
+query expand: +['total revenues; net sales; net revenue']
+query latency: model_load=0.000s embed=0.132s chroma=0.505s total=0.637s
+context budget 4500 tokens: kept 18 chunks (4107 tokens) (3M: 2021/2250, Boeing: 2086/2250), dropped 2: 3M_2021_10K p.37, BOEING_2021_10K p.89
+query parse: companies=['Johnson & Johnson', 'Pfizer'] year=2022 searching=['Johnson & Johnson', 'Pfizer'] where={"$and": [{"company": {"$in": ["PepsiCo", "Best Buy", "MGM Resorts", "Ulta Beauty", "Johnson & Johnson", "Pfizer", "3M", "Boeing", "AMD", "Adobe", "Corning", "Verizon"]}}, {"$or": [{"$and": [{"company": "Johnson & Johnson"}, {"period": {"$in": ["2022"]}}]}, {"$and": [{"company": "Pfizer"}, {"period": {"$in": ["2022"]}}]}]}]}
+query expand: +['net income; net earnings; net income attributable']
+query latency: model_load=0.000s embed=0.178s chroma=1.549s total=1.727s
+sub-query [Johnson & Johnson]: 'Which had the bigger bottom line in 2022, J&J? Give both figures.'
+query parse: companies=['Johnson & Johnson'] year=2022 searching=['Johnson & Johnson'] where={"$and": [{"company": {"$in": ["Johnson & Johnson"]}}, {"$and": [{"company": "Johnson & Johnson"}, {"period": {"$in": ["2022"]}}]}]}
+query expand: +['net income; net earnings; net income attributable']
+query latency: model_load=0.000s embed=0.140s chroma=0.536s total=0.675s
+sub-query [Pfizer]: 'Which had the bigger bottom line in 2022, Pfizer? Give both figures.'
+query parse: companies=['Pfizer'] year=2022 searching=['Pfizer'] where={"$and": [{"company": {"$in": ["Pfizer"]}}, {"$and": [{"company": "Pfizer"}, {"period": {"$in": ["2022"]}}]}]}
+query expand: +['net income; net earnings; net income attributable']
+query latency: model_load=0.000s embed=0.136s chroma=0.751s total=0.887s
+context budget 4500 tokens: kept 19 chunks (4224 tokens) (Johnson & Johnson: 2126/2250, Pfizer: 2098/2250), dropped 1: PFIZER_2022_10K p.33
+query parse: companies=['AMD', 'Verizon'] year=2022 searching=['AMD', 'Verizon'] where={"$and": [{"company": {"$in": ["PepsiCo", "Best Buy", "MGM Resorts", "Ulta Beauty", "Johnson & Johnson", "Pfizer", "3M", "Boeing", "AMD", "Adobe", "Corning", "Verizon"]}}, {"$or": [{"$and": [{"company": "AMD"}, {"period": {"$in": ["2022"]}}]}, {"$and": [{"company": "Verizon"}, {"period": {"$in": ["2022"]}}]}]}]}
+query latency: model_load=0.000s embed=0.133s chroma=1.494s total=1.627s
+sub-query [AMD]: "Which earned more in 2022, AMD? State each company's net income."
+query parse: companies=['AMD'] year=2022 searching=['AMD'] where={"$and": [{"company": {"$in": ["AMD"]}}, {"$and": [{"company": "AMD"}, {"period": {"$in": ["2022"]}}]}]}
+query latency: model_load=0.000s embed=0.120s chroma=0.566s total=0.686s
+sub-query [Verizon]: "Which earned more in 2022, Verizon? State each company's net income."
+query parse: companies=['Verizon'] year=2022 searching=['Verizon'] where={"$and": [{"company": {"$in": ["Verizon"]}}, {"$and": [{"company": "Verizon"}, {"period": {"$in": ["2022"]}}]}]}
+query latency: model_load=0.000s embed=0.135s chroma=0.531s total=0.666s
+context budget 4500 tokens: kept 19 chunks (4277 tokens) (AMD: 2194/2250, Verizon: 2083/2250), dropped 1: AMD_2022_10K p.55
+query parse: companies=['AMD', 'Adobe'] year=2022 searching=['AMD', 'Adobe'] where={"$and": [{"company": {"$in": ["PepsiCo", "Best Buy", "MGM Resorts", "Ulta Beauty", "Johnson & Johnson", "Pfizer", "3M", "Boeing", "AMD", "Adobe", "Corning", "Verizon"]}}, {"$or": [{"$and": [{"company": "AMD"}, {"period": {"$in": ["2022"]}}]}, {"$and": [{"company": "Adobe"}, {"period": {"$in": ["2022"]}}]}]}]}
+query expand: +['total revenues; net sales; net revenue']
+query latency: model_load=0.000s embed=0.130s chroma=1.428s total=1.559s
+sub-query [AMD]: "How did fiscal 2022 revenue stack up against AMD's 2022 revenue?"
+query parse: companies=['AMD'] year=2022 searching=['AMD'] where={"$and": [{"company": {"$in": ["AMD"]}}, {"$and": [{"company": "AMD"}, {"period": {"$in": ["2022"]}}]}]}
+query expand: +['total revenues; net sales; net revenue']
+query latency: model_load=0.000s embed=0.118s chroma=0.549s total=0.667s
+sub-query [Adobe]: "How did Adobe's fiscal 2022 revenue stack up 2022 revenue?"
+query parse: companies=['Adobe'] year=2022 searching=['Adobe'] where={"$and": [{"company": {"$in": ["Adobe"]}}, {"$and": [{"company": "Adobe"}, {"period": {"$in": ["2022"]}}]}]}
+query expand: +['total revenues; net sales; net revenue']
+query latency: model_load=0.000s embed=0.111s chroma=0.447s total=0.557s
+context budget 4500 tokens: kept 18 chunks (4175 tokens) (AMD: 2001/2250, Adobe: 2174/2250), dropped 2: AMD_2022_10K p.88, AMD_2022_10K p.85
+query parse: companies=['Best Buy'] year=2022 searching=['Best Buy'] where={"$and": [{"company": {"$in": ["PepsiCo", "Best Buy", "MGM Resorts", "Ulta Beauty"]}}, {"$and": [{"company": "Best Buy"}, {"period": {"$in": ["2022"]}}]}]}
+query expand: +['total revenues; net sales; net revenue']
+query latency: model_load=0.000s embed=0.109s chroma=0.934s total=1.043s
+query parse: companies=['Best Buy'] year=2022 searching=['Best Buy'] where={"$and": [{"company": {"$in": ["PepsiCo", "Best Buy", "MGM Resorts", "Ulta Beauty"]}}, {"$and": [{"company": "Best Buy"}, {"period": {"$in": ["2022"]}}]}]}
+query expand: +['total revenues; net sales; net revenue']
+query latency: model_load=0.000s embed=0.101s chroma=0.961s total=1.061s
+context budget 4500 tokens: kept 14 chunks (3698 tokens), dropped 0
+query parse: companies=['Johnson & Johnson'] year=2021 searching=['Johnson & Johnson'] where={"$and": [{"company": {"$in": ["Johnson & Johnson", "Pfizer", "3M", "Boeing"]}}, {"$and": [{"company": "Johnson & Johnson"}, {"period": {"$in": ["2021"]}}]}]}
+query expand: +['net income; net earnings; net income attributable']
+query latency: model_load=0.000s embed=0.164s chroma=0.966s total=1.130s
+query parse: companies=['Johnson & Johnson'] year=2021 searching=['Johnson & Johnson'] where={"$and": [{"company": {"$in": ["Johnson & Johnson", "Pfizer", "3M", "Boeing"]}}, {"$and": [{"company": "Johnson & Johnson"}, {"period": {"$in": ["2021"]}}]}]}
+query expand: +['net income; net earnings; net income attributable']
+query latency: model_load=0.000s embed=0.117s chroma=0.925s total=1.042s
+context budget 4500 tokens: kept 14 chunks (3273 tokens), dropped 0
+query parse: companies=['Ulta Beauty'] year=2022 searching=['Ulta Beauty'] where={"$and": [{"company": {"$in": ["PepsiCo", "Best Buy", "MGM Resorts", "Ulta Beauty"]}}, {"$and": [{"company": "Ulta Beauty"}, {"period": {"$in": ["2023", "2024"]}}]}]}
+query expand: +['total revenues; net sales; net revenue']
+query latency: model_load=0.000s embed=0.128s chroma=0.717s total=0.845s
+query parse: companies=['Ulta Beauty'] year=2022 searching=['Ulta Beauty'] where={"$and": [{"company": {"$in": ["PepsiCo", "Best Buy", "MGM Resorts", "Ulta Beauty"]}}, {"$and": [{"company": "Ulta Beauty"}, {"period": {"$in": ["2023", "2024"]}}]}]}
+query expand: +['total revenues; net sales; net revenue']
+query latency: model_load=0.000s embed=0.138s chroma=0.725s total=0.863s
+context budget 4500 tokens: kept 14 chunks (3125 tokens), dropped 0
+query parse: companies=['Pfizer'] year=2022 searching=['PepsiCo', 'Best Buy', 'MGM Resorts', 'Ulta Beauty'] where={"$and": [{"company": {"$in": ["PepsiCo", "Best Buy", "MGM Resorts", "Ulta Beauty"]}}, {"$or": [{"$and": [{"company": "PepsiCo"}, {"period": {"$in": ["2022"]}}]}, {"$and": [{"company": "Best Buy"}, {"period": {"$in": ["2022"]}}]}, {"$and": [{"company": "MGM Resorts"}, {"period": {"$in": ["2022"]}}]}, {"$and": [{"company": "Ulta Beauty"}, {"period": {"$in": ["2023", "2024"]}}]}]}]}
+query expand: +['total revenues; net sales; net revenue']
+query latency: model_load=0.000s embed=0.103s chroma=1.322s total=1.425s
+query parse: companies=['AMD'] year=2021 searching=['PepsiCo', 'Best Buy', 'MGM Resorts', 'Ulta Beauty'] where={"$and": [{"company": {"$in": ["PepsiCo", "Best Buy", "MGM Resorts", "Ulta Beauty"]}}, {"$or": [{"$and": [{"company": "PepsiCo"}, {"period": {"$in": ["2021"]}}]}, {"$and": [{"company": "Best Buy"}, {"period": {"$in": ["2021"]}}]}, {"$and": [{"company": "MGM Resorts"}, {"period": {"$in": ["2021"]}}]}, {"$and": [{"company": "Ulta Beauty"}, {"period": {"$in": ["2023"]}}]}]}]}
+query latency: model_load=0.000s embed=0.084s chroma=1.301s total=1.385s
+query parse: companies=['PepsiCo'] year=2023 searching=['Johnson & Johnson', 'Pfizer', '3M', 'Boeing'] where={"$and": [{"company": {"$in": ["Johnson & Johnson", "Pfizer", "3M", "Boeing"]}}, {"$or": [{"$and": [{"company": "Johnson & Johnson"}, {"period": {"$in": ["2023"]}}]}, {"$and": [{"company": "Pfizer"}, {"period": {"$in": ["2023"]}}]}, {"$and": [{"company": "3M"}, {"period": {"$in": ["2023"]}}]}, {"company": "Boeing"}]}]}
+query expand: +['total revenues; net sales; net revenue']
+query latency: model_load=0.000s embed=0.121s chroma=1.251s total=1.372s
+query parse: companies=['Verizon'] year=2021 searching=['Johnson & Johnson', 'Pfizer', '3M', 'Boeing'] where={"$and": [{"company": {"$in": ["Johnson & Johnson", "Pfizer", "3M", "Boeing"]}}, {"$or": [{"$and": [{"company": "Johnson & Johnson"}, {"period": {"$in": ["2021"]}}]}, {"$and": [{"company": "Pfizer"}, {"period": {"$in": ["2021"]}}]}, {"$and": [{"company": "3M"}, {"period": {"$in": ["2021"]}}]}, {"$and": [{"company": "Boeing"}, {"period": {"$in": ["2021"]}}]}]}]}
+query latency: model_load=0.000s embed=0.071s chroma=1.285s total=1.356s
+query parse: companies=['Boeing'] year=2022 searching=['AMD', 'Adobe', 'Corning', 'Verizon'] where={"$and": [{"company": {"$in": ["AMD", "Adobe", "Corning", "Verizon"]}}, {"$or": [{"$and": [{"company": "AMD"}, {"period": {"$in": ["2022"]}}]}, {"$and": [{"company": "Adobe"}, {"period": {"$in": ["2022"]}}]}, {"$and": [{"company": "Corning"}, {"period": {"$in": ["2022"]}}]}, {"$and": [{"company": "Verizon"}, {"period": {"$in": ["2022"]}}]}]}]}
+query latency: model_load=0.000s embed=0.073s chroma=1.281s total=1.354s
+query parse: companies=['Best Buy'] year=2023 searching=['AMD', 'Adobe', 'Corning', 'Verizon'] where={"$and": [{"company": {"$in": ["AMD", "Adobe", "Corning", "Verizon"]}}, {"$or": [{"company": "AMD"}, {"company": "Adobe"}, {"$and": [{"company": "Corning"}, {"period": {"$in": ["2023"]}}]}, {"company": "Verizon"}]}]}
+query expand: +['total revenues; net sales; net revenue']
+query latency: model_load=0.000s embed=0.081s chroma=1.182s total=1.263s
+query parse: companies=['Ulta Beauty'] year=2018 searching=['Ulta Beauty'] where={"$and": [{"company": {"$in": ["PepsiCo", "Best Buy", "MGM Resorts", "Ulta Beauty"]}}, {"company": "Ulta Beauty"}]}
+query expand: +['total revenues; net sales; net revenue']
+query latency: model_load=0.000s embed=0.113s chroma=0.639s total=0.752s
+query parse: companies=['Verizon'] year=2024 searching=['Verizon'] where={"$and": [{"company": {"$in": ["AMD", "Adobe", "Corning", "Verizon"]}}, {"company": "Verizon"}]}
+query expand: +['total revenues; net sales; net revenue']
+query latency: model_load=0.000s embed=0.106s chroma=0.753s total=0.859s
+query parse: companies=['PepsiCo'] year=2022 searching=['PepsiCo'] where={"$and": [{"company": {"$in": ["PepsiCo", "Best Buy", "MGM Resorts", "Ulta Beauty"]}}, {"$and": [{"company": "PepsiCo"}, {"period": {"$in": ["2022"]}}]}]}
+query latency: model_load=0.000s embed=0.085s chroma=0.994s total=1.079s
+query parse: companies=['Boeing'] year=2021 searching=['Boeing'] where={"$and": [{"company": {"$in": ["Johnson & Johnson", "Pfizer", "3M", "Boeing"]}}, {"$and": [{"company": "Boeing"}, {"period": {"$in": ["2021"]}}]}]}
+query expand: +['total revenues; net sales; net revenue']
+query latency: model_load=0.000s embed=0.088s chroma=0.822s total=0.910s
+query parse: companies=['AMD'] year=2022 searching=['AMD'] where={"$and": [{"company": {"$in": ["AMD", "Adobe", "Corning", "Verizon"]}}, {"$and": [{"company": "AMD"}, {"period": {"$in": ["2022"]}}]}]}
+query latency: model_load=0.000s embed=0.086s chroma=0.784s total=0.869s
+query parse: companies=['Pfizer'] year=2024 searching=['Pfizer'] where={"$and": [{"company": {"$in": ["Johnson & Johnson", "Pfizer", "3M", "Boeing"]}}, {"company": "Pfizer"}]}
+query latency: model_load=0.000s embed=0.083s chroma=1.049s total=1.132s
+wrote D:\Assignment DRG\eval\results\final_all_default_check2.json, .md, and updated summary.csv

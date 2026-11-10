@@ -1,0 +1,95 @@
+##### compare_runs.py p4_baseline_tune final_tune --metric ctx
+- 33 questions compared (8 without this metric skipped)
+- **B better: 8**
+- **B worse: 0**
+- **net (B better - B worse): 8**
+##### compare_runs.py p6_baseline_holdout final_holdout --metric ctx
+- 9 questions compared (4 without this metric skipped)
+- **B better: 3**
+- **B worse: 0**
+- **net (B better - B worse): 3**
+##### compare_runs.py p5_x2_expand_alone p5_x10_cap1 --metric ctx
+- 33 questions compared (8 without this metric skipped)
+- **B better: 2**
+- **B worse: 0**
+- **net (B better - B worse): 2**
+##### compare_runs.py p5_x10_cap1 p5_r1b_c200_k14_cap1 --metric ctx
+- 33 questions compared (8 without this metric skipped)
+- **B better: 2**
+- **B worse: 0**
+- **net (B better - B worse): 2**
+##### compare_runs.py p4_baseline_tune p5_x2_expand_alone --metric ctx
+- 33 questions compared (8 without this metric skipped)
+- **B better: 5**
+- **B worse: 1**
+- **net (B better - B worse): 4**
+##### compare_runs.py p4_baseline_tune p5_x1b_hybrid --metric ctx
+- 33 questions compared (8 without this metric skipped)
+- **B better: 4**
+- **B worse: 4**
+- **net (B better - B worse): 0**
+##### compare_runs.py p5_x2_expand_alone p5_x2c_expand_on_hybrid --metric ctx
+- 33 questions compared (8 without this metric skipped)
+- **B better: 3**
+- **B worse: 2**
+- **net (B better - B worse): 1**
+##### compare_runs.py p4_baseline_tune p5_x3_queryclean --metric ctx
+- 33 questions compared (8 without this metric skipped)
+- **B better: 3**
+- **B worse: 2**
+- **net (B better - B worse): 1**
+##### compare_runs.py p4_baseline_tune p5_x4_prefix --metric ctx
+- 33 questions compared (8 without this metric skipped)
+- **B better: 1**
+- **B worse: 3**
+- **net (B better - B worse): -2**
+##### compare_runs.py p5_x2_expand_alone p5_x5_forecast --metric ctx
+- 33 questions compared (8 without this metric skipped)
+- **B better: 1**
+- **B worse: 0**
+- **net (B better - B worse): 1**
+##### compare_runs.py p5_x2_expand_alone p5_x6b_k12_b4500 --metric ctx
+- 33 questions compared (8 without this metric skipped)
+- **B better: 3**
+- **B worse: 0**
+- **net (B better - B worse): 3**
+##### compare_runs.py p5_x2_expand_alone p5_x9_onnx --metric ctx
+- 33 questions compared (8 without this metric skipped)
+- **B better: 0**
+- **B worse: 0**
+- **net (B better - B worse): 0**
+##### compare_runs.py p5_x2_expand_alone p5_r1_c200_k8 --metric ctx
+- 33 questions compared (8 without this metric skipped)
+- **B better: 3**
+- **B worse: 4**
+- **net (B better - B worse): -1**
+##### compare_runs.py p5_x2_expand_alone p5_r1_c200_k14 --metric ctx
+- 33 questions compared (8 without this metric skipped)
+- **B better: 4**
+- **B worse: 0**
+- **net (B better - B worse): 4**
+##### compare_runs.py p5_x2_expand_alone p5_x6a_k12_b6500 --metric ctx
+- 33 questions compared (8 without this metric skipped)
+- **B better: 3**
+- **B worse: 0**
+- **net (B better - B worse): 3**
+##### compare_runs.py p5_x2_expand_alone p5_x6c_k5_b4500 --metric ctx
+- 33 questions compared (8 without this metric skipped)
+- **B better: 0**
+- **B worse: 2**
+- **net (B better - B worse): -2**
+##### compare_runs.py p5_x2_expand_alone p5_x10_cap2 --metric ctx
+- 33 questions compared (8 without this metric skipped)
+- **B better: 1**
+- **B worse: 0**
+- **net (B better - B worse): 1**
+##### compare_runs.py p7_budget4500 p7_budget3000 --metric ctx
+- 33 questions compared (8 without this metric skipped)
+- **B better: 0**
+- **B worse: 0**
+- **net (B better - B worse): 0**
+##### compare_runs.py p7_budget4500 p7_budget2200 --metric ctx
+- 33 questions compared (8 without this metric skipped)
+- **B better: 0**
+- **B worse: 0**
+- **net (B better - B worse): 0**

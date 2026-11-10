@@ -1,0 +1,5 @@
+run 1/5: wall 100.88s (llm 0.00s, pre-LLM 100.88s) ok=True
+run 2/5: wall 18.86s (llm 0.00s, pre-LLM 18.86s) ok=True
+run 3/5: wall 17.89s (llm 0.00s, pre-LLM 17.89s) ok=True
+run 4/5: wall 17.86s (llm 0.00s, pre-LLM 17.86s) ok=True
+run 5/5: wall 19.38s (llm 0.00s, pre-LLM 19.38s) ok=True

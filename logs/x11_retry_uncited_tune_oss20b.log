@@ -1,0 +1,34 @@
+config overrides: {'RETRY_UNCITED': True}
+index metadata: {'context_header': True, 'embed_model': 'BAAI/bge-small-en-v1.5', 'chunk_tokens': 200, 'chunk_overlap': 40, 'max_chunk_tokens': 500, 'written': '2026-11-09T13:26:06+05:00'}
+41 questions, k=[5, 10, 20], index=index_c200
+query parse: companies=[] year=None searching=['PepsiCo', 'Best Buy', 'MGM Resorts', 'Ulta Beauty', 'Johnson & Johnson', 'Pfizer', '3M', 'Boeing', 'AMD', 'Adobe', 'Corning', 'Verizon'] where={"company": {"$in": ["PepsiCo", "Best Buy", "MGM Resorts", "Ulta Beauty", "Johnson & Johnson", "Pfizer", "3M", "Boeing", "AMD", "Adobe", "Corning", "Verizon"]}}
+onnx query encoder loaded in 0.60s
+query latency: model_load=0.597s embed=0.005s chroma=1.172s total=1.774s
+query parse: companies=['PepsiCo'] year=2022 searching=['PepsiCo'] where={"$and": [{"company": {"$in": ["PepsiCo", "Best Buy", "MGM Resorts", "Ulta Beauty"]}}, {"$and": [{"company": "PepsiCo"}, {"period": {"$in": ["2022"]}}]}]}
+query latency: model_load=0.000s embed=0.007s chroma=0.111s total=0.119s
+query parse: companies=['PepsiCo'] year=2022 searching=['PepsiCo'] where={"$and": [{"company": {"$in": ["PepsiCo", "Best Buy", "MGM Resorts", "Ulta Beauty"]}}, {"$and": [{"company": "PepsiCo"}, {"period": {"$in": ["2022"]}}]}]}
+query latency: model_load=0.000s embed=0.005s chroma=0.107s total=0.112s
+context budget 4500 tokens: kept 14 chunks (3070 tokens), dropped 0
+ask parse: companies=['PepsiCo'] year=2022
+query parse: companies=['PepsiCo'] year=2022 searching=['PepsiCo'] where={"$and": [{"company": {"$in": ["PepsiCo", "Best Buy", "MGM Resorts", "Ulta Beauty"]}}, {"$and": [{"company": "PepsiCo"}, {"period": {"$in": ["2022"]}}]}]}
+query latency: model_load=0.000s embed=0.005s chroma=0.109s total=0.114s
+retrieved 14 chunks:
+C1 PEPSICO_2022Q4_EARNINGS p.24
+C2 PEPSICO_2022_10K p.25
+C3 PEPSICO_2022_10K p.32
+C4 PEPSICO_2022_10K p.35
+C5 PEPSICO_2022_10K p.17
+C6 PEPSICO_2022_10K p.64
+C7 PEPSICO_2022_10K p.19
+C8 PEPSICO_2022_10K p.76
+C9 PEPSICO_2022_10K p.131
+C10 PEPSICO_2022Q4_EARNINGS p.20
+C11 PEPSICO_2022_10K p.24
+C12 PEPSICO_2022_10K p.53
+C13 PEPSICO_2022_10K p.482
+C14 PEPSICO_2022Q4_EARNINGS p.1
+context budget 4500 tokens: kept 14 chunks (3070 tokens), dropped 0
+LLM cache hit (no API call)
+LLM raw response (first 2000 chars): {"status":"answered","answer":"The filings provided do not report any materially important ongoing legal battles for FY2022 or FY2021."}
+answer had no valid citation; retrying once with a citation reminder
+LLM HTTP 429 (rate limited): waiting 1416s, retry 1/3

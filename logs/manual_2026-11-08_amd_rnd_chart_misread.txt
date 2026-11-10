@@ -1,0 +1,9 @@
+# Captured manually from terminal, 2026-11-08 ~18:35 (before PREFER_10K and sub-queries existed)
+# Command: .venv\Scripts\ask.exe --role lead "Compare R&D spending at AMD and Pfizer in 2022."
+retrieved 12 chunks:
+C1 AMD_2022_annualreport p.53 | C2 PFIZER_2022_10K p.33 | C3 AMD_2022_annualreport p.3 | C4 PFIZER_2022_10K p.33
+C5 AMD_2022_annualreport p.5 | C6 PFIZER_2022_10K p.4 | C7 AMD_2022_annualreport p.51 | C8 PFIZER_2022_10K p.70
+C9 AMD_2022_10K p.44 | C10 PFIZER_2022_10K p.86 | C11 AMD_2022_annualreport p.6 | C12 PFIZER_2022_10K p.31
+{"status": "answered", "answer": "In fiscal year 2022, AMD reported R&D investment of $9.8 billion [C3]. The provided Pfizer filings do not include a figure for Pfizer's 2022 R&D spending, so a direct comparison cannot be completed.", "citations": [{"doc_id": "AMD_2022_annualreport", "page": 3, ...}]}
+# Ground truth: AMD 2022 R&D = $5,005M (AMD_2022_10K p.54). AMD_2022_annualreport p.3 is a bar chart whose labels
+# were extracted as loose text ("$9.8B $4.3B ... $5.0B ... REVENUE GROSS PROFIT R&D INVESTMENT"); the model misattributed a bar.
