@@ -14,6 +14,11 @@ dependencies = [
     "transformers>=4.40",
     "requests>=2.31",
     "python-dotenv>=1.0",
+    "numpy>=1.26",
+    "scipy>=1.11",
+    "tokenizers>=0.19",
+    "onnxruntime>=1.17",
+    "onnx>=1.16",
 ]
 
 [project.optional-dependencies]
