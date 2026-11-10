@@ -105,7 +105,9 @@ def test_flags_default_off():
 
 @needs_index
 def test_drop_boilerplate_removes_short_and_exhibit_chunks_and_keeps_acl(capsys):
-    cfg = _cfg(DROP_BOILERPLATE=True)
+    # 200-token chunks (the new ./index) make exhibit pages produce many more chunks per query, so the default
+    # overfetch of 3x can be all boilerplate for these exhibit-heavy queries; use a deeper overfetch here.
+    cfg = _cfg(DROP_BOILERPLATE=True, DROP_BOILERPLATE_OVERFETCH=10)
     queries = [("tech_telecom", "AMD 2022 exhibits incorporated by reference stock purchase plan"),
                ("consumer", "PepsiCo Executive Incentive Compensation Plan exhibit 10.19"),
                ("lead", "signatures pursuant to the requirements of the Securities Exchange Act")]

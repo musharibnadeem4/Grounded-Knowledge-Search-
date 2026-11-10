@@ -24,6 +24,27 @@ def real_manifest(monkeypatch):
     A._periods_cache.clear()
 
 
+@pytest.fixture(autouse=True)
+def pipeline_shape(monkeypatch):
+    """These tests describe the pipeline's mechanics with a plain retrieve(k) per call; pin the knobs that
+    the shipped defaults changed (see test_shipped_defaults) so that the mechanics stay what they assert."""
+    monkeypatch.setattr(config, "ASK_K", 8)
+    monkeypatch.setattr(config, "ASK_K_PER_COMPANY", 6)
+    monkeypatch.setattr(config, "ASK_MAX_CHUNKS_PER_PAGE", 0)
+
+
+def test_shipped_defaults(monkeypatch):
+    monkeypatch.undo()  # drop the pinned values above
+    import importlib
+    cfg = importlib.reload(config)
+    assert (cfg.CHUNK_TOKENS, cfg.CHUNK_OVERLAP) == (200, 40)
+    assert (cfg.ASK_K, cfg.ASK_K_PER_COMPANY, cfg.ASK_MAX_CHUNKS_PER_PAGE) == (14, 10, 1)
+    assert cfg.QUERY_EXPAND and cfg.ONNX_ENCODER and cfg.YEAR_COMPANY_FILTER and cfg.PREFER_10K_OVER_ANNUALREPORT
+    assert not (cfg.HYBRID_BM25 or cfg.FORECAST_PRIOR_YEAR or cfg.QUERY_CLEAN or cfg.DROP_BOILERPLATE
+                or cfg.RERANKER or cfg.QUERY_PREFIX)
+    assert cfg.PROMPT_VERSION == 1 and cfg.CONTEXT_TOKEN_BUDGET == 4500
+
+
 @pytest.fixture
 def no_retrieval(monkeypatch):
     def boom(*a, **k):
@@ -420,3 +441,367 @@ def test_llm_still_sees_the_original_question(monkeypatch):
     question = "Compare R&D spending at AMD and Adobe in 2022"
     A.answer(question, "tech_telecom")
     assert calls[0][1].endswith(f"Question: {question}")
+
+
+# ------------------------------------------------- context budget / rate limits
+def _tokens(monkeypatch, per_char=1):
+    monkeypatch.setattr(A, "count_tokens", lambda s: len(s) // per_char)
+
+
+def test_fit_budget_keeps_rank_order_until_full(monkeypatch, capsys):
+    _tokens(monkeypatch)
+    hits = [hit(i, text="x" * 100) for i in range(1, 6)]
+    n = A.count_tokens(A.format_block(1, hits[0]))
+    kept = A.fit_budget(hits, int(n * 2.5))
+    assert [h.chunk_id for h in kept] == ["chunk1", "chunk2"]
+    assert "kept 2 chunks" in capsys.readouterr().err
+    # the same call logs the dropped count
+    A.fit_budget(hits, int(n * 2.5))
+    assert "dropped 3" in capsys.readouterr().err
+
+
+def test_fit_budget_always_keeps_first_chunk(monkeypatch):
+    _tokens(monkeypatch)
+    assert len(A.fit_budget([hit(1), hit(2)], 1)) == 1
+
+
+def test_fit_budget_equal_share_per_company(monkeypatch):
+    _tokens(monkeypatch)
+    pf = [hit(i, "Pfizer", "x" * 100) for i in range(1, 7)]
+    am = [hit(i + 10, "AMD", "x" * 100) for i in range(1, 7)]
+    n = A.count_tokens(A.format_block(1, pf[0]))
+    kept = A.fit_budget(A.interleave([pf, am]), int(n * 6), multi=True)  # share = 3 chunks each
+    assert [h.company for h in kept].count("Pfizer") == 3
+    assert [h.company for h in kept].count("AMD") == 3
+    assert [h.company for h in kept][:4] == ["Pfizer", "AMD", "Pfizer", "AMD"]  # still interleaved
+
+
+def test_answer_applies_budget_and_numbers_kept_chunks(monkeypatch):
+    _tokens(monkeypatch)
+    monkeypatch.setattr(A, "retrieve", lambda *a, **k: [hit(i, text="x" * 100) for i in range(1, 9)])
+    calls = fake_llm(monkeypatch, {"status": "answered", "answer": "Revenue was 2,415 million [C1]."})
+    cfg = type("C", (), {k: getattr(config, k) for k in dir(config) if k.isupper()})
+    cfg.CONTEXT_TOKEN_BUDGET = 400
+    A.answer("PepsiCo revenue 2022", "consumer", cfg)
+    ctx = calls[0][1]
+    assert "[C1]" in ctx and "[C8]" not in ctx
+
+
+class Resp:
+    def __init__(self, status, headers=None, body=None):
+        self.status_code, self.headers, self.text = status, headers or {}, "body"
+        self._body = body
+
+    def raise_for_status(self):
+        if self.status_code >= 400:
+            raise requests.HTTPError(f"{self.status_code}", response=self)
+
+    def json(self):
+        return self._body
+
+
+OK = {"choices": [{"message": {"content": "{}"}}]}
+
+
+def test_429_waits_retry_after_then_succeeds(monkeypatch, capsys):
+    monkeypatch.setenv("LLM_PROVIDER", "groq")
+    monkeypatch.setenv("GROQ_API_KEY", "k")
+    monkeypatch.setattr(llm, "load_dotenv", lambda *a, **k: None)
+    seq = [Resp(429, {"retry-after": "7"}), Resp(429), Resp(200, body=OK)]
+    monkeypatch.setattr(requests, "post", lambda *a, **k: seq.pop(0))
+    sleeps = []
+    monkeypatch.setattr(llm.time, "sleep", sleeps.append)
+    assert llm.chat("s", "u") == "{}"
+    assert sleeps == [7.0, 20.0]  # header value, then the 20 s default
+    assert capsys.readouterr().err.count("HTTP 429") == 2
+
+
+def test_429_gives_up_after_three_retries(monkeypatch):
+    monkeypatch.setenv("LLM_PROVIDER", "groq")
+    monkeypatch.setenv("GROQ_API_KEY", "k")
+    monkeypatch.setattr(llm, "load_dotenv", lambda *a, **k: None)
+    n = []
+    monkeypatch.setattr(requests, "post", lambda *a, **k: n.append(1) or Resp(429))
+    monkeypatch.setattr(llm.time, "sleep", lambda s: None)
+    with pytest.raises(llm.LLMError) as e:
+        llm.chat("s", "u")
+    assert len(n) == 4 and e.value.status == 429
+
+
+def test_413_halves_the_context_and_retries_once(monkeypatch, capsys):
+    _tokens(monkeypatch)
+    monkeypatch.setattr(A, "retrieve", lambda *a, **k: [hit(i, text="x" * 100) for i in range(1, 9)])
+    sizes = []
+
+    def chat(system, user, timeout=None):
+        sizes.append(user.count("[C"))
+        if len(sizes) == 1:
+            raise llm.LLMError("too big", status=413)
+        return json.dumps({"status": "answered", "answer": "Revenue was 2,415 million [C1]."})
+    monkeypatch.setattr(llm, "chat", chat)
+    cfg = type("C", (), {k: getattr(config, k) for k in dir(config) if k.isupper()})
+    cfg.CONTEXT_TOKEN_BUDGET = 800
+    r = A.answer("PepsiCo revenue 2022", "consumer", cfg)
+    assert r["status"] == "answered" and len(sizes) == 2 and sizes[1] < sizes[0]
+    assert "413" in capsys.readouterr().err
+
+
+def test_413_twice_refuses(monkeypatch):
+    _tokens(monkeypatch)
+    monkeypatch.setattr(A, "retrieve", lambda *a, **k: [hit(1)])
+
+    def chat(*a, **k):
+        raise llm.LLMError("too big", status=413)
+    monkeypatch.setattr(llm, "chat", chat)
+    assert A.answer("PepsiCo revenue 2022", "consumer")["answer"] == A.LLM_DOWN
+
+
+def test_prompt_version_switch(monkeypatch):
+    class C:
+        PROMPT_VERSION = 2
+    assert A.system_prompt(C) is A.SYSTEM_PROMPT_V2 and A.SYSTEM_PROMPT_V2 != A.SYSTEM_PROMPT
+    assert A.system_prompt(config) is A.SYSTEM_PROMPT          # default stays version 1
+    assert "10. Output ONLY a JSON object" in A.SYSTEM_PROMPT_V2 and "Output ONLY a JSON object" in A.SYSTEM_PROMPT
+    # the rules shared with v1 are untouched
+    assert A.SYSTEM_PROMPT_V2.startswith(A.SYSTEM_PROMPT.split("7. Output")[0])
+
+
+def test_count_tokens_matches_transformers_tokenizer():
+    """The light tokenizers-based counter must agree with the transformers tokenizer used at ingest."""
+    from drg.ingest import load_tokenizer
+    if A._tokenizer_json() is None:
+        pytest.skip("tokenizer.json not available")
+    tok = load_tokenizer()
+    for text in ["Net revenues were $5,162,082 thousand.", "Research and development 5,005 2,845 1,983",
+                 "AMD_2022_10K | AMD | 2022 | page 54 | Consolidated Statements of Operations\n" + "word " * 300]:
+        assert A.count_tokens(text) == len(tok.encode(text, add_special_tokens=False))
+
+
+def test_cap_per_page_keeps_rank_order_and_k():
+    hits = [hit(1), hit(1), hit(2), hit(1), hit(3), hit(2), hit(4)]
+    for i, h in enumerate(hits):
+        h.chunk_id = f"c{i}"
+    out = A.cap_per_page(hits, 1, 3)
+    assert [(h.doc_id, h.chunk_id) for h in out] == [("DOC_1", "c0"), ("DOC_2", "c2"), ("DOC_3", "c4")]
+    assert [h.chunk_id for h in A.cap_per_page(hits, 2, 10)] == ["c0", "c1", "c2", "c4", "c5", "c6"]
+
+
+def test_gather_with_page_cap_fetches_more_then_trims(monkeypatch):
+    seen = []
+
+    def fake(q, role, k, cfg, companies=None):
+        seen.append(k)
+        return [hit(1), hit(1), hit(2), hit(3)]
+    monkeypatch.setattr(A, "retrieve", fake)
+
+    class C:
+        ASK_K = 2
+        ASK_K_PER_COMPANY = 2
+        ASK_MAX_CHUNKS_PER_PAGE = 1
+    out = A.gather("PepsiCo revenue", "consumer", set(), C)
+    assert seen == [6] and [h.doc_id for h in out] == ["DOC_1", "DOC_2"]
+
+
+# ------------------------------------------------------------- LLM response cache (evaluation only)
+def test_llm_cache_roundtrip_and_off_by_default(monkeypatch, tmp_path):
+    monkeypatch.setenv("LLM_PROVIDER", "ollama")
+    monkeypatch.setattr(llm, "load_dotenv", lambda *a, **k: None)
+    monkeypatch.setitem(llm._cache, "dir", None)
+    calls = []
+    monkeypatch.setattr(llm, "_chat_uncached", lambda s, u, t=None: calls.append(1) or '{"status":"refused"}')
+    assert llm.chat("sys", "usr") and llm.chat("sys", "usr") and len(calls) == 2   # cache off: always calls
+    llm.enable_cache(tmp_path)
+    try:
+        before = llm.cache_stats()
+        assert llm.chat("sys", "usr") == '{"status":"refused"}' and len(calls) == 3  # miss -> stored
+        assert llm.chat("sys", "usr") == '{"status":"refused"}' and len(calls) == 3  # hit -> no call
+        assert llm.chat("sys", "other") and len(calls) == 4                          # other prompt -> miss
+        after = llm.cache_stats()
+        assert after["hits"] - before["hits"] == 1 and after["misses"] - before["misses"] == 2
+        llm.cache_put("sys", "seeded", "SEEDED")
+        assert llm.chat("sys", "seeded") == "SEEDED" and len(calls) == 4
+    finally:
+        llm._cache["dir"] = None
+
+
+# ------------------------------------------------ RETRY_UNCITED (experiment X11)
+def _uncited_then_cited(monkeypatch, second):
+    seen = []
+
+    def chat(system, user, timeout=None):
+        seen.append(user)
+        if len(seen) == 1:
+            return json.dumps({"status": "answered", "answer": "Revenue was 2,415 million."})  # no marker
+        return second
+    monkeypatch.setattr(llm, "chat", chat)
+    monkeypatch.setattr(A, "retrieve", lambda *a, **k: [hit(1)])
+    return seen
+
+
+def test_uncited_answer_is_refused_by_default(monkeypatch):
+    seen = _uncited_then_cited(monkeypatch, json.dumps({"status": "answered", "answer": "x [C1]"}))
+    r = A.answer("PepsiCo revenue 2022", "consumer")
+    assert r["answer"] == A.NO_CITATION and len(seen) == 1
+
+
+def test_retry_uncited_recovers_with_a_reminder(monkeypatch):
+    seen = _uncited_then_cited(monkeypatch, json.dumps({"status": "answered", "answer": "Revenue was 2,415 million [C1]."}))
+
+    class C:
+        pass
+    for k in dir(config):
+        if k.isupper():
+            setattr(C, k, getattr(config, k))
+    C.RETRY_UNCITED = True
+    r = A.answer("PepsiCo revenue 2022", "consumer", C)
+    assert r["status"] == "answered" and r["citations"] and len(seen) == 2
+    assert "REMINDER" in seen[1] and "REMINDER" not in seen[0]
+    assert A.last_run["retried_uncited"] is True
+
+
+def test_retry_uncited_gives_up_after_one_retry(monkeypatch):
+    seen = _uncited_then_cited(monkeypatch, json.dumps({"status": "answered", "answer": "still no marker 2,415"}))
+
+    class C:
+        pass
+    for k in dir(config):
+        if k.isupper():
+            setattr(C, k, getattr(config, k))
+    C.RETRY_UNCITED = True
+    r = A.answer("PepsiCo revenue 2022", "consumer", C)
+    assert r["answer"] == A.NO_CITATION and len(seen) == 2
+
+
+# ------------------------------------------------ PROMPT_VERSION = 3: structured citations field
+def _cfg3(**over):
+    class C:
+        pass
+    for k in dir(config):
+        if k.isupper():
+            setattr(C, k, getattr(config, k))
+    C.PROMPT_VERSION = 3
+    for k, v in over.items():
+        setattr(C, k, v)
+    return C
+
+
+def test_v3_prompt_asks_for_citations_array():
+    p = A.system_prompt(_cfg3())
+    assert p is A.SYSTEM_PROMPT_V3 and '"citations"' in p and "optional" in p
+    assert p.startswith("You answer questions") and A.SYSTEM_PROMPT_V3 != A.SYSTEM_PROMPT
+
+
+@pytest.mark.parametrize("value,ids", [(["C3", "C7"], [3, 7]), ("C2, C4", [2, 4]), ([3, "[C5]"], [3, 5]),
+                                       (["C1-C3"], [1, 2, 3]), (None, []), ([], []), (["x", "Cabc"], [])])
+def test_cite_field_ids(value, ids):
+    assert A.cite_field_ids(value) == ids
+
+
+def test_postcheck_unions_field_and_inline_and_drops_invalid(capsys):
+    hits = [hit(1), hit(2), hit(3)]
+    text, cites = A.postcheck("Revenue was 5 [C2].", hits, [1, 2, 9])
+    assert [c["chunk_id"] for c in cites] == ["chunk2", "chunk1"]   # inline first, then field-only; C9 dropped
+    assert "dropped invalid citation id C9" in capsys.readouterr().err
+    assert A.postcheck("no marker", hits, [3])[1][0]["chunk_id"] == "chunk3"
+    assert A.postcheck("no marker", hits, [])[1] == []
+
+
+def test_v3_field_only_citation_is_accepted(monkeypatch):
+    monkeypatch.setattr(A, "retrieve", lambda *a, **k: [hit(1), hit(2)])
+    fake_llm(monkeypatch, {"status": "answered", "answer": "Revenue was 2,415 million.", "citations": ["C2"]})
+    r = A.answer("PepsiCo revenue 2022", "consumer", _cfg3())
+    assert r["status"] == "answered" and [c["page"] for c in r["citations"]] == [2]
+
+
+def test_v3_inline_marker_only_still_works(monkeypatch):
+    monkeypatch.setattr(A, "retrieve", lambda *a, **k: [hit(1), hit(2)])
+    fake_llm(monkeypatch, {"status": "answered", "answer": "Revenue was 2,415 million [C1]."})
+    assert A.answer("PepsiCo revenue 2022", "consumer", _cfg3())["citations"][0]["page"] == 1
+
+
+def test_v3_invalid_ids_then_retry_then_refuse(monkeypatch):
+    monkeypatch.setattr(A, "retrieve", lambda *a, **k: [hit(1)])
+    seen = []
+
+    def chat(system, user, timeout=None):
+        seen.append(user)
+        return json.dumps({"status": "answered", "answer": "Revenue was 2,415 million.", "citations": ["C8"]})
+    monkeypatch.setattr(llm, "chat", chat)
+    r = A.answer("PepsiCo revenue 2022", "consumer", _cfg3())
+    assert r["answer"] == A.NO_CITATION and len(seen) == 2 and "citations" in seen[1] and "REMINDER" in seen[1]
+
+
+def test_v3_retry_recovers(monkeypatch):
+    monkeypatch.setattr(A, "retrieve", lambda *a, **k: [hit(1)])
+    replies = [{"status": "answered", "answer": "Revenue was 2,415 million.", "citations": []},
+               {"status": "answered", "answer": "Revenue was 2,415 million.", "citations": ["C1"]}]
+    monkeypatch.setattr(llm, "chat", lambda s, u, timeout=None: json.dumps(replies.pop(0)))
+    r = A.answer("PepsiCo revenue 2022", "consumer", _cfg3())
+    assert r["status"] == "answered" and len(r["citations"]) == 1
+
+
+def test_default_prompt_is_unchanged_and_ignores_the_field(monkeypatch):
+    monkeypatch.setattr(A, "retrieve", lambda *a, **k: [hit(1)])
+    fake_llm(monkeypatch, {"status": "answered", "answer": "Revenue was 2,415 million.", "citations": ["C1"]})
+    assert A.answer("PepsiCo revenue 2022", "consumer")["answer"] == A.NO_CITATION   # v1 needs inline markers
+
+
+# ------------------------------------------------ provider daily cap: fail fast with a clear reason
+class _Resp429:
+    status_code = 429
+    headers = {"retry-after": "1101"}
+    text = '{"error":{"message":"Rate limit reached ... on tokens per day (TPD): Limit 200000, Used 197041"}}'
+
+
+def test_long_retry_after_does_not_sleep_and_raises_quota_error(monkeypatch):
+    monkeypatch.setenv("LLM_PROVIDER", "groq")
+    monkeypatch.setenv("GROQ_API_KEY", "k")
+    monkeypatch.setattr(llm, "load_dotenv", lambda *a, **k: None)
+    monkeypatch.setitem(llm._cache, "dir", None)
+    monkeypatch.setattr(requests, "post", lambda *a, **k: _Resp429())
+    monkeypatch.setattr(llm.time, "sleep", lambda s: pytest.fail("must not sleep on a daily cap"))
+    with pytest.raises(llm.LLMQuotaError) as e:
+        llm.chat("s", "u")
+    assert e.value.status == 429 and "tokens per day" in str(e.value)
+
+
+def test_short_retry_after_still_waits(monkeypatch):
+    seq = [type("R", (), {"status_code": 429, "headers": {"retry-after": "30"}, "text": ""})(),
+           type("R", (), {"status_code": 200, "headers": {}, "text": "", "raise_for_status": lambda s: None,
+                          "json": lambda s: {"choices": [{"message": {"content": "{}"}}]}})()]
+    monkeypatch.setenv("LLM_PROVIDER", "groq")
+    monkeypatch.setenv("GROQ_API_KEY", "k")
+    monkeypatch.setattr(llm, "load_dotenv", lambda *a, **k: None)
+    monkeypatch.setitem(llm._cache, "dir", None)
+    monkeypatch.setattr(requests, "post", lambda *a, **k: seq.pop(0))
+    waits = []
+    monkeypatch.setattr(llm.time, "sleep", waits.append)
+    assert llm.chat("s", "u") == "{}" and waits == [30.0]
+
+
+def test_ask_returns_clear_refusal_when_quota_is_exhausted(monkeypatch, capsys):
+    monkeypatch.setattr(A, "retrieve", lambda *a, **k: [hit(1), hit(2)])
+
+    def boom(*a, **k):
+        raise llm.LLMQuotaError("HTTP 429: retry-after 1101s", status=429)
+    monkeypatch.setattr(llm, "chat", boom)
+    r = A.answer("PepsiCo revenue 2022", "consumer")
+    assert r == {"status": "refused", "answer": A.QUOTA_EXHAUSTED, "citations": []}
+    assert A.QUOTA_EXHAUSTED == "LLM quota exhausted (provider daily limit); retrieval succeeded"
+    err = capsys.readouterr().err
+    assert "retrieved pages that could not be sent to the LLM: DOC_1 p.1, DOC_2 p.2" in err
+    assert A.last_run["quota_exhausted"] is True
+
+
+def test_quota_during_citation_retry_is_reported_as_quota(monkeypatch):
+    monkeypatch.setattr(A, "retrieve", lambda *a, **k: [hit(1)])
+    n = []
+
+    def chat(system, user, timeout=None):
+        n.append(1)
+        if len(n) == 1:
+            return json.dumps({"status": "answered", "answer": "Revenue was 2,415 million."})
+        raise llm.LLMQuotaError("cap", status=429)
+    monkeypatch.setattr(llm, "chat", chat)
+    r = A.answer("PepsiCo revenue 2022", "consumer", _cfg3())
+    assert r["answer"] == A.QUOTA_EXHAUSTED
